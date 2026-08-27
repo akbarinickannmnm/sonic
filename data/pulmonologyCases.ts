@@ -81,38 +81,38 @@ export const pulmonologyCases: Case[] = [
             id: "asthma-pe-general",
             sourceId: "PE001",
             label: "General Assessment",
-            content: "بیمار هوشیار و همودینامیکاً پایدار است. در زمان معاینه دیسترس شدید تنفسی ندارد و قادر به صحبت کردن با جملات کامل است.",
+            content: "Patient is alert and comfortable at rest without severe respiratory distress.",
           },
           {
             id: "asthma-pe-vitals",
             sourceId: "PE002",
             label: "Vital Signs",
-            content: "T 36.8°C، HR 94/min، BP 118/72 mmHg، RR 18/min، SpO₂ 97% در هوای اتاق.",
+            content: "T 36.8°C, HR 94/min, BP 118/72 mmHg, RR 18/min, SpO₂ 97% on room air.",
           },
           {
             id: "asthma-pe-inspection",
             sourceId: "PE003",
             label: "Respiratory Inspection",
-            content: "حرکات قفسه سینه متقارن است و استفاده واضح از عضلات فرعی تنفس دیده نمی‌شود.",
+            content: "Chest movement is symmetric with no marked accessory muscle use.",
           },
           {
             id: "asthma-pe-auscultation",
             sourceId: "PE006",
             label: "Chest Auscultation",
-            content: "Wheezing منتشر دوطرفه، بیشتر در بازدم، همراه با طولانی شدن فاز بازدم شنیده می‌شود.",
+            content: "Diffuse expiratory wheeze with prolonged expiration is heard bilaterally.",
           },
           {
-            id: "asthma-pe-cardiovascular",
+            id: "asthma-pe-upper",
+            sourceId: "PE010",
+            label: "Upper Airway Examination",
+            content: "Mild nasal mucosal edema is present without stridor.",
+          },
+          {
+            id: "asthma-pe-cardiac",
             sourceId: "PE007",
             label: "Cardiovascular Examination",
-            content: "ریتم قلب منظم است؛ سوفل قابل‌توجه، JVP بالا یا صدای گالوپ وجود ندارد.",
-          },
-          {
-            id: "asthma-pe-peripheral",
-            sourceId: "PE008",
-            label: "Peripheral Examination",
-            content: "ادم محیطی، کلابینگ و سیانوز وجود ندارد.",
-          },
+            content: "Regular heart sounds without significant murmur or peripheral edema.",
+          }
         ],
       },
 
@@ -169,6 +169,20 @@ export const pulmonologyCases: Case[] = [
             ],
             relevance: "non-contributory",
           },
+          {
+            id: "asthma-peak-flow",
+            name: "Peak Expiratory Flow",
+            category: "Pulmonary Function Tests",
+            findings: [{ label: "Peak Expiratory Flow", value: "PEF کاهش یافته و بین اندازه‌گیری‌های مختلف تغییرپذیری قابل‌توجه دارد." }],
+            relevance: "low",
+          },
+          {
+            id: "asthma-feno",
+            name: "FeNO",
+            category: "Pulmonary Function Tests",
+            findings: [{ label: "FeNO", value: "FeNO افزایش یافته و با التهاب eosinophilic راه هوایی سازگار است." }],
+            relevance: "low",
+          }
         ],
       },
     ],
@@ -283,9 +297,48 @@ export const pulmonologyCases: Case[] = [
         type: "physical-exam",
         title: "Physical Examination",
         hints: [
-          { id: "002-pe-1", sourceId: "PE001", label: "General Assessment", content: "COPD: بیمار هوشیار است و با فعالیت مختصر دچار تنگی نفس می‌شود. RR 22/min، SpO₂ 92% در هوای اتاق. استفاده خفیف از عضلات فرعی تنفس دیده می‌شود. در سمع، کاهش منتشر صداهای تنفسی همراه با wheeze خفیف وجود دارد." },
-          { id: "002-pe-2", sourceId: "PE002", label: "Vital Signs", content: "COPD: بیمار هوشیار است و با فعالیت مختصر دچار تنگی نفس می‌شود. RR 22/min، SpO₂ 92% در هوای اتاق. استفاده خفیف از عضلات فرعی تنفس دیده می‌شود. در سمع، کاهش منتشر صداهای تنفسی همراه با wheeze خفیف وجود دارد." },
-          { id: "002-pe-3", sourceId: "PE006", label: "Chest Auscultation", content: "COPD: بیمار هوشیار است و با فعالیت مختصر دچار تنگی نفس می‌شود. RR 22/min، SpO₂ 92% در هوای اتاق. استفاده خفیف از عضلات فرعی تنفس دیده می‌شود. در سمع، کاهش منتشر صداهای تنفسی همراه با wheeze خفیف وجود دارد." },
+          {
+            id: "copd-pe-general",
+            sourceId: "PE001",
+            label: "General Assessment",
+            content: "Patient is alert with mild exertional dyspnea and no acute severe distress.",
+          },
+          {
+            id: "copd-pe-vitals",
+            sourceId: "PE002",
+            label: "Vital Signs",
+            content: "T 36.7°C, HR 92/min, BP 132/78 mmHg, RR 22/min, SpO₂ 92% on room air.",
+          },
+          {
+            id: "copd-pe-expansion",
+            sourceId: "PE004",
+            label: "Chest Expansion",
+            content: "Bilateral chest expansion is reduced but approximately symmetric.",
+          },
+          {
+            id: "copd-pe-percussion",
+            sourceId: "PE005",
+            label: "Chest Percussion",
+            content: "Percussion is relatively hyperresonant bilaterally with reduced diaphragmatic excursion.",
+          },
+          {
+            id: "copd-pe-auscultation",
+            sourceId: "PE006",
+            label: "Chest Auscultation",
+            content: "Breath sounds are diffusely reduced with prolonged expiration and mild expiratory wheeze.",
+          },
+          {
+            id: "copd-pe-breathing",
+            sourceId: "PE003",
+            label: "Breathing Pattern",
+            content: "Occasional pursed-lip breathing is observed.",
+          },
+          {
+            id: "copd-pe-peripheral",
+            sourceId: "PE008",
+            label: "Peripheral Examination",
+            content: "No marked cyanosis or peripheral edema is present.",
+          }
         ],
       },
       {
@@ -312,6 +365,27 @@ export const pulmonologyCases: Case[] = [
             name: "CBC",
             category: "Clinical Investigation",
             findings: [{ label: "CBC", value: "Leukocytosis قابل‌توجه وجود ندارد." }],
+            relevance: "low",
+          },
+          {
+            id: "002-abg",
+            name: "ABG",
+            category: "Laboratory",
+            findings: [{ label: "ABG", value: "Hypoxemia خفیف وجود دارد؛ hypercapnia قابل‌توجه دیده نمی‌شود." }],
+            relevance: "low",
+          },
+          {
+            id: "002-ecg",
+            name: "ECG",
+            category: "Cardiac Investigation",
+            findings: [{ label: "ECG", value: "Sinus rhythm بدون یافته اختصاصی." }],
+            relevance: "low",
+          },
+          {
+            id: "002-alpha1",
+            name: "Alpha-1 Antitrypsin Level",
+            category: "Laboratory",
+            findings: [{ label: "Alpha-1 Antitrypsin Level", value: "سطح Alpha-1 antitrypsin در محدوده طبیعی است." }],
             relevance: "low",
           }
         ],
@@ -382,9 +456,48 @@ export const pulmonologyCases: Case[] = [
         type: "physical-exam",
         title: "Physical Examination",
         hints: [
-          { id: "003-pe-1", sourceId: "PE001", label: "General Assessment", content: "CAP: بیمار تب‌دار و تاکی‌کارد است. T 38.7°C، HR 108/min، RR 24/min، SpO₂ 93% در هوای اتاق. در قاعده ریه راست crackles موضعی و کاهش خفیف صداهای تنفسی شنیده می‌شود." },
-          { id: "003-pe-2", sourceId: "PE002", label: "Vital Signs", content: "CAP: بیمار تب‌دار و تاکی‌کارد است. T 38.7°C، HR 108/min، RR 24/min، SpO₂ 93% در هوای اتاق. در قاعده ریه راست crackles موضعی و کاهش خفیف صداهای تنفسی شنیده می‌شود." },
-          { id: "003-pe-3", sourceId: "PE006", label: "Chest Auscultation", content: "CAP: بیمار تب‌دار و تاکی‌کارد است. T 38.7°C، HR 108/min، RR 24/min، SpO₂ 93% در هوای اتاق. در قاعده ریه راست crackles موضعی و کاهش خفیف صداهای تنفسی شنیده می‌شود." },
+          {
+            id: "cap-pe-general",
+            sourceId: "PE001",
+            label: "General Assessment",
+            content: "Patient appears febrile and mildly ill, with mild pleuritic discomfort.",
+          },
+          {
+            id: "cap-pe-vitals",
+            sourceId: "PE002",
+            label: "Vital Signs",
+            content: "T 38.7°C, HR 108/min, BP 112/68 mmHg, RR 24/min, SpO₂ 93% on room air.",
+          },
+          {
+            id: "cap-pe-expansion",
+            sourceId: "PE003",
+            label: "Chest Expansion",
+            content: "Right lower chest expansion is mildly reduced.",
+          },
+          {
+            id: "cap-pe-fremitus",
+            sourceId: "PE004",
+            label: "Tactile Fremitus",
+            content: "Tactile fremitus is increased over the right lower lung field.",
+          },
+          {
+            id: "cap-pe-percussion",
+            sourceId: "PE005",
+            label: "Chest Percussion",
+            content: "Dullness to percussion is present at the right lung base.",
+          },
+          {
+            id: "cap-pe-auscultation",
+            sourceId: "PE006",
+            label: "Chest Auscultation",
+            content: "Focal crackles and bronchial breath sounds are heard at the right base.",
+          },
+          {
+            id: "cap-pe-vocal",
+            sourceId: "PE011",
+            label: "Vocal Resonance",
+            content: "Vocal resonance is increased over the right lower lung field.",
+          }
         ],
       },
       {
@@ -411,6 +524,27 @@ export const pulmonologyCases: Case[] = [
             name: "CRP",
             category: "Clinical Investigation",
             findings: [{ label: "CRP", value: "افزایش واضح CRP دیده می‌شود." }],
+            relevance: "low",
+          },
+          {
+            id: "003-blood-culture",
+            name: "Blood Culture",
+            category: "Microbiology",
+            findings: [{ label: "Blood Culture", value: "پس از انکوباسیون، رشد باکتری در کشت خون مشاهده نشد." }],
+            relevance: "low",
+          },
+          {
+            id: "003-sputum-culture",
+            name: "Sputum Culture",
+            category: "Microbiology",
+            findings: [{ label: "Sputum Culture", value: "فلور تنفسی بدون رشد پاتوژن غالب گزارش می‌شود." }],
+            relevance: "low",
+          },
+          {
+            id: "003-procalcitonin",
+            name: "Procalcitonin",
+            category: "Laboratory",
+            findings: [{ label: "Procalcitonin", value: "Procalcitonin افزایش یافته است." }],
             relevance: "low",
           }
         ],
@@ -481,9 +615,48 @@ export const pulmonologyCases: Case[] = [
         type: "physical-exam",
         title: "Physical Examination",
         hints: [
-          { id: "004-pe-1", sourceId: "PE001", label: "General Assessment", content: "PE: بیمار مضطرب و تاکی‌پنه است. HR 116/min، RR 28/min، SpO₂ 91% در هوای اتاق، BP 126/78 mmHg. در ساق چپ تورم و tenderness خفیف وجود دارد؛ ریه‌ها ممکن است تقریباً clear باشند." },
-          { id: "004-pe-2", sourceId: "PE002", label: "Vital Signs", content: "PE: بیمار مضطرب و تاکی‌پنه است. HR 116/min، RR 28/min، SpO₂ 91% در هوای اتاق، BP 126/78 mmHg. در ساق چپ تورم و tenderness خفیف وجود دارد؛ ریه‌ها ممکن است تقریباً clear باشند." },
-          { id: "004-pe-3", sourceId: "PE006", label: "Chest Auscultation", content: "PE: بیمار مضطرب و تاکی‌پنه است. HR 116/min، RR 28/min، SpO₂ 91% در هوای اتاق، BP 126/78 mmHg. در ساق چپ تورم و tenderness خفیف وجود دارد؛ ریه‌ها ممکن است تقریباً clear باشند." },
+          {
+            id: "pe-pe-general",
+            sourceId: "PE001",
+            label: "General Assessment",
+            content: "Patient is anxious and tachypneic but currently hemodynamically stable.",
+          },
+          {
+            id: "pe-pe-vitals",
+            sourceId: "PE002",
+            label: "Vital Signs",
+            content: "HR 116/min, BP 126/78 mmHg, RR 28/min, SpO₂ 91% on room air; afebrile.",
+          },
+          {
+            id: "pe-pe-inspection",
+            sourceId: "PE003",
+            label: "Respiratory Inspection",
+            content: "Marked tachypnea is present without severe accessory muscle use.",
+          },
+          {
+            id: "pe-pe-auscultation",
+            sourceId: "PE006",
+            label: "Chest Auscultation",
+            content: "Lung fields are largely clear without focal crackles or bronchial breathing.",
+          },
+          {
+            id: "pe-pe-calf",
+            sourceId: "PE008",
+            label: "Lower Limb Examination",
+            content: "The left calf is mildly swollen compared with the right and is tender.",
+          },
+          {
+            id: "pe-pe-jvp",
+            sourceId: "PE009",
+            label: "JVP Examination",
+            content: "JVP is not elevated.",
+          },
+          {
+            id: "pe-pe-cardiac",
+            sourceId: "PE007",
+            label: "Cardiovascular Examination",
+            content: "Tachycardia is present with regular rhythm and no significant murmur.",
+          }
         ],
       },
       {
@@ -510,6 +683,27 @@ export const pulmonologyCases: Case[] = [
             name: "ECG",
             category: "Clinical Investigation",
             findings: [{ label: "ECG", value: "Sinus tachycardia بدون یافته اختصاصی دیگر." }],
+            relevance: "low",
+          },
+          {
+            id: "004-cbc",
+            name: "CBC",
+            category: "Laboratory",
+            findings: [{ label: "CBC", value: "CBC تقریباً طبیعی است و leukocytosis قابل‌توجه وجود ندارد." }],
+            relevance: "non-contributory",
+          },
+          {
+            id: "004-chest-x-ray",
+            name: "Chest X-Ray",
+            category: "Imaging",
+            findings: [{ label: "Chest X-Ray", value: "یافته اختصاصی برای PE دیده نمی‌شود؛ consolidation یا pneumothorax وجود ندارد." }],
+            relevance: "low",
+          },
+          {
+            id: "004-troponin",
+            name: "Troponin",
+            category: "Laboratory",
+            findings: [{ label: "Troponin", value: "Troponin کمی افزایش یافته است." }],
             relevance: "low",
           }
         ],
@@ -580,9 +774,48 @@ export const pulmonologyCases: Case[] = [
         type: "physical-exam",
         title: "Physical Examination",
         hints: [
-          { id: "005-pe-1", sourceId: "PE001", label: "General Assessment", content: "TB: بیمار لاغر و خسته به نظر می‌رسد. T 37.8°C، HR 96/min، RR 20/min، SpO₂ 95%. در سمع قله ریه راست crackles ظریف وجود دارد." },
-          { id: "005-pe-2", sourceId: "PE002", label: "Vital Signs", content: "TB: بیمار لاغر و خسته به نظر می‌رسد. T 37.8°C، HR 96/min، RR 20/min، SpO₂ 95%. در سمع قله ریه راست crackles ظریف وجود دارد." },
-          { id: "005-pe-3", sourceId: "PE006", label: "Chest Auscultation", content: "TB: بیمار لاغر و خسته به نظر می‌رسد. T 37.8°C، HR 96/min، RR 20/min، SpO₂ 95%. در سمع قله ریه راست crackles ظریف وجود دارد." },
+          {
+            id: "tb-pe-general",
+            sourceId: "PE001",
+            label: "General Assessment",
+            content: "Patient appears underweight and fatigued but is alert and hemodynamically stable.",
+          },
+          {
+            id: "tb-pe-vitals",
+            sourceId: "PE002",
+            label: "Vital Signs",
+            content: "T 37.8°C, HR 96/min, BP 118/70 mmHg, RR 20/min, SpO₂ 95% on room air.",
+          },
+          {
+            id: "tb-pe-inspection",
+            sourceId: "PE003",
+            label: "Respiratory Inspection",
+            content: "Chest movement is approximately symmetric without major respiratory distress.",
+          },
+          {
+            id: "tb-pe-percussion",
+            sourceId: "PE005",
+            label: "Chest Percussion",
+            content: "Mild dullness is present over the right upper lung zone.",
+          },
+          {
+            id: "tb-pe-auscultation",
+            sourceId: "PE006",
+            label: "Chest Auscultation",
+            content: "Fine crackles are heard over the right upper lung zone.",
+          },
+          {
+            id: "tb-pe-nodes",
+            sourceId: "PE009",
+            label: "Lymph Node Examination",
+            content: "No prominent cervical or supraclavicular lymphadenopathy is palpable.",
+          },
+          {
+            id: "tb-pe-clubbing",
+            sourceId: "PE008",
+            label: "Peripheral Examination",
+            content: "No clubbing, cyanosis, or peripheral edema is present.",
+          }
         ],
       },
       {
@@ -609,6 +842,27 @@ export const pulmonologyCases: Case[] = [
             name: "NAAT for Mycobacterium tuberculosis",
             category: "Clinical Investigation",
             findings: [{ label: "NAAT for Mycobacterium tuberculosis", value: "آزمایش مولکولی از خلط برای M. tuberculosis مثبت است." }],
+            relevance: "high",
+          },
+          {
+            id: "005-cbc",
+            name: "CBC",
+            category: "Laboratory",
+            findings: [{ label: "CBC", value: "Anemia خفیف دیده می‌شود؛ leukocytosis قابل‌توجه وجود ندارد." }],
+            relevance: "low",
+          },
+          {
+            id: "005-crp",
+            name: "CRP",
+            category: "Laboratory",
+            findings: [{ label: "CRP", value: "CRP افزایش یافته است." }],
+            relevance: "low",
+          },
+          {
+            id: "005-ct",
+            name: "Chest CT",
+            category: "Imaging",
+            findings: [{ label: "Chest CT", value: "درگیری غالب لوب فوقانی همراه با cavitary lesion و tree-in-bud nodules دیده می‌شود." }],
             relevance: "high",
           }
         ],
@@ -679,9 +933,48 @@ export const pulmonologyCases: Case[] = [
         type: "physical-exam",
         title: "Physical Examination",
         hints: [
-          { id: "006-pe-1", sourceId: "PE001", label: "General Assessment", content: "COVID-19: بیمار تب‌دار و تاکی‌پنه است. T 38.4°C، HR 104/min، RR 24/min، SpO₂ 92% در هوای اتاق. در سمع crackles ظریف دوطرفه در قاعده ریه‌ها شنیده می‌شود." },
-          { id: "006-pe-2", sourceId: "PE002", label: "Vital Signs", content: "COVID-19: بیمار تب‌دار و تاکی‌پنه است. T 38.4°C، HR 104/min، RR 24/min، SpO₂ 92% در هوای اتاق. در سمع crackles ظریف دوطرفه در قاعده ریه‌ها شنیده می‌شود." },
-          { id: "006-pe-3", sourceId: "PE006", label: "Chest Auscultation", content: "COVID-19: بیمار تب‌دار و تاکی‌پنه است. T 38.4°C، HR 104/min، RR 24/min، SpO₂ 92% در هوای اتاق. در سمع crackles ظریف دوطرفه در قاعده ریه‌ها شنیده می‌شود." },
+          {
+            id: "covid-pe-general",
+            sourceId: "PE001",
+            label: "General Assessment",
+            content: "Patient is febrile and mildly tachypneic with mild respiratory distress.",
+          },
+          {
+            id: "covid-pe-vitals",
+            sourceId: "PE002",
+            label: "Vital Signs",
+            content: "T 38.4°C, HR 104/min, BP 118/74 mmHg, RR 24/min, SpO₂ 92% on room air.",
+          },
+          {
+            id: "covid-pe-inspection",
+            sourceId: "PE003",
+            label: "Respiratory Inspection",
+            content: "Tachypnea and mildly increased work of breathing are present.",
+          },
+          {
+            id: "covid-pe-expansion",
+            sourceId: "PE004",
+            label: "Chest Expansion",
+            content: "Bilateral chest expansion is mildly reduced but symmetric.",
+          },
+          {
+            id: "covid-pe-auscultation",
+            sourceId: "PE006",
+            label: "Chest Auscultation",
+            content: "Fine bilateral crackles are heard, more prominent at the bases.",
+          },
+          {
+            id: "covid-pe-cardiac",
+            sourceId: "PE007",
+            label: "Cardiovascular Examination",
+            content: "Tachycardia is present without murmur or elevated JVP.",
+          },
+          {
+            id: "covid-pe-peripheral",
+            sourceId: "PE008",
+            label: "Peripheral Examination",
+            content: "No peripheral edema or marked cyanosis is present.",
+          }
         ],
       },
       {
@@ -708,6 +1001,27 @@ export const pulmonologyCases: Case[] = [
             name: "CBC",
             category: "Clinical Investigation",
             findings: [{ label: "CBC", value: "لنفوپنی خفیف دیده می‌شود." }],
+            relevance: "low",
+          },
+          {
+            id: "006-crp",
+            name: "CRP",
+            category: "Laboratory",
+            findings: [{ label: "CRP", value: "CRP افزایش یافته است." }],
+            relevance: "low",
+          },
+          {
+            id: "006-procalcitonin",
+            name: "Procalcitonin",
+            category: "Laboratory",
+            findings: [{ label: "Procalcitonin", value: "Procalcitonin پایین است و شواهد قوی به نفع bacterial pneumonia وجود ندارد." }],
+            relevance: "low",
+          },
+          {
+            id: "006-chest-x-ray",
+            name: "Chest X-Ray",
+            category: "Imaging",
+            findings: [{ label: "Chest X-Ray", value: "کدورت‌های دوطرفه patchy دیده می‌شود؛ یافته اختصاصی برای COVID نیست." }],
             relevance: "low",
           }
         ],
@@ -778,9 +1092,48 @@ export const pulmonologyCases: Case[] = [
         type: "physical-exam",
         title: "Physical Examination",
         hints: [
-          { id: "007-pe-1", sourceId: "PE001", label: "General Assessment", content: "Pleural effusion: بیمار با دیسترس خفیف تنفسی است. SpO₂ 93%، در قاعده ریه چپ کاهش صداهای تنفسی، dullness به percussion و کاهش fremitus وجود دارد." },
-          { id: "007-pe-2", sourceId: "PE002", label: "Vital Signs", content: "Pleural effusion: بیمار با دیسترس خفیف تنفسی است. SpO₂ 93%، در قاعده ریه چپ کاهش صداهای تنفسی، dullness به percussion و کاهش fremitus وجود دارد." },
-          { id: "007-pe-3", sourceId: "PE006", label: "Chest Auscultation", content: "Pleural effusion: بیمار با دیسترس خفیف تنفسی است. SpO₂ 93%، در قاعده ریه چپ کاهش صداهای تنفسی، dullness به percussion و کاهش fremitus وجود دارد." },
+          {
+            id: "effusion-pe-general",
+            sourceId: "PE001",
+            label: "General Assessment",
+            content: "Patient has mild respiratory discomfort but is alert and hemodynamically stable.",
+          },
+          {
+            id: "effusion-pe-vitals",
+            sourceId: "PE002",
+            label: "Vital Signs",
+            content: "T 37.1°C, HR 94/min, BP 128/76 mmHg, RR 22/min, SpO₂ 93% on room air.",
+          },
+          {
+            id: "effusion-pe-inspection",
+            sourceId: "PE003",
+            label: "Respiratory Inspection",
+            content: "Left lower chest movement is reduced.",
+          },
+          {
+            id: "effusion-pe-fremitus",
+            sourceId: "PE004",
+            label: "Tactile Fremitus",
+            content: "Tactile fremitus is reduced over the left lower lung field.",
+          },
+          {
+            id: "effusion-pe-percussion",
+            sourceId: "PE005",
+            label: "Chest Percussion",
+            content: "Marked dullness to percussion is present at the left base.",
+          },
+          {
+            id: "effusion-pe-auscultation",
+            sourceId: "PE006",
+            label: "Chest Auscultation",
+            content: "Breath sounds are reduced over the left lower lung field.",
+          },
+          {
+            id: "effusion-pe-trachea",
+            sourceId: "PE009",
+            label: "Tracheal Position",
+            content: "The trachea remains approximately central without major deviation.",
+          }
         ],
       },
       {
@@ -808,6 +1161,27 @@ export const pulmonologyCases: Case[] = [
             category: "Clinical Investigation",
             findings: [{ label: "BNP", value: "BNP بالا است و با سابقه نارسایی قلبی سازگار است." }],
             relevance: "low",
+          },
+          {
+            id: "007-ct-chest",
+            name: "Chest CT",
+            category: "Imaging",
+            findings: [{ label: "Chest CT", value: "Pleural fluid در سمت چپ همراه با compressive atelectatic change دیده می‌شود." }],
+            relevance: "low",
+          },
+          {
+            id: "007-cbc",
+            name: "CBC",
+            category: "Laboratory",
+            findings: [{ label: "CBC", value: "CBC بدون leukocytosis قابل‌توجه است." }],
+            relevance: "low",
+          },
+          {
+            id: "007-ecg",
+            name: "ECG",
+            category: "Cardiac Investigation",
+            findings: [{ label: "ECG", value: "Sinus rhythm بدون یافته اختصاصی." }],
+            relevance: "non-contributory",
           }
         ],
       },
@@ -877,9 +1251,48 @@ export const pulmonologyCases: Case[] = [
         type: "physical-exam",
         title: "Physical Examination",
         hints: [
-          { id: "008-pe-1", sourceId: "PE001", label: "General Assessment", content: "Pneumothorax: بیمار مضطرب است. HR 108/min، RR 26/min، SpO₂ 93%. در سمت راست کاهش واضح صداهای تنفسی و hyperresonance وجود دارد؛ انحراف تراشه یا افت فشار خون دیده نمی‌شود." },
-          { id: "008-pe-2", sourceId: "PE002", label: "Vital Signs", content: "Pneumothorax: بیمار مضطرب است. HR 108/min، RR 26/min، SpO₂ 93%. در سمت راست کاهش واضح صداهای تنفسی و hyperresonance وجود دارد؛ انحراف تراشه یا افت فشار خون دیده نمی‌شود." },
-          { id: "008-pe-3", sourceId: "PE006", label: "Chest Auscultation", content: "Pneumothorax: بیمار مضطرب است. HR 108/min، RR 26/min، SpO₂ 93%. در سمت راست کاهش واضح صداهای تنفسی و hyperresonance وجود دارد؛ انحراف تراشه یا افت فشار خون دیده نمی‌شود." },
+          {
+            id: "ptx-pe-general",
+            sourceId: "PE001",
+            label: "General Assessment",
+            content: "Patient is anxious with acute dyspnea but remains hemodynamically stable.",
+          },
+          {
+            id: "ptx-pe-vitals",
+            sourceId: "PE002",
+            label: "Vital Signs",
+            content: "HR 108/min, BP 124/78 mmHg, RR 26/min, SpO₂ 93% on room air; afebrile.",
+          },
+          {
+            id: "ptx-pe-inspection",
+            sourceId: "PE003",
+            label: "Respiratory Inspection",
+            content: "Right-sided chest movement is reduced with tachypnea.",
+          },
+          {
+            id: "ptx-pe-fremitus",
+            sourceId: "PE004",
+            label: "Tactile Fremitus",
+            content: "Tactile fremitus is reduced over the right hemithorax.",
+          },
+          {
+            id: "ptx-pe-percussion",
+            sourceId: "PE005",
+            label: "Chest Percussion",
+            content: "Percussion is hyperresonant over the right hemithorax.",
+          },
+          {
+            id: "ptx-pe-auscultation",
+            sourceId: "PE006",
+            label: "Chest Auscultation",
+            content: "Breath sounds are markedly reduced on the right.",
+          },
+          {
+            id: "ptx-pe-trachea",
+            sourceId: "PE009",
+            label: "Tracheal Position",
+            content: "The trachea is central without major mediastinal shift.",
+          }
         ],
       },
       {
@@ -906,6 +1319,27 @@ export const pulmonologyCases: Case[] = [
             name: "ABG",
             category: "Clinical Investigation",
             findings: [{ label: "ABG", value: "Hypoxemia خفیف وجود دارد." }],
+            relevance: "low",
+          },
+          {
+            id: "008-ecg",
+            name: "ECG",
+            category: "Cardiac Investigation",
+            findings: [{ label: "ECG", value: "Sinus tachycardia بدون ST elevation یا تغییر ایسکمیک." }],
+            relevance: "low",
+          },
+          {
+            id: "008-cbc",
+            name: "CBC",
+            category: "Laboratory",
+            findings: [{ label: "CBC", value: "CBC طبیعی است." }],
+            relevance: "non-contributory",
+          },
+          {
+            id: "008-ct",
+            name: "Chest CT",
+            category: "Imaging",
+            findings: [{ label: "Chest CT", value: "Pneumothorax در سمت راست و مقدار هوای پلورال مشخص است." }],
             relevance: "low",
           }
         ],
@@ -976,9 +1410,48 @@ export const pulmonologyCases: Case[] = [
         type: "physical-exam",
         title: "Physical Examination",
         hints: [
-          { id: "009-pe-1", sourceId: "PE001", label: "General Assessment", content: "Lung cancer: بیمار لاغر به نظر می‌رسد. SpO₂ 94%، HR 92/min. در سمع سمت راست کاهش موضعی صداهای تنفسی و crackles ظریف وجود دارد." },
-          { id: "009-pe-2", sourceId: "PE002", label: "Vital Signs", content: "Lung cancer: بیمار لاغر به نظر می‌رسد. SpO₂ 94%، HR 92/min. در سمع سمت راست کاهش موضعی صداهای تنفسی و crackles ظریف وجود دارد." },
-          { id: "009-pe-3", sourceId: "PE006", label: "Chest Auscultation", content: "Lung cancer: بیمار لاغر به نظر می‌رسد. SpO₂ 94%، HR 92/min. در سمع سمت راست کاهش موضعی صداهای تنفسی و crackles ظریف وجود دارد." },
+          {
+            id: "cancer-pe-general",
+            sourceId: "PE001",
+            label: "General Assessment",
+            content: "Patient appears thin and fatigued with unintentional weight loss.",
+          },
+          {
+            id: "cancer-pe-vitals",
+            sourceId: "PE002",
+            label: "Vital Signs",
+            content: "T 37.0°C, HR 92/min, BP 126/76 mmHg, RR 20/min, SpO₂ 94% on room air.",
+          },
+          {
+            id: "cancer-pe-expansion",
+            sourceId: "PE003",
+            label: "Chest Expansion",
+            content: "Right-sided chest expansion is mildly reduced.",
+          },
+          {
+            id: "cancer-pe-auscultation",
+            sourceId: "PE006",
+            label: "Chest Auscultation",
+            content: "Focal reduction in breath sounds with fine crackles is present on the right.",
+          },
+          {
+            id: "cancer-pe-clubbing",
+            sourceId: "PE008",
+            label: "Peripheral Examination",
+            content: "Digital clubbing is present.",
+          },
+          {
+            id: "cancer-pe-nodes",
+            sourceId: "PE009",
+            label: "Lymph Node Examination",
+            content: "A small firm supraclavicular lymph node is palpable.",
+          },
+          {
+            id: "cancer-pe-voice",
+            sourceId: "PE010",
+            label: "Voice Examination",
+            content: "Mild hoarseness is noted.",
+          }
         ],
       },
       {
@@ -1006,6 +1479,27 @@ export const pulmonologyCases: Case[] = [
             category: "Clinical Investigation",
             findings: [{ label: "CBC", value: "کم‌خونی خفیف دیده می‌شود." }],
             relevance: "low",
+          },
+          {
+            id: "009-chest-ct-extra1",
+            name: "Chest CT",
+            category: "Imaging",
+            findings: [{ label: "Chest CT", value: "توده نامنظم در ریه راست همراه با لنفادنوپاتی مدیاستینال دیده می‌شود." }],
+            relevance: "high",
+          },
+          {
+            id: "009-sputum-cytology",
+            name: "Sputum Cytology",
+            category: "Pathology",
+            findings: [{ label: "Sputum Cytology", value: "سلول‌های atypical در نمونه خلط دیده می‌شوند." }],
+            relevance: "low",
+          },
+          {
+            id: "009-ecg",
+            name: "ECG",
+            category: "Cardiac Investigation",
+            findings: [{ label: "ECG", value: "Sinus rhythm بدون یافته اختصاصی." }],
+            relevance: "non-contributory",
           }
         ],
       },
@@ -1075,9 +1569,48 @@ export const pulmonologyCases: Case[] = [
         type: "physical-exam",
         title: "Physical Examination",
         hints: [
-          { id: "010-pe-1", sourceId: "PE001", label: "General Assessment", content: "ARDS: بیمار در دیسترس شدید تنفسی است. RR 34/min، SpO₂ 84% در هوای اتاق. crackles دوطرفه منتشر شنیده می‌شود و نیاز به اکسیژن بالا دارد." },
-          { id: "010-pe-2", sourceId: "PE002", label: "Vital Signs", content: "ARDS: بیمار در دیسترس شدید تنفسی است. RR 34/min، SpO₂ 84% در هوای اتاق. crackles دوطرفه منتشر شنیده می‌شود و نیاز به اکسیژن بالا دارد." },
-          { id: "010-pe-3", sourceId: "PE006", label: "Chest Auscultation", content: "ARDS: بیمار در دیسترس شدید تنفسی است. RR 34/min، SpO₂ 84% در هوای اتاق. crackles دوطرفه منتشر شنیده می‌شود و نیاز به اکسیژن بالا دارد." },
+          {
+            id: "ards-pe-general",
+            sourceId: "PE001",
+            label: "General Assessment",
+            content: "Patient is in severe respiratory distress and cannot speak comfortably in full sentences.",
+          },
+          {
+            id: "ards-pe-vitals",
+            sourceId: "PE002",
+            label: "Vital Signs",
+            content: "T 38.1°C, HR 118/min, BP 108/66 mmHg, RR 34/min, SpO₂ 84% on room air.",
+          },
+          {
+            id: "ards-pe-inspection",
+            sourceId: "PE003",
+            label: "Respiratory Inspection",
+            content: "Severe tachypnea and marked accessory muscle use are present.",
+          },
+          {
+            id: "ards-pe-expansion",
+            sourceId: "PE004",
+            label: "Chest Expansion",
+            content: "Bilateral chest expansion is reduced but approximately symmetric.",
+          },
+          {
+            id: "ards-pe-auscultation",
+            sourceId: "PE006",
+            label: "Chest Auscultation",
+            content: "Diffuse bilateral fine crackles are heard, especially at the bases.",
+          },
+          {
+            id: "ards-pe-cardiac",
+            sourceId: "PE007",
+            label: "Cardiovascular Examination",
+            content: "Tachycardia is present without a new significant murmur or clearly elevated JVP.",
+          },
+          {
+            id: "ards-pe-perfusion",
+            sourceId: "PE008",
+            label: "Peripheral Perfusion",
+            content: "Peripheral extremities are cool with delayed capillary refill.",
+          }
         ],
       },
       {
@@ -1105,6 +1638,27 @@ export const pulmonologyCases: Case[] = [
             category: "Clinical Investigation",
             findings: [{ label: "Echocardiography", value: "شواهدی از نارسایی حاد شدید بطن چپ که توضیح‌دهنده ادم ریه باشد دیده نمی‌شود." }],
             relevance: "high",
+          },
+          {
+            id: "010-ct-chest",
+            name: "Chest CT",
+            category: "Imaging",
+            findings: [{ label: "Chest CT", value: "Bilateral diffuse ground-glass opacity و dependent consolidation دیده می‌شود." }],
+            relevance: "low",
+          },
+          {
+            id: "010-cbc",
+            name: "CBC",
+            category: "Laboratory",
+            findings: [{ label: "CBC", value: "Leukocytosis خفیف وجود دارد." }],
+            relevance: "low",
+          },
+          {
+            id: "010-ecg",
+            name: "ECG",
+            category: "Cardiac Investigation",
+            findings: [{ label: "ECG", value: "Sinus tachycardia بدون تغییر ایسکمیک." }],
+            relevance: "non-contributory",
           }
         ],
       },
@@ -1174,9 +1728,48 @@ export const pulmonologyCases: Case[] = [
         type: "physical-exam",
         title: "Physical Examination",
         hints: [
-          { id: "011-pe-1", sourceId: "PE001", label: "General Assessment", content: "Acute bronchitis: بیمار حال عمومی خوب دارد. T 37.2°C، HR 88/min، RR 16/min، SpO₂ 98%. سمع ریه‌ها عمدتاً clear است و wheeze خفیف پراکنده ممکن است شنیده شود." },
-          { id: "011-pe-2", sourceId: "PE002", label: "Vital Signs", content: "Acute bronchitis: بیمار حال عمومی خوب دارد. T 37.2°C، HR 88/min، RR 16/min، SpO₂ 98%. سمع ریه‌ها عمدتاً clear است و wheeze خفیف پراکنده ممکن است شنیده شود." },
-          { id: "011-pe-3", sourceId: "PE006", label: "Chest Auscultation", content: "Acute bronchitis: بیمار حال عمومی خوب دارد. T 37.2°C، HR 88/min، RR 16/min، SpO₂ 98%. سمع ریه‌ها عمدتاً clear است و wheeze خفیف پراکنده ممکن است شنیده شود." },
+          {
+            id: "bronchitis-pe-general",
+            sourceId: "PE001",
+            label: "General Assessment",
+            content: "Patient appears well and has no significant respiratory distress.",
+          },
+          {
+            id: "bronchitis-pe-vitals",
+            sourceId: "PE002",
+            label: "Vital Signs",
+            content: "T 37.2°C, HR 88/min, BP 120/74 mmHg, RR 16/min, SpO₂ 98% on room air.",
+          },
+          {
+            id: "bronchitis-pe-inspection",
+            sourceId: "PE003",
+            label: "Respiratory Inspection",
+            content: "Breathing pattern is normal without accessory muscle use.",
+          },
+          {
+            id: "bronchitis-pe-percussion",
+            sourceId: "PE005",
+            label: "Chest Percussion",
+            content: "Percussion is resonant bilaterally without focal dullness.",
+          },
+          {
+            id: "bronchitis-pe-auscultation",
+            sourceId: "PE006",
+            label: "Chest Auscultation",
+            content: "Scattered mild wheeze or rhonchi may be heard; no focal crackles.",
+          },
+          {
+            id: "bronchitis-pe-upper",
+            sourceId: "PE010",
+            label: "Upper Airway Examination",
+            content: "Mild pharyngeal erythema is present without tonsillar exudate.",
+          },
+          {
+            id: "bronchitis-pe-cardiac",
+            sourceId: "PE007",
+            label: "Cardiovascular Examination",
+            content: "Regular rhythm with normal heart sounds.",
+          }
         ],
       },
       {
@@ -1204,6 +1797,27 @@ export const pulmonologyCases: Case[] = [
             category: "Clinical Investigation",
             findings: [{ label: "Pulse Oximetry", value: "SpO₂ برابر 98% در هوای اتاق است." }],
             relevance: "low",
+          },
+          {
+            id: "011-crp",
+            name: "CRP",
+            category: "Laboratory",
+            findings: [{ label: "CRP", value: "CRP طبیعی یا کمی افزایش‌یافته است." }],
+            relevance: "low",
+          },
+          {
+            id: "011-covid-pcr",
+            name: "SARS-CoV-2 PCR",
+            category: "Microbiology",
+            findings: [{ label: "SARS-CoV-2 PCR", value: "PCR برای SARS-CoV-2 منفی است." }],
+            relevance: "low",
+          },
+          {
+            id: "011-ecg",
+            name: "ECG",
+            category: "Cardiac Investigation",
+            findings: [{ label: "ECG", value: "Sinus rhythm بدون تغییر قابل‌توجه." }],
+            relevance: "non-contributory",
           }
         ],
       },
@@ -1273,9 +1887,42 @@ export const pulmonologyCases: Case[] = [
         type: "physical-exam",
         title: "Physical Examination",
         hints: [
-          { id: "012-pe-1", sourceId: "PE001", label: "General Assessment", content: "OSA: بیمار BMI بالا دارد. فشار خون 148/92 mmHg است. SpO₂ در بیداری 96% است. معاینه ریه‌ها طبیعی است؛ گردن پهن و راه هوایی فوقانی تنگ دیده می‌شود." },
-          { id: "012-pe-2", sourceId: "PE002", label: "Vital Signs", content: "OSA: بیمار BMI بالا دارد. فشار خون 148/92 mmHg است. SpO₂ در بیداری 96% است. معاینه ریه‌ها طبیعی است؛ گردن پهن و راه هوایی فوقانی تنگ دیده می‌شود." },
-          { id: "012-pe-3", sourceId: "PE006", label: "Chest Auscultation", content: "OSA: بیمار BMI بالا دارد. فشار خون 148/92 mmHg است. SpO₂ در بیداری 96% است. معاینه ریه‌ها طبیعی است؛ گردن پهن و راه هوایی فوقانی تنگ دیده می‌شود." },
+          {
+            id: "osa-pe-general",
+            sourceId: "PE001",
+            label: "General Assessment",
+            content: "Patient has increased body habitus and no respiratory distress while awake.",
+          },
+          {
+            id: "osa-pe-vitals",
+            sourceId: "PE002",
+            label: "Vital Signs",
+            content: "BP 148/92 mmHg, HR 82/min, RR 16/min, SpO₂ 96% while awake on room air.",
+          },
+          {
+            id: "osa-pe-neck",
+            sourceId: "PE009",
+            label: "Neck Examination",
+            content: "Neck circumference is increased and the upper airway appears crowded.",
+          },
+          {
+            id: "osa-pe-airway",
+            sourceId: "PE010",
+            label: "Upper Airway Examination",
+            content: "The oropharynx is crowded with prominent soft tissue.",
+          },
+          {
+            id: "osa-pe-auscultation",
+            sourceId: "PE006",
+            label: "Chest Auscultation",
+            content: "Lung auscultation is clear without wheeze or crackles.",
+          },
+          {
+            id: "osa-pe-cardiac",
+            sourceId: "PE007",
+            label: "Cardiovascular Examination",
+            content: "Blood pressure is elevated; heart sounds are otherwise normal.",
+          }
         ],
       },
       {
@@ -1302,6 +1949,27 @@ export const pulmonologyCases: Case[] = [
             name: "CBC",
             category: "Clinical Investigation",
             findings: [{ label: "CBC", value: "یافته اختصاصی مهمی ندارد." }],
+            relevance: "low",
+          },
+          {
+            id: "012-ecg",
+            name: "ECG",
+            category: "Cardiac Investigation",
+            findings: [{ label: "ECG", value: "Sinus rhythm بدون یافته اختصاصی." }],
+            relevance: "low",
+          },
+          {
+            id: "012-cbc-extra1",
+            name: "CBC",
+            category: "Laboratory",
+            findings: [{ label: "CBC", value: "CBC طبیعی است." }],
+            relevance: "non-contributory",
+          },
+          {
+            id: "012-thyroid",
+            name: "Thyroid Function Tests",
+            category: "Laboratory",
+            findings: [{ label: "Thyroid Function Tests", value: "TSH و Free T4 در محدوده طبیعی هستند." }],
             relevance: "low",
           }
         ],
@@ -1372,9 +2040,48 @@ export const pulmonologyCases: Case[] = [
         type: "physical-exam",
         title: "Physical Examination",
         hints: [
-          { id: "013-pe-1", sourceId: "PE001", label: "General Assessment", content: "ILD: بیمار در استراحت نسبتاً راحت است ولی با راه رفتن دچار تنگی نفس می‌شود. SpO₂ 94%، در قاعده دو ریه fine end-inspiratory crackles شنیده می‌شود. Clubbing خفیف وجود دارد." },
-          { id: "013-pe-2", sourceId: "PE002", label: "Vital Signs", content: "ILD: بیمار در استراحت نسبتاً راحت است ولی با راه رفتن دچار تنگی نفس می‌شود. SpO₂ 94%، در قاعده دو ریه fine end-inspiratory crackles شنیده می‌شود. Clubbing خفیف وجود دارد." },
-          { id: "013-pe-3", sourceId: "PE006", label: "Chest Auscultation", content: "ILD: بیمار در استراحت نسبتاً راحت است ولی با راه رفتن دچار تنگی نفس می‌شود. SpO₂ 94%، در قاعده دو ریه fine end-inspiratory crackles شنیده می‌شود. Clubbing خفیف وجود دارد." },
+          {
+            id: "ild-pe-general",
+            sourceId: "PE001",
+            label: "General Assessment",
+            content: "Patient is comfortable at rest but develops dyspnea with exertion.",
+          },
+          {
+            id: "ild-pe-vitals",
+            sourceId: "PE002",
+            label: "Vital Signs",
+            content: "T 36.7°C, HR 90/min, BP 124/76 mmHg, RR 20/min, SpO₂ 94% on room air.",
+          },
+          {
+            id: "ild-pe-inspection",
+            sourceId: "PE003",
+            label: "Respiratory Inspection",
+            content: "Breathing is relatively rapid and shallow.",
+          },
+          {
+            id: "ild-pe-expansion",
+            sourceId: "PE004",
+            label: "Chest Expansion",
+            content: "Chest expansion is mildly reduced bilaterally.",
+          },
+          {
+            id: "ild-pe-auscultation",
+            sourceId: "PE006",
+            label: "Chest Auscultation",
+            content: "Fine end-inspiratory crackles are heard bilaterally at the bases.",
+          },
+          {
+            id: "ild-pe-clubbing",
+            sourceId: "PE008",
+            label: "Peripheral Examination",
+            content: "Digital clubbing is present.",
+          },
+          {
+            id: "ild-pe-cardiac",
+            sourceId: "PE007",
+            label: "Cardiovascular Examination",
+            content: "Regular heart sounds without an obvious significant murmur.",
+          }
         ],
       },
       {
@@ -1402,6 +2109,27 @@ export const pulmonologyCases: Case[] = [
             category: "Clinical Investigation",
             findings: [{ label: "DLCO", value: "DLCO کاهش یافته است." }],
             relevance: "high",
+          },
+          {
+            id: "013-chest-x-ray",
+            name: "Chest X-Ray",
+            category: "Imaging",
+            findings: [{ label: "Chest X-Ray", value: "Bilateral reticular interstitial opacities دیده می‌شود." }],
+            relevance: "low",
+          },
+          {
+            id: "013-cbc",
+            name: "CBC",
+            category: "Laboratory",
+            findings: [{ label: "CBC", value: "CBC بدون leukocytosis قابل‌توجه است." }],
+            relevance: "low",
+          },
+          {
+            id: "013-ecg",
+            name: "ECG",
+            category: "Cardiac Investigation",
+            findings: [{ label: "ECG", value: "Sinus rhythm بدون یافته اختصاصی." }],
+            relevance: "non-contributory",
           }
         ],
       },
@@ -1471,9 +2199,48 @@ export const pulmonologyCases: Case[] = [
         type: "physical-exam",
         title: "Physical Examination",
         hints: [
-          { id: "014-pe-1", sourceId: "PE001", label: "General Assessment", content: "Bronchiectasis: بیمار با سرفه و خلط فراوان مراجعه کرده است. در قاعده ریه‌ها crackles و rhonchi دوطرفه شنیده می‌شود؛ SpO₂ 94%." },
-          { id: "014-pe-2", sourceId: "PE002", label: "Vital Signs", content: "Bronchiectasis: بیمار با سرفه و خلط فراوان مراجعه کرده است. در قاعده ریه‌ها crackles و rhonchi دوطرفه شنیده می‌شود؛ SpO₂ 94%." },
-          { id: "014-pe-3", sourceId: "PE006", label: "Chest Auscultation", content: "Bronchiectasis: بیمار با سرفه و خلط فراوان مراجعه کرده است. در قاعده ریه‌ها crackles و rhonchi دوطرفه شنیده می‌شود؛ SpO₂ 94%." },
+          {
+            id: "bronchiectasis-pe-general",
+            sourceId: "PE001",
+            label: "General Assessment",
+            content: "Patient has frequent productive cough and mild respiratory discomfort.",
+          },
+          {
+            id: "bronchiectasis-pe-vitals",
+            sourceId: "PE002",
+            label: "Vital Signs",
+            content: "T 37.5°C, HR 94/min, BP 122/74 mmHg, RR 20/min, SpO₂ 94% on room air.",
+          },
+          {
+            id: "bronchiectasis-pe-inspection",
+            sourceId: "PE003",
+            label: "Respiratory Inspection",
+            content: "Breathing is mildly tachypneic with preserved bilateral chest movement.",
+          },
+          {
+            id: "bronchiectasis-pe-expansion",
+            sourceId: "PE004",
+            label: "Chest Expansion",
+            content: "Chest expansion is mildly reduced at both bases.",
+          },
+          {
+            id: "bronchiectasis-pe-auscultation",
+            sourceId: "PE006",
+            label: "Chest Auscultation",
+            content: "Coarse crackles and rhonchi are prominent at the lung bases and may change after coughing.",
+          },
+          {
+            id: "bronchiectasis-pe-clubbing",
+            sourceId: "PE008",
+            label: "Peripheral Examination",
+            content: "Digital clubbing is present.",
+          },
+          {
+            id: "bronchiectasis-pe-cardiac",
+            sourceId: "PE007",
+            label: "Cardiovascular Examination",
+            content: "Regular heart sounds without significant murmur.",
+          }
         ],
       },
       {
@@ -1500,6 +2267,27 @@ export const pulmonologyCases: Case[] = [
             name: "Chest X-Ray",
             category: "Clinical Investigation",
             findings: [{ label: "Chest X-Ray", value: "افزایش ضخامت دیواره برونش‌ها و خطوط برونکوواسکولار برجسته دیده می‌شود." }],
+            relevance: "low",
+          },
+          {
+            id: "014-chest-x-ray-extra1",
+            name: "Chest X-Ray",
+            category: "Imaging",
+            findings: [{ label: "Chest X-Ray", value: "افزایش ضخامت دیواره برونش‌ها و خطوط حلقوی در نواحی تحتانی دیده می‌شود." }],
+            relevance: "low",
+          },
+          {
+            id: "014-cbc",
+            name: "CBC",
+            category: "Laboratory",
+            findings: [{ label: "CBC", value: "Neutrophilia خفیف وجود دارد." }],
+            relevance: "low",
+          },
+          {
+            id: "014-crp",
+            name: "CRP",
+            category: "Laboratory",
+            findings: [{ label: "CRP", value: "CRP افزایش خفیف دارد." }],
             relevance: "low",
           }
         ],
@@ -1570,9 +2358,48 @@ export const pulmonologyCases: Case[] = [
         type: "physical-exam",
         title: "Physical Examination",
         hints: [
-          { id: "015-pe-1", sourceId: "PE001", label: "General Assessment", content: "Aspiration pneumonia: بیمار تب‌دار و تاکی‌پنه است. T 38.5°C، HR 106/min، RR 24/min، SpO₂ 92%. در قاعده ریه راست crackles و rhonchi شنیده می‌شود." },
-          { id: "015-pe-2", sourceId: "PE002", label: "Vital Signs", content: "Aspiration pneumonia: بیمار تب‌دار و تاکی‌پنه است. T 38.5°C، HR 106/min، RR 24/min، SpO₂ 92%. در قاعده ریه راست crackles و rhonchi شنیده می‌شود." },
-          { id: "015-pe-3", sourceId: "PE006", label: "Chest Auscultation", content: "Aspiration pneumonia: بیمار تب‌دار و تاکی‌پنه است. T 38.5°C، HR 106/min، RR 24/min، SpO₂ 92%. در قاعده ریه راست crackles و rhonchi شنیده می‌شود." },
+          {
+            id: "aspiration-pe-general",
+            sourceId: "PE001",
+            label: "General Assessment",
+            content: "Patient appears febrile and mildly toxic with mild respiratory distress.",
+          },
+          {
+            id: "aspiration-pe-vitals",
+            sourceId: "PE002",
+            label: "Vital Signs",
+            content: "T 38.5°C, HR 106/min, BP 114/70 mmHg, RR 24/min, SpO₂ 92% on room air.",
+          },
+          {
+            id: "aspiration-pe-inspection",
+            sourceId: "PE003",
+            label: "Respiratory Inspection",
+            content: "Tachypnea and mildly increased work of breathing are present.",
+          },
+          {
+            id: "aspiration-pe-expansion",
+            sourceId: "PE004",
+            label: "Chest Expansion",
+            content: "Right lower chest expansion is mildly reduced.",
+          },
+          {
+            id: "aspiration-pe-fremitus",
+            sourceId: "PE004",
+            label: "Tactile Fremitus",
+            content: "Tactile fremitus is increased over the right lower lung field.",
+          },
+          {
+            id: "aspiration-pe-auscultation",
+            sourceId: "PE006",
+            label: "Chest Auscultation",
+            content: "Crackles and rhonchi are heard over the right lower lung field.",
+          },
+          {
+            id: "aspiration-pe-airway",
+            sourceId: "PE010",
+            label: "Upper Airway Examination",
+            content: "Oropharyngeal secretions are present and cough protection appears impaired in the context of aspiration.",
+          }
         ],
       },
       {
@@ -1600,6 +2427,27 @@ export const pulmonologyCases: Case[] = [
             category: "Clinical Investigation",
             findings: [{ label: "Chest CT", value: "Consolidation در نواحی وابسته ریه راست دیده می‌شود." }],
             relevance: "high",
+          },
+          {
+            id: "015-chest-x-ray-extra1",
+            name: "Chest X-Ray",
+            category: "Imaging",
+            findings: [{ label: "Chest X-Ray", value: "Consolidation در نواحی dependent، به‌ویژه لوب تحتانی راست، دیده می‌شود." }],
+            relevance: "high",
+          },
+          {
+            id: "015-crp",
+            name: "CRP",
+            category: "Laboratory",
+            findings: [{ label: "CRP", value: "CRP به‌طور واضح افزایش یافته است." }],
+            relevance: "low",
+          },
+          {
+            id: "015-sputum-culture",
+            name: "Sputum Culture",
+            category: "Microbiology",
+            findings: [{ label: "Sputum Culture", value: "فلور مخلوط اوروفارنژیال رشد می‌کند و پاتوژن غالب مشخصی شناسایی نمی‌شود." }],
+            relevance: "low",
           }
         ],
       },
@@ -1609,3 +2457,20 @@ export const pulmonologyCases: Case[] = [
     reviewQuestions: [],
   },
 ];
+
+
+/**
+ * SONIC clinical reasoning selection limits.
+ *
+ * History: maximum 3 questions
+ * Physical examination: maximum 2 examinations
+ * Investigations: maximum 2 investigations
+ *
+ * Keep the option pools large. The limits apply to user selections,
+ * not to the number of options displayed.
+ */
+export const STAGE_SELECTION_LIMITS = {
+  history: 3,
+  "physical-exam": 2,
+  investigation: 2,
+} as const;
