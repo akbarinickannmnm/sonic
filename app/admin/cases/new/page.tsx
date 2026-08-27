@@ -2120,15 +2120,9 @@ useEffect(() => {
                                   </p>
                                 </div>
 
-                                <span
-                                  className={`shrink-0 rounded-full px-2 py-1 text-[10px] font-semibold uppercase ${
-                                    item.level === "follow-up"
-                                      ? "bg-amber-100 text-amber-700"
-                                      : "bg-emerald-100 text-emerald-700"
-                                  }`}
-                                >
-                                  {item.level}
-                                </span>
+                                <span className="shrink-0 rounded-full bg-emerald-100 px-2 py-1 text-[10px] font-semibold uppercase text-emerald-700">
+  {item.level}
+</span>
                               </div>
 
                               <p className="mt-2 text-xs text-slate-500">

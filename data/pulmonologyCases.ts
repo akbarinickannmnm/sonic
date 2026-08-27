@@ -221,7 +221,7 @@ export const pulmonologyCases: Case[] = [
         explanation: "هوای سرد، ورزش و آلرژن‌های هوابرد مانند شوره حیوانات از محرک‌های شناخته‌شده علائم Asthma هستند.",
       },
     ],
-  },,
+  },
   {
     id: "pulmo-002-copd",
     title: "COPD",
@@ -305,7 +305,7 @@ export const pulmonologyCases: Case[] = [
             name: "Chest X-Ray",
             category: "Clinical Investigation",
             findings: [{ label: "Chest X-Ray", value: "Hyperinflation و افزایش حجم ریه‌ها؛ بدون consolidation فوکال." }],
-            relevance: "medium",
+            relevance: "low",
           },
           {
             id: "002-cbc",
@@ -404,14 +404,14 @@ export const pulmonologyCases: Case[] = [
             name: "CBC",
             category: "Clinical Investigation",
             findings: [{ label: "CBC", value: "Leukocytosis با neutrophilia وجود دارد." }],
-            relevance: "medium",
+            relevance: "low",
           },
           {
             id: "003-crp",
             name: "CRP",
             category: "Clinical Investigation",
             findings: [{ label: "CRP", value: "افزایش واضح CRP دیده می‌شود." }],
-            relevance: "medium",
+            relevance: "low",
           }
         ],
       },
@@ -496,7 +496,7 @@ export const pulmonologyCases: Case[] = [
             name: "D-Dimer",
             category: "Clinical Investigation",
             findings: [{ label: "D-Dimer", value: "D-dimer به‌طور قابل‌توجهی بالا است." }],
-            relevance: "medium",
+           relevance: "low",
           },
           {
             id: "004-ct-pulmonary-angiography",
@@ -708,7 +708,7 @@ export const pulmonologyCases: Case[] = [
             name: "CBC",
             category: "Clinical Investigation",
             findings: [{ label: "CBC", value: "لنفوپنی خفیف دیده می‌شود." }],
-            relevance: "medium",
+            relevance: "low",
           }
         ],
       },
@@ -807,7 +807,7 @@ export const pulmonologyCases: Case[] = [
             name: "BNP",
             category: "Clinical Investigation",
             findings: [{ label: "BNP", value: "BNP بالا است و با سابقه نارسایی قلبی سازگار است." }],
-            relevance: "medium",
+            relevance: "low",
           }
         ],
       },
@@ -906,7 +906,7 @@ export const pulmonologyCases: Case[] = [
             name: "ABG",
             category: "Clinical Investigation",
             findings: [{ label: "ABG", value: "Hypoxemia خفیف وجود دارد." }],
-            relevance: "medium",
+            relevance: "low",
           }
         ],
       },
@@ -998,7 +998,7 @@ export const pulmonologyCases: Case[] = [
             name: "Chest X-Ray",
             category: "Clinical Investigation",
             findings: [{ label: "Chest X-Ray", value: "توده موضعی در لوب فوقانی راست دیده می‌شود." }],
-            relevance: "medium",
+            relevance: "low",
           },
           {
             id: "009-cbc",
@@ -1493,7 +1493,7 @@ export const pulmonologyCases: Case[] = [
             name: "Sputum Culture",
             category: "Clinical Investigation",
             findings: [{ label: "Sputum Culture", value: "رشد یک باکتری تنفسی پاتوژنیک از خلط دیده می‌شود." }],
-            relevance: "medium",
+            relevance: "low",
           },
           {
             id: "014-chest-x-ray",
@@ -1592,7 +1592,7 @@ export const pulmonologyCases: Case[] = [
             name: "CBC",
             category: "Clinical Investigation",
             findings: [{ label: "CBC", value: "Neutrophilic leukocytosis وجود دارد." }],
-            relevance: "medium",
+            relevance: "low",
           },
           {
             id: "015-chest-ct",

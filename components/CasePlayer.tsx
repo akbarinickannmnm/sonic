@@ -347,11 +347,16 @@ export default function CasePlayer({ caseData }: Props) {
                     key={item.id}
                     type="button"
                     onClick={() => {
-                      if (!item.answer) return;
-                      if (activeStage === "history") answerHistory(item.sourceId, item.answer);
-                      else if (activeStage === "physical-exam") answerPhysical(item.sourceId, item.answer);
-                      else answerInvestigation(item.answer as Investigation);
-                    }}
+  if (!item.answer) return;
+
+  if (activeStage === "history") {
+    answerHistory(item.sourceId, item.answer as CaseHint);
+  } else if (activeStage === "physical-exam") {
+    answerPhysical(item.sourceId, item.answer as CaseHint);
+  } else {
+    answerInvestigation(item.answer as Investigation);
+  }
+}}
                     className="w-full rounded-xl border border-slate-200 bg-white p-4 text-left text-sm font-medium leading-6 text-slate-800 transition hover:border-blue-400 hover:bg-blue-50"
                   >
                     {item.label}
