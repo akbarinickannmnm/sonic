@@ -1,14 +1,30 @@
-import { Case } from "../../../types/case";
+import { validateCase } from "../../../lib/caseValidator";
+import type { Case } from "../../../types/case";
 
-/*
- * Same key used across the rest of the app
- * (Case Library, Preview, Create/Edit Case).
- * Keep this in sync with:
- *   - app/admin/cases/page.tsx
- *   - app/admin/cases/preview/page.tsx
- *   - app/admin/cases/new/page.tsx
- */
 const STORAGE_KEY = "sonic-cases";
+
+function isValidStoredCase(value: unknown): value is Case {
+  if (!value || typeof value !== "object") return false;
+
+  const candidate = value as Partial<Case>;
+
+  if (
+    typeof candidate.id !== "string" ||
+    typeof candidate.title !== "string" ||
+    typeof candidate.course !== "string" ||
+    typeof candidate.difficulty !== "string" ||
+    !Array.isArray(candidate.tags) ||
+    !Array.isArray(candidate.stages) ||
+    !candidate.patient ||
+    typeof candidate.patient !== "object" ||
+    !Array.isArray(candidate.candidateDiagnosisIds) ||
+    !Array.isArray(candidate.reviewQuestions)
+  ) {
+    return false;
+  }
+
+  return validateCase(candidate as Case).length === 0;
+}
 
 export function getCases(): Case[] {
   if (typeof window === "undefined") return [];
@@ -18,21 +34,41 @@ export function getCases(): Case[] {
   if (!raw) return [];
 
   try {
-    return JSON.parse(raw);
+    const parsed: unknown = JSON.parse(raw);
+
+    if (!Array.isArray(parsed)) return [];
+
+    return parsed.filter(isValidStoredCase);
   } catch {
     return [];
   }
 }
 
 export function saveCases(cases: Case[]) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(cases));
+  const validCases = cases.filter(
+    (caseData) => validateCase(caseData).length === 0,
+  );
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(validCases),
+  );
 }
 
 export function saveCase(newCase: Case) {
-  const cases = getCases();
+  const errors = validateCase(newCase);
 
+  if (errors.length > 0) {
+    throw new Error(
+      `Cannot save invalid case: ${errors
+        .map((error) => `${error.field} — ${error.message}`)
+        .join("; ")}`,
+    );
+  }
+
+  const cases = getCases();
   const existingIndex = cases.findIndex(
-    c => c.id === newCase.id
+    (caseData) => caseData.id === newCase.id,
   );
 
   if (existingIndex >= 0) {
@@ -45,15 +81,9 @@ export function saveCase(newCase: Case) {
 }
 
 export function deleteCase(caseId: string) {
-  const cases = getCases().filter(
-    c => c.id !== caseId
-  );
-
-  saveCases(cases);
+  saveCases(getCases().filter((caseData) => caseData.id !== caseId));
 }
 
 export function getCaseById(id: string) {
-  return getCases().find(
-    c => c.id === id
-  );
+  return getCases().find((caseData) => caseData.id === id);
 }

@@ -11,8 +11,6 @@ import {
   pulmonologyQuestionBank,
   pulmonologyQuestionCategories,
 } from "../data/pulmonologyQuestionBank";
-import { pulmonologyPhysicalExamBank } from "../data/pulmonologyPhysicalExamBank";
-import { pulmonologyInvestigationBank } from "../data/pulmonologyInvestigationBank";
 import { isCorrectDiagnosis } from "../lib/caseEngine";
 
 const MAX_GUESSES = 4;
@@ -80,43 +78,6 @@ export default function CasePlayer({ caseData }: Props) {
       hints.map((hint) => [hint.sourceId ?? hint.id, hint]),
     );
   }, [historyStage]);
-
-  /*
-   * PHYSICAL EXAM
-   *
-   * Only findings that actually exist in the current case are shown.
-   * There is intentionally NO category filter here.
-   */
-  const physicalAnswerMap = useMemo(() => {
-    const hints =
-      physicalStage?.type === "physical-exam"
-        ? physicalStage.hints
-        : [];
-
-    return new Map(
-      hints.map((hint) => [hint.sourceId ?? hint.id, hint]),
-    );
-  }, [physicalStage]);
-
-  /*
-   * INVESTIGATIONS
-   *
-   * Only investigations that actually exist in the current case are shown.
-   * There is intentionally NO category filter here.
-   */
-  const investigationAnswerMap = useMemo(() => {
-    const investigations =
-      investigationStage?.type === "investigation"
-        ? investigationStage.investigations
-        : [];
-
-    return new Map(
-      investigations.map((item) => [
-        item.name.toLowerCase(),
-        item,
-      ]),
-    );
-  }, [investigationStage]);
 
   /*
    * HISTORY OPTIONS
@@ -252,18 +213,12 @@ export default function CasePlayer({ caseData }: Props) {
       return;
     }
 
-    const bankItem =
-      pulmonologyPhysicalExamBank.find(
-        (item) => item.id === examId,
-      );
-
     setAnswered((current) => {
       const next = [
         ...current,
         {
           id: `physical-exam:${examId}`,
           question:
-            bankItem?.title ??
             answer.label ??
             examId,
           answer: answer.content,

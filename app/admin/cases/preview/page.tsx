@@ -69,10 +69,6 @@ export default function CasePreviewPage() {
           const parsed = JSON.parse(stored);
 
           if (Array.isArray(parsed)) {
-            const storedIds = new Set(
-              parsed.map((item: Case) => item.id)
-            );
-
             const cleanedParsed = parsed.filter((item: Case) =>
               item.id.startsWith("pulmo-")
             );

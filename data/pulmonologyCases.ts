@@ -188,6 +188,7 @@ export const pulmonologyCases: Case[] = [
     ],
     diagnosis: diseases.find((item) => item.id === "asthma")!,
     candidateDiagnosisIds: [
+      "asthma",
       "copd",
       "community-acquired-pneumonia",
       "pulmonary-embolism",
@@ -1481,13 +1482,6 @@ export const pulmonologyCases: Case[] = [
             relevance: "low",
           },
           {
-            id: "009-chest-ct-extra1",
-            name: "Chest CT",
-            category: "Imaging",
-            findings: [{ label: "Chest CT", value: "توده نامنظم در ریه راست همراه با لنفادنوپاتی مدیاستینال دیده می‌شود." }],
-            relevance: "high",
-          },
-          {
             id: "009-sputum-cytology",
             name: "Sputum Cytology",
             category: "Pathology",
@@ -1959,13 +1953,6 @@ export const pulmonologyCases: Case[] = [
             relevance: "low",
           },
           {
-            id: "012-cbc-extra1",
-            name: "CBC",
-            category: "Laboratory",
-            findings: [{ label: "CBC", value: "CBC طبیعی است." }],
-            relevance: "non-contributory",
-          },
-          {
             id: "012-thyroid",
             name: "Thyroid Function Tests",
             category: "Laboratory",
@@ -2270,13 +2257,6 @@ export const pulmonologyCases: Case[] = [
             relevance: "low",
           },
           {
-            id: "014-chest-x-ray-extra1",
-            name: "Chest X-Ray",
-            category: "Imaging",
-            findings: [{ label: "Chest X-Ray", value: "افزایش ضخامت دیواره برونش‌ها و خطوط حلقوی در نواحی تحتانی دیده می‌شود." }],
-            relevance: "low",
-          },
-          {
             id: "014-cbc",
             name: "CBC",
             category: "Laboratory",
@@ -2377,16 +2357,10 @@ export const pulmonologyCases: Case[] = [
             content: "Tachypnea and mildly increased work of breathing are present.",
           },
           {
-            id: "aspiration-pe-expansion",
+            id: "aspiration-pe-palpation",
             sourceId: "PE004",
-            label: "Chest Expansion",
-            content: "Right lower chest expansion is mildly reduced.",
-          },
-          {
-            id: "aspiration-pe-fremitus",
-            sourceId: "PE004",
-            label: "Tactile Fremitus",
-            content: "Tactile fremitus is increased over the right lower lung field.",
+            label: "Chest Palpation",
+            content: "Right lower chest expansion is mildly reduced, with increased tactile fremitus over the right lower lung field.",
           },
           {
             id: "aspiration-pe-auscultation",
@@ -2426,13 +2400,6 @@ export const pulmonologyCases: Case[] = [
             name: "Chest CT",
             category: "Clinical Investigation",
             findings: [{ label: "Chest CT", value: "Consolidation در نواحی وابسته ریه راست دیده می‌شود." }],
-            relevance: "high",
-          },
-          {
-            id: "015-chest-x-ray-extra1",
-            name: "Chest X-Ray",
-            category: "Imaging",
-            findings: [{ label: "Chest X-Ray", value: "Consolidation در نواحی dependent، به‌ویژه لوب تحتانی راست، دیده می‌شود." }],
             relevance: "high",
           },
           {

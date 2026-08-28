@@ -82,7 +82,7 @@ export default function ReviewQuiz({ questions }: Props) {
 
         {answered && (
           <div className={`mt-5 rounded-xl p-4 ${isCorrect ? "bg-green-50 text-green-900" : "bg-red-50 text-red-900"}`}>
-            <p className="font-semibold">{isCorrect ? "Correct" : "ناCorrect"}</p>
+            <p className="font-semibold">{isCorrect ? "Correct" : "Incorrect"}</p>
             {!isCorrect && (
               <p className="mt-1 text-sm">
                 Correct answer: {currentQuestion.options.find((option) => option.id === currentQuestion.correctOptionId)?.text}
