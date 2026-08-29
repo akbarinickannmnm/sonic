@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { getDailyCase } from "../lib/dailyCase";
 
 const specialties = [
   { label: "Pulmonology", icon: "lungs", tone: "blue" },
@@ -38,6 +39,14 @@ function Icon({ name, size = 24, strokeWidth = 1.8 }: { name: string; size?: num
 
 export default function Home() {
   const router = useRouter();
+  const dailyCase = getDailyCase();
+  const dailyDate = new Date();
+  const dailyDateLabel = dailyDate.toLocaleDateString("en-US", {
+    month: "short",
+    day: "2-digit",
+    year: "numeric",
+    timeZone: "UTC",
+  }).toUpperCase();
 
   return (
     <main className="min-h-screen bg-[#fbfaf8] text-[#10213f]">
@@ -72,15 +81,15 @@ export default function Home() {
           <article className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-[0_8px_28px_rgba(15,23,42,0.05)]">
             <div className="grid min-h-[340px] md:grid-cols-[1.02fr_0.98fr]">
               <div className="flex flex-col justify-center p-7 sm:p-9 lg:p-10">
-                <div className="mb-5 inline-flex w-fit items-center rounded-lg bg-blue-50 px-3 py-1.5 text-[13px] font-medium text-blue-700">AUG 30, 2026</div>
-                <h2 className="text-[30px] font-semibold tracking-[-0.035em] sm:text-[34px]">Pulmonary Embolism</h2>
-                <p className="mt-3 max-w-[390px] text-[17px] leading-7 text-slate-700">A 45-year-old woman presents with sudden shortness of breath and pleuritic chest pain.</p>
+                <div className="mb-5 inline-flex w-fit items-center rounded-lg bg-blue-50 px-3 py-1.5 text-[13px] font-medium text-blue-700">{dailyDateLabel}</div>
+                <h2 className="text-[30px] font-semibold tracking-[-0.035em] sm:text-[34px]">{dailyCase.title}</h2>
+                <p className="mt-3 max-w-[390px] text-[17px] leading-7 text-slate-700">{dailyCase.presentation}</p>
                 <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-[14px] text-slate-600">
-                  <span className="flex items-center gap-2"><Icon name="user" size={19}/>45 yrs</span>
-                  <span className="flex items-center gap-2">♀&nbsp; Female</span>
-                  <span className="flex items-center gap-2"><Icon name="activity" size={19}/>Intermediate</span>
+                  <span className="flex items-center gap-2"><Icon name="user" size={19}/>{dailyCase.patient.age} yrs</span>
+                  <span className="flex items-center gap-2">{dailyCase.patient.sex === "male" ? "♂" : "♀"}&nbsp; {dailyCase.patient.sex === "male" ? "Male" : "Female"}</span>
+                  <span className="flex items-center gap-2"><Icon name="activity" size={19}/>{dailyCase.difficulty.charAt(0).toUpperCase() + dailyCase.difficulty.slice(1)}</span>
                 </div>
-                <button className="mt-7 flex w-fit items-center gap-4 rounded-lg bg-[#1768c7] px-7 py-3.5 text-[16px] font-medium text-white shadow-sm">Start today&apos;s case <Icon name="arrow" size={20}/></button>
+                <button type="button" onClick={() => router.push("/case/today")} className="mt-7 flex w-fit items-center gap-4 rounded-lg bg-[#1768c7] px-7 py-3.5 text-[16px] font-medium text-white shadow-sm transition hover:bg-[#155db2]">Start today&apos;s case <Icon name="arrow" size={20}/></button>
               </div>
               <div className="relative min-h-[280px] overflow-hidden bg-[#f7f4ed]">
                 <div className="absolute inset-0 opacity-60" style={{backgroundImage:"radial-gradient(circle at 55% 40%, rgba(255,255,255,.95), transparent 44%), linear-gradient(120deg, rgba(238,231,218,.5), rgba(250,248,243,.95))"}}/>
@@ -95,7 +104,11 @@ export default function Home() {
                     <path d="M284 246h38M296 229c10 7 17 13 25 24M297 263c9-7 15-13 22-25" stroke="#b44d4a" strokeWidth="6"/>
                   </svg>
                 </div>
-                <div className="absolute right-7 top-8 rotate-[-4deg] text-[12px] italic leading-7 text-slate-600">↑ d-dimer<br/>V/Q mismatch<br/>Pleuritic pain<br/>Tachycardia<br/>Risk factors?</div>
+                <div className="absolute right-7 top-8 rotate-[-4deg] text-[12px] italic leading-7 text-slate-600">
+                  {dailyCase.tags.slice(0, 5).map((tag) => (
+                    <div key={tag}>{tag.replaceAll("-", " ")}</div>
+                  ))}
+                </div>
               </div>
             </div>
           </article>

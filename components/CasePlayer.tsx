@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import type { Case, CaseHint, Investigation } from "../types/case";
 import Header from "./Header";
@@ -18,7 +18,11 @@ const MAX_HISTORY_QUESTIONS = 3;
 const MAX_PHYSICAL_EXAMS = 2;
 const MAX_INVESTIGATIONS = 2;
 
-type Props = { caseData: Case };
+type Props = {
+  caseData: Case;
+  storageKey?: string;
+  onComplete?: (result: { won: boolean; guessCount: number }) => void;
+};
 type Stage = "history" | "physical-exam" | "investigation";
 
 type AnsweredItem = {
@@ -38,7 +42,7 @@ function getStageLimit(stage: Stage) {
   return MAX_INVESTIGATIONS;
 }
 
-export default function CasePlayer({ caseData }: Props) {
+export default function CasePlayer({ caseData, storageKey, onComplete }: Props) {
   const historyStage = getStage(caseData, "history");
   const physicalStage = getStage(caseData, "physical-exam");
   const investigationStage = getStage(caseData, "investigation");
@@ -54,6 +58,7 @@ export default function CasePlayer({ caseData }: Props) {
   const [completed, setCompleted] = useState(false);
   const [won, setWon] = useState<boolean | null>(null);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [hydrated, setHydrated] = useState(!storageKey);
 
   const answeredIds = useMemo(
     () => new Set(answered.map((item) => item.id)),
@@ -145,6 +150,75 @@ export default function CasePlayer({ caseData }: Props) {
       )
       .slice(0, 8);
   }, [selectedDiagnosis]);
+
+  useEffect(() => {
+    if (!storageKey || typeof window === "undefined") {
+      setHydrated(true);
+      return;
+    }
+
+    try {
+      const raw = window.localStorage.getItem(storageKey);
+      if (raw) {
+        const saved = JSON.parse(raw) as {
+          answered?: AnsweredItem[];
+          activeStage?: Stage;
+          questionSearch?: string;
+          selectedCategory?: string | null;
+          selectedDiagnosis?: string;
+          guessCount?: number;
+          completed?: boolean;
+          won?: boolean | null;
+          showSuggestions?: boolean;
+        };
+
+        if (Array.isArray(saved.answered)) setAnswered(saved.answered);
+        if (saved.activeStage) setActiveStage(saved.activeStage);
+        if (typeof saved.questionSearch === "string") setQuestionSearch(saved.questionSearch);
+        if (saved.selectedCategory !== undefined) setSelectedCategory(saved.selectedCategory ?? null);
+        if (typeof saved.selectedDiagnosis === "string") setSelectedDiagnosis(saved.selectedDiagnosis);
+        if (typeof saved.guessCount === "number") setGuessCount(saved.guessCount);
+        if (typeof saved.completed === "boolean") setCompleted(saved.completed);
+        if (saved.won !== undefined) setWon(saved.won ?? null);
+        if (typeof saved.showSuggestions === "boolean") setShowSuggestions(saved.showSuggestions);
+      }
+    } catch {
+      window.localStorage.removeItem(storageKey);
+    } finally {
+      setHydrated(true);
+    }
+  }, [storageKey]);
+
+  useEffect(() => {
+    if (!storageKey || !hydrated || typeof window === "undefined") return;
+
+    window.localStorage.setItem(
+      storageKey,
+      JSON.stringify({
+        answered,
+        activeStage,
+        questionSearch,
+        selectedCategory,
+        selectedDiagnosis,
+        guessCount,
+        completed,
+        won,
+        showSuggestions,
+      }),
+    );
+  }, [
+    storageKey,
+    hydrated,
+    answered,
+    activeStage,
+    questionSearch,
+    selectedCategory,
+    selectedDiagnosis,
+    guessCount,
+    completed,
+    won,
+    showSuggestions,
+  ]);
 
   const stageLimit = getStageLimit(activeStage);
 
@@ -305,12 +379,14 @@ export default function CasePlayer({ caseData }: Props) {
     if (correct) {
       setWon(true);
       setCompleted(true);
+      onComplete?.({ won: true, guessCount: nextGuessCount });
       return;
     }
 
     if (nextGuessCount >= MAX_GUESSES) {
       setWon(false);
       setCompleted(true);
+      onComplete?.({ won: false, guessCount: nextGuessCount });
     }
   }
 
@@ -332,6 +408,16 @@ export default function CasePlayer({ caseData }: Props) {
       : activeStage === "physical-exam"
         ? "Physical Exam"
         : "Investigations";
+
+  if (!hydrated) {
+    return (
+      <main className="min-h-screen bg-slate-50 px-4 py-8 text-left">
+        <div className="mx-auto w-full max-w-4xl rounded-3xl border border-slate-200 bg-white p-10 text-center shadow-xl">
+          <p className="text-sm text-slate-500">Loading your case...</p>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-slate-50 px-4 py-8 text-left">
