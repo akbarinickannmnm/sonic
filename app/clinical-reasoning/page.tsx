@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 function Icon({
   name,
@@ -143,61 +144,15 @@ function Icon({
 
 function BodyIllustration() {
   return (
-    <div className="relative mx-auto h-[390px] w-[520px] max-w-full">
-      {/* connecting lines */}
-      <div className="absolute left-[112px] top-[94px] h-px w-[112px] rotate-[27deg] border-t border-dashed border-slate-300" />
-      <div className="absolute right-[112px] top-[94px] h-px w-[112px] -rotate-[27deg] border-t border-dashed border-slate-300" />
-
-      <div className="absolute left-[98px] top-[194px] h-px w-[112px] rotate-[7deg] border-t border-dashed border-slate-300" />
-      <div className="absolute right-[98px] top-[194px] h-px w-[112px] -rotate-[7deg] border-t border-dashed border-slate-300" />
-
-      <div className="absolute left-[125px] top-[295px] h-px w-[92px] -rotate-[21deg] border-t border-dashed border-slate-300" />
-      <div className="absolute right-[125px] top-[295px] h-px w-[92px] rotate-[21deg] border-t border-dashed border-slate-300" />
-
-      {/* body */}
-      <div className="absolute left-1/2 top-[58px] h-[320px] w-[230px] -translate-x-1/2">
-        <div className="absolute left-1/2 top-0 h-[78px] w-[64px] -translate-x-1/2 rounded-[45%] bg-slate-100" />
-
-        <div className="absolute left-[42px] top-[58px] h-[220px] w-[146px] rounded-t-[70px] bg-slate-100" />
-
-        <div className="absolute left-[29px] top-[93px] h-[190px] w-[48px] rotate-[8deg] rounded-full bg-slate-100" />
-
-        <div className="absolute right-[29px] top-[93px] h-[190px] w-[48px] -rotate-[8deg] rounded-full bg-slate-100" />
-
-        <div className="absolute left-[61px] top-[255px] h-[90px] w-[48px] rotate-[3deg] rounded-full bg-slate-100" />
-
-        <div className="absolute right-[61px] top-[255px] h-[90px] w-[48px] -rotate-[3deg] rounded-full bg-slate-100" />
-
-        {/* question mark */}
-        <div className="absolute left-1/2 top-[130px] -translate-x-1/2 text-[92px] font-medium leading-none text-slate-800">
-          ?
-        </div>
-      </div>
-
-      {/* organs */}
-      <div className="absolute left-[48px] top-[55px] flex h-[76px] w-[76px] items-center justify-center rounded-full bg-slate-50 text-slate-300 shadow-sm">
-        <Icon name="heart" size={35} strokeWidth={1.5} />
-      </div>
-
-      <div className="absolute right-[48px] top-[55px] flex h-[76px] w-[76px] items-center justify-center rounded-full bg-slate-50 text-slate-300 shadow-sm">
-        <Icon name="brain" size={35} strokeWidth={1.5} />
-      </div>
-
-      <div className="absolute left-[25px] top-[156px] flex h-[76px] w-[76px] items-center justify-center rounded-full bg-slate-50 text-slate-300 shadow-sm">
-        <Icon name="lungs" size={35} strokeWidth={1.5} />
-      </div>
-
-      <div className="absolute right-[25px] top-[156px] flex h-[76px] w-[76px] items-center justify-center rounded-full bg-slate-50 text-slate-300 shadow-sm">
-        <Icon name="kidney" size={35} strokeWidth={1.5} />
-      </div>
-
-      <div className="absolute left-[55px] top-[270px] flex h-[76px] w-[76px] items-center justify-center rounded-full bg-slate-50 text-slate-300 shadow-sm">
-        <Icon name="stomach" size={35} strokeWidth={1.5} />
-      </div>
-
-      <div className="absolute right-[55px] top-[270px] flex h-[76px] w-[76px] items-center justify-center rounded-full bg-slate-50 text-slate-300 shadow-sm">
-        <Icon name="bone" size={35} strokeWidth={1.5} />
-      </div>
+    <div className="relative mx-auto w-full max-w-[900px]">
+      <Image
+  src="/clinical-reasoning.png"
+  alt="Clinical reasoning"
+  width={1536}
+  height={1024}
+  priority
+  className="mx-auto h-auto w-1/2 object-contain"
+/>
     </div>
   );
 }
@@ -207,12 +162,8 @@ export default function ClinicalReasoningPage() {
   const [showHowItWorks, setShowHowItWorks] = useState(false);
 
   const startCase = () => {
-    /*
-      فعلاً فقط placeholder است.
-      بعداً اینجا منطق انتخاب random case را وصل می‌کنیم.
-    */
-    console.log("Start random clinical reasoning case");
-  };
+  setShowHowItWorks(true);
+};
 
   return (
     <main className="min-h-screen bg-white text-slate-900">

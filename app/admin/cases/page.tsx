@@ -47,7 +47,7 @@ export default function CaseLibraryPage() {
       if (Array.isArray(parsed)) {
         const cleanedParsed = parsed.filter(
           (item): item is Case =>
-            isValidCase(item) && item.id.startsWith("pulmo-")
+            isValidCase(item)
         );
 
         const cleanedIds = new Set(

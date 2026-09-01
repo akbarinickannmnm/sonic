@@ -11,6 +11,10 @@ import {
   pulmonologyQuestionBank,
   pulmonologyQuestionCategories,
 } from "../data/pulmonologyQuestionBank";
+import {
+  cardiologyQuestionBank,
+  cardiologyQuestionCategories,
+} from "../data/cardiologyQuestionBank";
 import { isCorrectDiagnosis } from "../lib/caseEngine";
 
 const MAX_GUESSES = 4;
@@ -46,6 +50,14 @@ export default function CasePlayer({ caseData, storageKey, onComplete }: Props) 
   const historyStage = getStage(caseData, "history");
   const physicalStage = getStage(caseData, "physical-exam");
   const investigationStage = getStage(caseData, "investigation");
+
+  const questionBank = caseData.course === "cardiology"
+    ? cardiologyQuestionBank
+    : pulmonologyQuestionBank;
+
+  const questionCategories = caseData.course === "cardiology"
+    ? cardiologyQuestionCategories
+    : pulmonologyQuestionCategories;
 
   const [answered, setAnswered] = useState<AnsweredItem[]>([]);
   const [activeStage, setActiveStage] = useState<Stage>("history");
@@ -92,7 +104,7 @@ export default function CasePlayer({ caseData, storageKey, onComplete }: Props) 
   const historyOptions = useMemo(() => {
     const query = questionSearch.trim().toLowerCase();
 
-    return pulmonologyQuestionBank
+    return questionBank
       .filter((question) => !answeredIds.has(`history:${question.id}`))
       .filter((question) => !selectedCategory || question.category === selectedCategory)
       .filter((question) => !query || question.text.toLowerCase().includes(query))
@@ -104,7 +116,7 @@ export default function CasePlayer({ caseData, storageKey, onComplete }: Props) 
       }))
       .filter((item): item is { id: string; label: string; sourceId: string; answer: CaseHint } => Boolean(item.answer))
       .slice(0, 8);
-  }, [answeredIds, questionSearch, selectedCategory, historyAnswerMap]);
+  }, [answeredIds, questionSearch, selectedCategory, historyAnswerMap, questionBank]);
 
   // Physical Exam uses the current case's actual findings directly.
   // No category filter and no global bank filtering.
@@ -560,7 +572,7 @@ export default function CasePlayer({ caseData, storageKey, onComplete }: Props) 
                       All
                     </button>
 
-                    {pulmonologyQuestionCategories.map(
+                    {questionCategories.map(
                       (category) => (
                         <button
                           key={category.id}

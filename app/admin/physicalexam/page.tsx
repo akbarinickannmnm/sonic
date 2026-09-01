@@ -8,17 +8,22 @@ import {
   physicalExamCategories,
   type PhysicalExamCategory,
 } from "../../../data/pulmonologyPhysicalExamBank";
+import {
+  cardiologyPhysicalExamBank,
+  cardiologyPhysicalExamCategories,
+  type CardiologyPhysicalExamCategory,
+} from "../../../data/cardiologyPhysicalExamBank";
 
 export default function PhysicalExamBankPage() {
+  const [course, setCourse] = useState<"pulmonology" | "cardiology">("pulmonology");
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState<
-    "all" | PhysicalExamCategory
-  >("all");
+  const [category, setCategory] = useState<string>("all");
 
   const filteredExams = useMemo(() => {
     const query = search.trim().toLowerCase();
 
-    return pulmonologyPhysicalExamBank.filter((exam) => {
+    const bank = course === "cardiology" ? cardiologyPhysicalExamBank : pulmonologyPhysicalExamBank;
+    return bank.filter((exam) => {
       const matchesSearch =
         !query ||
         exam.title.toLowerCase().includes(query) ||
@@ -29,10 +34,11 @@ export default function PhysicalExamBankPage() {
 
       return matchesSearch && matchesCategory;
     });
-  }, [search, category]);
+  }, [search, category, course]);
 
-  const categoryLabel = (id: PhysicalExamCategory) =>
-    physicalExamCategories.find((item) => item.id === id)?.label ?? id;
+  const activeCategories = course === "cardiology" ? cardiologyPhysicalExamCategories : physicalExamCategories;
+  const categoryLabel = (id: string) =>
+    activeCategories.find((item) => item.id === id)?.label ?? id;
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
@@ -40,13 +46,21 @@ export default function PhysicalExamBankPage() {
 
       <main className="mx-auto max-w-7xl px-6 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold">
-            Pulmonology Physical Exam Bank
-          </h1>
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <h1 className="text-3xl font-bold">
+                {course === "cardiology" ? "Cardiology" : "Pulmonology"} Physical Exam Bank
+              </h1>
 
           <p className="mt-2 text-slate-400">
-            Physical examination actions available for pulmonology cases.
+            Physical examination actions available for {course} cases.
           </p>
+            </div>
+            <select value={course} onChange={(e) => { setCourse(e.target.value as "pulmonology" | "cardiology"); setCategory("all"); }} className="rounded-lg border border-slate-700 bg-slate-900 px-4 py-3">
+              <option value="pulmonology">Pulmonology</option>
+              <option value="cardiology">Cardiology</option>
+            </select>
+          </div>
         </div>
 
         <div className="mb-6 flex flex-col gap-4 md:flex-row">
@@ -62,14 +76,14 @@ export default function PhysicalExamBankPage() {
             value={category}
             onChange={(e) =>
               setCategory(
-                e.target.value as "all" | PhysicalExamCategory
+                e.target.value
               )
             }
             className="rounded-lg border border-slate-700 bg-slate-900 px-4 py-3"
           >
             <option value="all">All Categories</option>
 
-            {physicalExamCategories.map((category) => (
+            {activeCategories.map((category) => (
               <option
                 key={category.id}
                 value={category.id}
@@ -106,9 +120,13 @@ export default function PhysicalExamBankPage() {
                 </span>
               </div>
 
-              <p className="text-slate-300">
-                {exam.description}
-              </p>
+              <p className="text-slate-300">{exam.description}</p>
+              {"answer" in exam && (
+                <div className="mt-4 rounded-lg border border-slate-700 bg-slate-950/60 p-4">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Key answer / expected finding</p>
+                  <p className="mt-1 text-sm leading-6 text-slate-300">{exam.answer}</p>
+                </div>
+              )}
             </div>
           ))}
         </div>

@@ -6,19 +6,24 @@ import Header from "../../../components/Header";
 import {
   pulmonologyQuestionBank,
   pulmonologyQuestionCategories,
-  type PulmonologyQuestionCategory,
 } from "../../../data/pulmonologyQuestionBank";
+import {
+  cardiologyQuestionBank,
+  cardiologyQuestionCategories,
+} from "../../../data/cardiologyQuestionBank";
 
 export default function QuestionBankPage() {
+  const [course, setCourse] = useState<"pulmonology" | "cardiology">("pulmonology");
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState<
-    "all" | PulmonologyQuestionCategory
-  >("all");
+  const [category, setCategory] = useState("all");
+
+  const questionBank = course === "cardiology" ? cardiologyQuestionBank : pulmonologyQuestionBank;
+  const questionCategories = course === "cardiology" ? cardiologyQuestionCategories : pulmonologyQuestionCategories;
 
   const filteredQuestions = useMemo(() => {
     const query = search.trim().toLowerCase();
 
-    return pulmonologyQuestionBank.filter((question) => {
+    return questionBank.filter((question) => {
       const matchesSearch =
         query.length === 0 ||
         question.text.toLowerCase().includes(query);
@@ -29,16 +34,10 @@ export default function QuestionBankPage() {
 
       return matchesSearch && matchesCategory;
     });
-  }, [search, category]);
+  }, [search, category, questionBank]);
 
-  const getCategoryLabel = (
-    id: PulmonologyQuestionCategory
-  ) => {
-    return (
-      pulmonologyQuestionCategories.find(
-        (item) => item.id === id
-      )?.label ?? id
-    );
+  const getCategoryLabel = (id: string) => {
+    return questionCategories.find((item) => item.id === id)?.label ?? id;
   };
 
   return (
@@ -48,13 +47,19 @@ export default function QuestionBankPage() {
       <div className="mx-auto max-w-7xl px-6 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-slate-900">
-            Pulmonology Question Bank
+            {course === "cardiology" ? "Cardiology" : "Pulmonology"} Question Bank
           </h1>
 
           <p className="mt-2 text-slate-600">
-            Total Questions: {pulmonologyQuestionBank.length}
+            Total Questions: {questionBank.length}
           </p>
         </div>
+
+
+          <div className="mb-4 flex gap-2">
+            <button type="button" onClick={() => { setCourse("pulmonology"); setCategory("all"); }} className={`rounded-xl px-4 py-2 text-sm font-medium ${course === "pulmonology" ? "bg-slate-900 text-white" : "bg-white text-slate-700"}`}>Pulmonology</button>
+            <button type="button" onClick={() => { setCourse("cardiology"); setCategory("all"); }} className={`rounded-xl px-4 py-2 text-sm font-medium ${course === "cardiology" ? "bg-slate-900 text-white" : "bg-white text-slate-700"}`}>Cardiology</button>
+          </div>
 
         <div className="mb-6 grid gap-4 md:grid-cols-2">
           <input
@@ -67,20 +72,14 @@ export default function QuestionBankPage() {
 
           <select
             value={category}
-            onChange={(e) =>
-              setCategory(
-                e.target.value as
-                  | "all"
-                  | PulmonologyQuestionCategory
-              )
-            }
+            onChange={(e) => setCategory(e.target.value)}
             className="rounded-xl border border-slate-300 bg-white px-4 py-3 outline-none focus:border-slate-500"
           >
             <option value="all">
               All Categories
             </option>
 
-            {pulmonologyQuestionCategories.map(
+            {questionCategories.map(
               (category) => (
                 <option
                   key={category.id}

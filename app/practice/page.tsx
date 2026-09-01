@@ -77,7 +77,7 @@ export default function PracticePage() {
         <section className="mt-9 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {specialties.map((specialty) => {
             const card = (
-              <div className={`group rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_6px_20px_rgba(15,23,42,0.035)] ${specialty.name === "Pulmonology" ? "transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_10px_28px_rgba(15,23,42,0.07)]" : ""}`}>
+              <div className={`group rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_6px_20px_rgba(15,23,42,0.035)] ${specialty.name === "Pulmonology" || specialty.name === "Cardiology" ? "transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_10px_28px_rgba(15,23,42,0.07)]" : ""}`}>
                 <div className="flex items-start justify-between">
                   <div className={`flex h-11 w-11 items-center justify-center rounded-full ${specialty.tone}`}>
                     <Icon name={specialty.icon} size={24} />
@@ -92,14 +92,14 @@ export default function PracticePage() {
                   <div className="h-full rounded-full bg-slate-800" style={{ width: `${specialty.progress}%` }} />
                 </div>
 
-                <div className={`mt-5 flex items-center justify-between text-sm font-medium ${specialty.name === "Pulmonology" ? "text-blue-700" : "text-slate-400"}`}>
-                  <span>{specialty.name === "Pulmonology" ? "Practice" : "Coming soon"}</span>
-                  {specialty.name === "Pulmonology" && <Icon name="arrow" size={18} />}
+                <div className={`mt-5 flex items-center justify-between text-sm font-medium ${specialty.name === "Pulmonology" ? "text-blue-700" : specialty.name === "Cardiology" ? "text-red-700" : "text-slate-400"}`}>
+                  <span>{specialty.name === "Pulmonology" || specialty.name === "Cardiology" ? "Practice" : "Coming soon"}</span>
+                  {(specialty.name === "Pulmonology" || specialty.name === "Cardiology") && <Icon name="arrow" size={18} />}
                 </div>
               </div>
             );
 
-            return specialty.name === "Pulmonology" ? <Link key={specialty.name} href="/practice/pulmonology" className="block">{card}</Link> : <div key={specialty.name}>{card}</div>;
+            return specialty.name === "Pulmonology" ? <Link key={specialty.name} href="/practice/pulmonology" className="block">{card}</Link> : specialty.name === "Cardiology" ? <Link key={specialty.name} href="/practice/cardiology" className="block">{card}</Link> : <div key={specialty.name}>{card}</div>;
           })}
         </section>
 

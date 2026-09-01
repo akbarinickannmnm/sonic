@@ -8,17 +8,21 @@ import {
   investigationCategories,
   type InvestigationCategory,
 } from "../../../data/pulmonologyInvestigationBank";
+import {
+  cardiologyInvestigationBank,
+  cardiologyInvestigationCategories,
+} from "../../../data/cardiologyInvestigationBank";
 
 export default function InvestigationBankPage() {
+  const [course, setCourse] = useState<"pulmonology" | "cardiology">("pulmonology");
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState<
-    "all" | InvestigationCategory
-  >("all");
+  const [category, setCategory] = useState<string>("all");
 
   const filteredInvestigations = useMemo(() => {
     const query = search.trim().toLowerCase();
 
-    return pulmonologyInvestigationBank.filter((investigation) => {
+    const bank = course === "cardiology" ? cardiologyInvestigationBank : pulmonologyInvestigationBank;
+    return bank.filter((investigation) => {
       const matchesSearch =
         !query ||
         investigation.title.toLowerCase().includes(query) ||
@@ -30,12 +34,11 @@ export default function InvestigationBankPage() {
 
       return matchesSearch && matchesCategory;
     });
-  }, [search, category]);
+  }, [search, category, course]);
 
-  const categoryLabel = (id: InvestigationCategory) =>
-    investigationCategories.find(
-      (item) => item.id === id
-    )?.label ?? id;
+  const activeCategories = course === "cardiology" ? cardiologyInvestigationCategories : investigationCategories;
+  const categoryLabel = (id: string) =>
+    activeCategories.find((item) => item.id === id)?.label ?? id;
 
   return (
     <div className="min-h-screen bg-slate-950 text-white">
@@ -43,13 +46,21 @@ export default function InvestigationBankPage() {
 
       <main className="mx-auto max-w-7xl px-6 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold">
-            Pulmonology Investigation Bank
-          </h1>
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <h1 className="text-3xl font-bold">
+                {course === "cardiology" ? "Cardiology" : "Pulmonology"} Investigation Bank
+              </h1>
 
           <p className="mt-2 text-slate-400">
-            Available investigations for pulmonology cases.
+            Available investigations for {course} cases.
           </p>
+            </div>
+            <select value={course} onChange={(e) => { setCourse(e.target.value as "pulmonology" | "cardiology"); setCategory("all"); }} className="rounded-lg border border-slate-700 bg-slate-900 px-4 py-3">
+              <option value="pulmonology">Pulmonology</option>
+              <option value="cardiology">Cardiology</option>
+            </select>
+          </div>
         </div>
 
         <div className="mb-6 flex flex-col gap-4 md:flex-row">
@@ -67,9 +78,7 @@ export default function InvestigationBankPage() {
             value={category}
             onChange={(e) =>
               setCategory(
-                e.target.value as
-                  | "all"
-                  | InvestigationCategory
+                e.target.value
               )
             }
             className="rounded-lg border border-slate-700 bg-slate-900 px-4 py-3"
@@ -78,7 +87,7 @@ export default function InvestigationBankPage() {
               All Categories
             </option>
 
-            {investigationCategories.map((category) => (
+            {activeCategories.map((category) => (
               <option
                 key={category.id}
                 value={category.id}
@@ -118,9 +127,13 @@ export default function InvestigationBankPage() {
                   </span>
                 </div>
 
-                <p className="text-slate-300">
-                  {investigation.description}
-                </p>
+                <p className="text-slate-300">{investigation.description}</p>
+                {"answer" in investigation && (
+                  <div className="mt-4 rounded-lg border border-slate-700 bg-slate-950/60 p-4">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Key answer / expected finding</p>
+                    <p className="mt-1 text-sm leading-6 text-slate-300">{investigation.answer}</p>
+                  </div>
+                )}
               </div>
             )
           )}

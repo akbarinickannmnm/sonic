@@ -14,6 +14,9 @@ import {
 } from "../../../../data/pulmonologyQuestionBank";
 import { pulmonologyPhysicalExamBank } from "../../../../data/pulmonologyPhysicalExamBank";
 import { pulmonologyInvestigationBank } from "../../../../data/pulmonologyInvestigationBank";
+import { cardiologyQuestionBank, cardiologyQuestionCategories } from "../../../../data/cardiologyQuestionBank";
+import { cardiologyPhysicalExamBank } from "../../../../data/cardiologyPhysicalExamBank";
+import { cardiologyInvestigationBank } from "../../../../data/cardiologyInvestigationBank";
 
 type StageType =
   | "history"
@@ -140,6 +143,11 @@ const [editingCaseId, setEditingCaseId] =
 
   const [course, setCourse] =
     useState<Case["course"]>("cardiology");
+
+  const activeQuestionBank = course === "cardiology" ? cardiologyQuestionBank : pulmonologyQuestionBank;
+  const activePhysicalExamBank = course === "cardiology" ? cardiologyPhysicalExamBank : pulmonologyPhysicalExamBank;
+  const activeInvestigationBank = course === "cardiology" ? cardiologyInvestigationBank : pulmonologyInvestigationBank;
+  const activeQuestionCategories = course === "cardiology" ? cardiologyQuestionCategories : pulmonologyQuestionCategories;
 
   const [difficulty, setDifficulty] =
     useState<
@@ -448,7 +456,7 @@ useEffect(() => {
         }
 
         const question =
-          pulmonologyQuestionBank.find(
+          activeQuestionBank.find(
             (item) => item.id === questionId
           );
 
@@ -490,7 +498,7 @@ useEffect(() => {
             .filter(Boolean)
         );
 
-        const newHints = pulmonologyQuestionBank
+        const newHints = activeQuestionBank
           .filter((question) => !existingIds.has(question.id))
           .map((question) => ({
             id: createId(),
@@ -531,7 +539,7 @@ useEffect(() => {
         }
 
         const exam =
-          pulmonologyPhysicalExamBank.find(
+          activePhysicalExamBank.find(
             (item) => item.id === examId
           );
 
@@ -567,7 +575,7 @@ useEffect(() => {
           currentHints.map((hint) => hint.sourceId).filter(Boolean)
         );
 
-        const newHints = pulmonologyPhysicalExamBank
+        const newHints = activePhysicalExamBank
           .filter((exam) => !existingIds.has(exam.id))
           .map((exam) => ({
             id: createId(),
@@ -610,7 +618,7 @@ useEffect(() => {
         }
 
         const investigation =
-          pulmonologyInvestigationBank.find(
+          activeInvestigationBank.find(
             (item) =>
               item.id === investigationId
           );
@@ -651,7 +659,7 @@ useEffect(() => {
             .filter(Boolean)
         );
 
-        const newInvestigations = pulmonologyInvestigationBank
+        const newInvestigations = activeInvestigationBank
           .filter((investigation) => !existingIds.has(investigation.id))
           .map((investigation) => ({
             id: createId(),
@@ -2023,7 +2031,7 @@ useEffect(() => {
                         All Categories
                       </button>
 
-                      {pulmonologyQuestionCategories.map((category) => (
+                      {activeQuestionCategories.map((category) => (
                         <button
                           key={category.id}
                           type="button"
@@ -2061,7 +2069,7 @@ useEffect(() => {
                     </div>
 
                     <div className="space-y-2">
-                      {pulmonologyQuestionBank
+                      {activeQuestionBank
                         .filter((item) => {
                           const query =
                             pickerSearch.trim().toLowerCase();
@@ -2127,7 +2135,7 @@ useEffect(() => {
 
                               <p className="mt-2 text-xs text-slate-500">
                                 {
-                                  pulmonologyQuestionCategories.find(
+                                  activeQuestionCategories.find(
                                     (category) =>
                                       category.id === item.category
                                   )?.label ?? item.category
@@ -2142,7 +2150,7 @@ useEffect(() => {
 
                 {picker.type === "physical-exam" && (
                   <div className="space-y-2">
-                    {pulmonologyPhysicalExamBank
+                    {activePhysicalExamBank
                       .filter((item) => {
                         const query =
                           pickerSearch.trim().toLowerCase();
@@ -2200,7 +2208,7 @@ useEffect(() => {
 
                 {picker.type === "investigation" && (
                   <div className="space-y-2">
-                    {pulmonologyInvestigationBank
+                    {activeInvestigationBank
                       .filter((item) => {
                         const query =
                           pickerSearch.trim().toLowerCase();

@@ -2423,6 +2423,916 @@ export const pulmonologyCases: Case[] = [
     candidateDiagnosisIds: ["aspiration-pneumonia", "community-acquired-pneumonia", "lung-abscess", "acute-bronchitis", "pleural-effusion"],
     reviewQuestions: [],
   },
+{
+  id: "pulmo-016-sarcoidosis",
+  title: "Sarcoidosis",
+  course: "pulmonology",
+  tags: ["sarcoidosis"],
+  difficulty: "medium",
+  patient: { age: 71, sex: "male" },
+  presentation: "A 71-year-old patient presents with chronic cough, dyspnea, and constitutional symptoms.",
+  stages: [
+    { id: "pulmo-016-sarcoidosis-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Sarcoidosis." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-016-sarcoidosis-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-016-sarcoidosis-pe", sourceId: "pulmo-pe-pulmo-016-sarcoidosis", label: "Physical Examination", content: "Bilateral crackles with possible peripheral adenopathy; no focal consolidation." }
+    ] },
+    { id: "pulmo-016-sarcoidosis-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-016-sarcoidosis-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-016-sarcoidosis-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "sarcoidosis")!,
+  candidateDiagnosisIds: ["sarcoidosis", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-017-pulmonary-hypertension",
+  title: "Pulmonary Hypertension",
+  course: "pulmonology",
+  tags: ["pulmonary-hypertension"],
+  difficulty: "medium",
+  patient: { age: 54, sex: "male" },
+  presentation: "A 54-year-old patient presents with progressive exertional dyspnea and presyncope.",
+  stages: [
+    { id: "pulmo-017-pulmonary-hypertension-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Pulmonary Hypertension." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-017-pulmonary-hypertension-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-017-pulmonary-hypertension-pe", sourceId: "pulmo-pe-pulmo-017-pulmonary-hypertension", label: "Physical Examination", content: "Accentuated P2 with right ventricular heave." }
+    ] },
+    { id: "pulmo-017-pulmonary-hypertension-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-017-pulmonary-hypertension-inv-1", name: "Echocardiogram", category: "Cardiovascular Imaging", findings: [{ label: "Echocardiogram", value: "Evidence of elevated pulmonary pressures and right-sided strain." }], relevance: "high" },
+      { id: "pulmo-017-pulmonary-hypertension-inv-2", name: "Right Heart Catheterization", category: "Hemodynamics", findings: [{ label: "Right Heart Catheterization", value: "Hemodynamics confirm elevated pulmonary artery pressures." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "pulmonary-hypertension")!,
+  candidateDiagnosisIds: ["pulmonary-hypertension", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-018-occupational-lung-disease",
+  title: "Occupational Lung Disease",
+  course: "pulmonology",
+  tags: ["occupational-lung-disease"],
+  difficulty: "medium",
+  patient: { age: 61, sex: "female" },
+  presentation: "A 61-year-old worker presents with chronic exertional dyspnea after years of occupational exposure.",
+  stages: [
+    { id: "pulmo-018-occupational-lung-disease-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Occupational Lung Disease." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-018-occupational-lung-disease-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-018-occupational-lung-disease-pe", sourceId: "pulmo-pe-pulmo-018-occupational-lung-disease", label: "Physical Examination", content: "Fine inspiratory crackles with exposure-related chronic respiratory limitation." }
+    ] },
+    { id: "pulmo-018-occupational-lung-disease-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-018-occupational-lung-disease-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-018-occupational-lung-disease-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "occupational-lung-disease")!,
+  candidateDiagnosisIds: ["occupational-lung-disease", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-019-hypersensitivity-pneumonitis",
+  title: "Hypersensitivity Pneumonitis",
+  course: "pulmonology",
+  tags: ["hypersensitivity-pneumonitis"],
+  difficulty: "medium",
+  patient: { age: 29, sex: "female" },
+  presentation: "A 29-year-old patient presents with recurrent cough and dyspnea related to environmental exposure.",
+  stages: [
+    { id: "pulmo-019-hypersensitivity-pneumonitis-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Hypersensitivity Pneumonitis." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-019-hypersensitivity-pneumonitis-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-019-hypersensitivity-pneumonitis-pe", sourceId: "pulmo-pe-pulmo-019-hypersensitivity-pneumonitis", label: "Physical Examination", content: "Diffuse fine crackles with exposure-related symptoms." }
+    ] },
+    { id: "pulmo-019-hypersensitivity-pneumonitis-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-019-hypersensitivity-pneumonitis-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-019-hypersensitivity-pneumonitis-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "hypersensitivity-pneumonitis")!,
+  candidateDiagnosisIds: ["hypersensitivity-pneumonitis", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-020-idiopathic-pulmonary-fibrosis",
+  title: "Idiopathic Pulmonary Fibrosis (IPF)",
+  course: "pulmonology",
+  tags: ["idiopathic-pulmonary-fibrosis"],
+  difficulty: "medium",
+  patient: { age: 62, sex: "male" },
+  presentation: "A 62-year-old patient presents with slowly progressive exertional dyspnea and dry cough.",
+  stages: [
+    { id: "pulmo-020-idiopathic-pulmonary-fibrosis-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Idiopathic Pulmonary Fibrosis (IPF)." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-020-idiopathic-pulmonary-fibrosis-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-020-idiopathic-pulmonary-fibrosis-pe", sourceId: "pulmo-pe-pulmo-020-idiopathic-pulmonary-fibrosis", label: "Physical Examination", content: "Bibasal fine inspiratory crackles with clubbing." }
+    ] },
+    { id: "pulmo-020-idiopathic-pulmonary-fibrosis-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-020-idiopathic-pulmonary-fibrosis-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-020-idiopathic-pulmonary-fibrosis-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "idiopathic-pulmonary-fibrosis")!,
+  candidateDiagnosisIds: ["idiopathic-pulmonary-fibrosis", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-021-lung-abscess",
+  title: "Lung Abscess",
+  course: "pulmonology",
+  tags: ["lung-abscess"],
+  difficulty: "medium",
+  patient: { age: 35, sex: "male" },
+  presentation: "A 35-year-old patient presents with fever, productive cough, and foul-smelling sputum.",
+  stages: [
+    { id: "pulmo-021-lung-abscess-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Lung Abscess." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-021-lung-abscess-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-021-lung-abscess-pe", sourceId: "pulmo-pe-pulmo-021-lung-abscess", label: "Physical Examination", content: "Fever and focal bronchial breath sounds over the affected region." }
+    ] },
+    { id: "pulmo-021-lung-abscess-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-021-lung-abscess-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-021-lung-abscess-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "lung-abscess")!,
+  candidateDiagnosisIds: ["lung-abscess", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-022-empyema",
+  title: "Empyema",
+  course: "pulmonology",
+  tags: ["empyema"],
+  difficulty: "medium",
+  patient: { age: 69, sex: "male" },
+  presentation: "A 69-year-old patient presents with fever, pleuritic chest pain, and persistent dyspnea.",
+  stages: [
+    { id: "pulmo-022-empyema-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Empyema." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-022-empyema-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-022-empyema-pe", sourceId: "pulmo-pe-pulmo-022-empyema", label: "Physical Examination", content: "Dullness to percussion and reduced breath sounds over a pleural collection." }
+    ] },
+    { id: "pulmo-022-empyema-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-022-empyema-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-022-empyema-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "empyema")!,
+  candidateDiagnosisIds: ["empyema", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-023-cystic-fibrosis",
+  title: "Cystic Fibrosis",
+  course: "pulmonology",
+  tags: ["cystic-fibrosis"],
+  difficulty: "medium",
+  patient: { age: 65, sex: "male" },
+  presentation: "A 65-year-old patient presents with recurrent sinopulmonary infections and chronic productive cough.",
+  stages: [
+    { id: "pulmo-023-cystic-fibrosis-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Cystic Fibrosis." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-023-cystic-fibrosis-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-023-cystic-fibrosis-pe", sourceId: "pulmo-pe-pulmo-023-cystic-fibrosis", label: "Physical Examination", content: "Diffuse crackles and chronic productive cough phenotype." }
+    ] },
+    { id: "pulmo-023-cystic-fibrosis-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-023-cystic-fibrosis-inv-1", name: "Sweat Chloride Test", category: "Laboratory", findings: [{ label: "Sweat Chloride Test", value: "Elevated sweat chloride concentration." }], relevance: "high" },
+      { id: "pulmo-023-cystic-fibrosis-inv-2", name: "Chest CT", category: "Chest Imaging", findings: [{ label: "Chest CT", value: "Bronchiectatic changes with chronic airway disease." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "cystic-fibrosis")!,
+  candidateDiagnosisIds: ["cystic-fibrosis", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-024-allergic-bronchopulmonary-aspergillosis",
+  title: "Allergic Bronchopulmonary Aspergillosis (ABPA)",
+  course: "pulmonology",
+  tags: ["allergic-bronchopulmonary-aspergillosis"],
+  difficulty: "medium",
+  patient: { age: 62, sex: "female" },
+  presentation: "A 62-year-old patient with asthma presents with worsening wheeze and recurrent pulmonary infiltrates.",
+  stages: [
+    { id: "pulmo-024-allergic-bronchopulmonary-aspergillosis-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Allergic Bronchopulmonary Aspergillosis (ABPA)." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-024-allergic-bronchopulmonary-aspergillosis-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-024-allergic-bronchopulmonary-aspergillosis-pe", sourceId: "pulmo-pe-pulmo-024-allergic-bronchopulmonary-aspergillosis", label: "Physical Examination", content: "Widespread expiratory wheeze." }
+    ] },
+    { id: "pulmo-024-allergic-bronchopulmonary-aspergillosis-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-024-allergic-bronchopulmonary-aspergillosis-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-024-allergic-bronchopulmonary-aspergillosis-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "allergic-bronchopulmonary-aspergillosis")!,
+  candidateDiagnosisIds: ["allergic-bronchopulmonary-aspergillosis", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-025-non-tuberculous-mycobacterial-infection",
+  title: "Non-Tuberculous Mycobacterial Infection",
+  course: "pulmonology",
+  tags: ["non-tuberculous-mycobacterial-infection"],
+  difficulty: "medium",
+  patient: { age: 54, sex: "female" },
+  presentation: "A 54-year-old patient presents with chronic cough, weight loss, and recurrent pulmonary symptoms.",
+  stages: [
+    { id: "pulmo-025-non-tuberculous-mycobacterial-infection-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Non-Tuberculous Mycobacterial Infection." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-025-non-tuberculous-mycobacterial-infection-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-025-non-tuberculous-mycobacterial-infection-pe", sourceId: "pulmo-pe-pulmo-025-non-tuberculous-mycobacterial-infection", label: "Physical Examination", content: "Chronic respiratory findings without acute hemodynamic instability." }
+    ] },
+    { id: "pulmo-025-non-tuberculous-mycobacterial-infection-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-025-non-tuberculous-mycobacterial-infection-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-025-non-tuberculous-mycobacterial-infection-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "non-tuberculous-mycobacterial-infection")!,
+  candidateDiagnosisIds: ["non-tuberculous-mycobacterial-infection", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-026-massive-hemoptysis",
+  title: "Massive Hemoptysis",
+  course: "pulmonology",
+  tags: ["massive-hemoptysis"],
+  difficulty: "hard",
+  patient: { age: 42, sex: "male" },
+  presentation: "A 42-year-old patient presents with acute large-volume hemoptysis and respiratory distress.",
+  stages: [
+    { id: "pulmo-026-massive-hemoptysis-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Massive Hemoptysis." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "Symptoms worsened rapidly over a short period." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-026-massive-hemoptysis-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-026-massive-hemoptysis-pe", sourceId: "pulmo-pe-pulmo-026-massive-hemoptysis", label: "Physical Examination", content: "Active hemoptysis with respiratory distress." }
+    ] },
+    { id: "pulmo-026-massive-hemoptysis-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-026-massive-hemoptysis-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-026-massive-hemoptysis-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "massive-hemoptysis")!,
+  candidateDiagnosisIds: ["massive-hemoptysis", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-027-acute-severe-asthma",
+  title: "Acute Severe Asthma",
+  course: "pulmonology",
+  tags: ["acute-severe-asthma"],
+  difficulty: "medium",
+  patient: { age: 69, sex: "female" },
+  presentation: "A 69-year-old patient with asthma presents with severe dyspnea and inability to speak full sentences.",
+  stages: [
+    { id: "pulmo-027-acute-severe-asthma-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Acute Severe Asthma." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "Symptoms worsened rapidly over a short period." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-027-acute-severe-asthma-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-027-acute-severe-asthma-pe", sourceId: "pulmo-pe-pulmo-027-acute-severe-asthma", label: "Physical Examination", content: "Marked wheeze with prolonged expiration and increased work of breathing." }
+    ] },
+    { id: "pulmo-027-acute-severe-asthma-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-027-acute-severe-asthma-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-027-acute-severe-asthma-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "acute-severe-asthma")!,
+  candidateDiagnosisIds: ["acute-severe-asthma", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-028-copd-exacerbation",
+  title: "COPD Exacerbation",
+  course: "pulmonology",
+  tags: ["copd-exacerbation"],
+  difficulty: "medium",
+  patient: { age: 50, sex: "male" },
+  presentation: "A 50-year-old smoker presents with an acute increase in dyspnea, cough, and sputum production.",
+  stages: [
+    { id: "pulmo-028-copd-exacerbation-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for COPD Exacerbation." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "Symptoms worsened rapidly over a short period." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-028-copd-exacerbation-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-028-copd-exacerbation-pe", sourceId: "pulmo-pe-pulmo-028-copd-exacerbation", label: "Physical Examination", content: "Diffuse wheeze and prolonged expiration." }
+    ] },
+    { id: "pulmo-028-copd-exacerbation-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-028-copd-exacerbation-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-028-copd-exacerbation-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "copd-exacerbation")!,
+  candidateDiagnosisIds: ["copd-exacerbation", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-029-cor-pulmonale",
+  title: "Cor Pulmonale",
+  course: "pulmonology",
+  tags: ["cor-pulmonale"],
+  difficulty: "medium",
+  patient: { age: 66, sex: "female" },
+  presentation: "A 66-year-old patient with chronic lung disease presents with dyspnea, edema, and fatigue.",
+  stages: [
+    { id: "pulmo-029-cor-pulmonale-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Cor Pulmonale." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-029-cor-pulmonale-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-029-cor-pulmonale-pe", sourceId: "pulmo-pe-pulmo-029-cor-pulmonale", label: "Physical Examination", content: "Elevated JVP and peripheral edema in chronic lung disease." }
+    ] },
+    { id: "pulmo-029-cor-pulmonale-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-029-cor-pulmonale-inv-1", name: "Echocardiogram", category: "Cardiovascular Imaging", findings: [{ label: "Echocardiogram", value: "Evidence of elevated pulmonary pressures and right-sided strain." }], relevance: "high" },
+      { id: "pulmo-029-cor-pulmonale-inv-2", name: "Right Heart Catheterization", category: "Hemodynamics", findings: [{ label: "Right Heart Catheterization", value: "Hemodynamics confirm elevated pulmonary artery pressures." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "cor-pulmonale")!,
+  candidateDiagnosisIds: ["cor-pulmonale", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-030-mediastinal-mass-syndrome",
+  title: "Mediastinal Mass Syndrome",
+  course: "pulmonology",
+  tags: ["mediastinal-mass-syndrome"],
+  difficulty: "medium",
+  patient: { age: 39, sex: "male" },
+  presentation: "A 39-year-old patient presents with progressive cough, dyspnea, and symptoms of mediastinal compression.",
+  stages: [
+    { id: "pulmo-030-mediastinal-mass-syndrome-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Mediastinal Mass Syndrome." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-030-mediastinal-mass-syndrome-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-030-mediastinal-mass-syndrome-pe", sourceId: "pulmo-pe-pulmo-030-mediastinal-mass-syndrome", label: "Physical Examination", content: "Signs of airway/vascular compression may be present." }
+    ] },
+    { id: "pulmo-030-mediastinal-mass-syndrome-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-030-mediastinal-mass-syndrome-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-030-mediastinal-mass-syndrome-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "mediastinal-mass-syndrome")!,
+  candidateDiagnosisIds: ["mediastinal-mass-syndrome", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-031-silicosis",
+  title: "Silicosis",
+  course: "pulmonology",
+  tags: ["silicosis"],
+  difficulty: "medium",
+  patient: { age: 60, sex: "female" },
+  presentation: "A 60-year-old miner presents with chronic cough and progressive exertional dyspnea.",
+  stages: [
+    { id: "pulmo-031-silicosis-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Silicosis." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-031-silicosis-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-031-silicosis-pe", sourceId: "pulmo-pe-pulmo-031-silicosis", label: "Physical Examination", content: "Fine crackles and occupational exposure stigmata." }
+    ] },
+    { id: "pulmo-031-silicosis-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-031-silicosis-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-031-silicosis-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "silicosis")!,
+  candidateDiagnosisIds: ["silicosis", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-032-asbestosis",
+  title: "Asbestosis",
+  course: "pulmonology",
+  tags: ["asbestosis"],
+  difficulty: "medium",
+  patient: { age: 59, sex: "male" },
+  presentation: "A 59-year-old former industrial worker presents with slowly progressive dyspnea and dry cough.",
+  stages: [
+    { id: "pulmo-032-asbestosis-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Asbestosis." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-032-asbestosis-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-032-asbestosis-pe", sourceId: "pulmo-pe-pulmo-032-asbestosis", label: "Physical Examination", content: "Bibasal crackles with possible clubbing." }
+    ] },
+    { id: "pulmo-032-asbestosis-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-032-asbestosis-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-032-asbestosis-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "asbestosis")!,
+  candidateDiagnosisIds: ["asbestosis", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-033-coal-workers-pneumoconiosis",
+  title: "Coal Workers' Pneumoconiosis",
+  course: "pulmonology",
+  tags: ["coal-workers-pneumoconiosis"],
+  difficulty: "medium",
+  patient: { age: 42, sex: "male" },
+  presentation: "A 42-year-old coal miner presents with chronic cough and exertional breathlessness.",
+  stages: [
+    { id: "pulmo-033-coal-workers-pneumoconiosis-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Coal Workers' Pneumoconiosis." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-033-coal-workers-pneumoconiosis-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-033-coal-workers-pneumoconiosis-pe", sourceId: "pulmo-pe-pulmo-033-coal-workers-pneumoconiosis", label: "Physical Examination", content: "Diffuse respiratory findings in a chronic occupational setting." }
+    ] },
+    { id: "pulmo-033-coal-workers-pneumoconiosis-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-033-coal-workers-pneumoconiosis-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-033-coal-workers-pneumoconiosis-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "coal-workers-pneumoconiosis")!,
+  candidateDiagnosisIds: ["coal-workers-pneumoconiosis", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-034-eosinophilic-pneumonia",
+  title: "Eosinophilic Pneumonia",
+  course: "pulmonology",
+  tags: ["eosinophilic-pneumonia"],
+  difficulty: "medium",
+  patient: { age: 29, sex: "male" },
+  presentation: "A 29-year-old patient presents with fever, cough, and pulmonary infiltrates.",
+  stages: [
+    { id: "pulmo-034-eosinophilic-pneumonia-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Eosinophilic Pneumonia." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-034-eosinophilic-pneumonia-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-034-eosinophilic-pneumonia-pe", sourceId: "pulmo-pe-pulmo-034-eosinophilic-pneumonia", label: "Physical Examination", content: "Diffuse crackles with systemic inflammatory features." }
+    ] },
+    { id: "pulmo-034-eosinophilic-pneumonia-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-034-eosinophilic-pneumonia-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-034-eosinophilic-pneumonia-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "eosinophilic-pneumonia")!,
+  candidateDiagnosisIds: ["eosinophilic-pneumonia", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-035-cryptogenic-organizing-pneumonia",
+  title: "Cryptogenic Organizing Pneumonia",
+  course: "pulmonology",
+  tags: ["cryptogenic-organizing-pneumonia"],
+  difficulty: "medium",
+  patient: { age: 47, sex: "male" },
+  presentation: "A 47-year-old patient presents with subacute cough, fever, and progressive dyspnea.",
+  stages: [
+    { id: "pulmo-035-cryptogenic-organizing-pneumonia-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Cryptogenic Organizing Pneumonia." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-035-cryptogenic-organizing-pneumonia-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-035-cryptogenic-organizing-pneumonia-pe", sourceId: "pulmo-pe-pulmo-035-cryptogenic-organizing-pneumonia", label: "Physical Examination", content: "Patchy crackles with subacute systemic symptoms." }
+    ] },
+    { id: "pulmo-035-cryptogenic-organizing-pneumonia-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-035-cryptogenic-organizing-pneumonia-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-035-cryptogenic-organizing-pneumonia-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "cryptogenic-organizing-pneumonia")!,
+  candidateDiagnosisIds: ["cryptogenic-organizing-pneumonia", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-036-alpha-1-antitrypsin-deficiency",
+  title: "Alpha-1 Antitrypsin Deficiency",
+  course: "pulmonology",
+  tags: ["alpha-1-antitrypsin-deficiency"],
+  difficulty: "medium",
+  patient: { age: 38, sex: "female" },
+  presentation: "A 38-year-old patient with unexpectedly early obstructive lung disease presents with dyspnea.",
+  stages: [
+    { id: "pulmo-036-alpha-1-antitrypsin-deficiency-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Alpha-1 Antitrypsin Deficiency." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-036-alpha-1-antitrypsin-deficiency-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-036-alpha-1-antitrypsin-deficiency-pe", sourceId: "pulmo-pe-pulmo-036-alpha-1-antitrypsin-deficiency", label: "Physical Examination", content: "Hyperinflation phenotype with early-onset obstructive disease." }
+    ] },
+    { id: "pulmo-036-alpha-1-antitrypsin-deficiency-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-036-alpha-1-antitrypsin-deficiency-inv-1", name: "Serum Alpha-1 Antitrypsin", category: "Laboratory", findings: [{ label: "Serum Alpha-1 Antitrypsin", value: "Markedly reduced serum alpha-1 antitrypsin level." }], relevance: "high" },
+      { id: "pulmo-036-alpha-1-antitrypsin-deficiency-inv-2", name: "Pulmonary Function Tests", category: "Pulmonary Function", findings: [{ label: "Pulmonary Function Tests", value: "Obstructive ventilatory defect with early airflow limitation." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "alpha-1-antitrypsin-deficiency")!,
+  candidateDiagnosisIds: ["alpha-1-antitrypsin-deficiency", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-037-pulmonary-alveolar-proteinosis",
+  title: "Pulmonary Alveolar Proteinosis",
+  course: "pulmonology",
+  tags: ["pulmonary-alveolar-proteinosis"],
+  difficulty: "medium",
+  patient: { age: 70, sex: "female" },
+  presentation: "A 70-year-old patient presents with slowly progressive dyspnea and diffuse pulmonary opacities.",
+  stages: [
+    { id: "pulmo-037-pulmonary-alveolar-proteinosis-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Pulmonary Alveolar Proteinosis." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-037-pulmonary-alveolar-proteinosis-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-037-pulmonary-alveolar-proteinosis-pe", sourceId: "pulmo-pe-pulmo-037-pulmonary-alveolar-proteinosis", label: "Physical Examination", content: "Diffuse crackles with exertional desaturation." }
+    ] },
+    { id: "pulmo-037-pulmonary-alveolar-proteinosis-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-037-pulmonary-alveolar-proteinosis-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-037-pulmonary-alveolar-proteinosis-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "pulmonary-alveolar-proteinosis")!,
+  candidateDiagnosisIds: ["pulmonary-alveolar-proteinosis", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-038-diffuse-alveolar-hemorrhage",
+  title: "Diffuse Alveolar Hemorrhage",
+  course: "pulmonology",
+  tags: ["diffuse-alveolar-hemorrhage"],
+  difficulty: "hard",
+  patient: { age: 41, sex: "female" },
+  presentation: "A 41-year-old patient presents with hemoptysis, anemia, and rapidly worsening dyspnea.",
+  stages: [
+    { id: "pulmo-038-diffuse-alveolar-hemorrhage-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Diffuse Alveolar Hemorrhage." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-038-diffuse-alveolar-hemorrhage-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-038-diffuse-alveolar-hemorrhage-pe", sourceId: "pulmo-pe-pulmo-038-diffuse-alveolar-hemorrhage", label: "Physical Examination", content: "Crackles with evidence of pulmonary bleeding." }
+    ] },
+    { id: "pulmo-038-diffuse-alveolar-hemorrhage-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-038-diffuse-alveolar-hemorrhage-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-038-diffuse-alveolar-hemorrhage-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "diffuse-alveolar-hemorrhage")!,
+  candidateDiagnosisIds: ["diffuse-alveolar-hemorrhage", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-039-pulmonary-langerhans-cell-histiocytosis",
+  title: "Pulmonary Langerhans Cell Histiocytosis",
+  course: "pulmonology",
+  tags: ["pulmonary-langerhans-cell-histiocytosis"],
+  difficulty: "medium",
+  patient: { age: 42, sex: "female" },
+  presentation: "A 42-year-old young adult smoker presents with cough and progressive dyspnea.",
+  stages: [
+    { id: "pulmo-039-pulmonary-langerhans-cell-histiocytosis-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Pulmonary Langerhans Cell Histiocytosis." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-039-pulmonary-langerhans-cell-histiocytosis-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-039-pulmonary-langerhans-cell-histiocytosis-pe", sourceId: "pulmo-pe-pulmo-039-pulmonary-langerhans-cell-histiocytosis", label: "Physical Examination", content: "Abnormal breath sounds without focal bacterial consolidation." }
+    ] },
+    { id: "pulmo-039-pulmonary-langerhans-cell-histiocytosis-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-039-pulmonary-langerhans-cell-histiocytosis-inv-1", name: "High-Resolution CT", category: "Chest Imaging", findings: [{ label: "High-Resolution CT", value: "Characteristic diffuse cystic/nodular pattern." }], relevance: "high" },
+      { id: "pulmo-039-pulmonary-langerhans-cell-histiocytosis-inv-2", name: "Pulmonary Function Tests", category: "Pulmonary Function", findings: [{ label: "Pulmonary Function Tests", value: "Reduced airflow or diffusion consistent with the disease pattern." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "pulmonary-langerhans-cell-histiocytosis")!,
+  candidateDiagnosisIds: ["pulmonary-langerhans-cell-histiocytosis", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-040-lymphangioleiomyomatosis",
+  title: "Lymphangioleiomyomatosis (LAM)",
+  course: "pulmonology",
+  tags: ["lymphangioleiomyomatosis"],
+  difficulty: "medium",
+  patient: { age: 28, sex: "male" },
+  presentation: "A 28-year-old woman presents with progressive dyspnea and recurrent spontaneous pneumothoraces.",
+  stages: [
+    { id: "pulmo-040-lymphangioleiomyomatosis-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Lymphangioleiomyomatosis (LAM)." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-040-lymphangioleiomyomatosis-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-040-lymphangioleiomyomatosis-pe", sourceId: "pulmo-pe-pulmo-040-lymphangioleiomyomatosis", label: "Physical Examination", content: "Reduced breath sounds or findings related to cystic lung disease." }
+    ] },
+    { id: "pulmo-040-lymphangioleiomyomatosis-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-040-lymphangioleiomyomatosis-inv-1", name: "High-Resolution CT", category: "Chest Imaging", findings: [{ label: "High-Resolution CT", value: "Characteristic diffuse cystic/nodular pattern." }], relevance: "high" },
+      { id: "pulmo-040-lymphangioleiomyomatosis-inv-2", name: "Pulmonary Function Tests", category: "Pulmonary Function", findings: [{ label: "Pulmonary Function Tests", value: "Reduced airflow or diffusion consistent with the disease pattern." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "lymphangioleiomyomatosis")!,
+  candidateDiagnosisIds: ["lymphangioleiomyomatosis", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-041-histoplasmosis",
+  title: "Histoplasmosis",
+  course: "pulmonology",
+  tags: ["histoplasmosis"],
+  difficulty: "medium",
+  patient: { age: 55, sex: "female" },
+  presentation: "A 55-year-old patient presents with fever, cough, and pulmonary symptoms after environmental exposure.",
+  stages: [
+    { id: "pulmo-041-histoplasmosis-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Histoplasmosis." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "The symptoms have persisted rather than rapidly resolving." },
+    ] },
+    { id: "pulmo-041-histoplasmosis-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-041-histoplasmosis-pe", sourceId: "pulmo-pe-pulmo-041-histoplasmosis", label: "Physical Examination", content: "Fever with variable focal or diffuse lung findings." }
+    ] },
+    { id: "pulmo-041-histoplasmosis-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-041-histoplasmosis-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-041-histoplasmosis-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "histoplasmosis")!,
+  candidateDiagnosisIds: ["histoplasmosis", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-042-coccidioidomycosis",
+  title: "Coccidioidomycosis",
+  course: "pulmonology",
+  tags: ["coccidioidomycosis"],
+  difficulty: "medium",
+  patient: { age: 38, sex: "female" },
+  presentation: "A 38-year-old patient presents with fever, cough, and pleuritic chest pain after travel to an endemic region.",
+  stages: [
+    { id: "pulmo-042-coccidioidomycosis-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Coccidioidomycosis." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "The symptoms have persisted rather than rapidly resolving." },
+    ] },
+    { id: "pulmo-042-coccidioidomycosis-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-042-coccidioidomycosis-pe", sourceId: "pulmo-pe-pulmo-042-coccidioidomycosis", label: "Physical Examination", content: "Fever and focal pulmonary findings." }
+    ] },
+    { id: "pulmo-042-coccidioidomycosis-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-042-coccidioidomycosis-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-042-coccidioidomycosis-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "coccidioidomycosis")!,
+  candidateDiagnosisIds: ["coccidioidomycosis", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-043-blastomycosis",
+  title: "Blastomycosis",
+  course: "pulmonology",
+  tags: ["blastomycosis"],
+  difficulty: "medium",
+  patient: { age: 58, sex: "female" },
+  presentation: "A 58-year-old patient presents with subacute cough, fever, and pulmonary infiltrates.",
+  stages: [
+    { id: "pulmo-043-blastomycosis-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Blastomycosis." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "The symptoms have persisted rather than rapidly resolving." },
+    ] },
+    { id: "pulmo-043-blastomycosis-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-043-blastomycosis-pe", sourceId: "pulmo-pe-pulmo-043-blastomycosis", label: "Physical Examination", content: "Fever with pulmonary infiltrative findings." }
+    ] },
+    { id: "pulmo-043-blastomycosis-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-043-blastomycosis-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-043-blastomycosis-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "blastomycosis")!,
+  candidateDiagnosisIds: ["blastomycosis", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-044-aspergillosis",
+  title: "Aspergillosis",
+  course: "pulmonology",
+  tags: ["aspergillosis"],
+  difficulty: "medium",
+  patient: { age: 52, sex: "male" },
+  presentation: "A 52-year-old patient with structural lung disease presents with chronic cough and recurrent hemoptysis.",
+  stages: [
+    { id: "pulmo-044-aspergillosis-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Aspergillosis." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-044-aspergillosis-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-044-aspergillosis-pe", sourceId: "pulmo-pe-pulmo-044-aspergillosis", label: "Physical Examination", content: "Abnormal breath sounds and recurrent hemoptysis." }
+    ] },
+    { id: "pulmo-044-aspergillosis-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-044-aspergillosis-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-044-aspergillosis-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "aspergillosis")!,
+  candidateDiagnosisIds: ["aspergillosis", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-045-pulmonary-mucormycosis",
+  title: "Mucormycosis Pulmonary Infection",
+  course: "pulmonology",
+  tags: ["pulmonary-mucormycosis"],
+  difficulty: "hard",
+  patient: { age: 37, sex: "male" },
+  presentation: "A 37-year-old immunocompromised patient presents with rapidly progressive respiratory symptoms and hemoptysis.",
+  stages: [
+    { id: "pulmo-045-pulmonary-mucormycosis-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Mucormycosis Pulmonary Infection." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "Symptoms worsened rapidly over a short period." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-045-pulmonary-mucormycosis-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-045-pulmonary-mucormycosis-pe", sourceId: "pulmo-pe-pulmo-045-pulmonary-mucormycosis", label: "Physical Examination", content: "Respiratory distress with severe systemic illness." }
+    ] },
+    { id: "pulmo-045-pulmonary-mucormycosis-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-045-pulmonary-mucormycosis-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-045-pulmonary-mucormycosis-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "pulmonary-mucormycosis")!,
+  candidateDiagnosisIds: ["pulmonary-mucormycosis", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-046-granulomatosis-with-polyangiitis",
+  title: "Granulomatosis with Polyangiitis (Wegener)",
+  course: "pulmonology",
+  tags: ["granulomatosis-with-polyangiitis"],
+  difficulty: "hard",
+  patient: { age: 37, sex: "female" },
+  presentation: "A 37-year-old patient presents with hemoptysis, constitutional symptoms, and upper-airway complaints.",
+  stages: [
+    { id: "pulmo-046-granulomatosis-with-polyangiitis-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Granulomatosis with Polyangiitis (Wegener)." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-046-granulomatosis-with-polyangiitis-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-046-granulomatosis-with-polyangiitis-pe", sourceId: "pulmo-pe-pulmo-046-granulomatosis-with-polyangiitis", label: "Physical Examination", content: "Crackles with systemic vasculitic features." }
+    ] },
+    { id: "pulmo-046-granulomatosis-with-polyangiitis-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-046-granulomatosis-with-polyangiitis-inv-1", name: "CBC", category: "Blood Tests", findings: [{ label: "CBC", value: "Anemia consistent with pulmonary bleeding." }], relevance: "high" },
+      { id: "pulmo-046-granulomatosis-with-polyangiitis-inv-2", name: "Urinalysis", category: "Laboratory", findings: [{ label: "Urinalysis", value: "Active urinary sediment with hematuria/proteinuria." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "granulomatosis-with-polyangiitis")!,
+  candidateDiagnosisIds: ["granulomatosis-with-polyangiitis", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-047-eosinophilic-granulomatosis-with-polyangiitis",
+  title: "Eosinophilic Granulomatosis with Polyangiitis (Churg-Strauss)",
+  course: "pulmonology",
+  tags: ["eosinophilic-granulomatosis-with-polyangiitis"],
+  difficulty: "medium",
+  patient: { age: 40, sex: "female" },
+  presentation: "A 40-year-old patient with asthma presents with pulmonary infiltrates and systemic symptoms.",
+  stages: [
+    { id: "pulmo-047-eosinophilic-granulomatosis-with-polyangiitis-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Eosinophilic Granulomatosis with Polyangiitis (Churg-Strauss)." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-047-eosinophilic-granulomatosis-with-polyangiitis-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-047-eosinophilic-granulomatosis-with-polyangiitis-pe", sourceId: "pulmo-pe-pulmo-047-eosinophilic-granulomatosis-with-polyangiitis", label: "Physical Examination", content: "Wheeze with pulmonary infiltrative findings." }
+    ] },
+    { id: "pulmo-047-eosinophilic-granulomatosis-with-polyangiitis-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-047-eosinophilic-granulomatosis-with-polyangiitis-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-047-eosinophilic-granulomatosis-with-polyangiitis-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "eosinophilic-granulomatosis-with-polyangiitis")!,
+  candidateDiagnosisIds: ["eosinophilic-granulomatosis-with-polyangiitis", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-048-goodpasture-syndrome",
+  title: "Goodpasture Syndrome",
+  course: "pulmonology",
+  tags: ["goodpasture-syndrome"],
+  difficulty: "hard",
+  patient: { age: 70, sex: "male" },
+  presentation: "A 70-year-old patient presents with hemoptysis and rapidly progressive renal dysfunction.",
+  stages: [
+    { id: "pulmo-048-goodpasture-syndrome-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Goodpasture Syndrome." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-048-goodpasture-syndrome-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-048-goodpasture-syndrome-pe", sourceId: "pulmo-pe-pulmo-048-goodpasture-syndrome", label: "Physical Examination", content: "Crackles with signs of pulmonary hemorrhage." }
+    ] },
+    { id: "pulmo-048-goodpasture-syndrome-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-048-goodpasture-syndrome-inv-1", name: "CBC", category: "Blood Tests", findings: [{ label: "CBC", value: "Anemia consistent with pulmonary bleeding." }], relevance: "high" },
+      { id: "pulmo-048-goodpasture-syndrome-inv-2", name: "Urinalysis", category: "Laboratory", findings: [{ label: "Urinalysis", value: "Active urinary sediment with hematuria/proteinuria." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "goodpasture-syndrome")!,
+  candidateDiagnosisIds: ["goodpasture-syndrome", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-049-pulmonary-manifestations-of-sle",
+  title: "Pulmonary Manifestations of SLE",
+  course: "pulmonology",
+  tags: ["pulmonary-manifestations-of-sle"],
+  difficulty: "medium",
+  patient: { age: 65, sex: "male" },
+  presentation: "A 65-year-old patient with systemic lupus presents with dyspnea and pleuritic symptoms.",
+  stages: [
+    { id: "pulmo-049-pulmonary-manifestations-of-sle-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Pulmonary Manifestations of SLE." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-049-pulmonary-manifestations-of-sle-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-049-pulmonary-manifestations-of-sle-pe", sourceId: "pulmo-pe-pulmo-049-pulmonary-manifestations-of-sle", label: "Physical Examination", content: "Pleural or parenchymal respiratory findings." }
+    ] },
+    { id: "pulmo-049-pulmonary-manifestations-of-sle-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-049-pulmonary-manifestations-of-sle-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-049-pulmonary-manifestations-of-sle-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "pulmonary-manifestations-of-sle")!,
+  candidateDiagnosisIds: ["pulmonary-manifestations-of-sle", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
+{
+  id: "pulmo-050-pulmonary-manifestations-of-rheumatoid-arthritis",
+  title: "Pulmonary Manifestations of Rheumatoid Arthritis",
+  course: "pulmonology",
+  tags: ["pulmonary-manifestations-of-rheumatoid-arthritis"],
+  difficulty: "medium",
+  patient: { age: 44, sex: "female" },
+  presentation: "A 44-year-old patient with rheumatoid arthritis presents with chronic dyspnea and cough.",
+  stages: [
+    { id: "pulmo-050-pulmonary-manifestations-of-rheumatoid-arthritis-history", type: "history", title: "Patient History", hints: [
+      { id: "resp-q001-answer", sourceId: "resp-q001", label: "resp-q001", content: "Symptoms began gradually over the expected course for Pulmonary Manifestations of Rheumatoid Arthritis." },
+      { id: "resp-q002-answer", sourceId: "resp-q002", label: "resp-q002", content: "The symptoms developed progressively rather than abruptly." },
+      { id: "resp-q003-answer", sourceId: "resp-q003", label: "resp-q003", content: "Overall, the respiratory symptoms have worsened over time." },
+    ] },
+    { id: "pulmo-050-pulmonary-manifestations-of-rheumatoid-arthritis-physical", type: "physical-exam", title: "Physical Examination", hints: [
+      { id: "pulmo-050-pulmonary-manifestations-of-rheumatoid-arthritis-pe", sourceId: "pulmo-pe-pulmo-050-pulmonary-manifestations-of-rheumatoid-arthritis", label: "Physical Examination", content: "Crackles with chronic interstitial or pleural findings." }
+    ] },
+    { id: "pulmo-050-pulmonary-manifestations-of-rheumatoid-arthritis-investigation", type: "investigation", title: "Investigations", investigations: [
+      { id: "pulmo-050-pulmonary-manifestations-of-rheumatoid-arthritis-inv-1", name: "Chest X-ray", category: "Chest Imaging", findings: [{ label: "Chest X-ray", value: "Pulmonary findings compatible with the suspected diagnosis." }], relevance: "high" },
+      { id: "pulmo-050-pulmonary-manifestations-of-rheumatoid-arthritis-inv-2", name: "CT Chest", category: "Chest Imaging", findings: [{ label: "CT Chest", value: "Cross-sectional imaging demonstrates a pattern supporting the suspected diagnosis." }], relevance: "high" },
+    ] },
+  ],
+  diagnosis: diseases.find((item) => item.id === "pulmonary-manifestations-of-rheumatoid-arthritis")!,
+  candidateDiagnosisIds: ["pulmonary-manifestations-of-rheumatoid-arthritis", "community-acquired-pneumonia", "asthma", "copd", "pulmonary-embolism"],
+  reviewQuestions: [],
+},
 ];
 
 

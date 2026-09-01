@@ -1,14 +1,17 @@
 import type { Case } from "../types/case";
 import { pulmonologyCases } from "./pulmonologyCases";
+import { cardiologyCases } from "./cardiologyCases";
 import { validateCase } from "../lib/caseValidator";
 
-const collectionErrors = pulmonologyCases.flatMap((caseData) =>
+const allDefaultCases = [...pulmonologyCases, ...cardiologyCases];
+
+const collectionErrors = allDefaultCases.flatMap((caseData) =>
   validateCase(caseData).map(
     (error) => `${caseData.id}: ${error.field} — ${error.message}`,
   ),
 );
 
-const caseIds = pulmonologyCases.map((caseData) => caseData.id);
+const caseIds = allDefaultCases.map((caseData) => caseData.id);
 const duplicateCaseIds = [...new Set(caseIds.filter((id, index) => caseIds.indexOf(id) !== index))];
 
 if (duplicateCaseIds.length > 0) {
@@ -23,4 +26,4 @@ if (collectionErrors.length > 0) {
   );
 }
 
-export const cases: Case[] = pulmonologyCases;
+export const cases: Case[] = allDefaultCases;
