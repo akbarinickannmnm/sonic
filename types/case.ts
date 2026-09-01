@@ -33,6 +33,8 @@ export type InvestigationFinding = {
 
 export type Investigation = {
   id: string;
+  /** Stable bank item ID. The runtime `id` remains the case-local instance ID. */
+  sourceId?: string;
   name: string;
   category: string;
 

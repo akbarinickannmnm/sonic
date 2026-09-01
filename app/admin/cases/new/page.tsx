@@ -8,15 +8,7 @@ import {
 } from "../../../../lib/caseValidator";
 import { allDiagnoses as diagnoses } from "../../../../data/allDiagnoses";
 import type { Case } from "../../../../types/case";
-import {
-  pulmonologyQuestionBank,
-  pulmonologyQuestionCategories,
-} from "../../../../data/pulmonologyQuestionBank";
-import { pulmonologyPhysicalExamBank } from "../../../../data/pulmonologyPhysicalExamBank";
-import { pulmonologyInvestigationBank } from "../../../../data/pulmonologyInvestigationBank";
-import { cardiologyQuestionBank, cardiologyQuestionCategories } from "../../../../data/cardiologyQuestionBank";
-import { cardiologyPhysicalExamBank } from "../../../../data/cardiologyPhysicalExamBank";
-import { cardiologyInvestigationBank } from "../../../../data/cardiologyInvestigationBank";
+import { getCourseBank } from "../../../../data/courseBanks";
 
 type StageType =
   | "history"
@@ -144,10 +136,11 @@ const [editingCaseId, setEditingCaseId] =
   const [course, setCourse] =
     useState<Case["course"]>("cardiology");
 
-  const activeQuestionBank = course === "cardiology" ? cardiologyQuestionBank : pulmonologyQuestionBank;
-  const activePhysicalExamBank = course === "cardiology" ? cardiologyPhysicalExamBank : pulmonologyPhysicalExamBank;
-  const activeInvestigationBank = course === "cardiology" ? cardiologyInvestigationBank : pulmonologyInvestigationBank;
-  const activeQuestionCategories = course === "cardiology" ? cardiologyQuestionCategories : pulmonologyQuestionCategories;
+  const activeCourseBank = getCourseBank(course);
+  const activeQuestionBank = activeCourseBank.history;
+  const activePhysicalExamBank = activeCourseBank.physicalExam;
+  const activeInvestigationBank = activeCourseBank.investigations;
+  const activeQuestionCategories = activeCourseBank.historyCategories;
 
   const [difficulty, setDifficulty] =
     useState<
@@ -1087,6 +1080,8 @@ useEffect(() => {
             (investigation) => ({
               id: investigation.id,
 
+              sourceId: investigation.sourceId,
+
               name: investigation.name,
 
               category:
@@ -1984,7 +1979,7 @@ useEffect(() => {
                   </h2>
 
                   <p className="mt-1 text-sm text-slate-500">
-                    Search the pulmonology bank and select an item.
+                    Search the active course bank and select an item.
                   </p>
                 </div>
 

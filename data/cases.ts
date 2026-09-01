@@ -26,4 +26,7 @@ if (collectionErrors.length > 0) {
   );
 }
 
-export const cases: Case[] = allDefaultCases;
+export const masterCaseBank: Case[] = allDefaultCases;
+
+// Backward-compatible export used throughout the current app.
+export const cases: Case[] = masterCaseBank;

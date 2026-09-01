@@ -7,14 +7,7 @@ import Header from "./Header";
 import DiagnosisSearch from "./DiagnosisSearch";
 import ReviewQuiz from "./ReviewQuiz";
 import { diseases } from "../data/diseases";
-import {
-  pulmonologyQuestionBank,
-  pulmonologyQuestionCategories,
-} from "../data/pulmonologyQuestionBank";
-import {
-  cardiologyQuestionBank,
-  cardiologyQuestionCategories,
-} from "../data/cardiologyQuestionBank";
+import { getCourseBank } from "../data/courseBanks";
 import { isCorrectDiagnosis } from "../lib/caseEngine";
 
 const MAX_GUESSES = 4;
@@ -51,13 +44,9 @@ export default function CasePlayer({ caseData, storageKey, onComplete }: Props) 
   const physicalStage = getStage(caseData, "physical-exam");
   const investigationStage = getStage(caseData, "investigation");
 
-  const questionBank = caseData.course === "cardiology"
-    ? cardiologyQuestionBank
-    : pulmonologyQuestionBank;
-
-  const questionCategories = caseData.course === "cardiology"
-    ? cardiologyQuestionCategories
-    : pulmonologyQuestionCategories;
+  const courseBank = getCourseBank(caseData.course, [caseData]);
+  const questionBank = courseBank.history;
+  const questionCategories = courseBank.historyCategories;
 
   const [answered, setAnswered] = useState<AnsweredItem[]>([]);
   const [activeStage, setActiveStage] = useState<Stage>("history");
@@ -82,21 +71,6 @@ export default function CasePlayer({ caseData, storageKey, onComplete }: Props) 
   ).length;
 
   /*
-   * HISTORY
-   *
-   * The question bank contains the large searchable set of history
-   * questions. The category filter is intentionally used ONLY here.
-   */
-  const historyAnswerMap = useMemo(() => {
-    const hints =
-      historyStage?.type === "history" ? historyStage.hints : [];
-
-    return new Map(
-      hints.map((hint) => [hint.sourceId ?? hint.id, hint]),
-    );
-  }, [historyStage]);
-
-  /*
    * HISTORY OPTIONS
    *
    * Category filtering and text search exist only for History.
@@ -112,37 +86,67 @@ export default function CasePlayer({ caseData, storageKey, onComplete }: Props) 
         id: question.id,
         label: question.text,
         sourceId: question.id,
-        answer: historyAnswerMap.get(question.id),
+        answer: question.answersByCase[caseData.id]
+          ? ({
+              id: `${question.id}:${caseData.id}`,
+              sourceId: question.id,
+              label: question.text,
+              content: question.answersByCase[caseData.id],
+            } satisfies CaseHint)
+          : undefined,
       }))
-      .filter((item): item is { id: string; label: string; sourceId: string; answer: CaseHint } => Boolean(item.answer))
+      .filter((item) => item.answer !== undefined)
       .slice(0, 8);
-  }, [answeredIds, questionSearch, selectedCategory, historyAnswerMap, questionBank]);
+  }, [answeredIds, questionSearch, selectedCategory, questionBank]);
 
   // Physical Exam uses the current case's actual findings directly.
   // No category filter and no global bank filtering.
   const physicalOptions = useMemo(() => {
-    return (physicalStage?.type === "physical-exam" ? physicalStage.hints : [])
+    const hints = physicalStage?.type === "physical-exam" ? physicalStage.hints : [];
+
+    return hints
       .filter((hint) => !answeredIds.has(`physical-exam:${hint.sourceId ?? hint.id}`))
-      .map((hint) => ({
-        id: hint.sourceId ?? hint.id,
-        label: hint.label ?? hint.sourceId ?? hint.id,
-        sourceId: hint.sourceId ?? hint.id,
-        answer: hint,
-      }));
-  }, [answeredIds, physicalStage]);
+      .map((hint) => {
+        const normalizedLabel = (hint.label ?? "").trim().toLowerCase();
+        const bankItem = courseBank.physicalExam.find(
+          (item) => item.id === hint.sourceId ||
+            item.title.trim().toLowerCase() === normalizedLabel ||
+            item.id === `legacy-physical:${normalizedLabel.replace(/[^a-z0-9]+/g, " ").trim() || "findings"}`
+        );
+
+        const sourceId = bankItem?.id ?? hint.sourceId ?? hint.id;
+
+        return {
+          id: sourceId,
+          label: bankItem?.title ?? hint.label ?? sourceId,
+          sourceId,
+          answer: hint,
+        };
+      });
+  }, [answeredIds, physicalStage, courseBank.physicalExam]);
 
   // Investigations also use the current case's actual investigations directly.
   // No category filter and no global bank filtering.
   const investigationOptions = useMemo(() => {
     return (investigationStage?.type === "investigation" ? investigationStage.investigations : [])
-      .filter((test) => !answeredIds.has(`investigation:${test.id}`))
-      .map((test) => ({
-        id: test.id,
-        label: test.name,
-        sourceId: test.id,
-        answer: test,
-      }));
-  }, [answeredIds, investigationStage]);
+      .map((test) => {
+        const normalizedName = test.name.trim().toLowerCase();
+        const bankItem = courseBank.investigations.find(
+          (item) => item.id === test.sourceId ||
+            item.title.trim().toLowerCase() === normalizedName ||
+            item.id === `legacy-investigation:${normalizedName.replace(/[^a-z0-9]+/g, " ").trim() || "unnamed"}`
+        );
+        const sourceId = bankItem?.id ?? test.sourceId ?? test.id;
+
+        return {
+          id: test.id,
+          label: bankItem?.title ?? test.name,
+          sourceId,
+          answer: test,
+        };
+      })
+      .filter((test) => !answeredIds.has(`investigation:${test.id}`));
+  }, [answeredIds, investigationStage, courseBank.investigations]);
 
   const filteredDiagnoses = useMemo(() => {
     const query = selectedDiagnosis.trim().toLowerCase();
@@ -619,7 +623,7 @@ export default function CasePlayer({ caseData, storageKey, onComplete }: Props) 
                         onClick={() => {
                           answerHistory(
                             item.sourceId,
-                            item.answer,
+                            item.answer!,
                           );
                         }}
                         className="w-full rounded-xl border border-slate-200 bg-white p-4 text-left text-sm font-medium leading-6 text-slate-800 transition hover:border-blue-400 hover:bg-blue-50"
