@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-vazirmatn);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: #f8fafc;
+  color: #111827;
+  font-family: var(--font-vazirmatn), Tahoma, Arial, sans-serif;
+}
+
+
+/* SONIC UI polish */
+:root {
+  --page: #f6f8fb;
+  --ink: #162033;
+  --muted-2: #718096;
+  --blue-500: #2f6fed;
+}
+
+a { color: inherit; }
+
+::selection { background: rgba(47,111,237,.16); }
+
+.sonic-container { width: min(1180px, calc(100% - 32px)); }
+
+.sonic-header { box-shadow: 0 1px 0 rgba(15,23,42,.03), 0 8px 30px rgba(15,23,42,.03); }
+.sonic-header-inner { min-height: 68px; }
+.sonic-brand-mark { letter-spacing: -0.035em; }
+
+.sonic-surface, .sonic-surface-soft { box-shadow: 0 8px 30px rgba(15,23,42,.045); }
+
+button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+button { transition: transform 140ms ease, box-shadow 140ms ease, background-color 140ms ease, border-color 140ms ease; }
+button:active:not(:disabled) { transform: translateY(0); }
+
+/* Better Arabic/Persian sizing across the app while preserving clinical Latin copy. */
+[dir="rtl"] body, [dir="rtl"] button, [dir="rtl"] input, [dir="rtl"] select, [dir="rtl"] textarea {
+  font-family: var(--font-vazirmatn), Tahoma, Arial, sans-serif;
+}
+
+[dir="rtl"] { direction: rtl; }
+[dir="ltr"] { direction: ltr; }
+
+/* Persian UI rhythm: avoid browser defaults that make Arabic-script text look cramped. */
+[dir="rtl"] body {
+  line-height: 1.7;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4 {
+  line-height: 1.35;
+}
+
+[dir="rtl"] input, [dir="rtl"] select, [dir="rtl"] textarea {
+  text-align: right;
+}
+
+[dir="rtl"] input::placeholder, [dir="rtl"] textarea::placeholder {
+  text-align: right;
+}
+.clinical-copy, .ltr, [dir="ltr"] { font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+
+/* Keep technical values / English case content readable inside RTL UI. */
+.clinical-copy, .clinical-copy p, .clinical-copy span { direction: ltr; text-align: left; }
+
+@media (max-width: 640px) {
+  body { font-size: 14px; }
+  .sonic-container { width: min(100% - 24px, 1180px); }
+}
+
+
+/* Final UI system: quiet surfaces, strong hierarchy, consistent controls. */
+:root {
+  --bg-0: #f7f8fa;
+  --bg-1: #ffffff;
+  --ink-0: #172033;
+  --ink-1: #3e4a5d;
+  --ink-2: #778196;
+  --line-0: #e7ebf1;
+  --line-1: #dbe1ea;
+  --accent: #2563eb;
+}
+
+body {
+  background: var(--bg-0);
+  color: var(--ink-0);
+}
+
+h1, h2, h3, h4 { letter-spacing: normal !important; }
+
+input, select, textarea {
+  min-height: 44px;
+  border: 1px solid var(--line-1);
+  color: var(--ink-0);
+  box-shadow: none;
+}
+
+input:hover, select:hover, textarea:hover { border-color: #cbd3df; }
+input:focus, select:focus, textarea:focus {
+  border-color: #8caaf0;
+  box-shadow: 0 0 0 4px rgba(37,99,235,.08);
+}
+
+button { font-weight: 600; }
+
+/* Uniform cards without the heavy "dashboard template" look. */
+.sonic-surface,
+.sonic-surface-soft,
+article.rounded-2xl,
+section.rounded-2xl {
+  box-shadow: 0 1px 2px rgba(15,23,42,.025), 0 10px 28px rgba(15,23,42,.035);
+}
+
+/* Prevent accidental horizontal overflow from long clinical strings. */
+main, section, article, header, footer { min-width: 0; }
+
+/* Persian text reads best with a little more line-height and no tracking hacks. */
+[dir="rtl"] p, [dir="rtl"] label, [dir="rtl"] button, [dir="rtl"] input, [dir="rtl"] select, [dir="rtl"] textarea {
+  letter-spacing: normal !important;
+}
