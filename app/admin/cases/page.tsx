@@ -206,9 +206,13 @@ export default function CaseLibraryPage() {
           <section className="mt-5 rounded-2xl border border-rose-200 bg-rose-50 p-5">
             <h2 className="font-bold text-rose-800">خطاهای اعتبارسنجی</h2>
             <div className="mt-3 max-h-56 overflow-auto space-y-1 text-sm text-rose-700">
-              {validationErrors.map((error, index) => (
-                <p key={`${error.caseId}-${error.field}-${index}`}>• {error.caseId} — {error.field}: {error.message}</p>
-              ))}
+              {validationErrors.map((error, index) => {
+                const caseId = error.caseId ?? "بدون شناسه";
+                const field = "field" in error ? error.field : error.code;
+                return (
+                  <p key={`${caseId}-${field}-${index}`}>• {caseId} — {field}: {error.message}</p>
+                );
+              })}
             </div>
           </section>
         )}
