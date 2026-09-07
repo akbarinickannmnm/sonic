@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 
 import type { Case, CaseHint, Investigation } from "../types/case";
 import DiagnosisSearch from "./DiagnosisSearch";
-import ReviewQuiz from "./ReviewQuiz";
 import { diseases } from "../data/diseases";
 import { getCourseBank } from "../data/courseBanks";
 import { isCorrectDiagnosis } from "../lib/caseEngine";
@@ -18,6 +17,9 @@ type Props = {
   caseData: Case;
   storageKey?: string;
   onComplete?: (result: { won: boolean; guessCount: number }) => void;
+  completionHref?: string;
+  nextCaseOptions?: PracticeCaseOption[];
+  practiceSelection?: PracticeSelection;
 };
 
 type Stage = "history" | "physical-exam" | "investigation";
@@ -55,6 +57,18 @@ type InvestigationItem = {
   answered: boolean;
 };
 
+type PracticeCaseOption = {
+  id: string;
+  difficulty: Case["difficulty"];
+  tags: string[];
+};
+
+type PracticeSelection = {
+  mode: "continue" | "unattempted" | "mistakes" | "start-over";
+  difficulty: Case["difficulty"] | "all";
+  tags: string[];
+};
+
 function getStage(caseData: Case, type: Stage) {
   return caseData.stages.find((stage) => stage.type === type);
 }
@@ -73,7 +87,50 @@ function stageTitle(stage: Stage) {
   return "بررسی‌ها";
 }
 
-export default function CasePlayer({ caseData, storageKey, onComplete }: Props) {
+function selectNextPracticeCase(
+  course: Case["course"],
+  currentCaseId: string,
+  options: PracticeCaseOption[] | undefined,
+  selection: PracticeSelection | undefined,
+) {
+  if (!options || options.length === 0) return undefined;
+
+  const mode = selection?.mode ?? "start-over";
+  const difficulty = selection?.difficulty ?? "all";
+  const selectedTags = selection?.tags ?? [];
+
+  const candidates = options.filter((candidate) => {
+    if (candidate.id === currentCaseId) return false;
+    if (difficulty !== "all" && candidate.difficulty !== difficulty) return false;
+    if (selectedTags.length > 0 && !selectedTags.some((tag) => candidate.tags.includes(tag))) return false;
+
+    if (mode === "start-over") return true;
+    if (typeof window === "undefined") return true;
+
+    try {
+      const raw = window.localStorage.getItem(`sonic:practice:${course}:${candidate.id}`);
+      const state = raw ? JSON.parse(raw) as { completed?: boolean; won?: boolean | null } : null;
+      if (mode === "unattempted") return state === null;
+      if (mode === "mistakes") return state?.completed === true && state.won === false;
+      if (mode === "continue") return state !== null && state.completed === false;
+      return true;
+    } catch {
+      return false;
+    }
+  });
+
+  if (candidates.length === 0) return undefined;
+  return candidates[Math.floor(Math.random() * candidates.length)];
+}
+
+export default function CasePlayer({
+  caseData,
+  storageKey,
+  onComplete,
+  completionHref,
+  nextCaseOptions,
+  practiceSelection,
+}: Props) {
   const courseBank = getCourseBank(caseData.course, [caseData]);
   const physicalStage = getStage(caseData, "physical-exam");
   const investigationStage = getStage(caseData, "investigation");
@@ -295,8 +352,6 @@ export default function CasePlayer({ caseData, storageKey, onComplete }: Props) 
   const historyComplete = historyAnswered.length >= MAX_HISTORY_QUESTIONS;
   const physicalComplete = physicalAnswered.length >= MAX_PHYSICAL_EXAMS;
   const investigationComplete = investigationAnswered.length >= MAX_INVESTIGATIONS;
-  const questionsComplete = historyComplete && physicalComplete && investigationComplete;
-
   function goToStage(stage: Stage) {
     if (completed) return;
     if (stage === "history") {
@@ -335,7 +390,7 @@ export default function CasePlayer({ caseData, storageKey, onComplete }: Props) 
       "برای این کیس اطلاعاتی برای این سؤال ثبت نشده است.";
 
     setActiveHistoryId(questionId);
-    setExpandedHistoryIds((current) => new Set(current).add(questionId));
+    setExpandedHistoryIds((current) => new Set(current).add(`history:${questionId}`));
 
     const nextCount = historyAnswered.length + 1;
     setAnswered((current) => [
@@ -442,7 +497,9 @@ export default function CasePlayer({ caseData, storageKey, onComplete }: Props) 
   }
 
   function submitDiagnosis() {
-    if (completed || !questionsComplete) return;
+    // Diagnosis can be attempted at any point during the case.
+    // The case ends immediately on a correct diagnosis or after 4 incorrect guesses.
+    if (completed) return;
 
     const diagnosis = diseases.find(
       (item) =>
@@ -487,6 +544,44 @@ export default function CasePlayer({ caseData, storageKey, onComplete }: Props) 
     );
   }
 
+  if (completed) {
+    return (
+      <main dir="rtl" className="min-h-screen bg-[#f7f9fc] text-slate-900">
+        <div className="mx-auto flex min-h-screen w-full max-w-[880px] items-center justify-center px-5 py-10 lg:px-8">
+          <section className="w-full rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-[0_8px_28px_rgba(15,23,42,0.035)] sm:p-12">
+            <h1 className="text-3xl font-extrabold tracking-tight text-slate-950">مرور کیس</h1>
+            <button
+              type="button"
+              onClick={() => {
+                if (typeof window === "undefined") return;
+                const nextCase = selectNextPracticeCase(
+                  caseData.course,
+                  caseData.id,
+                  nextCaseOptions,
+                  practiceSelection,
+                );
+                if (nextCase) {
+                  const params = new URLSearchParams();
+                  if (practiceSelection?.mode) params.set("mode", practiceSelection.mode);
+                  if (practiceSelection?.difficulty) params.set("difficulty", practiceSelection.difficulty);
+                  if (practiceSelection?.tags.length) params.set("tags", practiceSelection.tags.join(","));
+                  const query = params.toString();
+                  window.location.assign(`/practice/${caseData.course}/${nextCase.id}${query ? `?${query}` : ""}`);
+                  return;
+                }
+                window.location.assign(completionHref ?? `/practice/${caseData.course}`);
+              }}
+              className="mt-8 inline-flex min-w-[220px] items-center justify-center gap-3 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-bold text-white transition hover:bg-blue-700"
+            >
+              ادامه
+              <span aria-hidden="true" className="text-lg">←</span>
+            </button>
+          </section>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main dir="rtl" className="min-h-screen bg-[#f7f9fc] text-slate-900">
       <header className="border-b border-slate-200 bg-white">
@@ -517,6 +612,11 @@ export default function CasePlayer({ caseData, storageKey, onComplete }: Props) 
             <div className="rounded-full bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-500">
               {stageTitle(activeStage)}
             </div>
+          </div>
+
+          <div className="mt-5 rounded-xl border border-slate-200 bg-slate-50/70 px-4 py-4">
+            <div className="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-400">Chief Complaint</div>
+            <div className="mt-1 text-sm font-semibold leading-7 text-slate-800">{caseData.presentation}</div>
           </div>
 
           <StageStepper
@@ -591,8 +691,7 @@ export default function CasePlayer({ caseData, storageKey, onComplete }: Props) 
             />
           )}
 
-          {questionsComplete && (
-            <DiagnosisPanel
+          <DiagnosisPanel
               selectedDiagnosis={selectedDiagnosis}
               setSelectedDiagnosis={setSelectedDiagnosis}
               filteredDiagnoses={filteredDiagnoses}
@@ -603,13 +702,7 @@ export default function CasePlayer({ caseData, storageKey, onComplete }: Props) 
               completed={completed}
               onSubmit={submitDiagnosis}
             />
-          )}
 
-          {completed && caseData.reviewQuestions.length > 0 && (
-            <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_8px_28px_rgba(15,23,42,0.035)] lg:p-7">
-              <ReviewQuiz questions={caseData.reviewQuestions} />
-            </div>
-          )}
         </div>
       </div>
     </main>

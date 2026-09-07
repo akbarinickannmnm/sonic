@@ -141,7 +141,11 @@ export default function PracticeCoursePage({ course, cases }: Props) {
 
     const randomIndex = Math.floor(Math.random() * filteredCases.length);
     const selectedCase = filteredCases[randomIndex];
-    router.push(`/practice/${course}/${selectedCase.id}`);
+    const params = new URLSearchParams();
+    params.set("mode", mode);
+    params.set("difficulty", difficulty);
+    if (selectedTags.length > 0) params.set("tags", selectedTags.join(","));
+    router.push(`/practice/${course}/${selectedCase.id}?${params.toString()}`);
   }
 
   return (

@@ -44,10 +44,10 @@ export default function DailyCasePlayer({ caseData, dateKey }: { caseData: Case;
       caseData={caseData}
       storageKey={stateKey(dateKey, caseData.id)}
       onComplete={() => {
-        // Consume the daily attempt, but keep the current completed case
-        // visible so the user can read the result and review questions.
+        // Consume the daily attempt. The shared CasePlayer then shows the temporary review screen.
         window.localStorage.setItem(attemptKey(dateKey), "completed");
       }}
+      completionHref="/"
     />
   );
 }
