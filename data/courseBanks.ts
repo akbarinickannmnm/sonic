@@ -386,9 +386,9 @@ export function getCourseBank(course: Course, extraCases: Case[] = []): CourseBa
   const physicalExam = buildPhysicalExamBank(course, bankCases);
   const investigations = buildInvestigationBank(course, bankCases);
 
-  const historyCategories = course === "cardiology" ? cardiologyQuestionCategories : pulmonologyQuestionCategories;
-  const physicalExamCategories = course === "cardiology" ? cardiologyPhysicalExamCategories : pulmonologyPhysicalExamCategories;
-  const investigationCategories = course === "cardiology" ? cardiologyInvestigationCategories : pulmonologyInvestigationCategories;
+  const historyCategories: BankCategory[] = [...(course === "cardiology" ? cardiologyQuestionCategories : pulmonologyQuestionCategories)];
+  const physicalExamCategories: BankCategory[] = [...(course === "cardiology" ? cardiologyPhysicalExamCategories : pulmonologyPhysicalExamCategories)];
+  const investigationCategories: BankCategory[] = [...(course === "cardiology" ? cardiologyInvestigationCategories : pulmonologyInvestigationCategories)];
   const allInvestigationCategories = [
     ...investigationCategories,
     { id: "procedures", label: "پروسیجرها / اختصاصی" },

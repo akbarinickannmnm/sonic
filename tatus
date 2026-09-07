@@ -1,0 +1,13 @@
+* [33m8fb4ab4[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m Initial SONIC deployment
+* [33m4114c55[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Update practice case selection
+* [33m8b18ada[m feat: add cardiology course and patient voice cases
+* [33m99b6443[m Redesign clinical reasoning landing page
+* [33mcb748a9[m Connect daily case experience
+* [33mec15059[m Build specialty practice selection page
+* [33m0b2c950[m Clean up case data validation and gameplay
+* [33m7737670[m Update clinical reasoning limits and options
+* [33m258a98d[m Fix random case loading
+* [33m1b38de1[m Add random case selection
+* [33mee4e2b7[m Fix production build
+* [33mfddc147[m Fix production build
+* [33mfcd6543[m Initial SONIC V1

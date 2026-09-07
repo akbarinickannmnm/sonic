@@ -13,11 +13,11 @@ export type CardiologyInvestigation = {
 export const cardiologyInvestigationCategories = [
   { id:"laboratory", label:"آزمایشگاهی" },
   { id:"ecg", label:"ECG" },
-  { id:"echocardiography", label:"Echocardiography" },
-  { id:"imaging", label:"Imaging" },
+  { id:"echocardiography", label:"اکوکاردیوگرافی" },
+  { id:"imaging", label:"تصویربرداری" },
   { id:"coronary", label:"کرونر و عروقی" },
   { id:"rhythm", label:"پایش ریتم" },
-  { id:"cardiac-mri", label:"Cardiac MRI" },
+  { id:"cardiac-mri", label:"MRI قلب" },
   { id:"specialized", label:"آزمایش‌های تخصصی" },
 ] as const;
 
