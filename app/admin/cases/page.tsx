@@ -1,9 +1,10 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import Header from "../../../components/Header";
 import { masterCaseBank } from "../../../data/cases";
+import { ensureDailyCaseSchedule, formatDateKey, getDefaultDailyCase, readDailyCaseSchedule, writeDailyCaseSchedule, type DailyCaseSchedule } from "../../../lib/dailyCase";
 import { validatePulmonologyCases } from "../../../lib/pulmonologyCaseValidator";
 import { validateCardiologyCases } from "../../../lib/cardiologyCaseValidator";
 import type { Case } from "../../../types/case";
@@ -119,6 +120,55 @@ export default function CaseLibraryPage() {
   const [difficultyFilter, setDifficultyFilter] = useState("all");
   const [selectedId, setSelectedId] = useState<string | null>("pulmo-001");
   const [activeTab, setActiveTab] = useState<"overview" | "history" | "exam" | "investigations">("overview");
+  const [dailySchedule, setDailySchedule] = useState<DailyCaseSchedule>({});
+  const [scheduleDays, setScheduleDays] = useState(30);
+  const [dailyScheduleOpen, setDailyScheduleOpen] = useState(true);
+
+  useEffect(() => {
+    setDailySchedule(ensureDailyCaseSchedule(30));
+  }, []);
+
+  const dailyEligibleCases = useMemo(() =>
+    masterCaseBank
+      .filter((item) => item.difficulty === "easy" || item.difficulty === "medium")
+      .slice()
+      .sort((a, b) => a.id.localeCompare(b.id)),
+  []);
+
+  const upcomingDailyCases = useMemo(() => {
+    const today = new Date();
+    return Array.from({ length: scheduleDays }, (_, offset) => {
+      const date = new Date(today);
+      date.setDate(date.getDate() + offset);
+      const dateKey = formatDateKey(date);
+      const assignedId = dailySchedule[dateKey];
+      const assigned = assignedId ? masterCaseBank.find((item) => item.id === assignedId) : undefined;
+      return { date, dateKey, caseData: assigned ?? getDefaultDailyCase(date) };
+    });
+  }, [dailySchedule, scheduleDays]);
+
+  function setDailyCase(dateKey: string, caseId: string) {
+    const next = { ...dailySchedule, [dateKey]: caseId };
+    setDailySchedule(next);
+    writeDailyCaseSchedule(next);
+  }
+
+  function swapDailyCases(index: number, direction: -1 | 1) {
+    const targetIndex = index + direction;
+    if (targetIndex < 0 || targetIndex >= upcomingDailyCases.length) return;
+    const current = upcomingDailyCases[index];
+    const target = upcomingDailyCases[targetIndex];
+    const next = { ...dailySchedule, [current.dateKey]: target.caseData.id, [target.dateKey]: current.caseData.id };
+    setDailySchedule(next);
+    writeDailyCaseSchedule(next);
+  }
+
+  function resetDailySchedule() {
+    const next = { ...dailySchedule };
+    upcomingDailyCases.forEach(({ dateKey }) => delete next[dateKey]);
+    setDailySchedule(next);
+    writeDailyCaseSchedule(next);
+  }
 
   const validationErrors = useMemo(() => {
     if (courseFilter === "cardiology") return validateCardiologyCases(masterCaseBank.filter((item) => item.course === "cardiology"));
@@ -185,6 +235,66 @@ export default function CaseLibraryPage() {
               + ساخت کیس جدید
             </button>
           </div>
+        </section>
+
+        <section className="mt-5 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Case of the Day</p>
+              <h2 className="mt-1 text-2xl font-bold">برنامه کیس‌های روزهای آینده</h2>
+              <p className="mt-2 text-sm leading-6 text-slate-500">
+                کیس هر روز را ببین، برای هر تاریخ کیس دیگری انتخاب کن یا با جابه‌جایی ترتیب، برنامه را تغییر بده. زمان‌بندی بر اساس تاریخ تهران (Asia/Tehran) است و کیس هر روز ساعت ۰۰:۰۰ به وقت تهران عوض می‌شود.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => setDailyScheduleOpen((open) => !open)}
+                className="rounded-xl border border-slate-300 px-4 py-2 text-sm font-semibold hover:bg-slate-50"
+                aria-expanded={dailyScheduleOpen}
+              >
+                {dailyScheduleOpen ? "بستن بخش" : "باز کردن بخش"}
+              </button>
+              {dailyScheduleOpen && (
+                <>
+                  <button type="button" onClick={resetDailySchedule} className="rounded-xl border border-slate-300 px-4 py-2 text-sm font-semibold hover:bg-slate-50">بازنشانی برنامه</button>
+                  <select value={scheduleDays} onChange={(e) => setScheduleDays(Number(e.target.value))} className="rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm">
+                    <option value={30}>۳۰ روز</option>
+                    <option value={60}>۶۰ روز</option>
+                    <option value={90}>۹۰ روز</option>
+                  </select>
+                </>
+              )}
+            </div>
+          </div>
+
+          {dailyScheduleOpen && (
+          <div className="mt-5 overflow-hidden rounded-2xl border border-slate-200">
+            <div className="grid grid-cols-[70px_150px_1fr_92px] gap-3 border-b border-slate-200 bg-slate-50 px-4 py-3 text-xs font-semibold text-slate-500">
+              <span>#</span><span>تاریخ</span><span>کیس روز</span><span>ترتیب</span>
+            </div>
+            <div className="divide-y divide-slate-100">
+              {upcomingDailyCases.map(({ date, dateKey, caseData }, index) => (
+                <div key={dateKey} className="grid grid-cols-[70px_150px_1fr_92px] items-center gap-3 px-4 py-3">
+                  <span className="text-xs font-mono text-slate-400">{index + 1}</span>
+                  <div>
+                    <p className="text-sm font-semibold">{date.toLocaleDateString("fa-IR-u-ca-persian", { weekday: "short", month: "short", day: "numeric" })}</p>
+                    <p className="mt-0.5 text-[10px] text-slate-400">{dateKey} تهران</p>
+                  </div>
+                  <select value={caseData.id} onChange={(e) => setDailyCase(dateKey, e.target.value)} className="min-w-0 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm">
+                    {dailyEligibleCases.map((item) => (
+                      <option key={item.id} value={item.id}>{item.id} — {item.title}</option>
+                    ))}
+                  </select>
+                  <div className="flex justify-end gap-1">
+                    <button type="button" disabled={index === 0} onClick={() => swapDailyCases(index, -1)} className="h-8 w-8 rounded-lg border border-slate-200 text-sm disabled:opacity-30" aria-label="بالا">↑</button>
+                    <button type="button" disabled={index === upcomingDailyCases.length - 1} onClick={() => swapDailyCases(index, 1)} className="h-8 w-8 rounded-lg border border-slate-200 text-sm disabled:opacity-30" aria-label="پایین">↓</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          )}
         </section>
 
         <section className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-5">

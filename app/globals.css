@@ -94,7 +94,7 @@ button:active:not(:disabled) { transform: translateY(0); }
 }
 
 body {
-  background: var(--bg-0);
+  background: #fbf8f2;
   color: var(--ink-0);
 }
 
@@ -129,4 +129,13 @@ main, section, article, header, footer { min-width: 0; }
 /* Persian text reads best with a little more line-height and no tracking hacks. */
 [dir="rtl"] p, [dir="rtl"] label, [dir="rtl"] button, [dir="rtl"] input, [dir="rtl"] select, [dir="rtl"] textarea {
   letter-spacing: normal !important;
+}
+
+
+/* Home case title: dedicated Arabic/Persian face for cleaner clinical typography. */
+.sonic-home-case-title {
+  font-family: var(--font-vazirmatn), Tahoma, Arial, sans-serif;
+  font-feature-settings: "kern" 1, "liga" 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }

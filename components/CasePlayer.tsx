@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 
 import type { Case, CaseHint, Investigation } from "../types/case";
 import DiagnosisSearch from "./DiagnosisSearch";
+import CaseCompletionModal from "./CaseCompletionModal";
 import { diseases } from "../data/diseases";
 import { getCourseBank } from "../data/courseBanks";
 import { isCorrectDiagnosis } from "../lib/caseEngine";
@@ -422,8 +423,9 @@ export default function CasePlayer({
 
     setExpandedHistoryIds((current) => {
       const next = new Set(current);
-      if (next.has(questionId)) next.delete(questionId);
-      else next.add(questionId);
+      const key = `history:${questionId}`;
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
       return next;
     });
   }
@@ -545,38 +547,38 @@ export default function CasePlayer({
   }
 
   if (completed) {
+    const continueToNextCase = () => {
+      if (typeof window === "undefined") return;
+      const nextCase = selectNextPracticeCase(
+        caseData.course,
+        caseData.id,
+        nextCaseOptions,
+        practiceSelection,
+      );
+      if (nextCase) {
+        const params = new URLSearchParams();
+        if (practiceSelection?.mode) params.set("mode", practiceSelection.mode);
+        if (practiceSelection?.difficulty) params.set("difficulty", practiceSelection.difficulty);
+        if (practiceSelection?.tags.length) params.set("tags", practiceSelection.tags.join(","));
+        const query = params.toString();
+        window.location.assign(`/practice/${caseData.course}/${nextCase.id}${query ? `?${query}` : ""}`);
+        return;
+      }
+      window.location.assign(completionHref ?? `/practice/${caseData.course}`);
+    };
+
     return (
       <main dir="rtl" className="min-h-screen bg-[#f7f9fc] text-slate-900">
         <div className="mx-auto flex min-h-screen w-full max-w-[880px] items-center justify-center px-5 py-10 lg:px-8">
-          <section className="w-full rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-[0_8px_28px_rgba(15,23,42,0.035)] sm:p-12">
-            <h1 className="text-3xl font-extrabold tracking-tight text-slate-950">مرور کیس</h1>
-            <button
-              type="button"
-              onClick={() => {
-                if (typeof window === "undefined") return;
-                const nextCase = selectNextPracticeCase(
-                  caseData.course,
-                  caseData.id,
-                  nextCaseOptions,
-                  practiceSelection,
-                );
-                if (nextCase) {
-                  const params = new URLSearchParams();
-                  if (practiceSelection?.mode) params.set("mode", practiceSelection.mode);
-                  if (practiceSelection?.difficulty) params.set("difficulty", practiceSelection.difficulty);
-                  if (practiceSelection?.tags.length) params.set("tags", practiceSelection.tags.join(","));
-                  const query = params.toString();
-                  window.location.assign(`/practice/${caseData.course}/${nextCase.id}${query ? `?${query}` : ""}`);
-                  return;
-                }
-                window.location.assign(completionHref ?? `/practice/${caseData.course}`);
-              }}
-              className="mt-8 inline-flex min-w-[220px] items-center justify-center gap-3 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-bold text-white transition hover:bg-blue-700"
-            >
-              ادامه
-              <span aria-hidden="true" className="text-lg">←</span>
-            </button>
-          </section>
+          <CaseCompletionModal
+            caseData={caseData}
+            won={won === true}
+            guessCount={guessCount}
+            onContinue={continueToNextCase}
+            onReview={() => {
+              window.location.assign(`/practice/review/${caseData.course}/${caseData.id}`);
+            }}
+          />
         </div>
       </main>
     );
