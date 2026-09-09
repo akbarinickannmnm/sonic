@@ -1,0 +1,5 @@
+mnt/data/homefix/app/page.tsx(3,18): error TS2792: Cannot find module 'next/link'. Did you mean to set the 'moduleResolution' option to 'nodenext', or to add aliases to the 'paths' option?
+mnt/data/homefix/app/page.tsx(4,37): error TS2792: Cannot find module 'react'. Did you mean to set the 'moduleResolution' option to 'nodenext', or to add aliases to the 'paths' option?
+mnt/data/homefix/app/page.tsx(5,27): error TS2792: Cannot find module 'next/navigation'. Did you mean to set the 'moduleResolution' option to 'nodenext', or to add aliases to the 'paths' option?
+mnt/data/homefix/app/page.tsx(30,7): error TS2792: Cannot find module 'react/jsx-runtime'. Did you mean to set the 'moduleResolution' option to 'nodenext', or to add aliases to the 'paths' option?
+mnt/data/homefix/data/pulmonologyCases.ts(2388,5): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.

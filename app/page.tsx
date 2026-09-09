@@ -101,6 +101,28 @@ function Icon({
   return null;
 }
 
+
+function CourseIcon({ name }: { name: string }) {
+  const common = {
+    width: 40,
+    height: 40,
+    viewBox: "0 0 48 48",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.9,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    "aria-hidden": true,
+  };
+
+  if (name === "cardiology") return <svg {...common}><path d="M24 39S8 29.5 8 18.7C8 12.9 12 9 17.4 9c3.3 0 5.5 1.8 6.6 4.5C25.1 10.8 27.3 9 30.6 9 36 9 40 12.9 40 18.7 40 29.5 24 39 24 39Z"/><path d="M17.5 21h4l2-3 3.1 5 2-3h2.2"/></svg>;
+  if (name === "pulmonology") return <svg {...common}><path d="M24 8v14"/><path d="M23 22c-3.4-4.3-6.8-7.5-10.1-5.2-4.9 3.3-5.9 12.7-3.8 18.1 1.5 3.8 6.7 4 9.7.8 2.3-2.5 3.2-6.4 4.2-10.6Z"/><path d="M25 22c3.4-4.3 6.8-7.5 10.1-5.2 4.9 3.3 5.9 12.7 3.8 18.1-1.5 3.8-6.7 4-9.7.8-2.3-2.5-3.2-6.4-4.2-10.6Z"/><path d="M18.5 13v6M29.5 13v6"/></svg>;
+  if (name === "nephrology") return <svg {...common}><path d="M19 9c-5-1.8-8.4 2-8.4 8.4 0 7 3.2 13.5 8.4 13.5 3.9 0 5.8-3.2 5.8-7.8 0-4-1.3-6.4-3.4-8.7-1.1-1.3-1.6-3.4-2.4-5.4Z"/><path d="M29 9c5-1.8 8.4 2 8.4 8.4 0 7-3.2 13.5-8.4 13.5-3.9 0-5.8-3.2-5.8-7.8 0-4 1.3-6.4 3.4-8.7 1.1-1.3 1.6-3.4 2.4-5.4Z"/><path d="M24 22v9"/></svg>;
+  if (name === "endocrine") return <svg {...common}><path d="M15 14c3-2.4 5.8-.5 9 3 3.2-3.5 6-5.4 9-3 2.2 1.8 1.7 5.3.2 8.3-1.5 3.1-4.4 4.9-9.2 4.9s-7.7-1.8-9.2-4.9C13.3 19.3 12.8 15.8 15 14Z"/><path d="M24 17v12M20.5 22h7"/></svg>;
+  if (name === "gastroenterology") return <svg {...common}><path d="M16 10c5 0 6.5 3.4 6.5 8.2 0 4.6 2.5 6.3 5.8 6.3 4.2 0 6.2-2.6 6.2-6.7v-4.2c0-2.3 1.5-3.6 3.7-3.6"/><path d="M16 10c-2.8 2.2-4.5 6.2-4.5 10.7C11.5 29 16.2 36 22.8 36c3.9 0 6.3-2 6.3-5.5 0-3.2-2.3-4.9-5.5-4.9-4.7 0-6.7-2.3-6.7-6.1v-4.2"/></svg>;
+  return <svg {...common}><circle cx="24" cy="24" r="9.5"/><circle cx="20.5" cy="22" r="1.4"/><circle cx="27.5" cy="26" r="1.4"/><path d="M24 5v5M24 38v5M5 24h5M38 24h5M10.5 10.5l3.5 3.5M34 34l3.5 3.5M37.5 10.5 34 14M14 34l-3.5 3.5"/></svg>;
+}
+
 function persianDate(date = new Date()) {
   return new Intl.DateTimeFormat("fa-IR", {
     timeZone: "Asia/Tehran",
@@ -159,7 +181,7 @@ export default function Home() {
               <Icon name="search" size={22} />
             </button>
             <span className="h-5 w-px bg-slate-200" />
-            <span className="hidden text-sm font-medium sm:block">Nikan</span>
+            <span className="hidden text-sm font-medium sm:block">نیکان</span>
             <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1f2c3b] text-sm font-medium text-white">
               N
             </span>
@@ -184,8 +206,7 @@ export default function Home() {
           <div className="grid min-h-[390px] md:grid-cols-[1fr_1fr]" dir="ltr">
             <div className="relative order-1 min-h-[320px] overflow-hidden bg-[#f7f0ea] text-[#9a4846]">
               <div className="absolute left-8 top-8 text-[11px] font-medium uppercase leading-5 tracking-[0.18em]">
-                <div>CASE OF</div>
-                <div>THE DAY</div>
+                <div>کیس روز</div>
                 <div className="mt-2 h-px w-8 bg-current" />
               </div>
 
@@ -229,52 +250,77 @@ export default function Home() {
           </div>
         </article>
 
-        <section className="mt-8 grid gap-5 lg:grid-cols-2">
+        <section className="mt-8 grid gap-5 lg:grid-cols-2" dir="rtl">
           <Link
-            href="/practice"
-            className="group rounded-2xl border border-[#dde6f3] bg-[#f5f8fe] p-7 transition hover:-translate-y-0.5 hover:border-[#cbd9ef] hover:shadow-[0_10px_28px_rgba(37,99,235,0.06)]"
+            href="/clinical-reasoning"
+            className="order-2 group relative block overflow-hidden rounded-2xl border border-[#eee5d7] bg-[#faf6ef] p-8 shadow-[0_5px_20px_rgba(15,23,42,0.025)] transition hover:-translate-y-0.5 hover:border-[#e4d6bf] hover:shadow-[0_10px_28px_rgba(133,99,46,0.06)] focus:outline-none focus:ring-2 focus:ring-[#8b7757]/20"
+            dir="rtl"
+            aria-label="استدلال بالینی"
           >
-            <div className="flex items-start justify-between">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#e7effc] text-[#415f8d]">
-                <Icon name="document" size={29} />
+            <div className="flex h-full min-h-[300px] items-center justify-center">
+              <div className="flex flex-col items-center text-center">
+                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#f3ebdf] text-[#8b7757]">
+                  <Icon name="bulb" size={31} />
+                </span>
+
+                <div className="mt-6">
+                  <h2 className="text-[26px] font-semibold tracking-[-0.03em] text-[#173250]">
+                    استدلال بالینی
+                  </h2>
+                  <p className="mx-auto mt-3 max-w-[430px] text-[15px] leading-8 text-[#5d7695]">
+                    کیس‌ها از همه تخصص‌ها هستند.<br />
+                    تخصص پنهان است؛ خودت آن را پیدا کن.
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="mt-5" dir="rtl">
-              <h2 className="text-[23px] font-semibold text-[#24364e]">تمرین</h2>
-              <p className="mt-2 text-[15px] leading-7 text-slate-500">
-                کیس‌های بالینی را بر اساس تخصص
-                <br />
-                انتخاب و تمرین کن.
-              </p>
-            </div>
-            <div className="mt-7 flex items-center gap-3 text-[#415f8d]" dir="ltr">
-              <Icon name="arrow" size={22} />
-              <span className="h-px w-16 bg-[#bfd0e8]" />
             </div>
           </Link>
 
-          <Link
-            href="/clinical-reasoning"
-            className="group rounded-2xl border border-[#eee5d7] bg-[#faf6ef] p-7 transition hover:-translate-y-0.5 hover:border-[#e4d6bf] hover:shadow-[0_10px_28px_rgba(133,99,46,0.06)]"
+          <div
+            role="link"
+            tabIndex={0}
+            onClick={() => router.push("/practice")}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                router.push("/practice");
+              }
+            }}
+            className="order-1 cursor-pointer rounded-2xl border border-[#dce7f5] bg-[#f5f8fc] p-8 shadow-[0_5px_20px_rgba(15,23,42,0.025)] transition hover:-translate-y-0.5 hover:border-[#cdd9e7] hover:shadow-[0_10px_28px_rgba(57,84,115,0.06)] focus:outline-none focus:ring-2 focus:ring-[#183a5c]/20"
+            dir="rtl"
           >
-            <div className="flex items-start justify-between">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#f4ecdf] text-[#8b7757]">
-                <Icon name="bulb" size={30} />
+            <div className="flex min-h-[300px] flex-col">
+              <div className="text-center">
+                <h2 className="text-[26px] font-semibold tracking-[-0.03em] text-[#173250]">تمرین</h2>
+                <p className="mx-auto mt-3 max-w-[500px] text-[15px] leading-7 text-[#5d7695]">
+                  کیس‌های بالینی را بر اساس تخصص انتخاب و تمرین کن.
+                </p>
+              </div>
+
+              <div className="mx-auto mt-7 grid w-full max-w-[430px] grid-cols-3 gap-3">
+                {[
+                  ["gastroenterology", "گوارش"],
+                  ["endocrine", "غدد"],
+                  ["cardiology", "قلب و عروق"],
+                  ["infectious-disease", "عفونی"],
+                  ["nephrology", "نفرولوژی"],
+                  ["pulmonology", "پنومولوژی"],
+                ].map(([course, label]) => (
+                  <Link
+                    key={course}
+                    href={`/practice/${course}`}
+                    title={label}
+                    aria-label={label}
+                    onClick={(event) => event.stopPropagation()}
+                    onKeyDown={(event) => event.stopPropagation()}
+                    className="flex h-[78px] items-center justify-center rounded-xl border border-[#dfe7f0] bg-white/75 transition hover:-translate-y-0.5 hover:border-[#cdd9e7] hover:bg-white"
+                  >
+                    <CourseIcon name={course} />
+                  </Link>
+                ))}
               </div>
             </div>
-            <div className="mt-5" dir="rtl">
-              <h2 className="text-[23px] font-semibold text-[#24364e]">استدلال بالینی</h2>
-              <p className="mt-2 text-[15px] leading-7 text-slate-500">
-                کیس‌ها از همه تخصص‌ها هستند.
-                <br />
-                تخصص پنهان است؛ خودت آن را پیدا کن.
-              </p>
-            </div>
-            <div className="mt-7 flex items-center gap-3 text-[#8b7757]" dir="ltr">
-              <Icon name="arrow" size={22} />
-              <span className="h-px w-16 bg-[#d9cbb5]" />
-            </div>
-          </Link>
+          </div>
         </section>
 
         <section className="mt-5 overflow-hidden rounded-2xl border border-[#e7e4de] bg-white shadow-[0_5px_18px_rgba(15,23,42,0.025)]">

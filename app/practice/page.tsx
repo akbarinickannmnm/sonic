@@ -1,4 +1,5 @@
 import Link from "next/link";
+import BackButton from "@/components/BackButton";
 
 type Specialty = {
   key: "pulmonology" | "cardiology" | "nephrology" | "neurology" | "gastroenterology" | "endocrinology";
@@ -46,29 +47,36 @@ export default function PracticePage() {
     <main className="min-h-screen bg-[#fbfaf8] text-[#10213f]">
       <header className="border-b border-slate-200/80 bg-white/90 backdrop-blur">
         <div className="mx-auto flex h-[76px] max-w-[1180px] items-center justify-between px-5 lg:px-8">
+          <Link
+            href="/"
+            aria-label="خانه"
+            className="flex h-9 items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 text-sm font-medium text-slate-600 transition hover:border-slate-300 hover:text-slate-900"
+          >
+            <span className="text-[18px] leading-none">⌂</span>
+            <span>خانه</span>
+          </Link>
+
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-3">
               <span className="text-[30px] font-medium tracking-[-0.045em]">SONIC</span>
-              <span className="hidden border-l border-slate-300 pl-3 text-[13px] font-medium uppercase leading-[1.15] tracking-[0.18em] text-slate-500 sm:block">استدلال<br />بالینی</span>
+              <span className="hidden border-r border-slate-300 pr-3 text-[13px] font-medium uppercase leading-[1.15] tracking-[0.18em] text-slate-500 sm:block">استدلال<br />بالینی</span>
             </div>
-          </div>
-          <div className="flex items-center gap-4">
+            <div className="hidden h-9 w-px bg-slate-200 sm:block" />
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-700 text-sm font-medium text-white">N</div>
-            <span className="hidden text-sm font-medium sm:block">Nikan</span>
-            <span className="text-xs text-slate-400">⌄</span>
+            <span className="hidden text-sm font-medium sm:block">نیکان</span>
           </div>
         </div>
       </header>
 
       <div className="mx-auto max-w-[1180px] px-5 pb-16 pt-10 lg:px-8 lg:pt-12">
-        <div>
-          <p className="text-[12px] font-semibold tracking-[0.16em] text-slate-500">تمرین</p>
-          <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <h1 className="text-[34px] font-semibold tracking-[-0.035em] sm:text-[40px]">یک تخصص را انتخاب کن</h1>
-              <p className="mt-2 max-w-[650px] text-[15px] leading-6 text-slate-600">کیس‌های بالینی را بر اساس تخصص تمرین کن و روی حوزه‌ای که می‌خواهی بهتر شوی تمرکز کن.</p>
-            </div>
-            <div className="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-medium text-slate-500">۶ تخصص</div>
+        <div className="flex flex-col gap-5">
+          <div className="flex items-center justify-end">
+            <BackButton />
+          </div>
+
+          <div className="text-right">
+            <h1 className="text-[34px] font-semibold tracking-[-0.035em] sm:text-[40px]">یک تخصص را انتخاب کن</h1>
+            <p className="mt-2 max-w-[650px] text-[15px] leading-6 text-slate-600">کیس‌های بالینی را بر اساس تخصص تمرین کن و روی حوزه‌ای که می‌خواهی بهتر شوی تمرکز کن.</p>
           </div>
         </div>
 
@@ -101,16 +109,6 @@ export default function PracticePage() {
           })}
         </section>
 
-        <section className="mt-5 rounded-2xl border border-purple-100 bg-white p-6 shadow-[0_6px_20px_rgba(15,23,42,0.035)] sm:p-7">
-          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-            <div>
-              <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-[#7549a0]">همه تخصص‌ها</p>
-              <h2 className="mt-2 text-[21px] font-semibold">استدلال بالینی</h2>
-              <p className="mt-2 max-w-[680px] text-[15px] leading-6 text-slate-600">کیس‌ها از تخصص‌های مختلف انتخاب می‌شوند. تخصص پنهان است؛ سیستم مربوط و تشخیص را پیدا کن.</p>
-            </div>
-            <button type="button" disabled className="shrink-0 rounded-lg border border-slate-200 bg-slate-50 px-6 py-3 text-sm font-medium text-slate-400">به‌زودی</button>
-          </div>
-        </section>
       </div>
 
       <footer className="border-t border-slate-200 bg-white">

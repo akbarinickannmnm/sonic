@@ -1,0 +1,4 @@
+app/clinical-reasoning/page.tsx(3,26): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+app/clinical-reasoning/page.tsx(4,27): error TS2307: Cannot find module 'next/navigation' or its corresponding type declarations.
+app/clinical-reasoning/page.tsx(5,19): error TS2307: Cannot find module 'next/image' or its corresponding type declarations.
+app/clinical-reasoning/page.tsx(29,7): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.

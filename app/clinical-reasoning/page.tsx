@@ -144,14 +144,14 @@ function Icon({
 
 function BodyIllustration() {
   return (
-    <div className="relative mx-auto w-full max-w-[900px]">
+    <div className="relative mx-auto w-full max-w-[700px]">
       <Image
   src="/clinical-reasoning.png"
   alt="استدلال بالینی"
   width={1536}
   height={1024}
   priority
-  className="mx-auto h-auto w-1/2 object-contain"
+  className="mx-auto h-auto w-[54%] max-w-[380px] object-contain sm:w-[46%] sm:max-w-[420px]"
 />
     </div>
   );
@@ -166,232 +166,139 @@ export default function ClinicalReasoningPage() {
 };
 
   return (
-    <main className="min-h-screen bg-white text-slate-900">
+    <main dir="rtl" className="min-h-screen bg-white text-slate-900">
       {/* HEADER */}
-      <header className="flex h-[72px] items-center border-b border-slate-200 px-6 sm:px-8">
-        <div className="flex w-full items-center justify-between">
-          <div className="flex items-center gap-5">
-            <div className="flex items-center gap-3">
-              <div className="text-[29px] font-semibold tracking-[-0.04em]">
+      <header className="border-b border-[#ece9e4] bg-[#fbfaf8]">
+        <div className="mx-auto flex h-[76px] max-w-[1180px] items-center justify-between px-5 lg:px-8">
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-3" dir="ltr">
+              <span className="text-[30px] font-medium tracking-[-0.045em] text-[#1b2434]">
                 SONIC
-              </div>
-
-              <div className="h-7 w-px bg-slate-300" />
-
-              <div className="text-[12px] font-medium uppercase leading-[1.15] tracking-[0.17em] text-slate-700">
-                استدلال
+              </span>
+              <span className="hidden border-l border-slate-300 pl-3 text-[11px] font-medium uppercase leading-[1.2] tracking-[0.14em] text-slate-500 sm:block">
+                Sharpen your
                 <br />
-                بالینی
-              </div>
+                clinical reasoning.
+              </span>
             </div>
           </div>
 
-          <div className="flex items-center gap-5">
-            <div className="hidden items-center gap-2 sm:flex">
-              <span className="text-orange-500">
-                <Icon name="flame" size={21} />
-              </span>
+          <div className="flex items-center gap-4 text-slate-700" dir="ltr">
+            <button
+              type="button"
+              aria-label="جستجو"
+              className="rounded-full p-1.5"
+            >
+              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <circle cx="10.8" cy="10.8" r="6.4" />
+                <path d="m16 16 4 4" />
+              </svg>
+            </button>
 
-              <div className="leading-tight">
-                <div className="text-sm font-semibold text-slate-900">
-                  12
-                </div>
-                <div className="text-[11px] text-slate-500">
-                  روز پیوسته
-                </div>
-              </div>
+            <span className="hidden h-7 w-px bg-slate-200 sm:block" />
+
+            <span className="hidden text-[15px] font-medium text-[#1b2434] sm:block">نیکان</span>
+
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#223247] text-[15px] font-medium text-white">
+              N
             </div>
 
             <button
               type="button"
-              className="relative flex h-9 w-9 items-center justify-center rounded-full text-slate-700"
+              aria-label="منو"
+              className="rounded-full p-1.5"
             >
-              <Icon name="bell" size={22} />
-              <span className="absolute right-[5px] top-[4px] h-2 w-2 rounded-full bg-red-500" />
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+                <path d="M4 7h16M4 12h16M4 17h16" />
+              </svg>
             </button>
-
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-violet-50 text-lg font-medium text-violet-600">
-              N
-            </div>
           </div>
         </div>
       </header>
 
       {/* MAIN */}
-      <section className="mx-auto max-w-[1120px] px-6 pb-20 pt-14 sm:px-10">
+      <section dir="rtl" className="mx-auto max-w-[1180px] px-6 pb-8 pt-6 sm:px-8">
         {/* HERO */}
         <div className="text-center">
           <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-violet-50 text-violet-600">
             <Icon name="brain" size={37} strokeWidth={1.55} />
           </div>
 
-          <p className="mt-7 text-[11px] font-semibold uppercase tracking-[0.25em] text-slate-500">
-            CLINICAL REASONING
+          <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.25em] text-slate-500">
+            استدلال بالینی
           </p>
 
-          <h1 className="mt-4 text-[40px] font-semibold tracking-[-0.04em] text-slate-900 sm:text-[46px]">
-            The specialty is hidden.
+          <h1 className="mt-2 text-[34px] font-semibold tracking-[-0.03em] text-slate-900 sm:text-[42px]">
+            تخصص کیس پنهان است.
           </h1>
 
-          <p className="mx-auto mt-5 max-w-[550px] text-[18px] leading-7 text-slate-600">
-            Figure it out yourself.
+          <p className="mx-auto mt-2 max-w-[460px] text-[15px] leading-6 text-slate-500 sm:text-[16px]">
+            خودت سرنخ‌ها را کنار هم بگذار و حلش کن.
           </p>
         </div>
 
         {/* BODY */}
-        <div className="mt-5">
+        <div className="mt-1">
           <BodyIllustration />
         </div>
 
         {/* FEATURES */}
-        <div className="mx-auto mt-[-5px] grid max-w-[900px] grid-cols-1 divide-y divide-slate-200 border-y border-slate-200 md:grid-cols-3 md:divide-x md:divide-y-0">
-          <div className="flex flex-col items-center px-6 py-7 text-center">
+        <div className="mx-auto mt-0 grid max-w-[900px] grid-cols-1 divide-y divide-slate-200 border-y border-slate-200 md:grid-cols-3 md:divide-x md:divide-y-0">
+          <div className="flex flex-col items-center px-5 py-5 text-center">
             <div className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600">
               <Icon name="shuffle" size={19} />
             </div>
 
-            <h3 className="mt-3 text-[15px] font-semibold">
-              Mixed specialties
+            <h3 className="mt-2 text-[15px] font-semibold">
+              تخصص‌های مختلف
             </h3>
 
-            <p className="mt-1 text-sm text-slate-500">
-              Cases from all systems
+            <p className="mt-0.5 text-sm text-slate-500">
+              کیس‌ها از همه تخصص‌ها
             </p>
           </div>
 
-          <div className="flex flex-col items-center px-6 py-7 text-center">
+          <div className="flex flex-col items-center px-5 py-5 text-center">
             <div className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600">
               <Icon name="chart" size={19} />
             </div>
 
-            <h3 className="mt-3 text-[15px] font-semibold">
-              Easy – Medium
+            <h3 className="mt-2 text-[15px] font-semibold">
+              چالش بالینی
             </h3>
 
-            <p className="mt-1 text-sm text-slate-500">
-              Just the right challenge
+            <p className="mt-0.5 text-sm text-slate-500">
+              برای استدلال تمرین کن
             </p>
           </div>
 
-          <div className="flex flex-col items-center px-6 py-7 text-center">
+          <div className="flex flex-col items-center px-5 py-5 text-center">
             <div className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600">
               <Icon name="eye-off" size={19} />
             </div>
 
-            <h3 className="mt-3 text-[15px] font-semibold">
-              No specialty hints
+            <h3 className="mt-2 text-[15px] font-semibold">
+              بدون سرنخ تخصصی
             </h3>
 
-            <p className="mt-1 text-sm text-slate-500">
-              You identify the system
+            <p className="mt-0.5 text-sm text-slate-500">
+              تخصص را خودت پیدا کن
             </p>
           </div>
         </div>
 
         {/* CTA */}
-        <div className="mt-9 flex flex-col items-center">
+        <div className="mt-6 flex flex-col items-center">
           <button
             type="button"
             onClick={startCase}
             className="w-full max-w-[490px] rounded-xl bg-violet-600 py-4 text-[18px] font-semibold text-white shadow-sm transition-all hover:bg-violet-700 hover:shadow-md active:scale-[0.99]"
           >
-            Start a Case
+            شروع یک کیس
           </button>
 
-          <p className="mt-4 text-sm text-slate-500">
-            Estimated time: 10–15 min
-          </p>
         </div>
 
-        {/* HOW IT WORKS */}
-        <section className="mt-12 overflow-hidden rounded-xl border border-violet-100 bg-violet-50/20">
-          <div className="px-7 py-7">
-            <h2 className="text-[18px] font-semibold tracking-[-0.02em]">
-              How it works
-            </h2>
-
-            <div className="mt-7 grid grid-cols-1 gap-7 md:grid-cols-4 md:gap-0">
-              <div className="relative text-center md:border-r md:border-slate-200">
-                <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-violet-100 text-sm font-semibold text-violet-600">
-                  1
-                </div>
-
-                <h3 className="mt-4 text-[15px] font-medium">
-                  Take a history
-                </h3>
-
-                <p className="mt-1 text-sm text-slate-500">
-                  Listen carefully
-                </p>
-
-                <span className="absolute right-[-12px] top-5 hidden text-xl text-slate-300 md:block">
-                  →
-                </span>
-              </div>
-
-              <div className="relative text-center md:border-r md:border-slate-200">
-                <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-violet-100 text-sm font-semibold text-violet-600">
-                  2
-                </div>
-
-                <h3 className="mt-4 text-[15px] font-medium">
-                  Examine
-                </h3>
-
-                <p className="mt-1 text-sm text-slate-500">
-                  Find the clues
-                </p>
-
-                <span className="absolute right-[-12px] top-5 hidden text-xl text-slate-300 md:block">
-                  →
-                </span>
-              </div>
-
-              <div className="relative text-center md:border-r md:border-slate-200">
-                <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-violet-100 text-sm font-semibold text-violet-600">
-                  3
-                </div>
-
-                <h3 className="mt-4 text-[15px] font-medium">
-                  Investigate
-                </h3>
-
-                <p className="mt-1 text-sm text-slate-500">
-                  Order wisely
-                </p>
-
-                <span className="absolute right-[-12px] top-5 hidden text-xl text-slate-300 md:block">
-                  →
-                </span>
-              </div>
-
-              <div className="text-center">
-                <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-violet-100 text-sm font-semibold text-violet-600">
-                  4
-                </div>
-
-                <h3 className="mt-4 text-[15px] font-medium">
-                  Diagnose
-                </h3>
-
-                <p className="mt-1 text-sm text-slate-500">
-                  Make your call
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* HOW IT WORKS BUTTON */}
-        <div className="mt-7 text-center">
-          <button
-            type="button"
-            onClick={() => setShowHowItWorks(true)}
-            className="text-sm font-medium text-violet-600 transition-colors hover:text-violet-700"
-          >
-            Learn more about Clinical Reasoning
-          </button>
-        </div>
       </section>
 
       {/* MODAL */}
@@ -408,11 +315,11 @@ export default function ClinicalReasoningPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-violet-600">
-                  CLINICAL REASONING
+                  استدلال بالینی
                 </p>
 
                 <h2 className="mt-2 text-2xl font-semibold">
-                  How it works
+                  نحوه کار
                 </h2>
               </div>
 
@@ -428,28 +335,28 @@ export default function ClinicalReasoningPage() {
             <div className="mt-7 space-y-5">
               <div>
                 <p className="text-sm font-semibold">۰۱ — شرح حال</p>
-                <p className="mt-1 text-sm leading-6 text-slate-500">
+                <p className="mt-0.5 text-sm leading-6 text-slate-500">
                   پیش از رسیدن به تشخیص، اطلاعات مرتبط را کامل جمع‌آوری کن.
                 </p>
               </div>
 
               <div>
                 <p className="text-sm font-semibold">۰۲ — معاینه</p>
-                <p className="mt-1 text-sm leading-6 text-slate-500">
+                <p className="mt-0.5 text-sm leading-6 text-slate-500">
                   به یافته‌های معاینه‌ای توجه کن تا تشخیص افتراقی محدود شود.
                 </p>
               </div>
 
               <div>
                 <p className="text-sm font-semibold">۰۳ — بررسی</p>
-                <p className="mt-1 text-sm leading-6 text-slate-500">
+                <p className="mt-0.5 text-sm leading-6 text-slate-500">
                   بررسی‌های تشخیصی را هدفمند و نه بی‌هدف درخواست کن.
                 </p>
               </div>
 
               <div>
                 <p className="text-sm font-semibold">۰۴ — تشخیص</p>
-                <p className="mt-1 text-sm leading-6 text-slate-500">
+                <p className="mt-0.5 text-sm leading-6 text-slate-500">
                   سرنخ‌ها را کنار هم بگذار و تشخیص نهایی را انتخاب کن.
                 </p>
               </div>
@@ -460,7 +367,7 @@ export default function ClinicalReasoningPage() {
               onClick={() => setShowHowItWorks(false)}
               className="mt-7 w-full rounded-lg bg-violet-600 py-3 text-sm font-semibold text-white hover:bg-violet-700"
             >
-              Got it
+              متوجه شدم
             </button>
           </div>
         </div>

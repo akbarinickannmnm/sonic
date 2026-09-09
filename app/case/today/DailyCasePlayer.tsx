@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import CasePlayer from "../../../components/CasePlayer";
+import ExperienceCompletionModal from "../../../components/ExperienceCompletionModal";
 import type { Case } from "../../../types/case";
 
 const ATTEMPT_PREFIX = "sonic:daily-case:attempt:";
@@ -95,6 +96,7 @@ export default function DailyCasePlayer({
   // the server and client trees to differ and triggers React hydration errors.
   const [hydrated, setHydrated] = useState(false);
   const [locked, setLocked] = useState(false);
+  const [showCompletion, setShowCompletion] = useState(false);
 
   useEffect(() => {
     setLocked(window.localStorage.getItem(attemptKey(dateKey)) === "completed");
@@ -217,14 +219,28 @@ export default function DailyCasePlayer({
   }
 
   return (
-    <CasePlayer
-      caseData={caseData}
-      storageKey={stateKey(dateKey, caseData.id)}
-      onComplete={() => {
-        window.localStorage.setItem(attemptKey(dateKey), "completed");
-        setLocked(true);
-      }}
-      completionHref="/"
-    />
+    <>
+      <CasePlayer
+        caseData={caseData}
+        storageKey={stateKey(dateKey, caseData.id)}
+        onComplete={() => {
+          window.localStorage.setItem(attemptKey(dateKey), "completed");
+          setShowCompletion(true);
+        }}
+        completionHref="/"
+      />
+
+      <ExperienceCompletionModal
+        mode="daily"
+        open={showCompletion}
+        diagnosisName={caseData.diagnosis.name}
+        diagnosisId={caseData.diagnosis.id}
+        dateKey={dateKey}
+        onClose={() => {
+          setShowCompletion(false);
+          setLocked(true);
+        }}
+      />
+    </>
   );
 }
