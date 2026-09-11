@@ -9,7 +9,7 @@ import {
   type InvestigationBankItem,
 } from "../../../data/courseBanks";
 
-type Course = "pulmonology" | "cardiology";
+type Course = "pulmonology" | "cardiology" | "nephrology" | "gastroenterology" | "endocrinology" | "hematology-oncology";
 type Section = "history" | "physicalExam" | "investigations";
 
 const sections: { id: Section; label: string }[] = [
@@ -52,9 +52,9 @@ export default function QuestionBankPage() {
           <p className="mt-2 max-w-3xl text-slate-600">هر درس یک بانک واحد برای آیتم‌های قابل‌استفاده مجددِ شرح حال، معاینه فیزیکی و بررسی‌های تشخیصی دارد. پاسخ‌ها با شناسه ثابت بانک به هر کیس متصل می‌شوند.</p>
         </div>
         <div className="mb-5 flex flex-wrap gap-2">
-          {(["pulmonology", "cardiology"] as const).map((item) => (
+          {(["pulmonology", "cardiology", "nephrology", "gastroenterology", "endocrinology", "hematology-oncology"] as const).map((item) => (
             <button key={item} type="button" onClick={() => { setCourse(item); setCategory("all"); }} className={`rounded-xl px-4 py-2 text-sm font-semibold ${course === item ? "bg-slate-900 text-white" : "bg-white text-slate-700"}`}>
-              {item === "pulmonology" ? "ریه" : "قلب و عروق"}
+              {item === "pulmonology" ? "ریه" : item === "cardiology" ? "قلب و عروق" : item === "nephrology" ? "نفرولوژی" : item === "gastroenterology" ? "گوارش" : item === "endocrinology" ? "غدد" : "هماتولوژی و انکولوژی"}
             </button>
           ))}
         </div>

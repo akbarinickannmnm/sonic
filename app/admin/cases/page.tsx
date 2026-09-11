@@ -7,6 +7,10 @@ import { masterCaseBank } from "../../../data/cases";
 import { ensureDailyCaseSchedule, formatDateKey, getDefaultDailyCase, readDailyCaseSchedule, writeDailyCaseSchedule, type DailyCaseSchedule } from "../../../lib/dailyCase";
 import { validatePulmonologyCases } from "../../../lib/pulmonologyCaseValidator";
 import { validateCardiologyCases } from "../../../lib/cardiologyCaseValidator";
+import { validateNephrologyCases } from "../../../lib/nephrologyCaseValidator";
+import { validateGastroenterologyCases } from "../../../lib/gastroenterologyCaseValidator";
+import { validateEndocrinologyCases } from "../../../lib/endocrinologyCaseValidator";
+import { validateHematologyOncologyCases } from "../../../lib/hematologyOncologyCaseValidator";
 import type { Case } from "../../../types/case";
 
 const DIFFICULTY_LABELS: Record<Case["difficulty"], string> = {
@@ -19,8 +23,11 @@ const COURSE_LABELS: Record<string, string> = {
   pulmonology: "ریه",
   cardiology: "قلب",
   gastroenterology: "گوارش",
+  endocrinology: "غدد",
+  "hematology-oncology": "هماتولوژی و انکولوژی",
   neurology: "نورولوژی",
   "infectious-disease": "عفونی",
+  nephrology: "نفرولوژی",
 };
 
 const HISTORY_CATEGORY_LABELS: Record<string, string> = {
@@ -79,6 +86,38 @@ const PE_CATEGORY_LABELS: Record<string, string> = {
   functional: "ارزیابی عملکردی",
 };
 
+
+const NEPHRO_HISTORY_CATEGORY_LABELS: Record<string, string> = {
+  onset_and_course: "شروع و سیر علائم",
+  urinary_symptoms: "علائم ادراری",
+  stone_symptoms: "درد پهلو و سنگ",
+  edema: "ادم و افزایش وزن",
+  infection: "عفونت‌های اخیر",
+  autoimmune_sle: "بیماری‌های خودایمنی / SLE",
+  vasculitis: "واسکولیت",
+  vascular: "بیماری‌های عروقی",
+  diabetes_htn: "دیابت و فشار خون",
+  renal_function: "عملکرد کلیه و علائم بیماری مزمن کلیه",
+  medications: "داروها و نفروتوکسین‌ها",
+  volume_aki: "کاهش حجم، AKI و سابقه مرتبط",
+  obstruction: "انسداد و مشکلات ادراری",
+  family_history: "سابقه خانوادگی",
+  stone_history: "سابقه سنگ کلیه",
+};
+
+const NEPHRO_PE_CATEGORY_LABELS: Record<string, string> = {
+  general: "ارزیابی عمومی",
+  vitals: "علائم حیاتی",
+  volume_status: "وضعیت مایعات",
+  skin_mucosal: "معاینه پوست و مخاط",
+  cardiopulmonary: "معاینه قلب و ریه",
+  abdominal_flank: "معاینه شکم و پهلو",
+  genitourinary: "معاینه دستگاه ادراری",
+  extremities: "معاینه اندام‌ها",
+  neurologic: "معاینه عصبی",
+  fundoscopy: "معاینه فوندوس",
+};
+
 function getHistoryItems(caseItem: Case) {
   const stage = caseItem.stages.find((item) => item.type === "history");
   return stage?.type === "history" ? stage.hints : [];
@@ -105,13 +144,23 @@ function categoryLabel(caseItem: Case, category?: string) {
   if (caseItem.course === "cardiology") {
     return CARDIO_HISTORY_CATEGORY_LABELS[category] ?? CARDIO_PE_CATEGORY_LABELS[category] ?? category;
   }
+  if (caseItem.course === "nephrology") {
+    return NEPHRO_HISTORY_CATEGORY_LABELS[category] ?? NEPHRO_PE_CATEGORY_LABELS[category] ?? category;
+  }
   return HISTORY_CATEGORY_LABELS[category] ?? PE_CATEGORY_LABELS[category] ?? category;
 }
 
 function questionLabel(sourceId?: string, fallback?: string) {
   if (!sourceId) return fallback ?? "سؤال";
-  const index = Number(sourceId.replace("resp-q", ""));
-  return `سؤال ${String(index).padStart(2, "0")}`;
+  if (sourceId.startsWith("nephro-h")) {
+    const index = Number(sourceId.replace("nephro-h", ""));
+    return Number.isFinite(index) ? `سؤال ${String(index).padStart(2, "0")}` : fallback ?? sourceId;
+  }
+  if (sourceId.startsWith("resp-q")) {
+    const index = Number(sourceId.replace("resp-q", ""));
+    return Number.isFinite(index) ? `سؤال ${String(index).padStart(2, "0")}` : fallback ?? sourceId;
+  }
+  return fallback ?? sourceId;
 }
 
 export default function CaseLibraryPage() {
@@ -172,6 +221,10 @@ export default function CaseLibraryPage() {
 
   const validationErrors = useMemo(() => {
     if (courseFilter === "cardiology") return validateCardiologyCases(masterCaseBank.filter((item) => item.course === "cardiology"));
+    if (courseFilter === "nephrology") return validateNephrologyCases(masterCaseBank.filter((item) => item.course === "nephrology"));
+    if (courseFilter === "gastroenterology") return validateGastroenterologyCases(masterCaseBank.filter((item) => item.course === "gastroenterology"));
+    if (courseFilter === "endocrinology") return validateEndocrinologyCases(masterCaseBank.filter((item) => item.course === "endocrinology"));
+    if (courseFilter === "hematology-oncology") return validateHematologyOncologyCases(masterCaseBank.filter((item) => item.course === "hematology-oncology"));
     return validatePulmonologyCases(masterCaseBank.filter((item) => item.course === "pulmonology"));
   }, [courseFilter]);
 
@@ -299,7 +352,7 @@ export default function CaseLibraryPage() {
 
         <section className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-5">
           {[
-            ["کل کیس‌های ریه", stats.total, "text-slate-900"],
+            [`کل کیس‌های ${courseFilter === "cardiology" ? "قلب و عروق" : courseFilter === "nephrology" ? "نفرولوژی" : courseFilter === "pulmonology" ? "ریه" : "همه"}`, stats.total, "text-slate-900"],
             ["آسان", stats.easy, "text-emerald-600"],
             ["متوسط", stats.medium, "text-amber-600"],
             ["سخت", stats.hard, "text-rose-600"],
@@ -339,6 +392,10 @@ export default function CaseLibraryPage() {
               <option value="all">همه تخصص‌ها</option>
               <option value="pulmonology">ریه</option>
               <option value="cardiology">قلب</option>
+              <option value="nephrology">نفرولوژی</option>
+              <option value="gastroenterology">گوارش</option>
+              <option value="endocrinology">غدد</option>
+              <option value="hematology-oncology">هماتولوژی و انکولوژی</option>
             </select>
             <select value={difficultyFilter} onChange={(event) => setDifficultyFilter(event.target.value)} className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm">
               <option value="all">همه سطوح</option>

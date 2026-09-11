@@ -1,0 +1,45 @@
+export type NephrologyInvestigationCategory = "biopsy_specialized" | "imaging" | "immunologic_serologic" | "renal_function" | "specialized_renal_function" | "urinalysis" | "urine_protein";
+export type NephrologyInvestigationItem = { id: string; category: NephrologyInvestigationCategory; title: string; description: string; };
+
+export const nephrologyInvestigationCategories = [
+  { id: "renal_function", label: "عملکرد کلیه" },
+  { id: "urinalysis", label: "آزمایش ادرار" },
+  { id: "urine_protein", label: "پروتئین ادرار و آلبومین" },
+  { id: "immunologic_serologic", label: "تست‌های ایمنی و سرولوژیک" },
+  { id: "imaging", label: "تصویربرداری کلیه و مجاری ادراری" },
+  { id: "biopsy_specialized", label: "بیوپسی و بررسی‌های اختصاصی" },
+  { id: "specialized_renal_function", label: "تست‌های عملکردی و اختصاصی کلیه" },
+] as const;
+
+export const nephrologyInvestigationBank: NephrologyInvestigationItem[] = [
+  { id: "NINV-001", category: "renal_function", title: "Serum Creatinine", description: "کراتینین سرم و روند آن." },
+  { id: "NINV-002", category: "renal_function", title: "BUN", description: "اوره خون." },
+  { id: "NINV-003", category: "renal_function", title: "eGFR", description: "برآورد عملکرد گلومرولی." },
+  { id: "NINV-004", category: "renal_function", title: "Electrolytes", description: "سدیم، پتاسیم، کلر و بیکربنات." },
+  { id: "NINV-005", category: "renal_function", title: "Calcium / Phosphate / Magnesium", description: "کلسیم، فسفر و منیزیم." },
+  { id: "NINV-006", category: "renal_function", title: "CBC", description: "شمارش سلول‌های خون برای کم‌خونی، التهاب یا microangiopathy." },
+  { id: "NINV-007", category: "renal_function", title: "Albumin / Total Protein", description: "آلبومین و پروتئین تام سرم." },
+  { id: "NINV-008", category: "urinalysis", title: "Urinalysis", description: "Dipstick، blood، protein، WBC، specific gravity و pH." },
+  { id: "NINV-009", category: "urinalysis", title: "Urine Sediment", description: "RBC/WBC، casts و crystals." },
+  { id: "NINV-010", category: "urine_protein", title: "Urine Protein/Creatinine Ratio", description: "برآورد کمی proteinuria." },
+  { id: "NINV-011", category: "urine_protein", title: "Urine Albumin/Creatinine Ratio", description: "برآورد کمی albuminuria." },
+  { id: "NINV-012", category: "immunologic_serologic", title: "ANA / anti-dsDNA", description: "بررسی زمینه SLE." },
+  { id: "NINV-013", category: "immunologic_serologic", title: "ANCA", description: "بررسی vasculitis مرتبط با ANCA." },
+  { id: "NINV-014", category: "immunologic_serologic", title: "Anti-GBM Antibody", description: "بررسی Anti-GBM disease." },
+  { id: "NINV-015", category: "immunologic_serologic", title: "C3 / C4", description: "بررسی مصرف complement." },
+  { id: "NINV-016", category: "immunologic_serologic", title: "HBV / HCV / HIV Serology", description: "بررسی عفونت‌های مرتبط با renal disease." },
+  { id: "NINV-017", category: "immunologic_serologic", title: "SPEP / UPEP / Immunofixation / Free Light Chains", description: "بررسی monoclonal gammopathy و myeloma." },
+  { id: "NINV-018", category: "imaging", title: "Renal Ultrasound", description: "اندازه کلیه، اکوژنیسیته، کیست و hydronephrosis." },
+  { id: "NINV-019", category: "imaging", title: "Renal Doppler", description: "ارزیابی جریان عروق کلیوی." },
+  { id: "NINV-020", category: "imaging", title: "Non-contrast CT KUB", description: "بررسی سنگ و انسداد." },
+  { id: "NINV-021", category: "imaging", title: "CT Angiography / MRA", description: "بررسی renal vasculature و آئورت." },
+  { id: "NINV-022", category: "imaging", title: "CT / MRI for Cystic Disease", description: "ارزیابی کیست‌ها و ساختار کلیه." },
+  { id: "NINV-023", category: "biopsy_specialized", title: "Kidney Biopsy", description: "بررسی با LM، IF و EM در بیماری‌های مناسب." },
+  { id: "NINV-024", category: "biopsy_specialized", title: "Genetic Testing", description: "بررسی بیماری‌های ارثی کلیه." },
+  { id: "NINV-025", category: "biopsy_specialized", title: "Stone Analysis", description: "آنالیز ترکیب سنگ دفع‌شده." },
+  { id: "NINV-026", category: "specialized_renal_function", title: "Urine / Serum Osmolality", description: "ارزیابی توانایی تغلیظ و رقیق‌سازی ادرار." },
+  { id: "NINV-027", category: "specialized_renal_function", title: "Urine Sodium / FENa", description: "کمک به افتراق الگوهای AKI." },
+  { id: "NINV-028", category: "specialized_renal_function", title: "Urine Chloride", description: "کمک به ارزیابی اختلالات اسید-باز و حجم." },
+  { id: "NINV-029", category: "specialized_renal_function", title: "Water Deprivation / Desmopressin Testing", description: "بررسی Nephrogenic Diabetes Insipidus در موارد مناسب." },
+  { id: "NINV-030", category: "specialized_renal_function", title: "Urine Calcium / Citrate / Oxalate", description: "ارزیابی علل متابولیک سنگ کلیه." },
+];

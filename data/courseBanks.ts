@@ -25,6 +25,27 @@ import {
   cardiologyInvestigationBank,
   cardiologyInvestigationCategories,
 } from "./cardiologyInvestigationBank";
+import {
+  nephrologyQuestionBank,
+  nephrologyQuestionCategories,
+} from "./nephrologyQuestionBank";
+import {
+  nephrologyPhysicalExamBank,
+  nephrologyPhysicalExamCategories,
+} from "./nephrologyPhysicalExamBank";
+import {
+  nephrologyInvestigationBank,
+  nephrologyInvestigationCategories,
+} from "./nephrologyInvestigationBank";
+import { gastroenterologyQuestionBank, gastroenterologyQuestionCategories } from "./gastroenterologyQuestionBank";
+import { gastroenterologyPhysicalExamBank, gastroenterologyPhysicalExamSections } from "./gastroenterologyPhysicalExamBank";
+import { gastroenterologyInvestigationBank, gastroenterologyInvestigationSections } from "./gastroenterologyInvestigationBank";
+import { endocrinologyQuestionBank, endocrinologyQuestionCategories } from "./endocrinologyQuestionBank";
+import { endocrinologyPhysicalExamBank, endocrinologyPhysicalExamSections } from "./endocrinologyPhysicalExamBank";
+import { endocrinologyInvestigationBank, endocrinologyInvestigationSections } from "./endocrinologyInvestigationBank";
+import { hematologyOncologyQuestionBank, hematologyOncologyQuestionCategories } from "./hematologyOncologyQuestionBank";
+import { hematologyOncologyPhysicalExamBank, hematologyOncologyPhysicalExamSections } from "./hematologyOncologyPhysicalExamBank";
+import { hematologyOncologyInvestigationBank, hematologyOncologyInvestigationSections } from "./hematologyOncologyInvestigationBank";
 
 export type BankCategory = { id: string; label: string };
 
@@ -244,7 +265,7 @@ function cardiologyHistoryAnswer(caseData: Case, questionId: string): string {
 }
 
 function buildHistoryBank(course: Course, bankCases: Case[]): HistoryBankItem[] {
-  const definitions = course === "cardiology" ? cardiologyQuestionBank : pulmonologyQuestionBank;
+  const definitions = course === "cardiology" ? cardiologyQuestionBank : course === "nephrology" ? nephrologyQuestionBank : course === "gastroenterology" ? gastroenterologyQuestionBank : course === "endocrinology" ? endocrinologyQuestionBank : course === "hematology-oncology" ? hematologyOncologyQuestionBank : pulmonologyQuestionBank;
 
   return definitions.map((question) => {
     const answersByCase: Record<string, string> = {};
@@ -277,10 +298,10 @@ function buildHistoryBank(course: Course, bankCases: Case[]): HistoryBankItem[] 
 }
 
 function buildPhysicalExamBank(course: Course, bankCases: Case[]): PhysicalExamBankItem[] {
-  const definitions = course === "cardiology" ? cardiologyPhysicalExamBank : pulmonologyPhysicalExamBank;
+  const definitions = course === "cardiology" ? cardiologyPhysicalExamBank : course === "nephrology" ? nephrologyPhysicalExamBank : course === "gastroenterology" ? gastroenterologyPhysicalExamBank : course === "endocrinology" ? endocrinologyPhysicalExamBank : course === "hematology-oncology" ? hematologyOncologyPhysicalExamBank : pulmonologyPhysicalExamBank;
   const items = definitions.map((item) => ({
     id: item.id,
-    category: item.category,
+    category: "category" in item ? item.category : item.section,
     title: item.title,
     description: item.description,
     answersByCase: {} as Record<string, string>,
@@ -326,10 +347,10 @@ function buildPhysicalExamBank(course: Course, bankCases: Case[]): PhysicalExamB
 }
 
 function buildInvestigationBank(course: Course, bankCases: Case[]): InvestigationBankItem[] {
-  const definitions = course === "cardiology" ? cardiologyInvestigationBank : pulmonologyInvestigationBank;
+  const definitions = course === "cardiology" ? cardiologyInvestigationBank : course === "nephrology" ? nephrologyInvestigationBank : course === "gastroenterology" ? gastroenterologyInvestigationBank : course === "endocrinology" ? endocrinologyInvestigationBank : course === "hematology-oncology" ? hematologyOncologyInvestigationBank : pulmonologyInvestigationBank;
   const items: InvestigationBankItem[] = definitions.map((item) => ({
     id: item.id,
-    category: item.category,
+    category: "category" in item ? item.category : item.section,
     title: item.title,
     description: item.description,
     genericAnswer: "answer" in item && typeof item.answer === "string" ? item.answer : undefined,
@@ -386,9 +407,9 @@ export function getCourseBank(course: Course, extraCases: Case[] = []): CourseBa
   const physicalExam = buildPhysicalExamBank(course, bankCases);
   const investigations = buildInvestigationBank(course, bankCases);
 
-  const historyCategories: BankCategory[] = [...(course === "cardiology" ? cardiologyQuestionCategories : pulmonologyQuestionCategories)];
-  const physicalExamCategories: BankCategory[] = [...(course === "cardiology" ? cardiologyPhysicalExamCategories : pulmonologyPhysicalExamCategories)];
-  const investigationCategories: BankCategory[] = [...(course === "cardiology" ? cardiologyInvestigationCategories : pulmonologyInvestigationCategories)];
+  const historyCategories: BankCategory[] = [...(course === "cardiology" ? cardiologyQuestionCategories : course === "nephrology" ? nephrologyQuestionCategories : course === "gastroenterology" ? gastroenterologyQuestionCategories : course === "endocrinology" ? endocrinologyQuestionCategories : course === "hematology-oncology" ? hematologyOncologyQuestionCategories : pulmonologyQuestionCategories)];
+  const physicalExamCategories: BankCategory[] = [...(course === "cardiology" ? cardiologyPhysicalExamCategories : course === "nephrology" ? nephrologyPhysicalExamCategories : course === "gastroenterology" ? gastroenterologyPhysicalExamSections : course === "endocrinology" ? endocrinologyPhysicalExamSections : course === "hematology-oncology" ? hematologyOncologyPhysicalExamSections : pulmonologyPhysicalExamCategories)];
+  const investigationCategories: BankCategory[] = [...(course === "cardiology" ? cardiologyInvestigationCategories : course === "nephrology" ? nephrologyInvestigationCategories : course === "gastroenterology" ? gastroenterologyInvestigationSections : course === "endocrinology" ? endocrinologyInvestigationSections : course === "hematology-oncology" ? hematologyOncologyInvestigationSections : pulmonologyInvestigationCategories)];
   const allInvestigationCategories = [
     ...investigationCategories,
     { id: "procedures", label: "پروسیجرها / اختصاصی" },

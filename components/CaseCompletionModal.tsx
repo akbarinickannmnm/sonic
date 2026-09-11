@@ -10,6 +10,9 @@ const COURSE_LABELS: Record<Case["course"], string> = {
   gastroenterology: "گوارش",
   neurology: "نورولوژی",
   "infectious-disease": "عفونی",
+  nephrology: "نفرولوژی",
+  endocrinology: "غدد",
+  "hematology-oncology": "هماتولوژی و انکولوژی",
 };
 
 type Props = {

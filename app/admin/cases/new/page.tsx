@@ -1335,6 +1335,15 @@ useEffect(() => {
                   Infectious Disease
                 </option>
 
+                <option value="nephrology">
+                  Nephrology
+                </option>
+
+                <option value="hematology-oncology">هماتولوژی و انکولوژی</option>
+                <option value="endocrinology">
+                  Endocrinology
+                </option>
+
               </select>
 
             </div>

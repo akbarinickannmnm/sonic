@@ -1,9 +1,13 @@
 import type { Case } from "../types/case";
 import { pulmonologyCases } from "./pulmonologyCases";
 import { cardiologyCases } from "./cardiologyCases";
+import { nephrologyCases } from "./nephrologyCases";
+import { gastroenterologyCases } from "./gastroenterologyCases";
+import { endocrinologyCases } from "./endocrinologyCases";
+import { hematologyOncologyCases } from "./hematologyOncologyCases";
 import { validateCase } from "../lib/caseValidator";
 
-const allDefaultCases = [...pulmonologyCases, ...cardiologyCases];
+const allDefaultCases = [...pulmonologyCases, ...cardiologyCases, ...nephrologyCases, ...gastroenterologyCases, ...endocrinologyCases, ...hematologyOncologyCases];
 
 const collectionErrors = allDefaultCases.flatMap((caseData) =>
   validateCase(caseData).map(

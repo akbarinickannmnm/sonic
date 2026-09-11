@@ -14,7 +14,10 @@ export type Course =
   | "pulmonology"
   | "gastroenterology"
   | "neurology"
-  | "infectious-disease";
+  | "infectious-disease"
+  | "nephrology"
+  | "endocrinology"
+  | "hematology-oncology";
 
 
 /* ─────────────────────────────────────────

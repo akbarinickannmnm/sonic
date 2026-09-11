@@ -83,6 +83,9 @@ export default function PracticeCoursePage({ course, cases }: Props) {
     gastroenterology: "گوارش",
     neurology: "نورولوژی",
     "infectious-disease": "عفونی",
+    nephrology: "نفرولوژی",
+    endocrinology: "غدد",
+    "hematology-oncology": "هماتولوژی و انکولوژی",
   };
   const courseLabel = courseLabels[course];
 
@@ -161,7 +164,7 @@ export default function PracticeCoursePage({ course, cases }: Props) {
           </Link>
           <div className="flex items-center gap-3">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-500">
-              <span className="text-lg">{course === "pulmonology" ? "◌" : "♡"}</span>
+              <span className="text-lg">{course === "pulmonology" ? "◌" : course === "nephrology" ? "◉" : "♡"}</span>
             </div>
             <h1 className="text-[22px] font-semibold tracking-[-0.025em]">{courseLabel}</h1>
           </div>

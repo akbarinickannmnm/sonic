@@ -79,6 +79,9 @@ function courseLabel(course: Case["course"]) {
   if (course === "cardiology") return "قلب و عروق";
   if (course === "gastroenterology") return "گوارش";
   if (course === "neurology") return "نورولوژی";
+  if (course === "nephrology") return "نفرولوژی";
+  if (course === "endocrinology") return "غدد";
+  if (course === "hematology-oncology") return "هماتولوژی و انکولوژی";
   return "عفونی";
 }
 
