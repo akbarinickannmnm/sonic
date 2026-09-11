@@ -8,7 +8,10 @@ export type DailyCaseSchedule = Record<string, string>;
 
 /**
  * The daily case is deterministic for the Tehran (Asia/Tehran) calendar date.
- * Admins can override individual future dates through the schedule stored in localStorage.
+ * The user-facing Case of the Day must use this deterministic fallback directly so
+ * localhost, Vercel, and all users resolve the same case from the same repository data.
+ * localStorage scheduling is retained for the admin UI only and is not authoritative
+ * for the public Case of the Day until a shared database is introduced.
  */
 export function getDefaultDailyCase(date = new Date()): Case {
   const eligible = cases

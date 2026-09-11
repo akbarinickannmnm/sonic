@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getDailyCase, readDailyCaseSchedule } from "../lib/dailyCase";
+import { getDailyCase } from "../lib/dailyCase";
 
 function Icon({
   name,
@@ -139,7 +139,7 @@ export default function Home() {
   useEffect(() => {
     const refresh = () => {
       const now = new Date();
-      setDailyCase(getDailyCase(now, readDailyCaseSchedule()));
+      setDailyCase(getDailyCase(now));
     };
 
     refresh();

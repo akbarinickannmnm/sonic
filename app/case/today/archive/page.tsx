@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useMemo } from "react";
 import { cases } from "../../../../data/cases";
-import { getDefaultDailyCase, getTehranDateKey, readDailyCaseSchedule } from "../../../../lib/dailyCase";
+import { getDefaultDailyCase, getTehranDateKey } from "../../../../lib/dailyCase";
 
 function formatFaDate(dateKey: string) {
   const date = new Date(`${dateKey}T12:00:00+03:30`);
@@ -20,7 +20,6 @@ export default function DailyCaseArchivePage() {
   const rows = useMemo(() => {
     const today = new Date();
     const todayKey = getTehranDateKey(today);
-    const schedule = readDailyCaseSchedule();
     const result: Array<{ dateKey: string; caseItem: (typeof cases)[number] }> = [];
 
     // Archive always has real previous dates, even when those dates were not
@@ -29,10 +28,7 @@ export default function DailyCaseArchivePage() {
       const date = new Date(today);
       date.setDate(date.getDate() - offset);
       const dateKey = getTehranDateKey(date);
-      const caseId = schedule[dateKey];
-      const caseItem = caseId
-        ? cases.find((item) => item.id === caseId)
-        : getDefaultDailyCase(date);
+      const caseItem = getDefaultDailyCase(date);
 
       if (caseItem) result.push({ dateKey, caseItem });
     }
