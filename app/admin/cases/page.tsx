@@ -12,6 +12,12 @@ import { validateGastroenterologyCases } from "../../../lib/gastroenterologyCase
 import { validateEndocrinologyCases } from "../../../lib/endocrinologyCaseValidator";
 import { validateHematologyOncologyCases } from "../../../lib/hematologyOncologyCaseValidator";
 import type { Case } from "../../../types/case";
+import { pulmonologyQuestionBank } from "../../../data/pulmonologyQuestionBank";
+import { cardiologyQuestionBank } from "../../../data/cardiologyQuestionBank";
+import { nephrologyQuestionBank } from "../../../data/nephrologyQuestionBank";
+import { gastroenterologyQuestionBank } from "../../../data/gastroenterologyQuestionBank";
+import { endocrinologyQuestionBank } from "../../../data/endocrinologyQuestionBank";
+import { hematologyOncologyQuestionBank } from "../../../data/hematologyOncologyQuestionBank";
 
 const DIFFICULTY_LABELS: Record<Case["difficulty"], string> = {
   easy: "آسان",
@@ -148,6 +154,29 @@ function categoryLabel(caseItem: Case, category?: string) {
     return NEPHRO_HISTORY_CATEGORY_LABELS[category] ?? NEPHRO_PE_CATEGORY_LABELS[category] ?? category;
   }
   return HISTORY_CATEGORY_LABELS[category] ?? PE_CATEGORY_LABELS[category] ?? category;
+}
+
+function questionBankForCourse(caseItem: Case) {
+  switch (caseItem.course) {
+    case "pulmonology": return pulmonologyQuestionBank;
+    case "cardiology": return cardiologyQuestionBank;
+    case "nephrology": return nephrologyQuestionBank;
+    case "gastroenterology": return gastroenterologyQuestionBank;
+    case "endocrinology": return endocrinologyQuestionBank;
+    case "hematology-oncology": return hematologyOncologyQuestionBank;
+    default: return [];
+  }
+}
+
+function historyQuestionText(caseItem: Case, item: { sourceId?: string; label?: string }, index: number) {
+  const bank = questionBankForCourse(caseItem) as Array<{ id: string; text: string; category?: string }>;
+  const question = item.sourceId ? bank.find((entry) => entry.id === item.sourceId) : undefined;
+  return question?.text ?? item.label ?? (caseItem.course === "pulmonology" ? persianQuestion(index) : "سؤال History");
+}
+
+function historyQuestionCategory(caseItem: Case, item: { sourceId?: string }) {
+  const bank = questionBankForCourse(caseItem) as Array<{ id: string; text: string; category?: string }>;
+  return item.sourceId ? bank.find((entry) => entry.id === item.sourceId)?.category : undefined;
 }
 
 function questionLabel(sourceId?: string, fallback?: string) {
@@ -525,8 +554,8 @@ function HistoryView({ caseItem }: { caseItem: Case }) {
             <div className="flex items-start gap-3">
               <span className="shrink-0 rounded-lg bg-blue-50 px-2 py-1 font-mono text-xs font-semibold text-blue-700">{questionLabel(item.sourceId)} </span>
               <div className="min-w-0 flex-1">
-                <p className="text-xs font-semibold text-slate-400">{item.sourceId ? `دسته: ${HISTORY_CATEGORY_LABELS[categoryFromQuestion(index)] ?? "عمومی"}` : ""}</p>
-                <p className="mt-1 font-semibold leading-6">{persianQuestion(index)}</p>
+                <p className="text-xs font-semibold text-slate-400">{item.sourceId ? `دسته: ${categoryLabel(caseItem, historyQuestionCategory(caseItem, item) ?? categoryFromQuestion(index))}` : ""}</p>
+                <p className="mt-1 font-semibold leading-6">{historyQuestionText(caseItem, item, index)}</p>
                 <div className="mt-3 rounded-xl bg-slate-50 p-3 text-sm leading-7 text-slate-700">«{item.content}»</div>
               </div>
             </div>
