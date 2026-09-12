@@ -176,7 +176,6 @@ export default function PracticeCoursePage({ course, cases }: Props) {
     const state = readCaseState(course, caseData.id);
     if (mode === "unattempted") return state === null;
     if (mode === "mistakes") return state?.completed === true && state.won === false;
-    if (mode === "continue") return state !== null && state.completed === false;
     return true;
   }), [cases, course, difficulty, mode, progressReady]);
 
