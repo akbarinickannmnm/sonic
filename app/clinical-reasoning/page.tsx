@@ -167,54 +167,7 @@ export default function ClinicalReasoningPage() {
 
   return (
     <main dir="rtl" className="min-h-screen bg-white text-slate-900">
-      {/* HEADER */}
-      <header className="border-b border-[#ece9e4] bg-[#fbfaf8]">
-        <div className="mx-auto flex h-[76px] max-w-[1180px] items-center justify-between px-5 lg:px-8">
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-3" dir="ltr">
-              <span className="text-[30px] font-medium tracking-[-0.045em] text-[#1b2434]">
-                SONIC
-              </span>
-              <span className="hidden border-l border-slate-300 pl-3 text-[11px] font-medium uppercase leading-[1.2] tracking-[0.14em] text-slate-500 sm:block">
-                Sharpen your
-                <br />
-                clinical reasoning.
-              </span>
-            </div>
-          </div>
 
-          <div className="flex items-center gap-4 text-slate-700" dir="ltr">
-            <button
-              type="button"
-              aria-label="جستجو"
-              className="rounded-full p-1.5"
-            >
-              <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <circle cx="10.8" cy="10.8" r="6.4" />
-                <path d="m16 16 4 4" />
-              </svg>
-            </button>
-
-            <span className="hidden h-7 w-px bg-slate-200 sm:block" />
-
-            <span className="hidden text-[15px] font-medium text-[#1b2434] sm:block">نیکان</span>
-
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#223247] text-[15px] font-medium text-white">
-              N
-            </div>
-
-            <button
-              type="button"
-              aria-label="منو"
-              className="rounded-full p-1.5"
-            >
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-                <path d="M4 7h16M4 12h16M4 17h16" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </header>
 
       {/* MAIN */}
       <section dir="rtl" className="mx-auto max-w-[1180px] px-6 pb-8 pt-6 sm:px-8">

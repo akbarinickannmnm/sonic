@@ -131,37 +131,7 @@ export default function DailyCasePlayer({
   if (locked) {
     return (
       <main dir="rtl" className="min-h-screen bg-[#fbfaf8] text-[#10213f]">
-        <header className="border-b border-slate-200 bg-white">
-          <div className="mx-auto flex h-[74px] max-w-[1120px] items-center justify-between px-5 sm:px-7">
-            <div className="flex items-center gap-4" dir="rtl">
-              <div className="flex items-center gap-3">
-                <span className="text-[30px] font-medium tracking-[-0.045em] text-[#102b4d]">SONIC</span>
-                <span className="h-8 w-px bg-slate-200" />
-                <span className="hidden text-[12px] leading-5 text-slate-500 sm:block">
-                  استدلال بالینی
-                  <br />
-                  در دستان شما.
-                </span>
-              </div>
-            </div>
 
-            <div className="flex items-center gap-4 text-[#102b4d]" dir="ltr">
-              <button type="button" aria-label="جستجو" className="rounded-full p-1.5">
-                <Icon name="search" />
-              </button>
-              <button type="button" aria-label="اعلان‌ها" className="rounded-full p-1.5">
-                <Icon name="bell" />
-              </button>
-              <span className="hidden h-8 w-px bg-slate-200 sm:block" />
-              <span className="hidden text-sm font-medium sm:block">Nikan</span>
-              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#173250] text-sm font-medium text-white">N</span>
-              <button type="button" aria-label="منو" className="rounded-full p-1.5 sm:hidden">
-                <Icon name="menu" />
-              </button>
-              <span className="text-xs">⌄</span>
-            </div>
-          </div>
-        </header>
 
         <div className="mx-auto w-full max-w-[1120px] px-5 pb-10 pt-7 sm:px-7 sm:pt-8">
           <div className="mx-auto mb-6 w-full max-w-[760px] flex items-start justify-end">

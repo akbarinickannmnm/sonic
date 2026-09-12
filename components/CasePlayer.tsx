@@ -589,23 +589,7 @@ export default function CasePlayer({
 
   return (
     <main dir="rtl" className="min-h-screen bg-[#f7f9fc] text-slate-900">
-      <header className="border-b border-slate-200 bg-white">
-        <div className="sonic-container mx-auto flex min-h-[68px] items-center justify-between gap-5">
-          <div className="min-w-0">
-            <div className="flex items-center gap-3">
-              <div className="text-[23px] font-extrabold tracking-tight text-slate-950">SONIC</div>
-              <span className="h-5 w-px bg-slate-200" />
-              <span className="truncate text-sm font-semibold text-slate-600">Clinical Cases</span>
-            </div>
-            <div className="mt-0.5 truncate text-xs text-slate-400">
-              {courseLabel(caseData.course)} · {caseData.title}
-            </div>
-          </div>
-          <div className="shrink-0 text-left text-sm font-medium text-slate-500">
-            {caseData.patient.sex === "male" ? "مرد" : "زن"} · {caseData.patient.age} ساله
-          </div>
-        </div>
-      </header>
+
 
       <div className="sonic-container mx-auto py-5 lg:py-7">
         <div className="rounded-2xl border border-slate-200 bg-white px-5 py-5 shadow-[0_8px_28px_rgba(15,23,42,0.035)] lg:px-7">

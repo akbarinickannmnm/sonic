@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getDailyCase } from "../lib/dailyCase";
+import { getDailyCase, readDailyCaseSchedule } from "../lib/dailyCase";
 
 function Icon({
   name,
@@ -139,7 +139,7 @@ export default function Home() {
   useEffect(() => {
     const refresh = () => {
       const now = new Date();
-      setDailyCase(getDailyCase(now));
+      setDailyCase(getDailyCase(now, readDailyCaseSchedule()));
     };
 
     refresh();
@@ -161,36 +161,7 @@ export default function Home() {
 
   return (
     <main dir="rtl" className="min-h-screen bg-[#fbfaf8] text-[#172033]">
-      <header className="border-b border-[#ece9e4] bg-[#fbfaf8]">
-        <div className="mx-auto flex h-[76px] max-w-[1180px] items-center justify-between px-5 lg:px-8">
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-3" dir="ltr">
-              <span className="text-[30px] font-medium tracking-[-0.045em] text-[#1b2434]">
-                SONIC
-              </span>
-              <span className="hidden border-l border-slate-300 pl-3 text-[11px] font-medium uppercase leading-[1.2] tracking-[0.14em] text-slate-500 sm:block">
-                Sharpen your
-                <br />
-                clinical reasoning.
-              </span>
-            </div>
-          </div>
 
-          <div className="flex items-center gap-5 text-slate-700" dir="ltr">
-            <button aria-label="جستجو" className="rounded-full p-1.5">
-              <Icon name="search" size={22} />
-            </button>
-            <span className="h-5 w-px bg-slate-200" />
-            <span className="hidden text-sm font-medium sm:block">نیکان</span>
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1f2c3b] text-sm font-medium text-white">
-              N
-            </span>
-            <button aria-label="منو" className="rounded-lg p-1.5">
-              <Icon name="menu" size={24} />
-            </button>
-          </div>
-        </div>
-      </header>
 
       <div className="mx-auto max-w-[1180px] px-5 pb-14 pt-9 lg:px-8 lg:pt-10">
         <div className="mb-8 text-right">
@@ -299,13 +270,13 @@ export default function Home() {
 
               <div className="mx-auto mt-7 grid w-full max-w-[430px] grid-cols-3 gap-3">
                 {[
-                  ["gastroenterology", "گوارش"],
-                  ["endocrine", "غدد"],
-                  ["cardiology", "قلب و عروق"],
-                  ["infectious-disease", "عفونی"],
-                  ["nephrology", "نفرولوژی"],
-                  ["pulmonology", "پنومولوژی"],
-                ].map(([course, label]) => (
+                  ["gastroenterology", "گوارش", "/course-icons-png/gastrointestinal.png"],
+                  ["endocrinology", "غدد", "/course-icons-png/endocrine.png"],
+                  ["cardiology", "قلب و عروق", "/course-icons-png/cardiovascular.png"],
+                  ["hematology-oncology", "خون و انکولوژی", "/course-icons-png/hematology.png"],
+                  ["nephrology", "نفرولوژی", "/course-icons-png/renal.png"],
+                  ["pulmonology", "ریه", "/course-icons-png/respiratory.png"],
+                ].map(([course, label, iconSrc]) => (
                   <Link
                     key={course}
                     href={`/practice/${course}`}
@@ -315,7 +286,12 @@ export default function Home() {
                     onKeyDown={(event) => event.stopPropagation()}
                     className="flex h-[78px] items-center justify-center rounded-xl border border-[#dfe7f0] bg-white/75 transition hover:-translate-y-0.5 hover:border-[#cdd9e7] hover:bg-white"
                   >
-                    <CourseIcon name={course} />
+                    <img
+                      src={iconSrc}
+                      alt=""
+                      aria-hidden="true"
+                      className="h-14 w-14 object-contain"
+                    />
                   </Link>
                 ))}
               </div>

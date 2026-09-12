@@ -3,18 +3,27 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import DailyCasePlayer from "./DailyCasePlayer";
-import { getDailyCase, getTehranDateKey } from "../../../lib/dailyCase";
+import { ensureDailyCaseSchedule, getDailyCase, getTehranDateKey, readDailyCaseSchedule } from "../../../lib/dailyCase";
 
 export default function DailyCasePage() {
+  const [schedule, setSchedule] = useState<Record<string, string> | null>(null);
   const [now, setNow] = useState<Date | null>(null);
 
   useEffect(() => {
     const current = new Date();
     setNow(current);
+    setSchedule(ensureDailyCaseSchedule(30, current));
 
+    const refresh = () => setSchedule(readDailyCaseSchedule());
+    window.addEventListener("storage", refresh);
+    window.addEventListener("sonic:daily-case-schedule-updated", refresh);
+    return () => {
+      window.removeEventListener("storage", refresh);
+      window.removeEventListener("sonic:daily-case-schedule-updated", refresh);
+    };
   }, []);
 
-  if (!now) {
+  if (!now || !schedule) {
     return (
       <main dir="rtl" className="min-h-screen bg-[#fbfaf8] px-5 py-10">
         <div className="mx-auto max-w-[820px]">
@@ -28,7 +37,7 @@ export default function DailyCasePage() {
     );
   }
 
-  const caseData = getDailyCase(now);
+  const caseData = getDailyCase(now, schedule);
   const dateKey = getTehranDateKey(now);
 
   return (

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import BackButton from "@/components/BackButton";
 
 type Specialty = {
   key: "pulmonology" | "cardiology" | "nephrology" | "neurology" | "gastroenterology" | "endocrinology" | "rheumatology" | "infectious-disease" | "psychiatry" | "pediatrics" | "hematology-oncology";
@@ -55,35 +54,10 @@ function Icon({ name, size = 24, strokeWidth = 1.8 }: { name: Specialty["icon"] 
 export default function PracticePage() {
   return (
     <main className="min-h-screen bg-[#fbfaf8] text-[#10213f]">
-      <header className="border-b border-slate-200/80 bg-white/90 backdrop-blur">
-        <div className="mx-auto flex h-[76px] max-w-[1180px] items-center justify-between px-5 lg:px-8">
-          <Link
-            href="/"
-            aria-label="خانه"
-            className="flex h-9 items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 text-sm font-medium text-slate-600 transition hover:border-slate-300 hover:text-slate-900"
-          >
-            <span className="text-[18px] leading-none">⌂</span>
-            <span>خانه</span>
-          </Link>
 
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-3">
-              <span className="text-[30px] font-medium tracking-[-0.045em]">SONIC</span>
-              <span className="hidden border-r border-slate-300 pr-3 text-[13px] font-medium uppercase leading-[1.15] tracking-[0.18em] text-slate-500 sm:block">استدلال<br />بالینی</span>
-            </div>
-            <div className="hidden h-9 w-px bg-slate-200 sm:block" />
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-700 text-sm font-medium text-white">N</div>
-            <span className="hidden text-sm font-medium sm:block">نیکان</span>
-          </div>
-        </div>
-      </header>
 
       <div className="mx-auto max-w-[1180px] px-5 pb-16 pt-10 lg:px-8 lg:pt-12">
         <div className="flex flex-col gap-5">
-          <div className="flex items-center justify-end">
-            <BackButton />
-          </div>
-
           <div className="text-right">
             <h1 className="text-[34px] font-semibold tracking-[-0.035em] sm:text-[40px]">یک تخصص را انتخاب کن</h1>
             <p className="mt-2 max-w-[650px] text-[15px] leading-6 text-slate-600">کیس‌های بالینی را بر اساس تخصص تمرین کن و روی حوزه‌ای که می‌خواهی بهتر شوی تمرکز کن.</p>
