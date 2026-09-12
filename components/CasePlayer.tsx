@@ -113,7 +113,7 @@ function selectNextPracticeCase(
   });
 
   // Start Over follows the randomized order created on the Practice page.
-  if ((mode === "continue" || mode === "start-over") && typeof window !== "undefined") {
+  if (mode === "start-over" && typeof window !== "undefined") {
     const savedSequence = getSavedPracticeSequence(course);
 
     if (savedSequence && savedSequence.ids.length > 0 && savedSequence.difficulty === difficulty) {

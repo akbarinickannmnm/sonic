@@ -1,16 +1,10 @@
 import type { Case } from "../types/case";
 import { cases } from "../data/cases";
 
-export const DAILY_CASE_SCHEDULE_KEY = "sonic:daily-case:schedule:v2";
+export const DAILY_CASE_SCHEDULE_KEY = "sonic:daily-case:schedule:v1";
 export const DAILY_CASE_TIME_ZONE = "Asia/Tehran";
 
 export type DailyCaseSchedule = Record<string, string>;
-
-// Canonical assignments that must be identical in local and production builds.
-// Once a day is published, its assignment is no longer dependent on browser-local storage.
-const PUBLISHED_DAILY_CASES: Record<string, string> = {
-  "2026-09-13": "cardio-020",
-};
 
 /**
  * The daily case is deterministic for the Tehran (Asia/Tehran) calendar date.
@@ -39,12 +33,6 @@ export function getDefaultDailyCase(date = new Date()): Case {
   }
 
   const dateKey = getTehranDateKey(date);
-  const publishedId = PUBLISHED_DAILY_CASES[dateKey];
-  if (publishedId) {
-    const publishedCase = cases.find((item) => item.id === publishedId);
-    if (publishedCase) return publishedCase;
-  }
-
   const [year, month, day] = dateKey.split("-").map(Number);
   const anchor = Date.UTC(2026, 0, 1);
   const dayIndex = Math.floor((Date.UTC(year, month - 1, day) - anchor) / 86400000);
@@ -62,11 +50,7 @@ export function ensureDailyCaseSchedule(days = 30, from = new Date()): DailyCase
     const date = new Date(base);
     date.setDate(base.getDate() + offset);
     const dateKey = getTehranDateKey(date);
-    const publishedId = PUBLISHED_DAILY_CASES[dateKey];
-    if (publishedId && cases.some((item) => item.id === publishedId)) {
-      // Published dates are canonical and cannot be changed by stale browser storage.
-      schedule[dateKey] = publishedId;
-    } else if (!schedule[dateKey]) {
+    if (!schedule[dateKey]) {
       schedule[dateKey] = getDefaultDailyCase(date).id;
     }
   }
@@ -77,12 +61,6 @@ export function ensureDailyCaseSchedule(days = 30, from = new Date()): DailyCase
 
 export function getDailyCase(date = new Date(), schedule: DailyCaseSchedule = {}): Case {
   const dateKey = getTehranDateKey(date);
-  const publishedId = PUBLISHED_DAILY_CASES[dateKey];
-  if (publishedId) {
-    const publishedCase = cases.find((item) => item.id === publishedId);
-    if (publishedCase) return publishedCase;
-  }
-
   const scheduledId = schedule[dateKey];
   if (scheduledId) {
     const scheduledCase = cases.find((item) => item.id === scheduledId);

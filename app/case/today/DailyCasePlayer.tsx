@@ -9,8 +9,8 @@ import type { Case } from "../../../types/case";
 const ATTEMPT_PREFIX = "sonic:daily-case:attempt:";
 const STATE_PREFIX = "sonic:daily-case:state:";
 
-function attemptKey(dateKey: string, caseId: string) {
-  return `${ATTEMPT_PREFIX}${dateKey}:${caseId}`;
+function attemptKey(dateKey: string) {
+  return `${ATTEMPT_PREFIX}${dateKey}`;
 }
 
 function stateKey(dateKey: string, caseId: string) {
@@ -99,7 +99,7 @@ export default function DailyCasePlayer({
   const [showCompletion, setShowCompletion] = useState(false);
 
   useEffect(() => {
-    setLocked(window.localStorage.getItem(attemptKey(dateKey, caseData.id)) === "completed");
+    setLocked(window.localStorage.getItem(attemptKey(dateKey)) === "completed");
     setHydrated(true);
   }, [dateKey]);
 
@@ -194,7 +194,7 @@ export default function DailyCasePlayer({
         caseData={caseData}
         storageKey={stateKey(dateKey, caseData.id)}
         onComplete={() => {
-          window.localStorage.setItem(attemptKey(dateKey, caseData.id), "completed");
+          window.localStorage.setItem(attemptKey(dateKey), "completed");
           setShowCompletion(true);
         }}
         completionHref="/"
