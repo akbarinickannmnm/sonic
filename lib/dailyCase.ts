@@ -8,7 +8,7 @@ export type DailyCaseSchedule = Record<string, string>;
 
 /**
  * The daily case is deterministic for the Tehran (Asia/Tehran) calendar date.
- * Admins can override individual future dates through the schedule stored in localStorage.
+ * The schedule is deterministic and independent of browser localStorage.
  */
 export function getDefaultDailyCase(date = new Date()): Case {
   const eligible = cases
@@ -40,56 +40,20 @@ export function getDefaultDailyCase(date = new Date()): Case {
   return pool[normalizedIndex];
 }
 
-export function ensureDailyCaseSchedule(days = 30, from = new Date()): DailyCaseSchedule {
-  const schedule = readDailyCaseSchedule();
-  const base = new Date(from);
-  base.setHours(12, 0, 0, 0);
-
-  // Pre-assign today + the next N days. Existing admin choices are never overwritten.
-  for (let offset = 0; offset <= days; offset += 1) {
-    const date = new Date(base);
-    date.setDate(base.getDate() + offset);
-    const dateKey = getTehranDateKey(date);
-    if (!schedule[dateKey]) {
-      schedule[dateKey] = getDefaultDailyCase(date).id;
-    }
-  }
-
-  writeDailyCaseSchedule(schedule);
-  return schedule;
+export function ensureDailyCaseSchedule(_days = 30, _from = new Date()): DailyCaseSchedule {
+  return {};
 }
 
-export function getDailyCase(date = new Date(), schedule: DailyCaseSchedule = {}): Case {
-  const dateKey = getTehranDateKey(date);
-  const scheduledId = schedule[dateKey];
-  if (scheduledId) {
-    const scheduledCase = cases.find((item) => item.id === scheduledId);
-    if (scheduledCase) return scheduledCase;
-  }
+export function getDailyCase(date = new Date(), _schedule: DailyCaseSchedule = {}): Case {
   return getDefaultDailyCase(date);
 }
 
 export function readDailyCaseSchedule(): DailyCaseSchedule {
-  if (typeof window === "undefined") return {};
-  try {
-    const raw = window.localStorage.getItem(DAILY_CASE_SCHEDULE_KEY);
-    if (!raw) return {};
-    const parsed = JSON.parse(raw) as unknown;
-    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return {};
-    return Object.fromEntries(
-      Object.entries(parsed).filter(([date, caseId]) =>
-        /^\d{4}-\d{2}-\d{2}$/.test(date) && typeof caseId === "string" && cases.some((item) => item.id === caseId),
-      ),
-    );
-  } catch {
-    return {};
-  }
+  return {};
 }
 
-export function writeDailyCaseSchedule(schedule: DailyCaseSchedule) {
-  if (typeof window === "undefined") return;
-  window.localStorage.setItem(DAILY_CASE_SCHEDULE_KEY, JSON.stringify(schedule));
-  window.dispatchEvent(new CustomEvent("sonic:daily-case-schedule-updated"));
+export function writeDailyCaseSchedule(_schedule: DailyCaseSchedule) {
+  // No-op: localStorage must not be used as the source of truth.
 }
 
 export function getTehranDateKey(date = new Date()) {
