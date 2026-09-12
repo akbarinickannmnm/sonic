@@ -19,8 +19,8 @@ export default async function NephrologyCasePage({ params, searchParams }: Props
 
   if (!caseData) notFound();
 
-  const mode = ["continue", "unattempted", "mistakes", "start-over"].includes(selection.mode ?? "")
-    ? (selection.mode as "continue" | "unattempted" | "mistakes" | "start-over")
+  const mode = ["unattempted", "mistakes", "start-over"].includes(selection.mode ?? "")
+    ? (selection.mode as "unattempted" | "mistakes" | "start-over")
     : "start-over";
   const difficulty = ["easy", "medium", "hard", "all"].includes(selection.difficulty ?? "")
     ? (selection.difficulty as "easy" | "medium" | "hard" | "all")

@@ -18,8 +18,8 @@ export default async function CardiologyCasePage({ params, searchParams }: Props
   const caseData = cardiologyCases.find((item) => item.id === caseId);
   if (!caseData) notFound();
 
-  const mode = ["continue", "unattempted", "mistakes", "start-over"].includes(selection.mode ?? "")
-    ? (selection.mode as "continue" | "unattempted" | "mistakes" | "start-over")
+  const mode = ["unattempted", "mistakes", "start-over"].includes(selection.mode ?? "")
+    ? (selection.mode as "unattempted" | "mistakes" | "start-over")
     : "start-over";
   const difficulty = ["easy", "medium", "hard", "all"].includes(selection.difficulty ?? "")
     ? (selection.difficulty as "easy" | "medium" | "hard" | "all")

@@ -1,5 +1,7 @@
 "use client";
 
+import { getSavedPracticeSequence } from "../lib/practiceSequence";
+
 import { useEffect, useMemo, useState } from "react";
 
 import type { Case, CaseHint, Investigation } from "../types/case";
@@ -65,7 +67,7 @@ type PracticeCaseOption = {
 };
 
 type PracticeSelection = {
-  mode: "continue" | "unattempted" | "mistakes" | "start-over";
+  mode: "unattempted" | "mistakes" | "start-over";
   difficulty: Case["difficulty"] | "all";
   tags: string[];
 };
@@ -103,27 +105,61 @@ function selectNextPracticeCase(
   const difficulty = selection?.difficulty ?? "all";
   const selectedTags = selection?.tags ?? [];
 
-  const candidates = options.filter((candidate) => {
+  const baseCandidates = options.filter((candidate) => {
     if (candidate.id === currentCaseId) return false;
     if (difficulty !== "all" && candidate.difficulty !== difficulty) return false;
     if (selectedTags.length > 0 && !selectedTags.some((tag) => candidate.tags.includes(tag))) return false;
+    return true;
+  });
+
+  // Start Over follows the randomized order created on the Practice page.
+  if ((mode === "continue" || mode === "start-over") && typeof window !== "undefined") {
+    const savedSequence = getSavedPracticeSequence(course);
+
+    if (savedSequence && savedSequence.ids.length > 0 && savedSequence.difficulty === difficulty) {
+      const ordered = savedSequence.ids
+        .map((id) => baseCandidates.find((candidate) => candidate.id === id))
+        .filter((candidate): candidate is PracticeCaseOption => Boolean(candidate));
+
+      try {
+        const next = ordered.find((candidate) => {
+          const raw = window.localStorage.getItem(`sonic:practice:${course}:${candidate.id}`);
+          const state = raw ? JSON.parse(raw) as { completed?: boolean; won?: boolean | null } : null;
+
+          // Never offer a completed case again within the randomized Start Over sequence.
+          return !state?.completed;
+        });
+
+        if (next) return next;
+      } catch {
+        // Fall through to the safe legacy selection below.
+      }
+    }
+  }
+
+  const candidates = baseCandidates.filter((candidate) => {
+    if (typeof window === "undefined") return true;
 
     if (mode === "start-over") return true;
-    if (typeof window === "undefined") return true;
 
     try {
       const raw = window.localStorage.getItem(`sonic:practice:${course}:${candidate.id}`);
       const state = raw ? JSON.parse(raw) as { completed?: boolean; won?: boolean | null } : null;
       if (mode === "unattempted") return state === null;
       if (mode === "mistakes") return state?.completed === true && state.won === false;
-      if (mode === "continue") return state !== null && state.completed === false;
-      return true;
+            return true;
     } catch {
       return false;
     }
   });
 
   if (candidates.length === 0) return undefined;
+
+  if (mode === "start-over") {
+    // This is only a fallback if no persisted sequence exists.
+    return candidates[Math.floor(Math.random() * candidates.length)];
+  }
+
   return candidates[Math.floor(Math.random() * candidates.length)];
 }
 

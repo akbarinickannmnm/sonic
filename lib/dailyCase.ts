@@ -1,14 +1,20 @@
 import type { Case } from "../types/case";
 import { cases } from "../data/cases";
 
-export const DAILY_CASE_SCHEDULE_KEY = "sonic:daily-case:schedule:v1";
+export const DAILY_CASE_SCHEDULE_KEY = "sonic:daily-case:schedule:v2";
 export const DAILY_CASE_TIME_ZONE = "Asia/Tehran";
 
 export type DailyCaseSchedule = Record<string, string>;
 
+// Canonical assignments that must be identical in local and production builds.
+// Once a day is published, its assignment is no longer dependent on browser-local storage.
+const PUBLISHED_DAILY_CASES: Record<string, string> = {
+  "2026-09-13": "cardio-020",
+};
+
 /**
  * The daily case is deterministic for the Tehran (Asia/Tehran) calendar date.
- * The schedule is deterministic and independent of browser localStorage.
+ * Admins can override individual future dates through the schedule stored in localStorage.
  */
 export function getDefaultDailyCase(date = new Date()): Case {
   const eligible = cases
@@ -33,6 +39,12 @@ export function getDefaultDailyCase(date = new Date()): Case {
   }
 
   const dateKey = getTehranDateKey(date);
+  const publishedId = PUBLISHED_DAILY_CASES[dateKey];
+  if (publishedId) {
+    const publishedCase = cases.find((item) => item.id === publishedId);
+    if (publishedCase) return publishedCase;
+  }
+
   const [year, month, day] = dateKey.split("-").map(Number);
   const anchor = Date.UTC(2026, 0, 1);
   const dayIndex = Math.floor((Date.UTC(year, month - 1, day) - anchor) / 86400000);
@@ -40,20 +52,66 @@ export function getDefaultDailyCase(date = new Date()): Case {
   return pool[normalizedIndex];
 }
 
-export function ensureDailyCaseSchedule(_days = 30, _from = new Date()): DailyCaseSchedule {
-  return {};
+export function ensureDailyCaseSchedule(days = 30, from = new Date()): DailyCaseSchedule {
+  const schedule = readDailyCaseSchedule();
+  const base = new Date(from);
+  base.setHours(12, 0, 0, 0);
+
+  // Pre-assign today + the next N days. Existing admin choices are never overwritten.
+  for (let offset = 0; offset <= days; offset += 1) {
+    const date = new Date(base);
+    date.setDate(base.getDate() + offset);
+    const dateKey = getTehranDateKey(date);
+    const publishedId = PUBLISHED_DAILY_CASES[dateKey];
+    if (publishedId && cases.some((item) => item.id === publishedId)) {
+      // Published dates are canonical and cannot be changed by stale browser storage.
+      schedule[dateKey] = publishedId;
+    } else if (!schedule[dateKey]) {
+      schedule[dateKey] = getDefaultDailyCase(date).id;
+    }
+  }
+
+  writeDailyCaseSchedule(schedule);
+  return schedule;
 }
 
-export function getDailyCase(date = new Date(), _schedule: DailyCaseSchedule = {}): Case {
+export function getDailyCase(date = new Date(), schedule: DailyCaseSchedule = {}): Case {
+  const dateKey = getTehranDateKey(date);
+  const publishedId = PUBLISHED_DAILY_CASES[dateKey];
+  if (publishedId) {
+    const publishedCase = cases.find((item) => item.id === publishedId);
+    if (publishedCase) return publishedCase;
+  }
+
+  const scheduledId = schedule[dateKey];
+  if (scheduledId) {
+    const scheduledCase = cases.find((item) => item.id === scheduledId);
+    if (scheduledCase) return scheduledCase;
+  }
   return getDefaultDailyCase(date);
 }
 
 export function readDailyCaseSchedule(): DailyCaseSchedule {
-  return {};
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = window.localStorage.getItem(DAILY_CASE_SCHEDULE_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw) as unknown;
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return {};
+    return Object.fromEntries(
+      Object.entries(parsed).filter(([date, caseId]) =>
+        /^\d{4}-\d{2}-\d{2}$/.test(date) && typeof caseId === "string" && cases.some((item) => item.id === caseId),
+      ),
+    );
+  } catch {
+    return {};
+  }
 }
 
-export function writeDailyCaseSchedule(_schedule: DailyCaseSchedule) {
-  // No-op: localStorage must not be used as the source of truth.
+export function writeDailyCaseSchedule(schedule: DailyCaseSchedule) {
+  if (typeof window === "undefined") return;
+  window.localStorage.setItem(DAILY_CASE_SCHEDULE_KEY, JSON.stringify(schedule));
+  window.dispatchEvent(new CustomEvent("sonic:daily-case-schedule-updated"));
 }
 
 export function getTehranDateKey(date = new Date()) {
