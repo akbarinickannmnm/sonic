@@ -146,13 +146,13 @@ function BodyIllustration() {
   return (
     <div className="relative mx-auto w-full max-w-[700px]">
       <Image
-  src="/clinical-reasoning.png"
-  alt="استدلال بالینی"
-  width={1536}
-  height={1024}
-  priority
-  className="mx-auto h-auto w-[54%] max-w-[380px] object-contain sm:w-[46%] sm:max-w-[420px]"
-/>
+        src="/clinical-reasoning.png"
+        alt="استدلال بالینی"
+        width={1536}
+        height={1024}
+        priority
+        className="mx-auto h-auto w-[54%] max-w-[380px] object-contain sm:w-[46%] sm:max-w-[420px]"
+      />
     </div>
   );
 }
@@ -317,7 +317,7 @@ export default function ClinicalReasoningPage() {
 
             <button
               type="button"
-              onClick={() => setShowHowItWorks(false)}
+              onClick={() => router.push("/clinical-reasoning/cases")}
               className="mt-7 w-full rounded-lg bg-violet-600 py-3 text-sm font-semibold text-white hover:bg-violet-700"
             >
               متوجه شدم

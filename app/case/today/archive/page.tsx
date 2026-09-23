@@ -69,7 +69,7 @@ export default function DailyCaseArchivePage() {
                   <p className="mt-1 font-semibold text-[#173250]">{caseItem.title}</p>
                 </div>
                 <Link
-                  href={`/practice/${caseItem.course}/${caseItem.id}`}
+                  href={`/case/today/archive/${dateKey}`}
                   className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
                 >
                   مشاهده کیس

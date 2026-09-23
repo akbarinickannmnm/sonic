@@ -10,7 +10,7 @@ export type Disease = Diagnosis & {
   priority: DiseasePriority;
 };
 
-export const diseases: Disease[] = [
+export const searchBank: Disease[] = [
   // Priority 1 — Must have
   {
     id: "community-acquired-pneumonia",
@@ -1876,4 +1876,36 @@ export const diseases: Disease[] = [
     synonyms: [],
     priority: 3,
   },
+  // Clinical Reasoning / cross-course diagnoses not previously present in the bank
+  { id: "subarachnoid-hemorrhage", name: "Subarachnoid Hemorrhage", synonyms: ["SAH"], priority: 1 },
+  { id: "arrhythmic-syncope", name: "Arrhythmic Syncope", synonyms: ["Cardiac Syncope"], priority: 1 },
+  { id: "heart-failure", name: "Heart Failure", synonyms: ["CHF"], priority: 1 },
+  { id: "benign-paroxysmal-positional-vertigo", name: "Benign Paroxysmal Positional Vertigo (BPPV)", synonyms: ["BPPV"], priority: 1 },
+  { id: "occult-malignancy", name: "Occult Malignancy", synonyms: ["Occult Cancer"], priority: 2 },
+  { id: "nephrotic-syndrome", name: "Nephrotic Syndrome", synonyms: [], priority: 1 },
+  { id: "deep-vein-thrombosis", name: "Deep Vein Thrombosis (DVT)", synonyms: ["DVT"], priority: 1 },
+  { id: "vertebral-malignancy", name: "Vertebral Malignancy", synonyms: [], priority: 2 },
+  { id: "renal-stone", name: "Renal Stone", synonyms: ["Kidney Stone", "Nephrolithiasis"], priority: 1 },
+  { id: "obstructive-jaundice", name: "Obstructive Jaundice", synonyms: [], priority: 1 },
+  { id: "cholestatic-liver-disease", name: "Cholestatic Liver Disease", synonyms: ["Cholestasis"], priority: 2 },
+  { id: "rheumatoid-arthritis", name: "Rheumatoid Arthritis", synonyms: ["RA"], priority: 1 },
+  { id: "nephritic-syndrome", name: "Nephritic Syndrome", synonyms: [], priority: 1 },
+  { id: "acute-kidney-injury", name: "Acute Kidney Injury (AKI)", synonyms: ["AKI"], priority: 1 },
+  { id: "infectious-delirium", name: "Delirium Secondary to Infection", synonyms: ["Infectious Delirium"], priority: 2 },
+  { id: "frontal-lobe-tumor", name: "Frontal Lobe Tumor", synonyms: [], priority: 2 },
+  { id: "ischemic-stroke", name: "Ischemic Stroke", synonyms: ["Cerebral Ischemic Stroke", "CVA"], priority: 1 },
+  { id: "cerebellar-disease", name: "Cerebellar Disease", synonyms: [], priority: 2 },
+  { id: "optic-neuritis", name: "Optic Neuritis", synonyms: [], priority: 2 },
+  { id: "hyperthyroidism", name: "Hyperthyroidism", synonyms: ["Thyrotoxicosis"], priority: 1 },
+  { id: "lymphoma", name: "Lymphoma", synonyms: [], priority: 1 },
+  { id: "orthostatic-syncope", name: "Orthostatic Presyncope / Syncope", synonyms: ["Orthostatic Syncope", "Orthostatic Hypotension"], priority: 1 },
+  { id: "hiv-infection", name: "HIV Infection", synonyms: ["HIV"], priority: 1 },
+  { id: "rhabdomyolysis", name: "Rhabdomyolysis", synonyms: [], priority: 1 },
+  { id: "giant-cell-arteritis", name: "Giant Cell Arteritis", synonyms: ["Temporal Arteritis"], priority: 2 },
+  { id: "acute-leukemia", name: "Acute Leukemia", synonyms: [], priority: 1 },
+
 ];
+
+
+// Backward-compatible alias: all existing Practice imports read from the same Search Bank.
+export const diseases = searchBank;

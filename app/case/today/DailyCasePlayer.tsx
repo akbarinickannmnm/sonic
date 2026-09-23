@@ -87,9 +87,11 @@ function formatTehranPersianDate(dateKey: string) {
 export default function DailyCasePlayer({
   caseData,
   dateKey,
+  archiveMode = false,
 }: {
   caseData: Case;
   dateKey: string;
+  archiveMode?: boolean;
 }) {
   // IMPORTANT: do not read localStorage during the render that hydrates from SSR.
   // The server cannot see localStorage, so a direct window check in useState causes
@@ -151,11 +153,11 @@ export default function DailyCasePlayer({
             <p className="mt-5 text-center text-[12px] font-medium text-slate-500">کیس روز</p>
 
             <h1 className="mt-2 text-center text-[27px] font-semibold tracking-[-0.035em] text-[#102b4d] sm:text-[32px]">
-              کیس امروز را قبلاً حل کرده‌اید.
+              کیس {archiveMode ? "روز" : "امروز"} را قبلاً حل کرده‌اید.
             </h1>
 
             <p className="mx-auto mt-3 max-w-[560px] text-center text-[14px] leading-6 text-slate-500">
-              امروز از تلاش خود استفاده کرده‌اید. فردا دوباره برای یک چالش بالینی جدید
+              از تلاش خود استفاده کرده‌اید. {archiveMode ? "می‌توانید از آرشیو کیس‌های روز دوباره مرور کنید." : "فردا دوباره برای یک چالش بالینی جدید"}
               <br />
               بازگردید.
             </p>
@@ -198,10 +200,11 @@ export default function DailyCasePlayer({
           setShowCompletion(true);
         }}
         completionHref="/"
+        showCompletionModal={false}
       />
 
       <ExperienceCompletionModal
-        mode="daily"
+        mode={archiveMode ? "daily-archive" : "daily"}
         open={showCompletion}
         diagnosisName={caseData.diagnosis.name}
         diagnosisId={caseData.diagnosis.id}

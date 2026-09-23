@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-type CompletionMode = "clinical-reasoning" | "daily";
+type CompletionMode = "clinical-reasoning" | "daily" | "daily-archive";
 
 type Props = {
   mode: CompletionMode;
@@ -50,8 +50,20 @@ function calculateDailyStreak(dateKey: string) {
 
 function CheckIcon() {
   return (
-    <div className="flex h-[56px] w-[56px] items-center justify-center rounded-full border border-emerald-200 bg-emerald-50 text-[30px] font-medium text-emerald-600">
-      ✓
+    <div className="flex h-[68px] w-[68px] shrink-0 items-center justify-center rounded-full border border-emerald-300 bg-emerald-50 text-emerald-600">
+      <svg
+        width="35"
+        height="35"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.1"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M5 12.5 10 17 19 7" />
+      </svg>
     </div>
   );
 }
@@ -67,11 +79,6 @@ function FlameIcon() {
   );
 }
 
-/**
- * Completion shell for experiences with their own post-case UX.
- * Practice keeps using CaseCompletionModal.
- * Daily Case gets the dedicated streak-based completion treatment.
- */
 export default function ExperienceCompletionModal({
   mode,
   open,
@@ -81,20 +88,21 @@ export default function ExperienceCompletionModal({
   dateKey = "",
 }: Props) {
   const [streak, setStreak] = useState(0);
+  const isDaily = mode === "daily" || mode === "daily-archive";
+  const showStreak = mode === "daily";
 
   useEffect(() => {
-    if (!open || mode !== "daily" || !dateKey) return;
+    if (!open || !showStreak || !dateKey) return;
     setStreak(calculateDailyStreak(dateKey));
-  }, [open, mode, dateKey]);
+  }, [open, showStreak, dateKey]);
 
   if (!open) return null;
 
   const safeStreak = Math.max(streak, 1);
-  const isDaily = mode === "daily";
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/30 px-4 py-6 backdrop-blur-[2px]"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/45 p-4"
       dir="rtl"
       role="presentation"
       onMouseDown={(event) => {
@@ -105,88 +113,87 @@ export default function ExperienceCompletionModal({
         role="dialog"
         aria-modal="true"
         aria-label="اتمام کیس"
-        className="h-[390px] w-full max-w-[520px] overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-[0_24px_80px_rgba(15,23,42,0.16)]"
+        className="flex w-full max-w-[540px] max-h-[calc(100vh-40px)] flex-col overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-none"
       >
-        <div className="flex h-full flex-col">
-          <div className="flex-1 px-[43px] pt-[28px]">
-            <div className="flex items-start justify-between gap-6">
+        <div className="min-h-0 flex-1 overflow-y-auto px-6 pb-6 pt-7 sm:px-8 sm:pt-8">
+          <div className="relative text-center">
+            <div className="absolute right-0 top-0">
               <CheckIcon />
-
-              <div className="text-right">
-                <p className="text-[12px] font-semibold tracking-[0.15em] text-[#8aa0bd]">
-                  CASE COMPLETE
-                </p>
-                <h2 className="mt-[10px] text-[31px] font-bold leading-[1.2] tracking-[-0.03em] text-[#0b1228]">
-                  درست گفتی
-                </h2>
-                <p className="mt-[11px] text-[15px] font-medium leading-7 text-[#69809f]">
-                  آفرین؛ تشخیص کیس امروز را درست انتخاب کردی.
-                </p>
-              </div>
             </div>
 
-            <div className="mt-[27px] rounded-[18px] border border-[#d8e3f0] bg-[#f8fbff] px-6 py-[18px]">
-              <p className="text-right text-[13px] font-semibold text-[#8ba1bc]">تشخیص درست</p>
-              <p className="mt-[7px] text-right text-[20px] font-bold leading-7 text-[#0c1227]" dir="ltr">
-                {diagnosisName}
+            <div className="px-14 sm:px-16">
+              <div className="text-[14px] font-semibold tracking-[0.08em] text-[#8BA3C3]">
+                CASE COMPLETE
+              </div>
+              <h2 className="mt-3 text-[38px] font-bold leading-tight tracking-[-0.035em] text-[#10172A]">
+                درست گفتی
+              </h2>
+              <p className="mt-4 text-[18px] leading-8 text-[#7F9ABD]">
+                آفرین؛ این کیس روز را درست حل کردی.
               </p>
             </div>
+          </div>
 
-            {isDaily && (
-              <div className="mt-[22px] rounded-[18px] border border-[#f2e4d9] bg-[#fffaf6] px-[25px] py-[15px]">
-                <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4">
-                  <div className="flex justify-start">
-                    <Link
-                      href="/streak"
-                      className="inline-flex h-[48px] items-center gap-3 rounded-full bg-[#eef4ff] px-[20px] text-[14px] font-semibold text-[#2d6fd6] transition hover:bg-[#e8f0ff]"
-                    >
-                      <span>مشاهده رکوردهای من</span>
-                      <span aria-hidden="true" className="text-[22px] leading-none">←</span>
-                    </Link>
+          <div className="mt-6 rounded-[20px] border border-[#D8E4F2] bg-[#F7FAFE] px-6 py-5 text-center">
+            <div className="text-[15px] font-semibold text-[#91A8C5]">تشخیص درست</div>
+            <div
+              className="mt-2 text-[21px] font-bold leading-8 text-[#111827]"
+              dir="ltr"
+            >
+              {diagnosisName}
+            </div>
+          </div>
+
+          {showStreak && (
+            <div className="mt-6 rounded-[22px] border border-[#F2E4D9] bg-[#FFFAF6] px-6 py-5">
+              <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4">
+                <div className="flex justify-start">
+                  <Link
+                    href="/streak"
+                    className="inline-flex min-h-[48px] items-center gap-3 rounded-full bg-[#EEF4FF] px-5 text-[14px] font-semibold text-[#2D6FD6] transition hover:bg-[#E7F0FF]"
+                  >
+                    <span>مشاهده رکوردهای من</span>
+                    <span aria-hidden="true" className="text-[22px] leading-none">←</span>
+                  </Link>
+                </div>
+
+                <span aria-hidden="true" className="h-[38px] w-px bg-[#D8D1CA]" />
+
+                <div className="flex items-center justify-end gap-4">
+                  <div className="text-right">
+                    <p className="text-[14px] font-semibold text-[#7E94AF]">رکورد پیوسته</p>
+                    <p className="mt-1 text-[32px] font-bold leading-none text-[#10182E]">
+                      {safeStreak} روز
+                    </p>
                   </div>
-
-                  <span aria-hidden="true" className="h-[38px] w-px bg-[#d8d1ca]" />
-
-                  <div className="flex items-center justify-end gap-4">
-                    <div className="text-right">
-                      <p className="text-[14px] font-semibold text-[#7e94af]">رکورد پیوسته</p>
-                      <p className="mt-[2px] text-[32px] font-bold leading-none text-[#10182e]">
-                        {safeStreak} روز
-                      </p>
-                    </div>
-                    <div className="flex h-[56px] w-[56px] items-center justify-center rounded-full bg-[#ffecdf] text-[#f26a12]">
-                      <FlameIcon />
-                    </div>
+                  <div className="flex h-[56px] w-[56px] items-center justify-center rounded-full bg-[#FFECDD] text-[#F26A12]">
+                    <FlameIcon />
                   </div>
                 </div>
               </div>
-            )}
-
-            {!isDaily && <div className="mt-[22px] min-h-[84px]" />}
-          </div>
-
-          {isDaily && (
-            <div className="flex h-[82px] items-center gap-4 border-t border-slate-200 px-[43px]" dir="ltr">
-              <Link
-                href={diagnosisId ? `/learn/${encodeURIComponent(diagnosisId)}` : "#"}
-                className="flex h-[54px] flex-1 items-center justify-center rounded-[17px] bg-[#10182e] px-4 text-center text-[14px] font-semibold text-white transition hover:bg-[#0d1426]"
-                dir="rtl"
-              >
-                <span>درباره {diagnosisName || "تشخیص"} بیشتر بدان</span>
-                <span aria-hidden="true" className="mr-2 text-[19px] leading-none">←</span>
-              </Link>
-
-              <Link
-                href="/case/today/archive"
-                className="flex h-[54px] w-[174px] items-center justify-center gap-2 rounded-[17px] border border-[#d6e0ec] bg-white px-4 text-center text-[14px] font-semibold text-[#4e6380] transition hover:bg-[#f8fafc]"
-                dir="rtl"
-              >
-                <span>آرشیو کیس‌ها</span>
-                <span aria-hidden="true" className="text-[19px] leading-none">→</span>
-              </Link>
             </div>
           )}
         </div>
+
+        {isDaily && (
+          <div className="grid shrink-0 grid-cols-2 gap-3 border-t border-slate-200 bg-white px-6 py-4 sm:px-8">
+            <Link
+              href="/case/today/archive"
+              className="relative flex min-h-[58px] items-center justify-center rounded-[16px] border border-[#D8E4F2] bg-white px-12 text-center text-[14px] font-bold text-[#172033] transition hover:bg-[#F8FAFD]"
+            >
+              <span>آرشیو کیس‌ها</span>
+              <span aria-hidden="true" className="absolute right-5 text-[20px] leading-none">→</span>
+            </Link>
+
+            <Link
+              href={diagnosisId ? `/learn/${encodeURIComponent(diagnosisId)}` : "#"}
+              className="relative flex min-h-[58px] items-center justify-center rounded-[16px] bg-[#080D21] px-12 text-center text-[14px] font-bold !text-white transition hover:bg-[#111936]"
+            >
+              <span className="!text-white">درباره تشخیص بیشتر بدان</span>
+              <span aria-hidden="true" className="absolute right-5 text-[20px] leading-none !text-white">→</span>
+            </Link>
+          </div>
+        )}
       </section>
     </div>
   );

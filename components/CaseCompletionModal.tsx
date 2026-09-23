@@ -1,19 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
 import type { Case } from "../types/case";
-import { getMasterCaseBank } from "../data/courseBanks";
-
-const COURSE_LABELS: Record<Case["course"], string> = {
-  pulmonology: "ریه",
-  cardiology: "قلب و عروق",
-  gastroenterology: "گوارش",
-  neurology: "نورولوژی",
-  "infectious-disease": "عفونی",
-  nephrology: "نفرولوژی",
-  endocrinology: "غدد",
-  "hematology-oncology": "هماتولوژی و انکولوژی",
-};
 
 type Props = {
   caseData: Case;
@@ -23,92 +10,116 @@ type Props = {
   onReview: () => void;
 };
 
-function readCompletedCount(course: Case["course"], cases: Case[]) {
-  if (typeof window === "undefined") return 0;
-  return cases.filter((item) => {
-    try {
-      const raw = window.localStorage.getItem(`sonic:practice:${course}:${item.id}`);
-      return raw ? JSON.parse(raw)?.completed === true : false;
-    } catch {
-      return false;
-    }
-  }).length;
+function CheckIcon({ won }: { won: boolean }) {
+  return (
+    <div
+      className={`flex h-[68px] w-[68px] shrink-0 items-center justify-center rounded-full border ${
+        won
+          ? "border-emerald-300 bg-emerald-50 text-emerald-600"
+          : "border-amber-300 bg-amber-50 text-amber-600"
+      }`}
+    >
+      {won ? (
+        <svg
+          width="35"
+          height="35"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.1"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M5 12.5 10 17 19 7" />
+        </svg>
+      ) : (
+        <span className="text-[30px] font-bold leading-none">!</span>
+      )}
+    </div>
+  );
 }
 
-export default function CaseCompletionModal({ caseData, won, guessCount, onContinue, onReview }: Props) {
-  const courseCases = useMemo(
-    () => getMasterCaseBank([caseData]).filter((item) => item.course === caseData.course),
-    [caseData],
-  );
-
-  const completedCount = Math.max(
-    readCompletedCount(caseData.course, courseCases),
-    1,
-  );
-  const progress = Math.round((completedCount / Math.max(courseCases.length, 1)) * 100);
-
+export default function CaseCompletionModal({
+  caseData,
+  won,
+  guessCount,
+  onContinue,
+  onReview,
+}: Props) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/30 px-4 py-6 backdrop-blur-[2px]" dir="rtl">
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/45 p-4 backdrop-blur-[3px]"
+      dir="rtl"
+      role="presentation"
+    >
       <section
         role="dialog"
         aria-modal="true"
         aria-labelledby="case-complete-title"
-        className="w-full max-w-[520px] overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-[0_24px_80px_rgba(15,23,42,0.16)]"
+        className="flex w-full max-w-[620px] max-h-[calc(100vh-32px)] flex-col overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-[0_28px_90px_rgba(15,23,42,0.22)]"
       >
-        <div className="px-6 pb-5 pt-7 sm:px-8 sm:pt-8">
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <div className="text-[11px] font-bold tracking-[0.16em] text-slate-400">CASE COMPLETE</div>
-              <h1 id="case-complete-title" className="mt-2 text-2xl font-extrabold tracking-tight text-slate-950">
-                {won ? "تشخیص درست بود" : "کیس تمام شد"}
-              </h1>
-              <p className="mt-2 text-sm leading-7 text-slate-500">
-                {won ? "آفرین؛ تشخیص نهایی را درست انتخاب کردی." : "حدس‌ها تمام شد. حالا می‌توانی پاسخ کامل کیس را مرور کنی."}
+        <div className="min-h-0 flex-1 overflow-y-auto px-7 pb-7 pt-8 sm:px-10 sm:pt-9">
+          <div className="relative text-center">
+            <div className="absolute right-0 top-0">
+              <CheckIcon won={won} />
+            </div>
+
+            <div className="px-16 sm:px-20">
+              <div className="text-[14px] font-semibold tracking-[0.08em] text-[#8BA3C3]">
+                CASE COMPLETE
+              </div>
+
+              <h2
+                id="case-complete-title"
+                className="mt-3 text-[38px] font-bold leading-tight tracking-[-0.035em] text-[#10172A]"
+              >
+                {won ? "درست گفتی" : "کیس تمام شد"}
+              </h2>
+
+              <p className="mt-4 text-[18px] leading-8 text-[#7F9ABD]">
+                {won
+                  ? "آفرین؛ تشخیص این کیس را درست انتخاب کردی."
+                  : "حدس‌ها تمام شد؛ حالا می‌توانی پاسخ کامل کیس را مرور کنی."}
               </p>
             </div>
-            <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full border text-lg font-black ${won ? "border-emerald-200 bg-emerald-50 text-emerald-700" : "border-amber-200 bg-amber-50 text-amber-700"}`}>
-              {won ? "✓" : "!"}
-            </div>
           </div>
 
-          <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4">
-            <div className="text-xs font-semibold text-slate-400">تشخیص درست</div>
-            <div className="mt-1 text-base font-extrabold text-slate-950">{caseData.diagnosis.name}</div>
-            <div className="mt-3 flex items-center justify-between text-xs text-slate-500">
+          <div className="mt-8 rounded-[22px] border border-[#D8E4F2] bg-[#F7FAFE] px-7 py-6 text-center">
+            <div className="text-[15px] font-semibold text-[#91A8C5]">
+              تشخیص درست
+            </div>
+            <div
+              className="mt-3 text-[22px] font-bold leading-8 text-[#111827]"
+              dir="ltr"
+            >
+              {caseData.diagnosis.name}
+            </div>
+
+            <div className="mt-5 flex items-center justify-center gap-2 text-[15px] text-[#91A8C5]">
               <span>تعداد حدس‌ها</span>
-              <span className="font-bold text-slate-700">{guessCount} / 4</span>
-            </div>
-          </div>
-
-          <div className="mt-5">
-            <div className="flex items-end justify-between gap-4">
-              <div>
-                <div className="text-xs font-semibold text-slate-400">پیشرفت دوره</div>
-                <div className="mt-1 text-sm font-bold text-slate-800">{COURSE_LABELS[caseData.course]}</div>
-              </div>
-              <div className="text-left text-sm font-extrabold text-slate-800">{completedCount} / {courseCases.length}</div>
-            </div>
-            <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-100">
-              <div className="h-full rounded-full bg-slate-800 transition-all" style={{ width: `${progress}%` }} />
+              <span className="font-bold text-[#172033]">{guessCount} / 4</span>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col-reverse gap-2 border-t border-slate-100 bg-white px-6 py-5 sm:flex-row sm:justify-between sm:px-8">
-          <button
-            type="button"
-            onClick={onContinue}
-            className="inline-flex min-h-11 items-center justify-center rounded-xl border border-slate-200 px-5 text-sm font-bold text-slate-600 transition hover:border-slate-300 hover:bg-slate-50"
-          >
-            ادامه به کیس بعدی
-          </button>
+        <div className="grid shrink-0 grid-cols-2 gap-4 border-t border-slate-200 bg-white px-7 py-5 sm:px-10">
           <button
             type="button"
             onClick={onReview}
-            className="inline-flex min-h-11 items-center justify-center rounded-xl bg-slate-900 px-5 text-sm font-bold text-white transition hover:bg-slate-800"
+            className="flex min-h-[62px] items-center justify-center gap-2 rounded-[18px] bg-[#080D21] px-5 text-center text-[15px] font-bold text-white transition hover:bg-[#111936]"
           >
-            درباره تشخیص بیشتر بدان
-            <span aria-hidden="true" className="mr-2">←</span>
+            <span>درباره تشخیص بیشتر بدان</span>
+            <span aria-hidden="true" className="text-[20px] leading-none">←</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={onContinue}
+            className="flex min-h-[62px] items-center justify-center gap-2 rounded-[18px] border border-[#D8E4F2] bg-white px-5 text-center text-[15px] font-bold text-[#172033] transition hover:bg-[#F8FAFD]"
+          >
+            <span>ادامه به کیس بعدی</span>
+            <span aria-hidden="true" className="text-[20px] leading-none">→</span>
           </button>
         </div>
       </section>

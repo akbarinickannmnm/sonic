@@ -114,31 +114,6 @@ export default function PracticeCoursePage({ course, cases }: Props) {
   const [mode, setMode] = useState<PracticeMode>("unattempted");
   const [difficulty, setDifficulty] = useState<DifficultyFilter>("all");
   const [progressReady, setProgressReady] = useState(false);
-
-  useEffect(() => {
-    const refresh = () => setProgressReady(true);
-    refresh();
-
-    const handleStorage = (event: StorageEvent) => {
-      if (event.key === null || event.key?.startsWith(`sonic:practice:${course}:`)) {
-        setProgressReady(false);
-        window.requestAnimationFrame(() => setProgressReady(true));
-      }
-    };
-
-    const handleProgressUpdated = () => {
-      setProgressReady(false);
-      window.requestAnimationFrame(() => setProgressReady(true));
-    };
-
-    window.addEventListener("storage", handleStorage);
-    window.addEventListener("sonic:practice-progress-updated", handleProgressUpdated);
-    return () => {
-      window.removeEventListener("storage", handleStorage);
-      window.removeEventListener("sonic:practice-progress-updated", handleProgressUpdated);
-    };
-  }, [course]);
-
   const { modeCounts, completedCount, progressPercent } = useMemo(() => {
     const counts: Record<PracticeMode, number> = {
       unattempted: cases.length,
@@ -167,6 +142,7 @@ export default function PracticeCoursePage({ course, cases }: Props) {
       progressPercent: Math.round((completed / Math.max(cases.length, 1)) * 100),
     };
   }, [cases, course, progressReady]);
+
 
   const filteredCases = useMemo(() => cases.filter((caseData) => {
     if (difficulty !== "all" && caseData.difficulty !== difficulty) return false;
