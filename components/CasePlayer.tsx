@@ -281,23 +281,45 @@ export default function CasePlayer({
   }, [courseBank.history, historyItems, selectedCategory]);
 
   const conversation = useMemo<ConversationItem[]>(() => {
-    return [
-      ...historySequence.map((id) => {
-        const item = historyItems.find((entry) => entry.id === id);
-        if (!item) return null;
-        return { key: `history-${id}`, stage: "شرح حال", category: item.category, question: item.text, answer: item.answer };
-      }),
-      ...physicalSequence.map((id) => {
-        const item = physicalItems.find((entry) => entry.id === id);
-        if (!item) return null;
-        return { key: `physical-${id}`, stage: "معاینه", category: item.category, question: item.text, answer: item.answer };
-      }),
-      ...investigationSequence.map((id) => {
-        const item = investigationItems.find((entry) => entry.id === id);
-        if (!item) return null;
-        return { key: `investigation-${id}`, stage: "بررسی", category: item.category, question: item.text, answer: item.answer };
-      }),
-    ].filter((item): item is ConversationItem => Boolean(item));
+    const items: ConversationItem[] = [];
+
+    for (const id of historySequence) {
+      const item = historyItems.find((entry) => entry.id === id);
+      if (!item) continue;
+      items.push({
+        key: `history-${id}`,
+        stage: "شرح حال",
+        category: item.category,
+        question: item.text,
+        answer: item.answer,
+      });
+    }
+
+    for (const id of physicalSequence) {
+      const item = physicalItems.find((entry) => entry.id === id);
+      if (!item) continue;
+      items.push({
+        key: `physical-${id}`,
+        stage: "معاینه",
+        category: item.category,
+        question: item.text,
+        answer: item.answer,
+      });
+    }
+
+    for (const id of investigationSequence) {
+      const item = investigationItems.find((entry) => entry.id === id);
+      if (!item) continue;
+      items.push({
+        key: `investigation-${id}`,
+        stage: "بررسی",
+        category: item.category,
+        question: item.text,
+        answer: item.answer,
+      });
+    }
+
+    return items;
   }, [historyItems, historySequence, investigationItems, physicalItems, physicalSequence, investigationSequence]);
 
   useEffect(() => {
