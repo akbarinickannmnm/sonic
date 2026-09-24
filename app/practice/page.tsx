@@ -31,16 +31,11 @@ const specialties: Specialty[] = [
 const orderedSpecialties = [...specialties].sort((a, b) => Number(b.available) - Number(a.available));
 
 const courseIconSources: Record<Specialty["icon"], string> = {
-  gastroenterology: "/course-icons-png/gastrointestinal.png",
-  endocrinology: "/course-icons-png/endocrine.png",
-  cardiology: "/course-icons-png/cardiovascular.png",
   "hematology-oncology": "/course-icons-png/hematology.png",
-  nephrology: "/course-icons-png/renal.png",
-  pulmonology: "/course-icons-png/respiratory.png",
-  brain: "/course-icons/neurology.svg",
-  heart: "/icons/courses/heart.png",
   kidney: "/course-icons-png/renal.png",
   lungs: "/course-icons-png/respiratory.png",
+  brain: "/course-icons/neurology.svg",
+  heart: "/icons/courses/heart.png",
   stomach: "/course-icons-png/gastrointestinal.png",
   thyroid: "/course-icons-png/endocrine.png",
   rheumatology: "/course-icons/rheumatology.svg",
