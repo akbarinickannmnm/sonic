@@ -30,13 +30,39 @@ const specialties: Specialty[] = [
 
 const orderedSpecialties = [...specialties].sort((a, b) => Number(b.available) - Number(a.available));
 
+const courseIconSources: Record<Specialty["icon"], string> = {
+  gastroenterology: "/course-icons-png/gastrointestinal.png",
+  endocrinology: "/course-icons-png/endocrine.png",
+  cardiology: "/course-icons-png/cardiovascular.png",
+  "hematology-oncology": "/course-icons-png/hematology.png",
+  nephrology: "/course-icons-png/renal.png",
+  pulmonology: "/course-icons-png/respiratory.png",
+  brain: "/course-icons/neurology.svg",
+  heart: "/icons/courses/heart.png",
+  kidney: "/course-icons-png/renal.png",
+  lungs: "/course-icons-png/respiratory.png",
+  stomach: "/course-icons-png/gastrointestinal.png",
+  thyroid: "/course-icons-png/endocrine.png",
+  rheumatology: "/course-icons/rheumatology.svg",
+  infectious: "/course-icons/infectious-disease.svg",
+  psychiatry: "/course-icons/psychiatry.svg",
+  pediatrics: "/course-icons/pediatrics.svg",
+};
+
 function CourseIcon({ name, unavailable = false }: { name: Specialty["icon"]; unavailable?: boolean }) {
+  const isCardiology = name === "heart";
   return (
     <img
-      src={`/icons/courses/${name}.png`}
+      src={courseIconSources[name]}
       alt=""
       aria-hidden="true"
-      className={`h-6 w-6 object-contain ${unavailable ? "opacity-60 grayscale" : ""}`}
+      className={`object-contain transition-none ${
+        unavailable
+          ? "h-8 w-8 opacity-45"
+          : isCardiology
+            ? "h-[27px] w-[27px] opacity-65 saturate-[0.45] brightness-[0.92]"
+            : "h-8 w-8"
+      }`}
       draggable={false}
     />
   );
@@ -110,7 +136,7 @@ export default function PracticePage() {
                 className={`group relative rounded-2xl border p-6 shadow-[0_6px_20px_rgba(15,23,42,0.03)] ${
                   specialty.available
                     ? "border-slate-200 bg-white transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_10px_28px_rgba(15,23,42,0.06)]"
-                    : "border-slate-200/80 bg-slate-50/75 grayscale-[0.35] opacity-[0.72]"
+                    : "border-slate-200/80 bg-slate-50/75"
                 }`}
               >
                 {!specialty.available && (
@@ -135,9 +161,11 @@ export default function PracticePage() {
                 <h2 className={`mt-6 text-[18px] font-semibold ${specialty.available ? "text-[#10213f]" : "text-slate-500"}`}>
                   {specialty.name}
                 </h2>
-                <p className={`mt-1 text-sm ${specialty.available ? "text-slate-500" : "text-slate-400"}`}>
-                  {specialty.description}
-                </p>
+                <div className={`mt-1 flex items-center justify-start text-sm ${specialty.available ? "text-slate-500" : "text-slate-400"}`} dir="rtl">
+                  <span className="font-medium">
+                    پیشرفت {((progressByCourse[specialty.key] ?? specialty.progress)).toLocaleString("fa-IR")}٪
+                  </span>
+                </div>
 
                 <div className={`mt-5 h-1.5 overflow-hidden rounded-full ${specialty.available ? "bg-slate-100" : "bg-slate-200"}`}>
                   <div
@@ -146,17 +174,20 @@ export default function PracticePage() {
                   />
                 </div>
 
-                <div className={`mt-5 flex items-center justify-between text-sm font-medium ${
-                  specialty.available
-                    ? specialty.key === "pulmonology" ? "text-[#4c7194]"
-                    : specialty.key === "cardiology" ? "text-[#8b3f53]"
-                    : specialty.key === "nephrology" ? "text-rose-700"
-                    : specialty.key === "gastroenterology" ? "text-[#6b7f5a]"
-                    : specialty.key === "endocrinology" ? "text-amber-700"
-                    : specialty.key === "hematology-oncology" ? "text-red-700"
-                    : "text-slate-600"
-                    : "text-slate-400"
-                }`}>
+                <div
+                  className="mt-5 flex items-center justify-between text-sm font-medium"
+                  style={{
+                    color: specialty.available
+                      ? specialty.key === "pulmonology" ? "#4c7194"
+                      : specialty.key === "cardiology" ? "#8b3f53"
+                      : specialty.key === "nephrology" ? "#15919a"
+                      : specialty.key === "gastroenterology" ? "#6b7f5a"
+                      : specialty.key === "endocrinology" ? "#6d5b8c"
+                      : specialty.key === "hematology-oncology" ? "#8f2746"
+                      : "#64748b"
+                      : "#94a3b8",
+                  }}
+                >
                   <span>{specialty.available ? "تمرین" : "در حال آماده‌سازی"}</span>
                 </div>
               </div>

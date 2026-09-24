@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import CasePlayer from "../../../components/CasePlayer";
@@ -74,16 +75,6 @@ function Icon({ name, size = 22 }: { name: "search" | "bell" | "menu"; size?: nu
   );
 }
 
-function formatTehranPersianDate(dateKey: string) {
-  const date = new Date(`${dateKey}T12:00:00+03:30`);
-  return new Intl.DateTimeFormat("fa-IR-u-ca-persian", {
-    timeZone: "Asia/Tehran",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  }).format(date);
-}
-
 export default function DailyCasePlayer({
   caseData,
   dateKey,
@@ -101,9 +92,9 @@ export default function DailyCasePlayer({
   const [showCompletion, setShowCompletion] = useState(false);
 
   useEffect(() => {
-    setLocked(window.localStorage.getItem(attemptKey(dateKey)) === "completed");
+    setLocked(!archiveMode && window.localStorage.getItem(attemptKey(dateKey)) === "completed");
     setHydrated(true);
-  }, [dateKey]);
+  }, [archiveMode, dateKey]);
 
   const learnHref = `/learn/${encodeURIComponent(caseData.diagnosis.id)}`;
 
@@ -136,15 +127,6 @@ export default function DailyCasePlayer({
 
 
         <div className="mx-auto w-full max-w-[1120px] px-5 pb-10 pt-7 sm:px-7 sm:pt-8">
-          <div className="mx-auto mb-6 w-full max-w-[760px] flex items-start justify-end">
-            <div className="flex flex-col items-end text-right">
-              <p className="whitespace-nowrap text-[14px] font-medium leading-6 text-slate-600">
-                {formatTehranPersianDate(dateKey)}
-              </p>
-              <span aria-hidden="true" className="mt-3 block h-px w-11 bg-slate-400" />
-            </div>
-          </div>
-
           <section className="mx-auto w-full max-w-[760px] rounded-2xl border border-slate-200 bg-white px-5 py-7 shadow-[0_8px_30px_rgba(15,23,42,0.045)] sm:px-7 sm:py-8 lg:px-9">
             <div className="flex justify-center">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-50 text-xl text-emerald-600">✓</div>
@@ -178,10 +160,31 @@ export default function DailyCasePlayer({
 
               <Link
                 href={learnHref}
-                className="flex h-[58px] items-center justify-center gap-2 rounded-xl bg-[#153f65] px-4 text-[15px] font-medium !text-white shadow-sm transition hover:bg-[#123754]"
+                className="relative flex h-[58px] items-center justify-center rounded-xl bg-[#153f65] px-14 text-[15px] font-medium !text-white shadow-sm transition hover:bg-[#123754]"
               >
-                <span className="!text-white">Learn more about {caseData.diagnosis.name}</span>
-                <span aria-hidden="true" className="text-lg !text-white">←</span>
+                <span aria-hidden="true" className="absolute left-4 flex items-center justify-center text-lg !text-white">←</span>
+
+                <span className="flex flex-col items-center justify-center text-center leading-5 font-[var(--font-vazirmatn)] text-[15px] font-medium !text-white" dir="ltr">
+                  <span className="!text-white">Learn more about</span>
+                  <span className="!text-white">{caseData.diagnosis.name}</span>
+                </span>
+
+                <span className="absolute right-4 flex h-[22px] w-[22px] items-center justify-center !text-white" aria-hidden="true">
+                  <svg
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M6 3.5h8.5L19 8v12.5H6z" />
+                    <path d="M14 3.5V8h5" />
+                    <path d="M9 12h7M9 15.5h7" />
+                  </svg>
+                </span>
               </Link>
             </div>
           </section>
@@ -194,9 +197,11 @@ export default function DailyCasePlayer({
     <>
       <CasePlayer
         caseData={caseData}
-        storageKey={stateKey(dateKey, caseData.id)}
+        storageKey={archiveMode ? undefined : stateKey(dateKey, caseData.id)}
         onComplete={() => {
-          window.localStorage.setItem(attemptKey(dateKey), "completed");
+          if (!archiveMode) {
+            window.localStorage.setItem(attemptKey(dateKey), "completed");
+          }
           setShowCompletion(true);
         }}
         completionHref="/"
@@ -211,7 +216,11 @@ export default function DailyCasePlayer({
         dateKey={dateKey}
         onClose={() => {
           setShowCompletion(false);
-          setLocked(true);
+          if (archiveMode) {
+            window.location.assign("/case/today/archive");
+          } else {
+            setLocked(true);
+          }
         }}
       />
     </>

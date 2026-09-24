@@ -55,13 +55,13 @@ function SectionIntro({ eyebrow, title, description, count }: {
   count?: string;
 }) {
   return (
-    <div className="flex items-end justify-between gap-4">
+    <div className="flex items-start justify-between gap-4">
       <div>
         <div className="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-400">{eyebrow}</div>
         <h2 className="mt-1 text-xl font-extrabold text-slate-950">{title}</h2>
         <p className="mt-1 text-sm leading-6 text-slate-400">{description}</p>
       </div>
-      {count ? <div className="shrink-0 text-xs font-bold text-slate-400">{count}</div> : null}
+      {count ? <div className="mt-1 shrink-0 text-[11px] font-bold leading-5 text-slate-400">{count}</div> : null}
     </div>
   );
 }
@@ -305,13 +305,9 @@ export default function ClinicalReasoningCasePlayer({ caseData }: Props) {
       <section className="rounded-[24px] border border-[#e7e3dc] bg-white p-5 shadow-[0_8px_24px_rgba(15,23,42,0.04)] lg:p-7">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
           <div className="min-w-0">
-            <p className="text-[11px] font-semibold tracking-[0.16em] text-slate-400">{caseData.id}</p>
-            <h1 className="mt-2 text-[28px] font-semibold leading-tight text-slate-950">{caseData.title}</h1>
-            <p className="mt-3 max-w-[780px] text-[15px] leading-8 text-slate-600">{caseData.presentation}</p>
-          </div>
-          <div className="shrink-0 rounded-2xl bg-[#f6f3ee] px-4 py-3 text-right">
-            <div className="text-[11px] font-semibold text-slate-400">بیمار</div>
-            <div className="mt-1 text-sm font-bold text-slate-700">
+            <p className="text-[11px] font-semibold tracking-[0.14em] text-slate-400">شکایت اصلی</p>
+            <h1 className="mt-2 max-w-[820px] text-[28px] font-semibold leading-10 text-slate-950">{caseData.presentation}</h1>
+            <div className="mt-3 text-[14px] font-semibold text-slate-500">
               {caseData.patient.age} ساله · {caseData.patient.sex === "male" ? "مرد" : "زن"}
             </div>
           </div>

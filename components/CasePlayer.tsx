@@ -533,10 +533,12 @@ export default function CasePlayer({
       <div className="mx-auto w-full max-w-[1180px] px-4 py-6 sm:px-6 lg:px-8">
         <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_8px_28px_rgba(15,23,42,0.035)] lg:p-7">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-            <div>
-              <div className="text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400">CASE</div>
-              <h1 className="mt-1 text-[24px] font-extrabold text-slate-950 lg:text-[28px]">{caseData.title}</h1>
-              <p className="mt-3 max-w-[850px] text-[15px] leading-8 text-slate-600">{caseData.presentation}</p>
+            <div className="min-w-0">
+              <div className="text-[11px] font-semibold tracking-[0.14em] text-slate-400">شکایت اصلی</div>
+              <h1 className="mt-1 max-w-[860px] text-[24px] font-extrabold leading-9 text-slate-950 lg:text-[28px]">{caseData.presentation}</h1>
+              <div className="mt-3 text-[14px] font-semibold text-slate-500">
+                {caseData.patient.age} ساله · {caseData.patient.sex === "male" ? "مرد" : "زن"}
+              </div>
             </div>
             <div className="shrink-0 rounded-xl bg-slate-50 px-4 py-3 text-right">
               <div className="text-[11px] font-semibold text-slate-400">مرحله فعلی</div>
@@ -692,13 +694,13 @@ function StageShell({
 }) {
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_8px_28px_rgba(15,23,42,0.035)] lg:p-7">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <div className="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-400">{eyebrow}</div>
           <h2 className="mt-1 text-xl font-extrabold text-slate-950">{title}</h2>
           <p className="mt-1 max-w-[800px] text-sm leading-6 text-slate-400">{description}</p>
         </div>
-        <div className="shrink-0 text-xs font-bold text-slate-400">{count}</div>
+        <div className="mt-1 shrink-0 text-[11px] font-bold leading-5 text-slate-400">{count}</div>
       </div>
 
       {categoryFilter && selectedCategory && onSelectCategory ? (

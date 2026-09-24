@@ -196,7 +196,7 @@ export default function PracticeCoursePage({ course, cases }: Props) {
               <div className="h-9 w-px bg-[#e9e6e1]" />
               <Stat compact value={completedCount.toLocaleString("fa-IR")} label="تکمیل‌شده" accent="#168d71" />
               <div className="h-9 w-px bg-[#e9e6e1]" />
-              <Stat compact value={`${progressPercent.toLocaleString("fa-IR")}٪`} label="پیشرفت" accent={meta.accent} progress={progressPercent} />
+              <Stat compact value={`${completedCount.toLocaleString("fa-IR")} از ${cases.length.toLocaleString("fa-IR")}`} label="کیس‌های حل‌شده" accent={meta.accent} />
             </div>
           </div>
         </section>
