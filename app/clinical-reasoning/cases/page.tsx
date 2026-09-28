@@ -22,7 +22,7 @@ export default function ClinicalReasoningCasesPage() {
 
   return (
     <main dir="rtl" className="min-h-screen bg-[#fbf8f2] text-slate-900">
-      <section className="mx-auto max-w-[1180px] px-5 pb-12 pt-8 lg:px-8">
+      <section className="sonic-fixed-container pb-12 pt-8">
         <div className="flex items-end justify-between gap-5 border-b border-[#e7e3dc] pb-6">
           <div>
             <p className="text-[11px] font-semibold tracking-[0.2em] text-slate-400">استدلال بالینی</p>

@@ -186,7 +186,7 @@ export default function ExperienceCompletionModal({
             </Link>
 
             <Link
-              href={diagnosisId ? `/learn/${encodeURIComponent(diagnosisId)}` : "#"}
+              href={"/learn"}
               className="relative flex min-h-[58px] items-center justify-center rounded-[16px] bg-[#080D21] px-12 text-center text-[14px] font-bold !text-white transition hover:bg-[#111936]"
             >
               <span className="!text-white">درباره تشخیص بیشتر بدان</span>

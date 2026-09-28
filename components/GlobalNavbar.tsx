@@ -62,7 +62,7 @@ export default function GlobalNavbar() {
       dir="rtl"
       className="relative z-[100] h-[76px] border-b border-[#ece9e4] bg-[#fbfaf8]/95 shadow-[0_2px_12px_rgba(15,23,42,0.035)] backdrop-blur"
     >
-      <div className="mx-auto flex h-full w-full max-w-[1180px] items-center justify-between px-5 lg:px-8">
+      <div className="sonic-fixed-container flex h-full items-center justify-between">
         <button
           type="button"
           onClick={() => router.push("/")}

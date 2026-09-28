@@ -307,7 +307,7 @@ export default function DailyCaseArchivePage() {
                   </Link>
 
                   <Link
-                    href={`/learn/${encodeURIComponent(selectedCase.diagnosis.id)}`}
+                    href={`/learn/${selectedCase.course}`}
                     className="flex h-[62px] items-center justify-center gap-3 rounded-xl border border-[#d4e0ee] bg-white px-6 text-[15px] font-semibold text-[#173250] transition hover:bg-[#f8fbff]"
                   >
                     <Icon type="file" size={22} />

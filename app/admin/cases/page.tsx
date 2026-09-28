@@ -543,11 +543,84 @@ function Overview({ caseItem }: { caseItem: Case }) {
   );
 }
 
+function EditableAnswer({
+  caseId,
+  stageType,
+  itemKey,
+  initialContent,
+}: {
+  caseId: string;
+  stageType: "history" | "physical-exam" | "investigation";
+  itemKey: string;
+  initialContent: string;
+}) {
+  const [value, setValue] = useState(initialContent);
+  const [status, setStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    setValue(initialContent);
+    setStatus("idle");
+    setError("");
+  }, [initialContent]);
+
+  async function save() {
+    setStatus("saving");
+    setError("");
+
+    try {
+      const response = await fetch("/api/admin/cases/answers", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ caseId, stageType, itemKey, content: value }),
+      });
+
+      const data = (await response.json()) as { ok?: boolean; error?: string };
+      if (!response.ok || !data.ok) {
+        throw new Error(data.error ?? "ذخیره انجام نشد.");
+      }
+
+      setStatus("saved");
+    } catch (saveError) {
+      setStatus("error");
+      setError(saveError instanceof Error ? saveError.message : "ذخیره انجام نشد.");
+    }
+  }
+
+  return (
+    <div className="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-3">
+      <textarea
+        value={value}
+        onChange={(event) => {
+          setValue(event.target.value);
+          setStatus("idle");
+          setError("");
+        }}
+        rows={3}
+        className="w-full resize-y rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm leading-7 outline-none focus:border-blue-500"
+        dir="rtl"
+      />
+      <div className="mt-2 flex items-center justify-between gap-3">
+        <span className="text-[11px] text-slate-400">این پاسخ جایگزین پاسخ فعلی می‌شود؛ پاسخ دوم ساخته نمی‌شود.</span>
+        <button
+          type="button"
+          onClick={save}
+          disabled={status === "saving"}
+          className="shrink-0 rounded-lg bg-blue-600 px-3 py-2 text-xs font-semibold text-white hover:bg-blue-700 disabled:opacity-60"
+        >
+          {status === "saving" ? "در حال ذخیره…" : status === "saved" ? "ذخیره شد" : "ذخیره در کد اصلی"}
+        </button>
+      </div>
+      {status === "error" && <p className="mt-2 text-xs text-rose-600">{error}</p>}
+    </div>
+  );
+}
+
 function HistoryView({ caseItem }: { caseItem: Case }) {
   const items = getHistoryItems(caseItem);
   return (
     <div>
-      <div className="mb-5 flex items-center justify-between"><h3 className="text-lg font-bold">History — {items.length} سؤال</h3><span className="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-500">همه پاسخ‌ها</span></div>
+      <div className="mb-5 flex items-center justify-between"><h3 className="text-lg font-bold">History — {items.length} سؤال</h3><span className="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-500">ویرایش پاسخ‌ها</span></div>
       <div className="space-y-3">
         {items.map((item, index) => (
           <article key={item.id} className="rounded-2xl border border-slate-200 p-4">
@@ -556,7 +629,12 @@ function HistoryView({ caseItem }: { caseItem: Case }) {
               <div className="min-w-0 flex-1">
                 <p className="text-xs font-semibold text-slate-400">{item.sourceId ? `دسته: ${categoryLabel(caseItem, historyQuestionCategory(caseItem, item) ?? categoryFromQuestion(index))}` : ""}</p>
                 <p className="mt-1 font-semibold leading-6">{historyQuestionText(caseItem, item, index)}</p>
-                <div className="mt-3 rounded-xl bg-slate-50 p-3 text-sm leading-7 text-slate-700">«{item.content}»</div>
+                <EditableAnswer
+                  caseId={caseItem.id}
+                  stageType="history"
+                  itemKey={item.id}
+                  initialContent={item.content}
+                />
               </div>
             </div>
           </article>
@@ -580,10 +658,54 @@ function persianQuestion(index: number) {
 
 function PhysicalExamView({ caseItem }: { caseItem: Case }) {
   const items = getPhysicalExamItems(caseItem);
-  return <div><div className="mb-5 flex items-center justify-between"><h3 className="text-lg font-bold">Physical Exam — {items.length} یافته</h3><span className="text-xs text-slate-400">یافته‌های ثابت همین بیمار</span></div><div className="grid gap-3 md:grid-cols-2">{items.map((item) => <article key={item.id} className="rounded-2xl border border-slate-200 p-4"><p className="text-sm font-bold">{PE_CATEGORY_LABELS[item.sourceId ?? ""] ?? item.label ?? item.sourceId}</p><p className="mt-2 text-sm leading-7 text-slate-600">{item.content}</p></article>)}</div></div>;
+  return (
+    <div>
+      <div className="mb-5 flex items-center justify-between"><h3 className="text-lg font-bold">Physical Exam — {items.length} یافته</h3><span className="text-xs text-slate-400">ویرایش پاسخ‌ها</span></div>
+      <div className="grid gap-3 md:grid-cols-2">
+        {items.map((item) => (
+          <article key={item.id} className="rounded-2xl border border-slate-200 p-4">
+            <p className="text-sm font-bold">{PE_CATEGORY_LABELS[item.sourceId ?? ""] ?? item.label ?? item.sourceId}</p>
+            <EditableAnswer
+              caseId={caseItem.id}
+              stageType="physical-exam"
+              itemKey={item.id}
+              initialContent={item.content}
+            />
+          </article>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 function InvestigationView({ caseItem }: { caseItem: Case }) {
   const items = getInvestigationItems(caseItem);
-  return <div><div className="mb-5 flex items-center justify-between"><h3 className="text-lg font-bold">Investigation — {items.length} مورد</h3><span className="text-xs text-slate-400">نتایج اختصاصی کیس</span></div><div className="space-y-3">{items.map((item) => <article key={item.id} className="rounded-2xl border border-slate-200 p-4"><div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between"><div><h4 className="font-bold">{item.name}</h4><p className="mt-1 text-xs text-slate-400">{item.category}</p></div><span className={`rounded-full px-3 py-1 text-xs font-semibold ${item.relevance === "high" ? "bg-emerald-50 text-emerald-700" : item.relevance === "low" ? "bg-amber-50 text-amber-700" : "bg-slate-100 text-slate-500"}`}>{item.relevance === "high" ? "اهمیت بالا" : item.relevance === "low" ? "اهمیت کم" : "غیرکمکی"}</span></div><div className="mt-4 grid gap-2">{item.findings.map((finding) => <div key={`${item.id}-${finding.label}`} className="rounded-xl bg-slate-50 p-3 text-sm"><span className="font-semibold">{finding.label}:</span> <span className="text-slate-700">{finding.value}</span></div>)}</div></article>)}</div></div>;
+  return (
+    <div>
+      <div className="mb-5 flex items-center justify-between"><h3 className="text-lg font-bold">Investigation — {items.length} مورد</h3><span className="text-xs text-slate-400">ویرایش نتایج</span></div>
+      <div className="space-y-3">
+        {items.map((item) => (
+          <article key={item.id} className="rounded-2xl border border-slate-200 p-4">
+            <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
+              <div><h4 className="font-bold">{item.name}</h4><p className="mt-1 text-xs text-slate-400">{item.category}</p></div>
+              <span className={`rounded-full px-3 py-1 text-xs font-semibold ${item.relevance === "high" ? "bg-emerald-50 text-emerald-700" : item.relevance === "low" ? "bg-amber-50 text-amber-700" : "bg-slate-100 text-slate-500"}`}>{item.relevance === "high" ? "اهمیت بالا" : item.relevance === "low" ? "اهمیت کم" : "غیرکمکی"}</span>
+            </div>
+            <div className="mt-4 grid gap-2">
+              {item.findings.map((finding) => (
+                <div key={`${item.id}-${finding.label}`}>
+                  <p className="mb-1 text-xs font-semibold text-slate-500">{finding.label}</p>
+                  <EditableAnswer
+                    caseId={caseItem.id}
+                    stageType="investigation"
+                    itemKey={`${item.id}::${finding.label}`}
+                    initialContent={finding.value}
+                  />
+                </div>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  );
 }

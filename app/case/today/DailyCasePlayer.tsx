@@ -96,7 +96,7 @@ export default function DailyCasePlayer({
     setHydrated(true);
   }, [archiveMode, dateKey]);
 
-  const learnHref = `/learn/${encodeURIComponent(caseData.diagnosis.id)}`;
+  const learnHref = `/learn/${caseData.course}`;
 
   // Keep the first render identical on server and client. Once mounted, replace it
   // with the actual completed/active state based on localStorage.
@@ -126,7 +126,7 @@ export default function DailyCasePlayer({
       <main dir="rtl" className="min-h-screen bg-[#fbfaf8] text-[#10213f]">
 
 
-        <div className="mx-auto w-full max-w-[1120px] px-5 pb-10 pt-7 sm:px-7 sm:pt-8">
+        <div className="sonic-fixed-container pb-10 pt-7 sm:pt-8">
           <section className="mx-auto w-full max-w-[760px] rounded-2xl border border-slate-200 bg-white px-5 py-7 shadow-[0_8px_30px_rgba(15,23,42,0.045)] sm:px-7 sm:py-8 lg:px-9">
             <div className="flex justify-center">
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-50 text-xl text-emerald-600">✓</div>

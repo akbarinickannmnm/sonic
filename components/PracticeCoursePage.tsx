@@ -178,7 +178,7 @@ export default function PracticeCoursePage({ course, cases }: Props) {
 
   return (
     <main dir="rtl" className="min-h-screen bg-[#f8f7f4] text-[#162238]">
-      <div className="mx-auto w-full max-w-[1180px] px-5 pb-8 pt-6 sm:px-7 lg:pt-8">
+      <div className="sonic-fixed-container pb-8 pt-6 lg:pt-8">
         {/* Header */}
         <section className="overflow-hidden rounded-[26px] border border-[#e7e4de] bg-white shadow-[0_16px_42px_rgba(17,31,51,0.045)]">
           <div className="grid gap-6 px-6 py-6 lg:grid-cols-[1fr_auto] lg:items-end lg:px-8 lg:py-7">

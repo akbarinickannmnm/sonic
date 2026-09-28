@@ -116,7 +116,7 @@ export default function PracticePage() {
     <main className="min-h-screen bg-[#fbfaf8] text-[#10213f]">
 
 
-      <div className="mx-auto max-w-[1180px] px-5 pb-16 pt-10 lg:px-8 lg:pt-12">
+      <div className="sonic-fixed-container pb-16 pt-10 lg:pt-12">
         <div className="flex flex-col gap-5">
           <div className="text-right">
             <h1 className="text-[34px] font-semibold tracking-[-0.035em] sm:text-[40px]">یک تخصص را انتخاب کن</h1>
@@ -211,7 +211,7 @@ export default function PracticePage() {
       </div>
 
       <footer className="border-t border-slate-200 bg-white">
-        <div className="mx-auto grid max-w-[1180px] gap-9 px-5 py-11 sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
+        <div className="sonic-fixed-container grid gap-9 py-11 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <div className="text-[26px] tracking-[-0.03em]">SONIC</div>
             <p className="mt-3 max-w-[250px] text-sm leading-6 text-slate-600">مهارت استدلال بالینی‌ات را تقویت کن.<br />پزشک بهتری شو.</p>

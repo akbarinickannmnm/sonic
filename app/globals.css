@@ -139,3 +139,10 @@ main, section, article, header, footer { min-width: 0; }
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
+
+/* Canonical SONIC content rail: every primary card must use this exact horizontal geometry. */
+.sonic-fixed-container {
+  width: 1120px;
+  max-width: calc(100vw - 40px);
+  margin-inline: auto;
+}

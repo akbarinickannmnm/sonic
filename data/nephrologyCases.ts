@@ -4614,7 +4614,7 @@ export const nephrologyCases: Case[] = seeds.map((seed) => ({
   ],
   diagnosis: diagnosis(seed.diagnosisId),
   candidateDiagnosisIds: (candidateSets[seed.phenotype] ?? [seed.diagnosisId]).slice(0, 5).includes(seed.diagnosisId) ? (candidateSets[seed.phenotype] ?? [seed.diagnosisId]).slice(0, 5) : [seed.diagnosisId, ...(candidateSets[seed.phenotype] ?? []).filter((id) => id !== seed.diagnosisId)].slice(0, 5),
-  reviewQuestions: reviewQuestions(seed),
+  reviewQuestions: [],
 }));
 
 const validationErrors = nephrologyCases.flatMap((caseData) => validateNephrologyCases([caseData]));

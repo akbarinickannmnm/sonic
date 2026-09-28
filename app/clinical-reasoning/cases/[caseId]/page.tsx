@@ -18,7 +18,7 @@ export default async function ClinicalReasoningCasePage({ params }: Props) {
 
   return (
     <main dir="rtl" className="min-h-screen bg-[#fbf8f2] px-5 py-8 text-slate-900">
-      <div className="mx-auto max-w-[1120px]">
+      <div className="sonic-fixed-container">
 <ClinicalReasoningCasePlayer caseData={caseData} />
       </div>
     </main>

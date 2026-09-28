@@ -170,7 +170,7 @@ export default function ClinicalReasoningPage() {
 
 
       {/* MAIN */}
-      <section dir="rtl" className="mx-auto max-w-[1180px] px-6 pb-8 pt-6 sm:px-8">
+      <section dir="rtl" className="sonic-fixed-container pb-8 pt-6">
         {/* HERO */}
         <div className="text-center">
           <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-violet-50 text-violet-600">

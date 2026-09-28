@@ -90,6 +90,27 @@ function normalizeDiagnosis(value: string) {
   return value.trim().toLowerCase().replace(/\s+/g, " ");
 }
 
+function markLastPracticeActivity(
+  caseData: Case,
+  totalCases: number | undefined,
+) {
+  if (typeof window === "undefined") return;
+
+  window.localStorage.setItem(
+    "sonic:last-practice-course",
+    JSON.stringify({
+      course: caseData.course,
+      caseId: caseData.id,
+      title: caseData.title,
+      difficulty: caseData.difficulty,
+      totalCases: totalCases ?? 0,
+      updatedAt: Date.now(),
+    }),
+  );
+
+  window.dispatchEvent(new Event("sonic:last-practice-updated"));
+}
+
 function selectNextPracticeCase(
   course: Case["course"],
   currentCaseId: string,
@@ -398,6 +419,8 @@ export default function CasePlayer({
       completed,
       won,
     }));
+
+    window.dispatchEvent(new Event("sonic:practice-progress-updated"));
   }, [activeHistoryId, activeInvestigationId, activePhysicalId, activeStage, completed, diagnosisInput, guessCount, historySequence, hydrated, investigationSequence, physicalSequence, selectedCategory, storageKey, won]);
 
   const historyComplete = historySequence.length >= MAX_HISTORY_QUESTIONS;
@@ -408,6 +431,7 @@ export default function CasePlayer({
     if (completed || activeStage !== "history") return;
     if (historySelected.has(id) || historySequence.length >= MAX_HISTORY_QUESTIONS) return;
 
+    markLastPracticeActivity(caseData, nextCaseOptions?.length);
     setActiveHistoryId(id);
     setHistorySequence((current) => [...current, id].slice(0, MAX_HISTORY_QUESTIONS));
 
@@ -423,6 +447,7 @@ export default function CasePlayer({
     if (completed || activeStage !== "physical-exam") return;
     if (physicalSelected.has(id) || physicalSequence.length >= MAX_PHYSICAL_EXAMS) return;
 
+    markLastPracticeActivity(caseData, nextCaseOptions?.length);
     setActivePhysicalId(id);
     setPhysicalSequence((current) => [...current, id].slice(0, MAX_PHYSICAL_EXAMS));
 
@@ -438,6 +463,7 @@ export default function CasePlayer({
     if (completed || activeStage !== "investigation") return;
     if (investigationSelected.has(id) || investigationSequence.length >= MAX_INVESTIGATIONS) return;
 
+    markLastPracticeActivity(caseData, nextCaseOptions?.length);
     setActiveInvestigationId(id);
     setInvestigationSequence((current) => [...current, id].slice(0, MAX_INVESTIGATIONS));
 
@@ -530,7 +556,7 @@ export default function CasePlayer({
 
   return (
     <main dir="rtl" className="min-h-screen bg-[#f7f9fc] text-slate-900">
-      <div className="mx-auto w-full max-w-[1180px] px-4 py-6 sm:px-6 lg:px-8">
+      <div className="sonic-fixed-container py-6">
         <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_8px_28px_rgba(15,23,42,0.035)] lg:p-7">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div className="min-w-0">

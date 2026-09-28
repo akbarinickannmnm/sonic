@@ -23,7 +23,7 @@ function reviewCategory(category: ReviewQuestion["category"]) {
   return labels[category];
 }
 
-export default function CaseReviewPage({ caseData }: { caseData: Case }) {
+export default function CaseReviewPage({ caseData, mode = "practice" }: { caseData: Case; mode?: "practice" | "learning" }) {
   const bank = useMemo(() => getCourseBank(caseData.course, [caseData]), [caseData]);
   const [answers, setAnswers] = useState<Record<string, string>>({});
 
@@ -49,9 +49,9 @@ export default function CaseReviewPage({ caseData }: { caseData: Case }) {
 
   return (
     <main dir="rtl" className="min-h-screen bg-[#f7f9fc] text-slate-900">
-      <div className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 lg:px-8 lg:py-9">
-        <Link href={`/practice/${caseData.course}`} className="inline-flex text-sm font-semibold text-slate-500 hover:text-slate-900">
-          → بازگشت به کیس‌ها
+      <div className="sonic-fixed-container py-6 lg:py-9">
+        <Link href={mode === "learning" ? `/learn/${caseData.course}` : `/practice/${caseData.course}`} className="inline-flex text-sm font-semibold text-slate-500 hover:text-slate-900">
+          → {mode === "learning" ? "بازگشت به انتخاب کیس" : "بازگشت به کیس‌ها"}
         </Link>
 
         <header className="mt-6 rounded-[24px] border border-slate-200 bg-white px-6 py-7 shadow-[0_8px_28px_rgba(15,23,42,0.035)] sm:px-8">
@@ -144,13 +144,15 @@ export default function CaseReviewPage({ caseData }: { caseData: Case }) {
         <div className="rounded-[22px] border border-slate-200 bg-white px-6 py-6 text-center shadow-[0_8px_28px_rgba(15,23,42,0.025)] sm:px-8">
           <div className="text-sm font-extrabold text-slate-900">مرور کیس تمام شد</div>
           <p className="mx-auto mt-2 max-w-lg text-sm leading-7 text-slate-500">
-            حالا می‌توانی به مسیر کیس‌ها برگردی و ادامه‌ی تمرین را دنبال کنی.
+            {mode === "learning"
+              ? "برای مطالعه‌ی یک کیس دیگر، به فهرست کیس‌های این درس برگرد."
+              : "حالا می‌توانی به مسیر کیس‌ها برگردی و ادامه‌ی تمرین را دنبال کنی."}
           </p>
           <Link
-            href={`/practice/${caseData.course}`}
+            href={mode === "learning" ? `/learn/${caseData.course}` : `/practice/${caseData.course}`}
             className="mt-5 inline-flex min-h-11 items-center justify-center rounded-xl bg-slate-900 px-6 text-sm font-bold text-white transition hover:bg-slate-800"
           >
-            ادامه کیس‌ها
+            {mode === "learning" ? "بازگشت به کیس‌ها" : "ادامه کیس‌ها"}
             <span aria-hidden="true" className="mr-2">←</span>
           </Link>
         </div>
