@@ -1,6 +1,7 @@
 import type { Case, Investigation, CaseHint, ReviewQuestion } from "../types/case";
 import { diseases } from "./diseases";
-import { gastroenterologyQuestionBank, answerGastroHistory } from "./gastroenterologyQuestionBank";
+import { gastroenterologyQuestionBank } from "./gastroenterologyQuestionBank";
+import { gastroHistoryAnswers, gastroPhysicalAnswers, gastroInvestigationAnswers } from "./gastroenterologyRevisedAnswers";
 import { gastroenterologyPhysicalExamBank } from "./gastroenterologyPhysicalExamBank";
 import { gastroenterologyInvestigationBank } from "./gastroenterologyInvestigationBank";
 
@@ -78,120 +79,62 @@ function candidates(seed: GastroSeed): string[] {
   return result.slice(0,4);
 }
 
-function physicalAnswer(seed: GastroSeed, section: string): string {
-  const id=seed.id;
-  if(section==="general") return ["gastric-cancer","esophageal-cancer","colorectal-cancer","pancreatic-cancer","cholangiocarcinoma","cirrhosis"].includes(id)?"بیمار هوشیار است ولی ظاهر بیمار مزمن دارد و کاهش وزن و کاهش توده عضلانی خفیف تا متوسط دیده می‌شود.":["acute-pancreatitis","acute-cholecystitis","acute-cholangitis","acute-appendicitis","acute-infectious-gastroenteritis","mesenteric-ischemia"].includes(id)?"بیمار بی‌قرار و ill-appearing است و با توجه به شروع حاد، درد و علائم سیستمیک دارد.":"بیمار هوشیار و نسبتاً stable است و ظاهر کلی با شدت بیماری سازگار است.";
-  if(section==="vitals") return ["acute-cholangitis","mesenteric-ischemia","acute-pancreatitis"].includes(id)?"تب و tachycardia وجود دارد و فشار خون فعلاً حفظ شده است.":id==="acute-infectious-gastroenteritis"?"تب و tachycardia خفیف وجود دارد و فشار خون کمی پایین‌تر از معمول است.":"علائم حیاتی در محدوده قابل‌قبول هستند و ناپایداری همودینامیک دیده نمی‌شود.";
-  if(section==="hydration") return ["acute-infectious-gastroenteritis","acute-cholangitis","acute-pancreatitis"].includes(id)?"خشکی مخاط و شواهد dehydration خفیف وجود دارد.":id==="cirrhosis"?"ادم محیطی و شواهد احتباس مایع وجود دارد؛ مخاط خشک نیست.":"شواهد واضحی از dehydration یا fluid overload وجود ندارد.";
-  if(section==="skin-eyes-mucosa") return ["hepatitis-a","hepatitis-b","hepatitis-d","hepatitis-e","choledocholithiasis","acute-cholangitis","cirrhosis","primary-biliary-cholangitis","primary-sclerosing-cholangitis","autoimmune-hepatitis","alcohol-associated-liver-disease","drug-induced-liver-injury","pancreatic-cancer","cholangiocarcinoma","autoimmune-pancreatitis"].includes(id)?"Scleral icterus وجود دارد؛ ضایعه پوستی قابل‌توجه دیگری دیده نمی‌شود.":id==="hereditary-hemochromatosis"?"Hyperpigmentation خفیف پوست دیده می‌شود و sclera بدون زردی واضح است.":"رنگ پوست و مخاط طبیعی است و زردی یا ضایعه قابل‌توجهی دیده نمی‌شود.";
-  if(section==="chronic-liver") return id==="cirrhosis"?"Spider angioma، palmar erythema و مقدار کمی gynecomastia دیده می‌شود؛ caput medusae واضح نیست.":["primary-biliary-cholangitis","primary-sclerosing-cholangitis","autoimmune-hepatitis","alcohol-associated-liver-disease","hepatitis-b","hepatitis-c"].includes(id)?"برخی stigmata خفیف بیماری مزمن کبد وجود دارد، ولی portal hypertension واضح دیده نمی‌شود.":"Stigmata مشخص بیماری مزمن کبدی مشاهده نشد.";
-  if(section==="abdominal-general") return ["acute-appendicitis","acute-cholecystitis","acute-cholangitis","diverticulitis","mesenteric-ischemia","acute-pancreatitis"].includes(id)?"شکم در بخش درگیر tenderness دارد و bowel sounds وجود دارند؛ guarding یا rigidity شدید مشاهده نشد.":["cirrhosis","pancreatic-cancer","cholangiocarcinoma"].includes(id)?"شکم کمی متسع است و mass واضحی لمس نمی‌شود؛ bowel sounds حضور دارند.":"شکم غیرمتسع است، bowel sounds حاضر هستند و guarding یا rigidity وجود ندارد.";
-  if(section==="focal-abdomen") return ["acute-pancreatitis","chronic-pancreatitis","autoimmune-pancreatitis","zollinger-ellison","peptic-ulcer-disease","h-pylori-gastritis","gastric-cancer","pancreatic-cancer"].includes(id)?"Epigastric tenderness وجود دارد؛ توده مشخصی لمس نمی‌شود.":["cholelithiasis","acute-cholecystitis","choledocholithiasis","acute-cholangitis","cholangiocarcinoma"].includes(id)?"Tenderness در RUQ وجود دارد و در سایر ربع‌های شکم یافته بارزی دیده نمی‌شود.":id==="acute-appendicitis"?"تندرنس واضح در right lower quadrant وجود دارد.":["diverticulitis","diverticular-disease","colorectal-cancer"].includes(id)?"Tenderness بیشتر در lower abdomen، به‌خصوص LLQ، وجود دارد؛ توده بزرگ واضح لمس نمی‌شود.":"Tenderness موضعی قابل‌توجه یا mass قابل لمس دیده نشد.";
-  if(section==="hepatobiliary") return id==="acute-cholecystitis"?"RUQ tenderness واضح و Murphy sign مثبت است؛ hepatomegaly و splenomegaly وجود ندارد.":["cholelithiasis","choledocholithiasis"].includes(id)?"RUQ tenderness خفیف وجود دارد؛ Murphy sign منفی است.":id==="acute-cholangitis"?"RUQ tenderness وجود دارد و معاینه دردناک است؛ Murphy sign می‌تواند مثبت باشد.":["cirrhosis","hepatitis-b","hepatitis-c","autoimmune-hepatitis","primary-biliary-cholangitis","primary-sclerosing-cholangitis","alcohol-associated-liver-disease"].includes(id)?"کبد کمی سفت یا بزرگ است و در موارد پیشرفته splenomegaly خفیف وجود دارد؛ Murphy sign منفی است.":["pancreatic-cancer","cholangiocarcinoma"].includes(id)?"زردی وجود دارد، اما Murphy sign منفی است و hepatomegaly واضح نیست.":"Hepatomegaly یا splenomegaly واضح وجود ندارد و Murphy sign منفی است.";
-  if(section==="pancreatic") return id==="acute-pancreatitis"?"Epigastric tenderness شدید وجود دارد؛ Cullen یا Grey Turner sign مشاهده نشد.":id==="chronic-pancreatitis"?"تندرنس خفیف اپی‌گاستر وجود دارد؛ Cullen یا Grey Turner sign وجود ندارد.":id==="pancreatic-cancer"?"تندرنس خفیف اپی‌گاستر وجود دارد و mass واضح لمس نمی‌شود.":"در معاینه پانکراتیک یافته اختصاصی یا ecchymosis غیرطبیعی مشاهده نشد.";
-  if(section==="intestinal") return ["crohn-disease","ulcerative-colitis","microscopic-colitis"].includes(id)?"Tenderness خفیف شکمی وجود دارد؛ distension شدید یا guarding دیده نمی‌شود.":["celiac-disease","small-intestinal-bacterial-overgrowth","whipple-disease","tropical-sprue","short-bowel-syndrome"].includes(id)?"شکم نرم است و distension خفیف ممکن است وجود داشته باشد؛ mass یا peritoneal signs وجود ندارد.":id==="irritable-bowel-syndrome"?"معاینه شکم عمدتاً طبیعی است و tenderness موضعی یا mass وجود ندارد.":["mesenteric-ischemia","mesenteric-venous-thrombosis"].includes(id)?"Tenderness شکمی وجود دارد و با شدت درد متناسب نیست؛ rigidity شدید فعلاً دیده نمی‌شود.":"Distension قابل‌توجه یا یافته غیرطبیعی واضح روده‌ای مشاهده نشد.";
-  if(section==="anorectal") return id==="anal-fissure"?"یک fissure دردناک در ناحیه آنال دیده می‌شود و خون روشن مختصر وجود دارد.":id==="hemorrhoidal-disease"?"Hemorrhoid قابل مشاهده یا لمس وجود دارد و توده غیرطبیعی دیگری دیده نمی‌شود.":id==="crohn-disease"?"یافته پری‌آنال خفیف وجود دارد؛ fistula یا abscess واضح دیده نمی‌شود.":"یافته غیرطبیعی در معاینه آنورکتال مشاهده نشد.";
-  if(section==="extraintestinal") return id==="crohn-disease"||id==="ulcerative-colitis"?"آرترالژی خفیف و یک تظاهر خارج‌روده‌ای ملایم وجود دارد؛ درگیری چشمی واضح دیده نشد.":id==="celiac-disease"?"پالور و کاهش توده عضلانی خفیف وجود دارد؛ یافته مفصلی یا چشمی واضح دیده نشد.":id==="wilson-disease"?"لرزش ظریف دست و یافته عصبی خفیف دیده می‌شود؛ سطح هوشیاری حفظ شده است.":id==="cirrhosis"?"ادم محیطی وجود دارد و asterixis خفیف دیده می‌شود.":"تظاهر خارج‌روده‌ای یا عصبی قابل‌توجهی مشاهده نشد.";
-  return "یافته غیرطبیعی قابل‌توجهی مشاهده نشد.";
-}
-
-function investigationResult(seed: GastroSeed, section: string): { label:string; value:string }[] {
-  const id=seed.id;
-  switch(section){
-    case "cbc-general":
-      if(["peptic-ulcer-disease","esophageal-cancer","gastric-cancer","colorectal-cancer","hereditary-gi-polyposis"].includes(id)) return [{label:"Hb",value:"کاهش‌یافته"},{label:"MCV",value:"الگوی میکروسیتیک"},{label:"WBC/Platelet",value:"بدون افزایش واضح"}];
-      if(["crohn-disease","ulcerative-colitis","acute-pancreatitis","acute-appendicitis","acute-cholecystitis","acute-cholangitis","diverticulitis","acute-infectious-gastroenteritis","mesenteric-ischemia","mesenteric-venous-thrombosis","cholangiocarcinoma","pancreatic-cancer"].includes(id)) return [{label:"WBC",value:"افزایش‌یافته با neutrophilia"},{label:"Hb",value:"طبیعی تا کمی کاهش‌یافته"},{label:"CRP",value:"افزایش‌یافته"}];
-      if(["cirrhosis","alcohol-associated-liver-disease"].includes(id)) return [{label:"Hb",value:"11–12 g/dL"},{label:"Platelet",value:"کاهش‌یافته"},{label:"MCV",value:"طبیعی تا بالا"}];
-      return [{label:"CBC",value:"در محدوده طبیعی"},{label:"CRP",value:"طبیعی"}];
-    case "liver-synthetic":
-      if(["hepatitis-a","hepatitis-b","hepatitis-c","hepatitis-d","hepatitis-e","autoimmune-hepatitis","drug-induced-liver-injury"].includes(id)) return [{label:"AST/ALT",value:"به‌طور واضح بالا، الگوی hepatocellular"},{label:"Bilirubin",value:"بالا"},{label:"Albumin/INR",value:"طبیعی تا مختصراً مختل"}];
-      if(["primary-biliary-cholangitis","primary-sclerosing-cholangitis","choledocholithiasis","acute-cholangitis","pancreatic-cancer","cholangiocarcinoma"].includes(id)) return [{label:"ALP/GGT",value:"به‌طور واضح بالا، الگوی cholestatic"},{label:"Direct bilirubin",value:"افزایش‌یافته"},{label:"AST/ALT",value:"خفیف تا متوسط بالا"}];
-      if(["cirrhosis","alcohol-associated-liver-disease"].includes(id)) return [{label:"AST/ALT",value:"افزایش خفیف تا متوسط"},{label:"Albumin",value:"کاهش‌یافته"},{label:"INR",value:"افزایش‌یافته"}];
-      if(id==="masld-mash") return [{label:"ALT/AST",value:"افزایش خفیف، ALT غالب"},{label:"Bilirubin/Albumin/INR",value:"طبیعی"}];
-      return [{label:"AST/ALT",value:"طبیعی"},{label:"ALP/Bilirubin",value:"طبیعی"},{label:"Albumin/INR",value:"طبیعی"}];
-    case "pancreatic-biochem":
-      if(id==="acute-pancreatitis") return [{label:"Lipase",value:">3× ULN"},{label:"Amylase",value:"افزایش‌یافته"},{label:"Calcium",value:"طبیعی تا کمی پایین"}];
-      if(id==="chronic-pancreatitis") return [{label:"Lipase/Amylase",value:"طبیعی یا کمی بالا"},{label:"Glucose",value:"افزایش‌یافته"}];
-      if(id==="pancreatic-cancer") return [{label:"Lipase/Amylase",value:"طبیعی یا مختصراً بالا"},{label:"Glucose",value:"افزایش‌یافته جدید"}];
-      if(id==="autoimmune-pancreatitis") return [{label:"Lipase",value:"مختصراً افزایش‌یافته"},{label:"Glucose",value:"طبیعی تا کمی بالا"}];
-      return [{label:"Lipase/Amylase",value:"طبیعی"},{label:"Calcium/Glucose",value:"بدون اختلال اختصاصی"}];
-    case "gi-autoimmune-celiac":
-      if(id==="celiac-disease") return [{label:"tTG-IgA",value:"مثبت با تیتر بالا"},{label:"Total IgA",value:"طبیعی"},{label:"ANA/ASMA/AMA",value:"منفی"}];
-      if(id==="autoimmune-hepatitis") return [{label:"ANA/ASMA",value:"مثبت"},{label:"IgG",value:"افزایش‌یافته"},{label:"AMA",value:"منفی"}];
-      if(id==="primary-biliary-cholangitis") return [{label:"AMA",value:"مثبت"},{label:"IgG",value:"طبیعی تا کمی بالا"}];
-      return [{label:"Autoimmune panel",value:"یافته اختصاصی به نفع بیماری خودایمنی دیده نشد"},{label:"Celiac serology",value:"منفی"}];
-    case "viral-metabolic-liver":
-      if(["hepatitis-a","hepatitis-b","hepatitis-c","hepatitis-d","hepatitis-e"].includes(id)) return [{label:"Viral serology",value:"الگوی مارکری سازگار با عفونت فعال"},{label:"تست‌های تکمیلی",value:"بر اساس نوع ویروس پیگیری می‌شود"}];
-      if(id==="wilson-disease") return [{label:"Ceruloplasmin",value:"پایین"},{label:"24-h urine copper",value:"افزایش‌یافته"},{label:"Serum copper",value:"کاهش‌یافته"}];
-      if(id==="hereditary-hemochromatosis") return [{label:"Ferritin",value:"افزایش‌یافته"},{label:"Transferrin saturation",value:">45%"}];
-      if(id==="alpha-1-antitrypsin-deficiency") return [{label:"A1AT",value:"پایین"},{label:"Phenotype",value:"الگوی کمبود مرتبط"}];
-      return [{label:"Viral hepatitis screen",value:"منفی"},{label:"Metabolic screen",value:"یافته اختصاصی ندارد"}];
-    case "stool":
-      if(id==="acute-infectious-gastroenteritis") return [{label:"Stool culture/PCR",value:"عامل عفونی محتمل شناسایی شد"},{label:"C. difficile",value:"منفی"}];
-      if(["crohn-disease","ulcerative-colitis"].includes(id)) return [{label:"Occult blood",value:"مثبت"},{label:"Stool culture/C. difficile",value:"منفی"}];
-      return [{label:"Stool studies",value:"یافته عفونی اختصاصی ندارد"},{label:"Occult blood",value:"منفی یا بدون یافته اختصاصی"}];
-    case "fecal-inflammatory-malabsorption":
-      if(["crohn-disease","ulcerative-colitis","microscopic-colitis"].includes(id)) return [{label:"Fecal calprotectin",value:"افزایش‌یافته"},{label:"Fecal fat",value:"طبیعی"},{label:"Fecal elastase",value:"طبیعی"}];
-      if(["celiac-disease","whipple-disease","tropical-sprue","short-bowel-syndrome","small-intestinal-bacterial-overgrowth"].includes(id)) return [{label:"Fecal fat",value:"افزایش‌یافته"},{label:"Fecal calprotectin",value:"طبیعی تا مختصراً بالا"},{label:"Fecal elastase",value:"در محدوده طبیعی"}];
-      if(id==="chronic-pancreatitis") return [{label:"Fecal elastase",value:"کاهش‌یافته"},{label:"Fecal fat",value:"افزایش‌یافته"}];
-      return [{label:"Fecal calprotectin",value:"طبیعی"},{label:"Fecal fat",value:"طبیعی"},{label:"Fecal elastase",value:"طبیعی"}];
-    case "abdominal-ultrasound":
-      if(id==="cholelithiasis") return [{label:"Gallbladder",value:"سنگ‌های متحرک بدون wall thickening؛ CBD طبیعی"}];
-      if(id==="acute-cholecystitis") return [{label:"Gallbladder",value:"سنگ، wall thickening و pericholecystic fluid"},{label:"Sonographic Murphy",value:"مثبت"}];
-      if(["choledocholithiasis","acute-cholangitis"].includes(id)) return [{label:"Bile ducts",value:"اتساع مجاری صفراوی و احتمال سنگ CBD"}];
-      if(["cirrhosis","primary-biliary-cholangitis","primary-sclerosing-cholangitis","alcohol-associated-liver-disease"].includes(id)) return [{label:"Liver",value:"اکوی ناهمگون و علائم بیماری مزمن کبد"},{label:"Portal/Spleen",value:"در موارد پیشرفته splenomegaly یا portal hypertension"}];
-      if(id==="pancreatic-cancer") return [{label:"Pancreas",value:"توده پانکراس با dilated biliary tree"}];
-      if(id==="cholangiocarcinoma") return [{label:"Bile ducts",value:"اتساع بالادست ضایعه انسدادی"}];
-      return [{label:"Ultrasound",value:"یافته ساختاری مهم یا انسداد واضح مشاهده نشد."}];
-    case "ct-abdomen":
-      if(id==="acute-appendicitis") return [{label:"Appendix",value:"قطور و ملتهب با periappendiceal inflammation"}];
-      if(id==="diverticulitis") return [{label:"Colon",value:"Diverticula همراه wall thickening و pericolic fat stranding"}];
-      if(id==="mesenteric-ischemia") return [{label:"Mesenteric vessels",value:"کاهش پرفیوژن مزانتریک و شواهد ایسکمی"},{label:"Bowel",value:"تغییرات ایسکمیک متناسب با شدت"}];
-      if(id==="mesenteric-venous-thrombosis") return [{label:"Mesenteric veins",value:"ترومبوز ورید مزانتریک همراه edema روده"}];
-      if(id==="pancreatic-cancer") return [{label:"Pancreas",value:"توده سر پانکراس و انسداد مجرای صفراوی"}];
-      if(id==="colorectal-cancer") return [{label:"Colon",value:"ضخیم‌شدگی فوکال دیواره و ضایعه مشکوک به تومور"}];
-      if(id==="crohn-disease") return [{label:"Bowel",value:"segmental wall thickening و skip involvement"}];
-      return [{label:"CT abdomen/pelvis",value:"یافته اختصاصی دیگری مشاهده نشد."}];
-    case "endoscopy-biopsy":
-      if(id==="gerd") return [{label:"EGD",value:"erosive esophagitis خفیف تا متوسط"}];
-      if(id==="barrett-esophagus") return [{label:"EGD",value:"columnar mucosa در GE junction"},{label:"Histopathology",value:"intestinal metaplasia سازگار با Barrett"}];
-      if(id==="achalasia") return [{label:"EGD/Manometry",value:"مری گشاد با مقاومت در LES؛ اختلال حرکتی محتمل"}];
-      if(id==="eosinophilic-esophagitis") return [{label:"EGD",value:"rings/furrows و narrowing"},{label:"Biopsy",value:"افزایش eosinophils"}];
-      if(id==="peptic-ulcer-disease") return [{label:"EGD",value:"ulcer گوارشی"}];
-      if(id==="h-pylori-gastritis") return [{label:"EGD/biopsy",value:"گاستریت"},{label:"Histopathology",value:"H. pylori مثبت"}];
-      if(id==="gastric-cancer") return [{label:"EGD",value:"توده یا زخم نامنظم مشکوک به بدخیمی"},{label:"Biopsy",value:"بدخیمی تأییدشده"}];
-      if(id==="celiac-disease") return [{label:"Duodenal biopsy",value:"villous atrophy و افزایش intraepithelial lymphocytes"}];
-      if(["crohn-disease","ulcerative-colitis","microscopic-colitis","colorectal-cancer","diverticular-disease","diverticulitis","hereditary-gi-polyposis"].includes(id)) return [{label:"Colonoscopy",value:"یافته آندوسکوپیک متناسب با تشخیص"},{label:"Biopsy/Pathology",value:"الگوی پاتولوژیک سازگار"}];
-      if(["pancreatic-cancer","cholangiocarcinoma","autoimmune-pancreatitis","chronic-pancreatitis"].includes(id)) return [{label:"EUS/biopsy",value:"یافته ساختاری پانکراس یا صفراوی متناسب با تشخیص"}];
-      return [{label:"Endoscopy/Histopathology",value:"یافته اختصاصی قابل‌توجهی مشاهده نشد."}];
-    default: return [{label:"نتیجه",value:"یافته اختصاصی قابل‌توجهی مشاهده نشد."}];
-  }
-}
-
 function history(seed: GastroSeed): CaseHint[] {
-  const patientCase = {
-    id: `gastro-${seed.id}`,
-    title: seed.title,
-    course: "gastroenterology" as const,
-    tags: seed.tags,
-    difficulty: seed.difficulty,
-    patient: { age: seed.age, sex: seed.sex },
-    presentation: seed.presentation,
-    stages: [],
-    diagnosis: diagnosis(seed.id),
-    candidateDiagnosisIds: [],
-    reviewQuestions: [],
-  } satisfies Case;
-  return gastroenterologyQuestionBank.map((q) => ({
-    id: `${seed.id}-${q.id}`,
-    type: "history",
-    title: q.text,
-    sourceId: q.id,
-    content: answerGastroHistory(patientCase, q.id),
-  }));
+  const answers = gastroHistoryAnswers[seed.id];
+  if (!answers) throw new Error(`Missing revised gastroenterology history answers for ${seed.id}`);
+  return gastroenterologyQuestionBank.map((q) => {
+    const content = answers[q.id];
+    if (typeof content !== "string" || !content.trim()) {
+      throw new Error(`Missing revised gastroenterology answer: ${seed.id}/${q.id}`);
+    }
+    return {
+      id: `${seed.id}-${q.id}`,
+      type: "history",
+      title: q.text,
+      sourceId: q.id,
+      content,
+    };
+  });
 }
-function physical(seed: GastroSeed): CaseHint[] { return gastroenterologyPhysicalExamBank.map((item) => ({ id: `${seed.id}-${item.id}`, type: "physical-exam", title: item.title, label: item.title, sourceId: item.id, content: physicalAnswer(seed,item.section) })); }
-function investigations(seed: GastroSeed): Investigation[] { return gastroenterologyInvestigationBank.map((item) => ({ id: `${seed.id}-${item.id}`, sourceId: item.id, name: item.title, category: item.section, findings: investigationResult(seed,item.section), relevance: "high" })); }
+
+function physical(seed: GastroSeed): CaseHint[] {
+  const answers = gastroPhysicalAnswers[seed.id];
+  if (!answers) throw new Error(`Missing revised gastroenterology physical exam answers for ${seed.id}`);
+  return gastroenterologyPhysicalExamBank.map((item) => {
+    const content = answers[item.id];
+    if (typeof content !== "string" || !content.trim()) {
+      throw new Error(`Missing revised gastroenterology physical exam answer: ${seed.id}/${item.id}`);
+    }
+    return {
+      id: `${seed.id}-${item.id}`,
+      type: "physical-exam",
+      title: item.title,
+      label: item.title,
+      sourceId: item.id,
+      content,
+    };
+  });
+}
+
+function investigations(seed: GastroSeed): Investigation[] {
+  const answers = gastroInvestigationAnswers[seed.id];
+  if (!answers) throw new Error(`Missing revised gastroenterology investigation answers for ${seed.id}`);
+  return gastroenterologyInvestigationBank.map((item) => {
+    const findings = answers[item.id];
+    if (!Array.isArray(findings) || findings.length === 0 || findings.some((finding) => !finding.label?.trim() || !finding.value?.trim())) {
+      throw new Error(`Missing revised gastroenterology investigation findings: ${seed.id}/${item.id}`);
+    }
+    return {
+      id: `${seed.id}-${item.id}`,
+      sourceId: item.id,
+      name: item.title,
+      category: item.section,
+      findings,
+      relevance: findings.some((finding) => /ثبت نشده|مستند نشده|انجام نشده|در دسترس نیست/.test(finding.value)) ? "low" : "high",
+    };
+  });
+}
+
 function review(seed: GastroSeed): ReviewQuestion[] { const opts=candidates(seed); return [{ id:`${seed.id}-review-1`, category:"diagnosis", question:"کدام تشخیص با مجموع شرح حال، معاینه و بررسی‌های این کیس بیشترین تطابق را دارد؟", options:opts.map((id,i)=>({id:`opt-${i+1}`,text:diagnosis(id).name})), correctOptionId:"opt-1", explanation:`الگوی بالینی و یافته‌های بررسی‌ها با ${diagnosis(seed.id).name} بیشترین تطابق را دارد.` }]; }
 
 export const gastroenterologyCases: Case[] = seeds.map((seed) => ({ id:`gastro-${seed.id}`, title:seed.title, course:"gastroenterology", tags:seed.tags, difficulty:seed.difficulty, patient:{age:seed.age,sex:seed.sex}, presentation:seed.presentation, stages:[ {id:`${seed.id}-history`,type:"history",title:"شرح حال",hints:history(seed)}, {id:`${seed.id}-physical`,type:"physical-exam",title:"معاینه فیزیکی",hints:physical(seed)}, {id:`${seed.id}-investigation`,type:"investigation",title:"بررسی‌های تشخیصی",investigations:investigations(seed)} ], diagnosis:diagnosis(seed.id), candidateDiagnosisIds:candidates(seed), reviewQuestions: [] }));

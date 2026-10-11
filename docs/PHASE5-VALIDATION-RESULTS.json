@@ -1,0 +1,33 @@
+{
+  "phase": 5,
+  "cases": 50,
+  "questions_per_case": 40,
+  "unique_question_ids": 40,
+  "structural_errors": 0,
+  "empty_history_answers": 0,
+  "strict_typescript_compile": "passed",
+  "runtime_checks": "passed",
+  "post_fix_validator_flags": 103,
+  "post_fix_validator_by_severity": {
+    "error": 0,
+    "review": 98,
+    "warning": 5
+  },
+  "post_fix_validator_by_code": {
+    "ONSET_MODE_UNDOCUMENTED": 47,
+    "ALLERGY_HISTORY_MISSING": 50,
+    "TARGET_DIAGNOSIS_LEAKAGE": 1,
+    "HIGH_ANSWER_REUSE": 5
+  },
+  "resolved": [
+    "QUESTION_ANSWER_SCOPE_MISMATCH x50",
+    "DYSPNEA_CONTRADICTION cardio-050"
+  ],
+  "remaining_limitations": [
+    "vaping is not present in source profiles and remains unknown",
+    "47 onset-mode fields are not specified in source profiles",
+    "cardio-003 is a known-HFrEF/follow-up scenario",
+    "full Next.js build not verified because package.json and lockfile are absent",
+    "not specialist cardiology sign-off"
+  ]
+}

@@ -1,0 +1,1498 @@
+[
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-001",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "از اطلاعاتی که دارم نمی‌توانم با اطمینان بگویم شروع درد ناگهانی بود یا تدریجی."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-001",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه سکته قلبی و نارسایی قلبی ندارم؛ دیابت و فشارخون دارم و کلسترولم بالاست. درباره بیماری کرونر قبلاً تشخیص مشخصی به من نگفته‌اند."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-001",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-002",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "شروع دقیقاً ناگهانی یا تدریجی بودن علائم در شرح‌حالم مشخص نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-002",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "فشارخون و چربی خون بالا دارم. دیابت، بیماری کلیوی یا تیروئیدی نداشته‌ام؛ سابقه سکته قلبی یا نارسایی قلبی ندارم. بیماری کرونر به‌طور مشخص برایم تشخیص داده نشده است."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-002",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-003",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سه سال پیش سکته قلبی داشته‌ام و قبلاً نارسایی قلبی برایم تشخیص داده شده است. فشارخون و چربی خون هم دارم؛ دیابت، بیماری کلیوی یا تیروئیدی ندارم."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-003",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-004",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "قبلاً برای ضربان نامنظم قلبم تشخیص فیبریلاسیون دهلیزی داده‌اند. سابقه سکته قلبی، نارسایی قلبی، فشارخون، دیابت، چربی خون، بیماری کلیوی یا تیروئیدی را رد می‌کنم."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-004",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-005",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "قبلاً گفته‌اند حمله‌های تپش قلبم از نوع SVT است. سابقه سکته قلبی، بیماری کرونر، نارسایی قلبی، فشارخون، دیابت، چربی خون، بیماری کلیوی یا تیروئیدی را رد می‌کنم."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-005",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-006",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-006",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی ۵ سال پیش سکته قلبی داشتم؛ بیماری کرونر بله؛ نارسایی قلبی نه؛ آریتمی قبلاً VT داشته‌ام؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-006",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-006",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-007",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-007",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل به من گفته‌اند سوفل قلبی دارم؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون بله؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-007",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-007",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-008",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-008",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل بله، از قبل گفته‌اند سوفل میترال دارم؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-008",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-008",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-009",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-009",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل قبلاً سوفل نداشتم؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-009",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-009",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-010",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-010",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-010",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-010",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-011",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-011",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل قبلاً گفته‌اند سوفل دارم؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-011",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-011",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-012",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-012",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی قبلاً نارسایی قلبی تشخیص داده شده؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-012",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-012",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-013",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-013",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-013",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-013",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-014",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-014",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون بله، سال‌ها فشار خون بالا دارم؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-014",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-014",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-015",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-015",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-015",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-015",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-016",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-016",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون بله؛ دیابت بله؛ چربی خون بله؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-016",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-016",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-017",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-017",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر بله؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون بله؛ دیابت بله؛ چربی خون بله؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-017",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-017",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-018",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-018",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-018",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-018",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-019",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-019",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-019",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-019",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-020",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-020",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-020",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-020",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-021",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-021",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون بله؛ دیابت نه؛ چربی خون بله؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-021",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-021",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-022",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-022",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون بله، ۲۰ سال؛ دیابت بله؛ چربی خون بله؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-022",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-022",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-023",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-023",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی بله؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون بله؛ دیابت نه؛ چربی خون بله؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-023",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-023",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-024",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-024",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی بله؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون بله؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-024",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-024",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-025",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-025",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت بله؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-025",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-025",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-026",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-026",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی قبلاً فلاتر تشخیص داده شده؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-026",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-026",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-027",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-027",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-027",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-027",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-028",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-028",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-028",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-028",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-029",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-029",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-029",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-029",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-030",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-030",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی سابقه سکته قلبی؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-030",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-030",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-031",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-031",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-031",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-031",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-032",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-032",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-032",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-032",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-033",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-033",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-033",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-033",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-034",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-034",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-034",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-034",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-035",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-035",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-035",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-035",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-036",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-036",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل سابقه بیماری دریچه‌ای دارم؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-036",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-036",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-037",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-037",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل بیماری دریچه میترال دارم؛ بیماری مادرزادی نه؛ تب روماتیسمی در کودکی تب روماتیسمی داشتم. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-037",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-037",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-038",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-038",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-038",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-038",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-039",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-039",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل سابقه بیماری دریچه‌ای دارم؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-039",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-039",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-040",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-040",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل از کودکی گفته‌اند سوفل قلبی دارم؛ بیماری مادرزادی بله، تنگی دریچه ریوی؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-040",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-040",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "TARGET_DIAGNOSIS_LEAKAGE",
+    "caseId": "cardio-040",
+    "questionId": "cardio-hist-035",
+    "message": "Past-history answer contains the target diagnosis/title; decide whether this is a follow-up or blind diagnostic case."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-041",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-041",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-041",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-041",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-042",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-042",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-042",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-042",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-043",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-043",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون بله؛ دیابت نه؛ چربی خون بله؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-043",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-043",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-044",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-044",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل بیماری دریچه‌ای دارم؛ بیماری مادرزادی نه؛ تب روماتیسمی در نوجوانی تب روماتیسمی داشتم. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-044",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-044",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-045",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-045",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی به من نارسایی قلبی گفته‌اند؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون بله؛ دیابت نه؛ چربی خون بله؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-045",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-045",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-046",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-046",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-046",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-046",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-047",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-047",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی نه؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-047",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-047",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-048",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-048",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل از کودکی گفته‌اند سوفل دارم؛ بیماری مادرزادی بله، ASD؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-048",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-048",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-049",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-049",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل از کودکی سوفل داشته‌ام؛ بیماری مادرزادی بله، VSD؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون نه؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-049",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-049",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "error",
+    "code": "DYSPNEA_CONTRADICTION",
+    "caseId": "cardio-050",
+    "questionId": "cardio-hist-022",
+    "message": "General dyspnea is denied but exertional dyspnea is affirmative.",
+    "answer": "بله"
+  },
+  {
+    "severity": "review",
+    "code": "ONSET_MODE_UNDOCUMENTED",
+    "caseId": "cardio-050",
+    "questionId": "cardio-hist-009",
+    "message": "Onset timing is documented but sudden-vs-gradual mode is not; source profile needs review.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "error",
+    "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+    "caseId": "cardio-050",
+    "questionId": "cardio-hist-035",
+    "message": "Answer includes systemic comorbidities that are not asked in the current wording of question 035; the approved wording and q035/q040 split have drifted.",
+    "answer": "سابقه قلبی: سکته قلبی نه؛ بیماری کرونر نه؛ نارسایی قلبی نه؛ آریتمی نه؛ بیماری دریچه‌ای/سوفل نه؛ بیماری مادرزادی به من گفته‌اند تنگی مادرزادی آئورت دارم؛ تب روماتیسمی نه. بیماری‌های همراه: فشارخون بله، از جوانی؛ دیابت نه؛ چربی خون نه؛ کلیه نه؛ تیروئید نه."
+  },
+  {
+    "severity": "review",
+    "code": "ALLERGY_HISTORY_MISSING",
+    "caseId": "cardio-050",
+    "questionId": "cardio-hist-038",
+    "message": "Allergy history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "review",
+    "code": "VAPE_HISTORY_MISSING",
+    "caseId": "cardio-050",
+    "questionId": "cardio-hist-040",
+    "message": "Vaping history is missing from source profile; do not treat as negative."
+  },
+  {
+    "severity": "warning",
+    "code": "HIGH_ANSWER_REUSE",
+    "caseId": "BANK",
+    "questionId": "cardio-hist-009",
+    "message": "Same rendered answer appears in 45/50 cases; verify whether this reflects real shared negatives or generic boilerplate.",
+    "answer": "نحوه شروع ناگهانی یا تدریجی در داده های این کیس به طور مستقل ثبت نشده است."
+  },
+  {
+    "severity": "warning",
+    "code": "HIGH_ANSWER_REUSE",
+    "caseId": "BANK",
+    "questionId": "cardio-hist-021",
+    "message": "Same rendered answer appears in 42/50 cases; verify whether this reflects real shared negatives or generic boilerplate.",
+    "answer": "نه"
+  },
+  {
+    "severity": "warning",
+    "code": "HIGH_ANSWER_REUSE",
+    "caseId": "BANK",
+    "questionId": "cardio-hist-036",
+    "message": "Same rendered answer appears in 43/50 cases; verify whether this reflects real shared negatives or generic boilerplate.",
+    "answer": "آنژیوگرافی/اقدامات دیگر: نداشته ام؛ استنت نه؛ جراحی بای پس نه؛ ابلیشن نه؛ دستگاه قلبی نه."
+  },
+  {
+    "severity": "warning",
+    "code": "HIGH_ANSWER_REUSE",
+    "caseId": "BANK",
+    "questionId": "cardio-hist-038",
+    "message": "Same rendered answer appears in 45/50 cases; verify whether this reflects real shared negatives or generic boilerplate.",
+    "answer": "اطلاعاتی درباره حساسیت دارویی در شرح حال این کیس ثبت نشده است."
+  },
+  {
+    "severity": "warning",
+    "code": "HIGH_ANSWER_REUSE",
+    "caseId": "BANK",
+    "questionId": "cardio-hist-039",
+    "message": "Same rendered answer appears in 41/50 cases; verify whether this reflects real shared negatives or generic boilerplate.",
+    "answer": "سابقه خانوادگی بیماری کرونر زودرس: نه؛ مرگ ناگهانی: نه؛ کاردیومیوپاتی: نه؛ آریتمی ارثی: نه؛ بیماری مادرزادی: نه؛ بیماری آئورت: نه."
+  }
+]

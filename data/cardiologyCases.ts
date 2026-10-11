@@ -1,13 +1,16 @@
 import type { Case, CaseHint } from "../types/case";
 import { diseases } from "./diseases";
 import { cardiologyQuestionBank } from "./cardiologyQuestionBank";
+import { cardiologyHistoryPhase3 } from "./cardiologyHistoryPhase3";
+import { cardiologyPhysicalExamBank } from "./cardiologyPhysicalExamBank";
+import { cardiologyInvestigationBank } from "./cardiologyInvestigationBank";
 import { assertCardiologyCasesValid } from "../lib/cardiologyCaseValidator";
 
 const q = (id: string, content: string): CaseHint => { const item = cardiologyQuestionBank.find(x => x.id === id); return { id: `${id}-answer`, sourceId: id, label: item?.text ?? id, content }; };
 
 const caseData: Array<{id:string; title:string; diagnosis:string; age:number; sex:"male"|"female"; difficulty:"easy"|"medium"|"hard"; profile: Record<string,string>; pe:string[]; inv:Array<[string,string]>}> = [
 {
- id: "cardio-001", title: "سندرم حاد کرونری (ACS)", diagnosis: "acute-coronary-syndrome", age: 58, sex: "male", difficulty: "easy",
+ id: "cardio-001", title: "سندرم حاد کرونری (ACS)", diagnosis: "acute-coronary-syndrome", age: 58, sex: "male", difficulty: "medium",
  profile: {"complaint": "درد و فشار شدید وسط سینه که حدود ۴۵ دقیقه است قطع نشده", "onset": "حدود ۴۵ دقیقه پیش، هنگام بالا رفتن از پله‌ها", "course": "از شروع تا الان برطرف نشده و شدیدتر شده", "exertional": "بله، با فعالیت شروع شد", "rest": "بله، این بار در استراحت هم ادامه دارد", "quality": "فشارنده و سنگین، انگار چیزی روی سینه‌ام گذاشته‌اند", "location": "وسط سینه", "radiation": "به دست چپ و کمی فک", "duration": "حدود ۴۵ دقیقه", "better": "با استراحت کامل نشده", "pleuritic": "نه", "position": "با تغییر وضعیت فرق نمی‌کند", "nausea": "تهوع و عرق سرد دارم", "dyspnea": "بله", "exertional_dyspnea": "بله", "tolerance": "امروز خیلی کم شده", "orthopnea": "نه", "pillows": "یک بالش", "pnd": "نه", "edema": "نه", "weight": "تغییری نداشته", "palpitations": "کمی تپش همراه درد", "abrupt": "نه", "rhythm": "منظم", "palp_duration": "همراه درد ادامه دارد", "palp_trigger": "با درد و فعالیت", "palp_associated": "سرگیجه خفیف و تنگی نفس", "pre_syncope": "نه", "syncope_ex": "نه", "prodrome": "تهوع و عرق سرد", "recovery": "هنوز کامل به حالت عادی برنگشته‌ام", "mi": "نه", "cad": "نه", "hf": "نه", "arrhythmia": "نه", "murmur": "نه", "htn": "بله، ۱۰ سال", "diabetes": "بله", "lipids": "بله", "kidney": "نه", "thyroid": "نه", "procedures": "تا حالا نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "لوزارتان و آتورواستاتین و متفورمین", "antiplatelet": "آسپیرین مصرف نمی‌کنم", "beta": "گاهی بتابلوکر می‌خورم", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "الان سیگار می‌کشم", "cigarettes": "روزی یک پاکت و ۳۰ سال است", "alcohol": "گاهی", "alcohol_amt": "ماهی یکی دو بار", "stimulants": "نه", "exercise": "فعالیت منظم ندارم", "lifestyle_loss": "بله، چند ماه است زودتر خسته می‌شوم", "osa": "خرخر شدید ندارم", "dietweight": "وزنم تقریباً ثابت بوده", "family_early_cad": "پدرم در ۵۶ سالگی سکته قلبی داشت", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "مادرم کلسترول بالا دارد", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه، این بار در استراحت هم هست", "age": "None", "fever": "نه"},
  pe: ["بیمار مضطرب و عرق‌کرده است و درد فعال دارد.", "BP 148/92 mmHg، HR 104/min، RR 20/min، SpO₂ 96% در هوای اتاق.", "تنفس سریع خفیف بدون استفاده از عضلات فرعی.", "نبض‌ها دوطرفه و قابل لمس؛ ادم محیطی ندارد.", "قله قلب در محل طبیعی لمس می‌شود؛ لرزش قابل لمس ندارد.", "S1/S2 قابل سمع؛ سوفل واضحی شنیده نمی‌شود."],
  inv: [["ECG", "ST depression در لیدهای جانبی."], ["High-sensitivity troponin", "Troponin با روند افزایشی بالاتر از حد مرجع."], ["CBC", "WBC 11,800/µL با نوتروفیلی خفیف؛ Hb 14.2 g/dL."], ["Echocardiography", "اختلال حرکتی منطقه‌ای دیواره قدامی-جانبی و LVEF حدود 45٪."], ["Coronary angiography", "تنگی شدید در یک رگ کرونر با ضایعه مسئول علائم."]],
@@ -20,13 +23,13 @@ const caseData: Array<{id:string; title:string; diagnosis:string; age:number; se
 },
 {
  id: "cardio-003", title: "نارسایی قلبی با کسر جهشی کاهش‌یافته (HFrEF)", diagnosis: "heart-failure-with-reduced-ejection-fraction", age: 70, sex: "female", difficulty: "easy",
- profile: {"complaint": "تنگی نفس و ورم پاها", "onset": "چند ماه پیش", "course": "به‌تدریج بدتر شده", "exertional": "بله", "rest": "گاهی", "quality": "فشار یا درد واضح ندارم", "location": "درد مشخصی ندارم", "radiation": "ندارد", "duration": "تنگی نفس با فعالیت چند دقیقه تا بیشتر طول می‌کشد", "better": "با نشستن و استراحت بهتر می‌شود", "pleuritic": "نه", "position": "با دراز کشیدن بدتر می‌شود", "nausea": "نه", "dyspnea": "بله", "exertional_dyspnea": "بله", "tolerance": "به‌طور واضح کمتر شده", "orthopnea": "بله", "pillows": "۳ بالش", "pnd": "بله", "edema": "هر دو ساق تا بالای مچ", "weight": "در دو هفته اخیر حدود ۳ کیلو اضافه کرده‌ام", "palpitations": "گاهی", "abrupt": "نه", "rhythm": "منظم", "palp_duration": "چند دقیقه", "palp_trigger": "با فعالیت", "palp_associated": "با تنگی نفس", "pre_syncope": "نه", "syncope_ex": "نه", "prodrome": "ندارم", "recovery": "با استراحت تدریجی بهتر می‌شوم", "mi": "حدود ۳ سال پیش سکته قلبی داشته‌ام", "cad": "بله", "hf": "بله، نارسایی قلبی قبلاً تشخیص داده شده", "arrhythmia": "نه", "murmur": "نه", "htn": "بله", "diabetes": "نه", "lipids": "بله", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "فوروزماید، لوزارتان، کارودیلول و اسپیرونولاکتون", "antiplatelet": "نه", "beta": "گاهی", "diuretic": "بله، فوروزماید", "medchange": "نه", "missed": "نه", "smoking": "قبلاً سیگار می‌کشیدم", "cigarettes": "روزی نصف پاکت به مدت ۲۵ سال، ۳ سال است ترک کرده‌ام", "alcohol": "نه", "alcohol_amt": "ندارم", "stimulants": "نه", "exercise": "کم", "lifestyle_loss": "بله", "osa": "نه", "dietweight": "نمک غذا را زیاد مصرف می‌کنم", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "age": "70", "fever": "نه"},
+ profile: {"complaint": "تنگی نفس و ورم پاها", "onset": "چند ماه پیش", "course": "به‌تدریج بدتر شده", "exertional": "بله", "rest": "گاهی", "quality": "فشار یا درد واضح ندارم", "location": "درد مشخصی ندارم", "radiation": "ندارد", "duration": "تنگی نفس با فعالیت چند دقیقه تا بیشتر طول می‌کشد", "better": "با نشستن و استراحت بهتر می‌شود", "pleuritic": "نه", "position": "با دراز کشیدن بدتر می‌شود", "nausea": "نه", "dyspnea": "بله", "exertional_dyspnea": "بله", "tolerance": "به‌طور واضح کمتر شده", "orthopnea": "بله", "pillows": "۳ بالش", "pnd": "بله", "edema": "هر دو ساق تا بالای مچ", "weight": "در دو هفته اخیر حدود ۳ کیلو اضافه کرده‌ام", "palpitations": "گاهی", "abrupt": "نه", "rhythm": "منظم", "palp_duration": "چند دقیقه", "palp_trigger": "با فعالیت", "palp_associated": "با تنگی نفس", "pre_syncope": "نه", "syncope_ex": "نه", "prodrome": "ندارم", "recovery": "با استراحت تدریجی بهتر می‌شوم", "mi": "حدود ۳ سال پیش سکته قلبی داشته‌ام", "cad": "بله", "hf": "بله، نارسایی قلبی قبلاً تشخیص داده شده", "arrhythmia": "نه", "murmur": "نه", "htn": "بله", "diabetes": "نه", "lipids": "بله", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "فوروزماید، لوزارتان، کارودیلول و اسپیرونولاکتون", "antiplatelet": "نه", "beta": "بله، کارودیلول مصرف می‌کنم", "diuretic": "بله، فوروزماید", "medchange": "نه", "missed": "نه", "smoking": "قبلاً سیگار می‌کشیدم", "cigarettes": "روزی نصف پاکت به مدت ۲۵ سال، ۳ سال است ترک کرده‌ام", "alcohol": "نه", "alcohol_amt": "ندارم", "stimulants": "نه", "exercise": "کم", "lifestyle_loss": "بله", "osa": "نه", "dietweight": "نمک غذا را زیاد مصرف می‌کنم", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "age": "70", "fever": "نه"},
  pe: ["بیمار با تنگی نفس در حالت نشسته و دیسترس متوسط است.", "BP 108/68، HR 96، RR 24، SpO₂ 92% در هوای اتاق.", "تنفس سریع با تلاش تنفسی خفیف.", "ادم گوده‌گذار دوطرفه تا ساق و اندام‌ها نسبتاً سرد.", "قله قلب جابه‌جا و ضربان سوم قابل سمع است.", "کراکل دوطرفه قاعده ریه و S3 شنیده می‌شود."],
  inv: [["BNP/NT-proBNP", "NT-proBNP برابر 4,800 pg/mL."], ["Echocardiography", "LVEF حدود 30٪ با کاهش منتشر عملکرد سیستولیک بطن چپ."], ["Chest X-ray", "احتقان عروقی ریه و ادم بینابینی همراه بزرگی قلب."], ["ECG", "ریتم سینوسی با Q wave قدیمی در لیدهای قدامی."], ["BMP/CMP", "کراتینین 1.3 mg/dL و سدیم 133 mmol/L."]],
 },
 {
  id: "cardio-004", title: "فیبریلاسیون دهلیزی (AF)", diagnosis: "atrial-fibrillation", age: 76, sex: "female", difficulty: "easy",
- profile: {"complaint": "تپش قلب", "onset": "چند هفته تا چند ماه پیش", "course": "حملات بیشتر شده‌اند", "exertional": "گاهی", "rest": "بله", "quality": "درد مشخصی ندارم", "location": "درد ندارم", "radiation": "ندارد", "duration": "چند دقیقه تا چند ساعت", "better": "گاهی خودبه‌خود قطع می‌شود", "pleuritic": "نه", "position": "فرقی ندارد", "nausea": "گاهی", "dyspnea": "گاهی", "exertional_dyspnea": "کمی", "tolerance": "کمی کمتر شده", "orthopnea": "نه", "pillows": "یک", "pnd": "نه", "edema": "نه", "weight": "ثابت", "palpitations": "بله، واضح", "abrupt": "گاهی ناگهانی شروع می‌شود ولی همیشه نه", "rhythm": "نامنظم", "palp_duration": "چند ساعت", "palp_trigger": "گاهی با استرس", "palp_associated": "گاهی سرگیجه و تنگی نفس", "pre_syncope": "گاهی", "syncope_ex": "نه", "prodrome": "گاهی احساس گرمی", "recovery": "بعد از قطع تپش سریع خوب می‌شوم", "mi": "نه", "cad": "نه", "hf": "نه", "arrhythmia": "بله، AF قبلاً تشخیص داده شده", "murmur": "نه", "htn": "نه", "diabetes": "نه", "lipids": "نه", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "آپیکسابان و متوپرولول", "antiplatelet": "داروی ضدانعقاد مصرف می‌کنم", "beta": "نه", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "نه", "cigarettes": "ندارم", "alcohol": "کم", "alcohol_amt": "گاهی", "stimulants": "نه", "exercise": "متوسط", "lifestyle_loss": "کمی", "osa": "نه", "dietweight": "ثابت", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "palp": "بله، ضربان نامنظم و کوبنده", "age": "None", "fever": "نه"},
+ profile: {"complaint": "تپش قلب", "onset": "چند هفته تا چند ماه پیش", "course": "حملات بیشتر شده‌اند", "exertional": "گاهی", "rest": "بله", "quality": "درد مشخصی ندارم", "location": "درد ندارم", "radiation": "ندارد", "duration": "چند دقیقه تا چند ساعت", "better": "گاهی خودبه‌خود قطع می‌شود", "pleuritic": "نه", "position": "فرقی ندارد", "nausea": "گاهی", "dyspnea": "گاهی", "exertional_dyspnea": "کمی", "tolerance": "کمی کمتر شده", "orthopnea": "نه", "pillows": "یک", "pnd": "نه", "edema": "نه", "weight": "ثابت", "palpitations": "بله، واضح", "abrupt": "گاهی ناگهانی شروع می‌شود ولی همیشه نه", "rhythm": "نامنظم", "palp_duration": "چند ساعت", "palp_trigger": "گاهی با استرس", "palp_associated": "گاهی سرگیجه و تنگی نفس", "pre_syncope": "گاهی", "syncope_ex": "نه", "prodrome": "گاهی احساس گرمی", "recovery": "بعد از قطع تپش سریع خوب می‌شوم", "mi": "نه", "cad": "نه", "hf": "نه", "arrhythmia": "بله، AF قبلاً تشخیص داده شده", "murmur": "نه", "htn": "نه", "diabetes": "نه", "lipids": "نه", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "داروی روزانه مصرف نمی‌کنم", "antiplatelet": "داروی ضدانعقاد مصرف می‌کنم", "beta": "نه", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "نه", "cigarettes": "ندارم", "alcohol": "کم", "alcohol_amt": "گاهی", "stimulants": "نه", "exercise": "متوسط", "lifestyle_loss": "کمی", "osa": "نه", "dietweight": "ثابت", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "palp": "بله، ضربان نامنظم و کوبنده", "age": "None", "fever": "نه"},
  pe: ["بیمار هوشیار و پایدار است ولی از تپش شکایت دارد.", "BP 132/78، HR 118/min، RR 18، SpO₂ 97%.", "تنفس بدون دیسترس.", "نبض نامنظم و نامنظم، ادم ندارد.", "قله قلب قابل لمس، بدون thrill.", "ریتم نامنظم؛ S1 شدت متغیر دارد."],
  inv: [["ECG", "ریتم کاملاً نامنظم با نبود موج P منظم."], ["Echocardiography", "بزرگی دهلیز چپ و LVEF حدود 55٪."], ["Holter Monitor", "اپیزودهای متعدد AF ثبت شده‌اند."], ["TSH", "TSH در محدوده طبیعی."], ["NT-proBNP", "کمی افزایش یافته، 980 pg/mL."]],
 },
@@ -37,7 +40,7 @@ const caseData: Array<{id:string; title:string; diagnosis:string; age:number; se
  inv: [["ECG", "تاکی‌کاردی منظم با QRS باریک و ضربان حدود 185/min."], ["Electrophysiology Study", "AVNRT القا و مسیر مدار بازگشتی مشخص شد."], ["Echocardiography", "ساختار قلب و LVEF طبیعی."], ["Electrolytes", "پتاسیم و منیزیم طبیعی."], ["CBC", "Hb و WBC در محدوده طبیعی."]],
 },
 {
- id: "cardio-006", title: "تاکی‌کاردی بطنی (VT)", diagnosis: "ventricular-tachycardia", age: 64, sex: "male", difficulty: "easy",
+ id: "cardio-006", title: "تاکی‌کاردی بطنی (VT)", diagnosis: "ventricular-tachycardia", age: 64, sex: "male", difficulty: "medium",
  profile: {"complaint": "تپش قلب", "onset": "چند هفته تا چند ماه پیش", "course": "حملات بیشتر شده‌اند", "exertional": "گاهی", "rest": "بله", "quality": "درد مشخصی ندارم", "location": "درد ندارم", "radiation": "ندارد", "duration": "چند دقیقه تا چند ساعت", "better": "گاهی خودبه‌خود قطع می‌شود", "pleuritic": "نه", "position": "فرقی ندارد", "nausea": "گاهی", "dyspnea": "گاهی", "exertional_dyspnea": "کمی", "tolerance": "کمی کمتر شده", "orthopnea": "نه", "pillows": "یک", "pnd": "نه", "edema": "نه", "weight": "ثابت", "palpitations": "بله، واضح", "abrupt": "ناگهانی", "rhythm": "خیلی سریع و منظم", "palp_duration": "چند دقیقه", "palp_trigger": "گاهی با فعالیت", "palp_associated": "سرگیجه شدید و نزدیک غش", "pre_syncope": "بله", "syncope_ex": "نه", "prodrome": "گاهی احساس گرمی", "recovery": "بعد از قطع تپش سریع خوب می‌شوم", "mi": "۵ سال پیش سکته قلبی داشتم", "cad": "بله", "hf": "نه", "arrhythmia": "قبلاً VT داشته‌ام", "murmur": "نه", "htn": "نه", "diabetes": "نه", "lipids": "نه", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "ICD دارم", "meds": "داروی قلبی منظمی ندارم", "antiplatelet": "نه", "beta": "نه", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "نه", "cigarettes": "ندارم", "alcohol": "کم", "alcohol_amt": "گاهی", "stimulants": "نه", "exercise": "متوسط", "lifestyle_loss": "کمی", "osa": "نه", "dietweight": "ثابت", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "palp": "تپش خیلی سریع همراه سرگیجه", "age": "None", "fever": "نه"},
  pe: ["بیمار رنگ‌پریده و سرگیجه‌دار است.", "BP 88/58، HR 168/min، RR 24، SpO₂ 94%.", "تنفس سریع.", "اندام‌ها سرد و پرشدگی مویرگی حدود ۳ ثانیه.", "قله قلب بدون یافته برجسته.", "ریتم بسیار سریع؛ صدای قلب‌ها با ریتم بطنی هماهنگ است."],
  inv: [["ECG", "تاکی‌کاردی منظم با QRS پهن حدود 168/min."], ["Echocardiography", "LVEF حدود 35٪ و اسکار قدیمی دیواره تحتانی."], ["Troponin", "کمی بالاتر از حد مرجع، بدون روند شدید افزایشی."], ["Coronary angiography", "بیماری کرونر قدیمی با تنگی‌های متوسط."], ["Electrolytes", "پتاسیم 4.1 و منیزیم طبیعی."]],
@@ -55,7 +58,7 @@ const caseData: Array<{id:string; title:string; diagnosis:string; age:number; se
  inv: [["Echocardiography", "MR شدید با جت برگشتی به دهلیز چپ و بزرگ‌شدن LV/LA؛ LVEF 55٪."], ["ECG", "ریتم سینوسی با بزرگی دهلیز چپ."], ["Chest X-ray", "بزرگی قلب و احتقان خفیف ریوی."], ["BNP", "BNP برابر 380 pg/mL."], ["TEE", "شدت MR و پرولاپس لت خلفی تأیید شد."]],
 },
 {
- id: "cardio-009", title: "اندوکاردیت عفونی", diagnosis: "infective-endocarditis", age: 44, sex: "male", difficulty: "easy",
+ id: "cardio-009", title: "اندوکاردیت عفونی", diagnosis: "infective-endocarditis", age: 44, sex: "male", difficulty: "medium",
  profile: {"complaint": "تب طول‌کشیده، لرز و خستگی", "onset": "حدود سه هفته پیش", "course": "بدتر شده", "exertional": "گاهی", "rest": "بله", "quality": "درد مشخصی ندارم", "location": "درد ندارم", "radiation": "ندارد", "duration": "چند دقیقه تا چند ساعت", "better": "گاهی خودبه‌خود قطع می‌شود", "pleuritic": "نه", "position": "فرقی ندارد", "nausea": "گاهی", "dyspnea": "کمی", "exertional_dyspnea": "کمی", "tolerance": "کمی کمتر شده", "orthopnea": "نه", "pillows": "یک", "pnd": "نه", "edema": "نه", "weight": "حدود ۴ کیلو کم کرده‌ام", "palpitations": "بله، واضح", "abrupt": "بله", "rhythm": "بسته به حمله", "palp_duration": "۱۰ دقیقه تا چند ساعت", "palp_trigger": "گاهی استرس یا قهوه", "palp_associated": "گاهی سرگیجه و تنگی نفس", "pre_syncope": "گاهی", "syncope_ex": "نه", "prodrome": "گاهی احساس گرمی", "recovery": "بعد از قطع تپش سریع خوب می‌شوم", "mi": "نه", "cad": "نه", "hf": "نه", "arrhythmia": "نه", "murmur": "قبلاً سوفل نداشتم", "htn": "نه", "diabetes": "نه", "lipids": "نه", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "فقط استامینوفن", "antiplatelet": "نه", "beta": "نه", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "نه", "cigarettes": "ندارم", "alcohol": "کم", "alcohol_amt": "گاهی", "stimulants": "نه", "exercise": "متوسط", "lifestyle_loss": "کمی", "osa": "نه", "dietweight": "ثابت", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "دو هفته قبل دندانم را درمان کردم", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "fever": "بله، تب و لرز دارم", "age": "None"},
  pe: ["بیمار تب‌دار و خسته به نظر می‌رسد.", "T 38.8°C، BP 108/64، HR 104، RR 20، SpO₂ 97%.", "تنفس بدون دیسترس.", "چند پتشی کوچک روی بستر ناخن‌ها دیده می‌شود.", "قله قلب طبیعی؛ thrill ندارد.", "سوفل هولوسیستولیک جدید در apex شنیده می‌شود."],
  inv: [["CBC", "WBC 15,600/µL با نوتروفیلی و Hb 10.8 g/dL."], ["CRP", "CRP برابر 142 mg/L."], ["Blood cultures", "سه ست کشت خون با Streptococcus sanguinis مثبت."], ["Echocardiography", "vegetation حدود 10 mm روی لت قدامی میترال و MR جدید."], ["TEE", "vegetation متحرک روی دریچه میترال با نارسایی همراه."]],
@@ -67,7 +70,7 @@ const caseData: Array<{id:string; title:string; diagnosis:string; age:number; se
  inv: [["ECG", "ST elevation منتشر و PR depression در چند لید."], ["Troponin", "کمی افزایش یافته، 0.18 ng/mL."], ["CRP", "CRP برابر 76 mg/L."], ["Echocardiography", "افیوژن کوچک پریکارد بدون شواهد تامپوناد."], ["CBC", "WBC 11,200/µL."]],
 },
 {
- id: "cardio-011", title: "کاردیومیوپاتی هیپرتروفیک (HCM)", diagnosis: "hypertrophic-cardiomyopathy", age: 24, sex: "male", difficulty: "easy",
+ id: "cardio-011", title: "کاردیومیوپاتی هیپرتروفیک (HCM)", diagnosis: "hypertrophic-cardiomyopathy", age: 24, sex: "male", difficulty: "medium",
  profile: {"complaint": "تنگی نفس و نزدیک غش هنگام ورزش", "onset": "چند ماه پیش", "course": "بدتر شده", "exertional": "گاهی فشار سینه با ورزش", "rest": "نه", "quality": "فشار", "location": "وسط سینه", "radiation": "ندارد", "duration": "چند دقیقه", "better": "با توقف فعالیت", "pleuritic": "نه", "position": "فرقی ندارد", "nausea": "گاهی", "dyspnea": "بله", "exertional_dyspnea": "بله", "tolerance": "کم شده", "orthopnea": "نه", "pillows": "یک", "pnd": "نه", "edema": "نه", "weight": "ثابت", "palpitations": "بله، واضح", "abrupt": "بله", "rhythm": "بسته به حمله", "palp_duration": "۱۰ دقیقه تا چند ساعت", "palp_trigger": "گاهی استرس یا قهوه", "palp_associated": "گاهی سرگیجه و تنگی نفس", "pre_syncope": "بله", "syncope_ex": "بله، یک بار هنگام ورزش", "prodrome": "گاهی احساس گرمی", "recovery": "بعد از قطع تپش سریع خوب می‌شوم", "mi": "نه", "cad": "نه", "hf": "نه", "arrhythmia": "نه", "murmur": "قبلاً گفته‌اند سوفل دارم", "htn": "نه", "diabetes": "نه", "lipids": "نه", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "داروی قلبی منظمی ندارم", "antiplatelet": "نه", "beta": "نه", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "نه", "cigarettes": "ندارم", "alcohol": "کم", "alcohol_amt": "گاهی", "stimulants": "نه", "exercise": "متوسط", "lifestyle_loss": "کمی", "osa": "نه", "dietweight": "ثابت", "family_early_cad": "نه", "family_sudden": "پسرعمویم در ۲۶ سالگی ناگهانی فوت کرد", "family_cm": "مادرم HCM دارد", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "age": "None", "fever": "نه"},
  pe: ["بیمار جوان و مضطرب است.", "BP 118/70، HR 82، RR 16، SpO₂ 99%.", "تنفس طبیعی در استراحت.", "نبض‌ها طبیعی.", "heave و thrill سیستولیک در لبه چپ جناغ لمس می‌شود.", "سوفل سیستولیک در لبه چپ جناغ که با ایستادن بیشتر می‌شود."],
  inv: [["Echocardiography", "ضخامت سپتوم 22 mm، SAM دریچه میترال و LVOT gradient حدود 65 mmHg با مانور."], ["ECG", "LVH همراه تغییرات ST-T."], ["Holter Monitor", "PVC و چند اپیزود NSVT ثبت شده."], ["Cardiac MRI", "هیپرتروفی نامتقارن سپتوم با late gadolinium enhancement محدود."], ["Genetic Testing", "یک واریانت بیماری‌زای مرتبط با سارکومر شناسایی شد."]],
@@ -79,19 +82,19 @@ const caseData: Array<{id:string; title:string; diagnosis:string; age:number; se
  inv: [["Echocardiography", "اتساع هر دو بطن و LVEF حدود 25٪."], ["BNP", "NT-proBNP برابر 3,900 pg/mL."], ["Cardiac MRI", "کاهش عملکرد بطن چپ با فیبروز میوکارد غیرایسکمیک."], ["ECG", "ریتم سینوسی با LBBB."], ["CMP", "کراتینین 1.2 و الکترولیت‌ها بدون اختلال مهم."]],
 },
 {
- id: "cardio-013", title: "میوکاردیت حاد", diagnosis: "acute-myocarditis", age: 27, sex: "male", difficulty: "easy",
+ id: "cardio-013", title: "میوکاردیت حاد", diagnosis: "acute-myocarditis", age: 27, sex: "male", difficulty: "medium",
  profile: {"complaint": "درد سینه، تنگی نفس و تپش قلب بعد از یک بیماری ویروسی", "onset": "یک هفته پیش", "course": "در چند روز اخیر بدتر شده", "exertional": "با فعالیت بدتر", "rest": "گاهی", "quality": "فشار و گاهی درد مبهم", "location": "وسط سینه", "radiation": "ندارد", "duration": "ده‌ها دقیقه", "better": "با استراحت", "pleuritic": "کمی", "position": "فرقی ندارد", "nausea": "گاهی", "dyspnea": "بله", "exertional_dyspnea": "کمی", "tolerance": "کمی کمتر شده", "orthopnea": "نه", "pillows": "یک", "pnd": "نه", "edema": "نه", "weight": "ثابت", "palpitations": "بله، واضح", "abrupt": "بله", "rhythm": "بسته به حمله", "palp_duration": "۱۰ دقیقه تا چند ساعت", "palp_trigger": "گاهی استرس یا قهوه", "palp_associated": "سرگیجه خفیف", "pre_syncope": "گاهی", "syncope_ex": "نه", "prodrome": "گاهی احساس گرمی", "recovery": "بعد از قطع تپش سریع خوب می‌شوم", "mi": "نه", "cad": "نه", "hf": "نه", "arrhythmia": "نه", "murmur": "نه", "htn": "نه", "diabetes": "نه", "lipids": "نه", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "داروی قلبی منظمی ندارم", "antiplatelet": "نه", "beta": "نه", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "نه", "cigarettes": "ندارم", "alcohol": "کم", "alcohol_amt": "گاهی", "stimulants": "نه", "exercise": "متوسط", "lifestyle_loss": "کمی", "osa": "نه", "dietweight": "ثابت", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "یک هفته قبل تب و بدن‌درد شدید داشتم", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "palp": "بله", "palpassoc": "سرگیجه خفیف", "fever": "الان تب ندارم", "age": "None"},
  pe: ["بیمار با تنگی نفس و درد سینه است.", "T 37.4°C، BP 110/70، HR 106، RR 20، SpO₂ 96%.", "تنفس کمی سریع.", "ادم ندارد.", "قله قلب طبیعی.", "S3 خفیف و صدای قلب با ضربان تند شنیده می‌شود."],
  inv: [["Troponin", "Troponin I برابر 1.8 ng/mL و بالاتر از حد مرجع."], ["ECG", "تغییرات غیراختصاصی ST-T."], ["Cardiac MRI", "ادم میوکارد و الگوی late gadolinium enhancement غیرایسکمیک."], ["Echocardiography", "LVEF حدود 45٪ با کاهش خفیف عملکرد."], ["CRP", "CRP برابر 48 mg/L."]],
 },
 {
- id: "cardio-014", title: "دیسکشن آئورت", diagnosis: "aortic-dissection", age: 61, sex: "male", difficulty: "easy",
+ id: "cardio-014", title: "دیسکشن آئورت", diagnosis: "aortic-dissection", age: 61, sex: "male", difficulty: "hard",
  profile: {"complaint": "درد ناگهانی و بسیار شدید سینه که به پشت می‌زند", "onset": "یک ساعت پیش، ناگهانی", "course": "از شروع شدید و ثابت مانده", "exertional": "نه", "rest": "بله", "quality": "پارگی و بسیار شدید", "location": "وسط سینه", "radiation": "به بین دو کتف", "duration": "یک ساعت و مداوم", "better": "چیزی بهترش نمی‌کند", "pleuritic": "نه", "position": "فرقی ندارد", "nausea": "گاهی", "dyspnea": "کمی", "exertional_dyspnea": "کمی", "tolerance": "کمی کمتر شده", "orthopnea": "نه", "pillows": "یک", "pnd": "نه", "edema": "نه", "weight": "ثابت", "palpitations": "بله، واضح", "abrupt": "بله", "rhythm": "بسته به حمله", "palp_duration": "۱۰ دقیقه تا چند ساعت", "palp_trigger": "گاهی استرس یا قهوه", "palp_associated": "گاهی سرگیجه و تنگی نفس", "pre_syncope": "نزدیک غش شدم", "syncope_ex": "نه", "prodrome": "گاهی احساس گرمی", "recovery": "بعد از قطع تپش سریع خوب می‌شوم", "mi": "نه", "cad": "نه", "hf": "نه", "arrhythmia": "نه", "murmur": "نه", "htn": "بله، سال‌ها فشار خون بالا دارم", "diabetes": "نه", "lipids": "نه", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "داروی قلبی منظمی ندارم", "antiplatelet": "نه", "beta": "نه", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "قبلاً", "cigarettes": "روزی یک پاکت به مدت ۲۰ سال", "alcohol": "کم", "alcohol_amt": "گاهی", "stimulants": "نه", "exercise": "متوسط", "lifestyle_loss": "کمی", "osa": "نه", "dietweight": "ثابت", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "پدرم آنوریسم آئورت داشت", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "age": "None", "fever": "نه"},
  pe: ["بیمار بسیار مضطرب و دردناک است.", "BP راست 198/108 و چپ 168/92، HR 108، RR 22، SpO₂ 97%.", "تنفس سریع.", "نبض رادیال چپ ضعیف‌تر از راست است.", "قله قلب طبیعی.", "سوفل جدید نارسایی آئورت شنیده می‌شود."],
  inv: [["CT Angiography", "فلپ intimal از آئورت صعودی تا آئورت نزولی مشاهده شد."], ["ECG", "تغییرات غیراختصاصی بدون ST elevation حاد."], ["Troponin", "Troponin کمی افزایش یافته است."], ["Echocardiography", "نارسایی متوسط دریچه آئورت و اتساع ریشه آئورت."], ["CBC", "Hb 13.9 g/dL."]],
 },
 {
- id: "cardio-015", title: "پرفشاری خون ریوی", diagnosis: "pulmonary-hypertension", age: 46, sex: "female", difficulty: "easy",
+ id: "cardio-015", title: "پرفشاری خون ریوی", diagnosis: "pulmonary-hypertension", age: 46, sex: "female", difficulty: "medium",
  profile: {"complaint": "تنگی نفس شدید هنگام فعالیت و خستگی", "onset": "حدود یک سال", "course": "تدریجی بدتر شده", "exertional": "گاهی", "rest": "بله", "quality": "درد مشخصی ندارم", "location": "درد ندارم", "radiation": "ندارد", "duration": "چند دقیقه تا چند ساعت", "better": "گاهی خودبه‌خود قطع می‌شود", "pleuritic": "نه", "position": "فرقی ندارد", "nausea": "گاهی", "dyspnea": "بله", "exertional_dyspnea": "بله", "tolerance": "خیلی کمتر شده", "orthopnea": "نه", "pillows": "یک", "pnd": "نه", "edema": "کمی ورم مچ پا", "weight": "ثابت", "palpitations": "بله، واضح", "abrupt": "بله", "rhythm": "بسته به حمله", "palp_duration": "۱۰ دقیقه تا چند ساعت", "palp_trigger": "گاهی استرس یا قهوه", "palp_associated": "گاهی سرگیجه و تنگی نفس", "pre_syncope": "گاهی", "syncope_ex": "یک بار هنگام راه رفتن سریع", "prodrome": "گاهی احساس گرمی", "recovery": "بعد از قطع تپش سریع خوب می‌شوم", "mi": "نه", "cad": "نه", "hf": "نه", "arrhythmia": "نه", "murmur": "نه", "htn": "نه", "diabetes": "نه", "lipids": "نه", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "داروی قلبی منظمی ندارم", "antiplatelet": "نه", "beta": "نه", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "نه", "cigarettes": "ندارم", "alcohol": "کم", "alcohol_amt": "گاهی", "stimulants": "نه", "exercise": "متوسط", "lifestyle_loss": "کمی", "osa": "نه", "dietweight": "ثابت", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "age": "None", "fever": "نه"},
  pe: ["بیمار با تنگی نفس هنگام راه رفتن است.", "BP 112/70، HR 92، RR 20، SpO₂ 94%.", "تنفس کمی سریع.", "JVP بالا و ادم خفیف دوطرفه.", "heave بطن راست در کنار چپ جناغ لمس می‌شود.", "P2 بلندتر از حد معمول است."],
  inv: [["Echocardiography", "RVSP تخمینی 72 mmHg و بزرگ‌شدن بطن راست."], ["Right Heart Catheterization", "mPAP 46 mmHg و PVR بالا با wedge pressure طبیعی."], ["ECG", "Right axis deviation و RBBB ناقص."], ["CT Pulmonary Angiography", "شواهدی از آمبولی مزمن یا حاد دیده نشد."], ["BNP", "BNP برابر 360 pg/mL."]],
@@ -121,13 +124,13 @@ const caseData: Array<{id:string; title:string; diagnosis:string; age:number; se
  inv: [["ECG", "تغییرات ایسکمیک متناسب با تابلوی بالینی."], ["High-sensitivity troponin", "برای افتراق آسیب حاد میوکارد اندازه‌گیری شد و نتیجه با تابلوی بالینی تفسیر می‌شود."], ["Echocardiography", "اختلال حرکتی منطقه‌ای متناسب با ضایعه."], ["Coronary angiography", "آناتومی کرونر/ضایعه مسئول مشخص شد."], ["CBC", "Hb و پلاکت در محدوده قابل‌قبول."]],
 },
 {
- id: "cardio-020", title: "دیسکشن خودبه‌خودی عروق کرونر (SCAD)", diagnosis: "spontaneous-coronary-artery-dissection", age: 42, sex: "female", difficulty: "medium",
+ id: "cardio-020", title: "دیسکشن خودبه‌خودی عروق کرونر (SCAD)", diagnosis: "spontaneous-coronary-artery-dissection", age: 42, sex: "female", difficulty: "hard",
  profile: {"complaint": "درد ناگهانی سینه", "onset": "دو روز پس از یک دوره استرس شدید", "course": "اولین بار شدید بود", "exertional": "نه", "rest": "بله", "quality": "فشارنده", "location": "وسط سینه", "radiation": "به شانه چپ", "duration": "۳۰ دقیقه", "better": "با استراحت کمی بهتر شد", "pleuritic": "نه", "position": "فرقی ندارد", "nausea": "بله", "dyspnea": "بله", "exertional_dyspnea": "کمی", "tolerance": "کمی کمتر شده", "orthopnea": "نه", "pillows": "یک", "pnd": "نه", "edema": "نه", "weight": "ثابت", "palpitations": "بله، واضح", "abrupt": "بله", "rhythm": "بسته به حمله", "palp_duration": "۱۰ دقیقه تا چند ساعت", "palp_trigger": "گاهی استرس یا قهوه", "palp_associated": "گاهی سرگیجه و تنگی نفس", "pre_syncope": "گاهی", "syncope_ex": "نه", "prodrome": "گاهی احساس گرمی", "recovery": "بعد از قطع تپش سریع خوب می‌شوم", "mi": "نه", "cad": "نه", "hf": "نه", "arrhythmia": "نه", "murmur": "نه", "htn": "نه", "diabetes": "نه", "lipids": "نه", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "داروی قلبی منظمی ندارم", "antiplatelet": "نه", "beta": "نه", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "نه", "cigarettes": "ندارم", "alcohol": "کم", "alcohol_amt": "گاهی", "stimulants": "نه", "exercise": "متوسط", "lifestyle_loss": "کمی", "osa": "نه", "dietweight": "ثابت", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "age": "None", "fever": "نه"},
  pe: ["بیمار مضطرب و با ناراحتی سینه است.", "BP 132/80، HR 96، RR 20، SpO₂ 96%.", "تنفس کمی سریع.", "نبض‌ها قرینه؛ ادم ندارد.", "قله قلب طبیعی و thrill ندارد.", "S1/S2 طبیعی و ممکن است تاکی‌کاردی خفیف وجود داشته باشد."],
  inv: [["ECG", "تغییرات ایسکمیک متناسب با تابلوی بالینی."], ["High-sensitivity troponin", "برای افتراق آسیب حاد میوکارد اندازه‌گیری شد و نتیجه با تابلوی بالینی تفسیر می‌شود."], ["Echocardiography", "اختلال حرکتی منطقه‌ای متناسب با ضایعه."], ["Coronary angiography", "آناتومی کرونر/ضایعه مسئول مشخص شد."], ["CBC", "Hb و پلاکت در محدوده قابل‌قبول."]],
 },
 {
- id: "cardio-021", title: "اختلال عروق ریز کرونر", diagnosis: "coronary-microvascular-dysfunction", age: 51, sex: "female", difficulty: "medium",
+ id: "cardio-021", title: "اختلال عروق ریز کرونر", diagnosis: "coronary-microvascular-dysfunction", age: 51, sex: "female", difficulty: "hard",
  profile: {"complaint": "درد و فشار سینه هنگام فعالیت", "onset": "حدود یک سال", "course": "تقریباً ثابت ولی مزاحم", "exertional": "بله", "rest": "گاهی", "quality": "فشار و سنگینی", "location": "وسط سینه", "radiation": "گاهی به شانه", "duration": "۱۵ تا ۲۰ دقیقه", "better": "با استراحت", "pleuritic": "نه", "position": "فرقی ندارد", "nausea": "گاهی", "dyspnea": "گاهی", "exertional_dyspnea": "کمی", "tolerance": "کمی کمتر شده", "orthopnea": "نه", "pillows": "یک", "pnd": "نه", "edema": "نه", "weight": "ثابت", "palpitations": "بله، واضح", "abrupt": "بله", "rhythm": "بسته به حمله", "palp_duration": "۱۰ دقیقه تا چند ساعت", "palp_trigger": "گاهی استرس یا قهوه", "palp_associated": "گاهی سرگیجه و تنگی نفس", "pre_syncope": "گاهی", "syncope_ex": "نه", "prodrome": "گاهی احساس گرمی", "recovery": "بعد از قطع تپش سریع خوب می‌شوم", "mi": "نه", "cad": "نه", "hf": "نه", "arrhythmia": "نه", "murmur": "نه", "htn": "بله", "diabetes": "نه", "lipids": "بله", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "داروی قلبی منظمی ندارم", "antiplatelet": "نه", "beta": "نه", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "نه", "cigarettes": "ندارم", "alcohol": "کم", "alcohol_amt": "گاهی", "stimulants": "نه", "exercise": "متوسط", "lifestyle_loss": "کمی", "osa": "نه", "dietweight": "ثابت", "family_early_cad": "مادرم بیماری کرونر زودرس داشت", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "age": "None", "fever": "نه"},
  pe: ["بیمار مضطرب و با ناراحتی سینه است.", "BP 132/80، HR 96، RR 20، SpO₂ 96%.", "تنفس کمی سریع.", "نبض‌ها قرینه؛ ادم ندارد.", "قله قلب طبیعی و thrill ندارد.", "S1/S2 طبیعی و ممکن است تاکی‌کاردی خفیف وجود داشته باشد."],
  inv: [["ECG", "تغییرات ایسکمیک متناسب با تابلوی بالینی."], ["High-sensitivity troponin", "برای افتراق آسیب حاد میوکارد اندازه‌گیری شد و نتیجه با تابلوی بالینی تفسیر می‌شود."], ["Echocardiography", "اختلال حرکتی منطقه‌ای متناسب با ضایعه."], ["Coronary angiography", "آناتومی کرونر/ضایعه مسئول مشخص شد."], ["CBC", "Hb و پلاکت در محدوده قابل‌قبول."]],
@@ -136,22 +139,22 @@ const caseData: Array<{id:string; title:string; diagnosis:string; age:number; se
  id: "cardio-022", title: "نارسایی قلبی با کسر جهشی حفظ‌شده (HFpEF)", diagnosis: "hfpef", age: 72, sex: "female", difficulty: "medium",
  profile: {"complaint": "تنگی نفس با فعالیت و ورم پاها", "onset": "حدود یک سال", "course": "تدریجی", "exertional": "بله", "rest": "گاهی", "quality": "فشار یا درد واضح ندارم", "location": "درد مشخصی ندارم", "radiation": "ندارد", "duration": "تنگی نفس با فعالیت چند دقیقه تا بیشتر طول می‌کشد", "better": "با نشستن و استراحت بهتر می‌شود", "pleuritic": "نه", "position": "با دراز کشیدن بدتر می‌شود", "nausea": "نه", "dyspnea": "بله", "exertional_dyspnea": "بله", "tolerance": "به‌طور واضح کمتر شده", "orthopnea": "بله", "pillows": "۲", "pnd": "گاهی", "edema": "هر دو مچ پا", "weight": "در دو هفته اخیر حدود ۳ کیلو اضافه کرده‌ام", "palpitations": "گاهی", "abrupt": "نه", "rhythm": "منظم", "palp_duration": "چند دقیقه", "palp_trigger": "با فعالیت", "palp_associated": "با تنگی نفس", "pre_syncope": "نه", "syncope_ex": "نه", "prodrome": "ندارم", "recovery": "با استراحت تدریجی بهتر می‌شوم", "mi": "نه", "cad": "نه", "hf": "نه", "arrhythmia": "نه", "murmur": "نه", "htn": "بله، ۲۰ سال", "diabetes": "بله", "lipids": "بله", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "لوزارتان و آملودیپین", "antiplatelet": "نه", "beta": "گاهی", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "هرگز سیگار نکشیده‌ام", "cigarettes": "ندارم", "alcohol": "نه", "alcohol_amt": "ندارم", "stimulants": "نه", "exercise": "کم", "lifestyle_loss": "بله", "osa": "خرخر شدید دارم و آپنه خواب برایم تشخیص داده شده", "dietweight": "نمک غذا را زیاد مصرف می‌کنم", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "age": "None", "fever": "نه"},
  pe: ["بیمار هوشیار و پایدار است.", "BP 124/76، HR 84، RR 18، SpO₂ 97%.", "تنفس بدون دیسترس.", "نبض‌های محیطی قرینه و ادم ندارد.", "قله قلب در محل طبیعی و بدون thrill.", "S1/S2 طبیعی و بدون سوفل قابل‌توجه."],
- inv: [["NT-proBNP", "NT-proBNP به‌طور قابل‌توجهی افزایش یافته است."], ["Echocardiography", "LVEF حفظ‌شده یا نزدیک طبیعی با یافته‌های اختلال پرشدن/فشارهای پرشدگی بالا."], ["Chest X-ray", "در HF چپ احتقان ریوی؛ در بیماری‌های غالباً راست ممکن است ادم ریه واضح نباشد."], ["ECG", "تغییرات متناسب با بیماری زمینه‌ای."], ["CMP", "عملکرد کلیه و الکترولیت‌ها برای ارزیابی احتقان و درمان بررسی شد."]],
+ inv: [["NT-proBNP", "NT-proBNP افزایش‌یافته است؛ مقدار دقیق در سناریو ثبت نشده است."], ["Echocardiography", "LVEF حفظ‌شده یا نزدیک طبیعی با یافته‌های اختلال پرشدن/فشارهای پرشدگی بالا."], ["Chest X-ray", "در HF چپ احتقان ریوی؛ در بیماری‌های غالباً راست ممکن است ادم ریه واضح نباشد."], ["ECG", "تغییرات متناسب با بیماری زمینه‌ای."], ["CMP", "عملکرد کلیه و الکترولیت‌ها برای ارزیابی احتقان و درمان بررسی شد."]],
 },
 {
  id: "cardio-023", title: "نارسایی قلبی حاد دِکمپنسیه", diagnosis: "acute-decompensated-heart-failure", age: 68, sex: "male", difficulty: "medium",
  profile: {"complaint": "تنگی نفس شدید که از دیشب ناگهان بدتر شده", "onset": "دیشب", "course": "سریع بدتر شده", "exertional": "بله", "rest": "گاهی", "quality": "فشار یا درد واضح ندارم", "location": "درد مشخصی ندارم", "radiation": "ندارد", "duration": "تنگی نفس با فعالیت چند دقیقه تا بیشتر طول می‌کشد", "better": "با نشستن و استراحت بهتر می‌شود", "pleuritic": "نه", "position": "با دراز کشیدن بدتر می‌شود", "nausea": "نه", "dyspnea": "بله، حتی در استراحت", "exertional_dyspnea": "بله", "tolerance": "به‌طور واضح کمتر شده", "orthopnea": "بله، با نشستن بهترم", "pillows": "۴", "pnd": "بله", "edema": "هر دو ساق", "weight": "در یک هفته ۴ کیلو اضافه کرده‌ام", "palpitations": "گاهی", "abrupt": "نه", "rhythm": "منظم", "palp_duration": "چند دقیقه", "palp_trigger": "با فعالیت", "palp_associated": "با تنگی نفس", "pre_syncope": "نه", "syncope_ex": "نه", "prodrome": "ندارم", "recovery": "با استراحت تدریجی بهتر می‌شوم", "mi": "نه", "cad": "نه", "hf": "بله", "arrhythmia": "نه", "murmur": "نه", "htn": "بله", "diabetes": "نه", "lipids": "بله", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "فوروزماید، کارودیلول و لوزارتان", "antiplatelet": "نه", "beta": "گاهی", "diuretic": "نه", "medchange": "نه", "missed": "دو روز داروهایم را نخوردم", "smoking": "هرگز سیگار نکشیده‌ام", "cigarettes": "ندارم", "alcohol": "نه", "alcohol_amt": "ندارم", "stimulants": "نه", "exercise": "کم", "lifestyle_loss": "بله", "osa": "نه", "dietweight": "نمک غذا را زیاد مصرف می‌کنم", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "age": "None", "fever": "نه"},
  pe: ["بیمار هوشیار و پایدار است.", "BP 124/76، HR 84، RR 18، SpO₂ 97%.", "تنفس بدون دیسترس.", "نبض‌های محیطی قرینه و ادم ندارد.", "قله قلب در محل طبیعی و بدون thrill.", "S1/S2 طبیعی و بدون سوفل قابل‌توجه."],
- inv: [["NT-proBNP", "NT-proBNP به‌طور قابل‌توجهی افزایش یافته است."], ["Echocardiography", "LVEF حفظ‌شده یا نزدیک طبیعی با یافته‌های اختلال پرشدن/فشارهای پرشدگی بالا."], ["Chest X-ray", "در HF چپ احتقان ریوی؛ در بیماری‌های غالباً راست ممکن است ادم ریه واضح نباشد."], ["ECG", "تغییرات متناسب با بیماری زمینه‌ای."], ["CMP", "عملکرد کلیه و الکترولیت‌ها برای ارزیابی احتقان و درمان بررسی شد."]],
+ inv: [["NT-proBNP", "NT-proBNP افزایش‌یافته است؛ مقدار دقیق در سناریو ثبت نشده است."], ["Echocardiography", "LVEF حفظ‌شده یا نزدیک طبیعی با یافته‌های اختلال پرشدن/فشارهای پرشدگی بالا."], ["Chest X-ray", "در HF چپ احتقان ریوی؛ در بیماری‌های غالباً راست ممکن است ادم ریه واضح نباشد."], ["ECG", "تغییرات متناسب با بیماری زمینه‌ای."], ["CMP", "عملکرد کلیه و الکترولیت‌ها برای ارزیابی احتقان و درمان بررسی شد."]],
 },
 {
  id: "cardio-024", title: "نارسایی قلب راست", diagnosis: "right-sided-heart-failure", age: 63, sex: "male", difficulty: "medium",
  profile: {"complaint": "ورم پاها، سنگینی شکم و خستگی", "onset": "چند ماه", "course": "بدتر شده", "exertional": "بله", "rest": "گاهی", "quality": "فشار یا درد واضح ندارم", "location": "درد مشخصی ندارم", "radiation": "ندارد", "duration": "تنگی نفس با فعالیت چند دقیقه تا بیشتر طول می‌کشد", "better": "با نشستن و استراحت بهتر می‌شود", "pleuritic": "نه", "position": "با دراز کشیدن بدتر می‌شود", "nausea": "نه", "dyspnea": "کمی", "exertional_dyspnea": "بله", "tolerance": "به‌طور واضح کمتر شده", "orthopnea": "نه", "pillows": "۳ بالش", "pnd": "نه", "edema": "هر دو پا تا ساق", "weight": "۳ کیلو افزایش", "palpitations": "گاهی", "abrupt": "نه", "rhythm": "منظم", "palp_duration": "چند دقیقه", "palp_trigger": "با فعالیت", "palp_associated": "با تنگی نفس", "pre_syncope": "نه", "syncope_ex": "نه", "prodrome": "ندارم", "recovery": "با استراحت تدریجی بهتر می‌شوم", "mi": "نه", "cad": "نه", "hf": "بله", "arrhythmia": "نه", "murmur": "نه", "htn": "نه", "diabetes": "نه", "lipids": "بله", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "فوروزماید", "antiplatelet": "نه", "beta": "گاهی", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "هرگز سیگار نکشیده‌ام", "cigarettes": "ندارم", "alcohol": "نه", "alcohol_amt": "ندارم", "stimulants": "نه", "exercise": "کم", "lifestyle_loss": "بله", "osa": "نه", "dietweight": "نمک غذا را زیاد مصرف می‌کنم", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "age": "None", "fever": "نه"},
  pe: ["بیمار خسته و دارای ورم محیطی است.", "BP 116/72، HR 88، RR 18، SpO₂ 95%.", "تنفس نسبتاً راحت در استراحت.", "JVP بالا و ادم گوده‌گذار دوطرفه تا ساق.", "قله قلب بدون جابه‌جایی واضح.", "صدای قلب با یافته‌های سمت راست؛ در TR سوفل هولوسیستولیک کنار چپ جناغ شنیده می‌شود."],
- inv: [["NT-proBNP", "NT-proBNP به‌طور قابل‌توجهی افزایش یافته است."], ["Echocardiography", "LVEF حفظ‌شده یا نزدیک طبیعی با یافته‌های اختلال پرشدن/فشارهای پرشدگی بالا."], ["Chest X-ray", "در HF چپ احتقان ریوی؛ در بیماری‌های غالباً راست ممکن است ادم ریه واضح نباشد."], ["ECG", "تغییرات متناسب با بیماری زمینه‌ای."], ["CMP", "عملکرد کلیه و الکترولیت‌ها برای ارزیابی احتقان و درمان بررسی شد."]],
+ inv: [["NT-proBNP", "NT-proBNP افزایش‌یافته است؛ مقدار دقیق در سناریو ثبت نشده است."], ["Echocardiography", "LVEF حفظ‌شده یا نزدیک طبیعی با یافته‌های اختلال پرشدن/فشارهای پرشدگی بالا."], ["Chest X-ray", "در HF چپ احتقان ریوی؛ در بیماری‌های غالباً راست ممکن است ادم ریه واضح نباشد."], ["ECG", "تغییرات متناسب با بیماری زمینه‌ای."], ["CMP", "عملکرد کلیه و الکترولیت‌ها برای ارزیابی احتقان و درمان بررسی شد."]],
 },
 {
- id: "cardio-025", title: "شوک کاردیوژنیک", diagnosis: "cardiogenic-shock", age: 70, sex: "male", difficulty: "medium",
+ id: "cardio-025", title: "شوک کاردیوژنیک", diagnosis: "cardiogenic-shock", age: 70, sex: "male", difficulty: "hard",
  profile: {"complaint": "درد شدید سینه همراه ضعف، تنگی نفس و احساس غش", "onset": "دو ساعت پیش", "course": "سریع بدتر شده", "exertional": "بله", "rest": "بله", "quality": "فشار شدید", "location": "وسط سینه", "radiation": "به دست چپ", "duration": "بیش از یک ساعت", "better": "بهتر نشده", "pleuritic": "نه", "position": "فرقی ندارد", "nausea": "بله", "dyspnea": "بله، شدید", "exertional_dyspnea": "کمی", "tolerance": "کمی کمتر شده", "orthopnea": "نه", "pillows": "یک", "pnd": "نه", "edema": "نه", "weight": "ثابت", "palpitations": "بله، واضح", "abrupt": "بله", "rhythm": "بسته به حمله", "palp_duration": "۱۰ دقیقه تا چند ساعت", "palp_trigger": "گاهی استرس یا قهوه", "palp_associated": "گاهی سرگیجه و تنگی نفس", "pre_syncope": "بله", "syncope_ex": "نه", "prodrome": "گاهی احساس گرمی", "recovery": "بعد از قطع تپش سریع خوب می‌شوم", "mi": "نه", "cad": "نه", "hf": "نه", "arrhythmia": "نه", "murmur": "نه", "htn": "نه", "diabetes": "بله", "lipids": "نه", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "داروی قلبی منظمی ندارم", "antiplatelet": "نه", "beta": "نه", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "نه", "cigarettes": "ندارم", "alcohol": "کم", "alcohol_amt": "گاهی", "stimulants": "نه", "exercise": "متوسط", "lifestyle_loss": "کمی", "osa": "نه", "dietweight": "ثابت", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "age": "None", "fever": "نه"},
  pe: ["بیمار بی‌هوش یا با هوشیاری مختل و بسیار بدحال است.", "BP قابل اندازه‌گیری نیست یا 72/44، HR نامنظم/سریع، RR غیرطبیعی، SpO₂ پایین.", "تنفس ناکافی و تلاش تنفسی شدید.", "اندام‌ها سرد و پرشدگی مویرگی طولانی.", "نبض محیطی بسیار ضعیف یا غایب.", "صدای قلب مؤثر و منظم قابل اتکا نیست."],
  inv: [["ECG", "تغییرات ایسکمیک متناسب با تابلوی بالینی."], ["High-sensitivity troponin", "برای افتراق آسیب حاد میوکارد اندازه‌گیری شد و نتیجه با تابلوی بالینی تفسیر می‌شود."], ["Echocardiography", "اختلال حرکتی منطقه‌ای متناسب با ضایعه."], ["Coronary angiography", "آناتومی کرونر/ضایعه مسئول مشخص شد."], ["CBC", "Hb و پلاکت در محدوده قابل‌قبول."]],
@@ -163,7 +166,7 @@ const caseData: Array<{id:string; title:string; diagnosis:string; age:number; se
  inv: [["ECG", "یافته ریتمیک اختصاصی در نوار قلب ثبت شد؛ در AV block طولانی‌شدن PR یا افتادن QRS و در complete block جدایی دهلیز و بطن دیده می‌شود."], ["Echocardiography", "LVEF حدود 55٪ و بدون اختلال ساختاری عمده."], ["Electrolytes", "پتاسیم و منیزیم طبیعی."], ["TSH", "TSH طبیعی."], ["Holter Monitor", "اختلال ریتم/هدایت متناظر با علائم ثبت شد."]],
 },
 {
- id: "cardio-027", title: "تاکی‌کاردی AVNRT", diagnosis: "avnrt", age: 33, sex: "female", difficulty: "medium",
+ id: "cardio-027", title: "تاکی‌کاردی AVNRT", diagnosis: "avnrt", age: 33, sex: "female", difficulty: "easy",
  profile: {"complaint": "تپش قلب", "onset": "چند هفته تا چند ماه پیش", "course": "حملات بیشتر شده‌اند", "exertional": "گاهی", "rest": "بله", "quality": "درد مشخصی ندارم", "location": "درد ندارم", "radiation": "ندارد", "duration": "چند دقیقه تا چند ساعت", "better": "گاهی خودبه‌خود قطع می‌شود", "pleuritic": "نه", "position": "فرقی ندارد", "nausea": "گاهی", "dyspnea": "گاهی", "exertional_dyspnea": "کمی", "tolerance": "کمی کمتر شده", "orthopnea": "نه", "pillows": "یک", "pnd": "نه", "edema": "نه", "weight": "ثابت", "palpitations": "بله، واضح", "abrupt": "بله، ناگهانی شروع و قطع می‌شود", "rhythm": "منظم", "palp_duration": "۵ تا ۳۰ دقیقه", "palp_trigger": "گاهی با قهوه", "palp_associated": "گاهی تنگی نفس", "pre_syncope": "نه", "syncope_ex": "نه", "prodrome": "گاهی احساس گرمی", "recovery": "بعد از قطع تپش سریع خوب می‌شوم", "mi": "نه", "cad": "نه", "hf": "نه", "arrhythmia": "نه", "murmur": "نه", "htn": "نه", "diabetes": "نه", "lipids": "نه", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "داروی قلبی منظمی ندارم", "antiplatelet": "نه", "beta": "نه", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "نه", "cigarettes": "ندارم", "alcohol": "کم", "alcohol_amt": "گاهی", "stimulants": "نه", "exercise": "متوسط", "lifestyle_loss": "کمی", "osa": "نه", "dietweight": "ثابت", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "palp": "تپش خیلی سریع و منظم", "age": "None", "fever": "نه"},
  pe: ["بیمار هوشیار و همودینامیکاً پایدار است.", "BP 118/72، HR 150/min، RR 19، SpO₂ 97%.", "تنفس کمی سریع.", "نبض سریع؛ در MAT نامنظم و در AVNRT/AVRT منظم.", "پره‌کوردیال بدون thrill.", "صدای قلب سریع؛ سوفل واضحی شنیده نمی‌شود."],
  inv: [["ECG", "یافته ریتمیک اختصاصی در نوار قلب ثبت شد؛ در AV block طولانی‌شدن PR یا افتادن QRS و در complete block جدایی دهلیز و بطن دیده می‌شود."], ["Echocardiography", "LVEF حدود 55٪ و بدون اختلال ساختاری عمده."], ["Electrolytes", "پتاسیم و منیزیم طبیعی."], ["TSH", "TSH طبیعی."], ["Holter Monitor", "اختلال ریتم/هدایت متناظر با علائم ثبت شد."]],
@@ -193,13 +196,13 @@ const caseData: Array<{id:string; title:string; diagnosis:string; age:number; se
  inv: [["ECG", "یافته ریتمیک اختصاصی در نوار قلب ثبت شد؛ در AV block طولانی‌شدن PR یا افتادن QRS و در complete block جدایی دهلیز و بطن دیده می‌شود."], ["Echocardiography", "LVEF حدود 55٪ و بدون اختلال ساختاری عمده."], ["Electrolytes", "پتاسیم و منیزیم طبیعی."], ["TSH", "TSH طبیعی."], ["Holter Monitor", "اختلال ریتم/هدایت متناظر با علائم ثبت شد."]],
 },
 {
- id: "cardio-032", title: "بلوک دهلیزی‌بطنی درجه یک", diagnosis: "first-degree-av-block", age: 58, sex: "male", difficulty: "medium",
+ id: "cardio-032", title: "بلوک دهلیزی‌بطنی درجه یک", diagnosis: "first-degree-av-block", age: 58, sex: "male", difficulty: "easy",
  profile: {"complaint": "برای معاینه معمول آمده‌ام و علامت خاصی ندارم", "onset": "در نوار قلب اخیر متوجه شدند", "course": "بدون تغییر", "exertional": "گاهی", "rest": "بله", "quality": "درد مشخصی ندارم", "location": "درد ندارم", "radiation": "ندارد", "duration": "چند دقیقه تا چند ساعت", "better": "گاهی خودبه‌خود قطع می‌شود", "pleuritic": "نه", "position": "فرقی ندارد", "nausea": "گاهی", "dyspnea": "نه", "exertional_dyspnea": "کمی", "tolerance": "کمی کمتر شده", "orthopnea": "نه", "pillows": "یک", "pnd": "نه", "edema": "نه", "weight": "ثابت", "palpitations": "بله، واضح", "abrupt": "بله", "rhythm": "بسته به حمله", "palp_duration": "۱۰ دقیقه تا چند ساعت", "palp_trigger": "گاهی استرس یا قهوه", "palp_associated": "ندارم", "pre_syncope": "گاهی", "syncope_ex": "نه", "prodrome": "گاهی احساس گرمی", "recovery": "بعد از قطع تپش سریع خوب می‌شوم", "mi": "نه", "cad": "نه", "hf": "نه", "arrhythmia": "نه", "murmur": "نه", "htn": "نه", "diabetes": "نه", "lipids": "نه", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "داروی قلبی منظمی ندارم", "antiplatelet": "نه", "beta": "نه", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "نه", "cigarettes": "ندارم", "alcohol": "کم", "alcohol_amt": "گاهی", "stimulants": "نه", "exercise": "متوسط", "lifestyle_loss": "کمی", "osa": "نه", "dietweight": "ثابت", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "palpassoc": "ندارم", "age": "None", "fever": "نه"},
  pe: ["بیمار هوشیار است و بسته به شدت بیماری سرگیجه دارد.", "BP 118/68، HR 42 تا 58/min، RR 16، SpO₂ 98%.", "تنفس طبیعی.", "نبض کند؛ در بلوک کامل آهسته و منظم.", "پره‌کوردیال بدون thrill.", "ریتم آهسته؛ سوفل مهمی شنیده نمی‌شود."],
  inv: [["ECG", "یافته ریتمیک اختصاصی در نوار قلب ثبت شد؛ در AV block طولانی‌شدن PR یا افتادن QRS و در complete block جدایی دهلیز و بطن دیده می‌شود."], ["Echocardiography", "LVEF حدود 55٪ و بدون اختلال ساختاری عمده."], ["Electrolytes", "پتاسیم و منیزیم طبیعی."], ["TSH", "TSH طبیعی."], ["Holter Monitor", "اختلال ریتم/هدایت متناظر با علائم ثبت شد."]],
 },
 {
- id: "cardio-033", title: "بلوک AV نوع Mobitz I", diagnosis: "mobitz-i-av-block", age: 42, sex: "male", difficulty: "medium",
+ id: "cardio-033", title: "بلوک AV نوع Mobitz I", diagnosis: "mobitz-i-av-block", age: 42, sex: "male", difficulty: "easy",
  profile: {"complaint": "سرگیجه‌های کوتاه و احساس جا افتادن ضربان", "onset": "چند هفته", "course": "گاهی بیشتر شده", "exertional": "گاهی", "rest": "بله", "quality": "درد مشخصی ندارم", "location": "درد ندارم", "radiation": "ندارد", "duration": "چند دقیقه تا چند ساعت", "better": "گاهی خودبه‌خود قطع می‌شود", "pleuritic": "نه", "position": "فرقی ندارد", "nausea": "گاهی", "dyspnea": "گاهی", "exertional_dyspnea": "کمی", "tolerance": "کمی کمتر شده", "orthopnea": "نه", "pillows": "یک", "pnd": "نه", "edema": "نه", "weight": "ثابت", "palpitations": "بله، واضح", "abrupt": "بله", "rhythm": "گاهی نامنظم", "palp_duration": "چند ثانیه", "palp_trigger": "گاهی استرس یا قهوه", "palp_associated": "گاهی سرگیجه و تنگی نفس", "pre_syncope": "گاهی", "syncope_ex": "نه", "prodrome": "گاهی احساس گرمی", "recovery": "بعد از قطع تپش سریع خوب می‌شوم", "mi": "نه", "cad": "نه", "hf": "نه", "arrhythmia": "نه", "murmur": "نه", "htn": "نه", "diabetes": "نه", "lipids": "نه", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "داروی قلبی منظمی ندارم", "antiplatelet": "نه", "beta": "نه", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "نه", "cigarettes": "ندارم", "alcohol": "کم", "alcohol_amt": "گاهی", "stimulants": "نه", "exercise": "متوسط", "lifestyle_loss": "کمی", "osa": "نه", "dietweight": "ثابت", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "palp": "جا افتادن ضربان", "age": "None", "fever": "نه"},
  pe: ["بیمار هوشیار است و بسته به شدت بیماری سرگیجه دارد.", "BP 118/68، HR 42 تا 58/min، RR 16، SpO₂ 98%.", "تنفس طبیعی.", "نبض کند؛ در بلوک کامل آهسته و منظم.", "پره‌کوردیال بدون thrill.", "ریتم آهسته؛ سوفل مهمی شنیده نمی‌شود."],
  inv: [["ECG", "یافته ریتمیک اختصاصی در نوار قلب ثبت شد؛ در AV block طولانی‌شدن PR یا افتادن QRS و در complete block جدایی دهلیز و بطن دیده می‌شود."], ["Echocardiography", "LVEF حدود 55٪ و بدون اختلال ساختاری عمده."], ["Electrolytes", "پتاسیم و منیزیم طبیعی."], ["TSH", "TSH طبیعی."], ["Holter Monitor", "اختلال ریتم/هدایت متناظر با علائم ثبت شد."]],
@@ -217,7 +220,7 @@ const caseData: Array<{id:string; title:string; diagnosis:string; age:number; se
  inv: [["ECG", "یافته ریتمیک اختصاصی در نوار قلب ثبت شد؛ در AV block طولانی‌شدن PR یا افتادن QRS و در complete block جدایی دهلیز و بطن دیده می‌شود."], ["Echocardiography", "LVEF حدود 55٪ و بدون اختلال ساختاری عمده."], ["Electrolytes", "پتاسیم و منیزیم طبیعی."], ["TSH", "TSH طبیعی."], ["Holter Monitor", "اختلال ریتم/هدایت متناظر با علائم ثبت شد."]],
 },
 {
- id: "cardio-036", title: "نارسایی دریچه آئورت", diagnosis: "aortic-regurgitation", age: 53, sex: "male", difficulty: "medium",
+ id: "cardio-036", title: "نارسایی دریچه آئورت", diagnosis: "aortic-regurgitation", age: 53, sex: "male", difficulty: "easy",
  profile: {"complaint": "تپش قلب و تنگی نفس هنگام فعالیت", "onset": "حدود یک سال", "course": "تدریجی", "exertional": "گاهی فشار سینه", "rest": "بله", "quality": "ضربان‌دار", "location": "وسط سینه", "radiation": "ندارد", "duration": "چند دقیقه", "better": "با استراحت", "pleuritic": "نه", "position": "فرقی ندارد", "nausea": "گاهی", "dyspnea": "بله", "exertional_dyspnea": "بله", "tolerance": "کمی کمتر شده", "orthopnea": "کمی", "pillows": "۲", "pnd": "نه", "edema": "نه", "weight": "ثابت", "palpitations": "بله، واضح", "abrupt": "بله", "rhythm": "بسته به حمله", "palp_duration": "۱۰ دقیقه تا چند ساعت", "palp_trigger": "گاهی استرس یا قهوه", "palp_associated": "گاهی سرگیجه و تنگی نفس", "pre_syncope": "گاهی", "syncope_ex": "نه", "prodrome": "گاهی احساس گرمی", "recovery": "بعد از قطع تپش سریع خوب می‌شوم", "mi": "نه", "cad": "نه", "hf": "نه", "arrhythmia": "نه", "murmur": "سابقه بیماری دریچه‌ای دارم", "htn": "نه", "diabetes": "نه", "lipids": "نه", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "داروی قلبی منظمی ندارم", "antiplatelet": "نه", "beta": "نه", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "نه", "cigarettes": "ندارم", "alcohol": "کم", "alcohol_amt": "گاهی", "stimulants": "نه", "exercise": "متوسط", "lifestyle_loss": "کمی", "osa": "نه", "dietweight": "ثابت", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "age": "None", "fever": "نه"},
  pe: ["بیمار پایدار ولی خسته است.", "BP 156/54، HR 86، RR 18، SpO₂ 97%.", "بدون دیسترس تنفسی.", "نبض‌ها جهنده و پرقدرت هستند.", "قله قلب جابه‌جا و هایپردینامیک است.", "سوفل دیاستولیک decrescendo در لبه چپ جناغ شنیده می‌شود."],
  inv: [["Echocardiography", "ضایعه دریچه‌ای مربوط به تشخیص با شدت متوسط تا شدید و اثر همودینامیک متناظر."], ["ECG", "تغییرات دهلیزی یا بطنی متناسب با ضایعه."], ["Chest X-ray", "یافته‌های سازگار با تغییرات قلبی مزمن، بدون ادم حاد."], ["BNP", "BNP کمی افزایش یافته است."], ["CBC", "Hb و WBC بدون اختلال مهم."]],
@@ -229,25 +232,25 @@ const caseData: Array<{id:string; title:string; diagnosis:string; age:number; se
  inv: [["Echocardiography", "ضایعه دریچه‌ای مربوط به تشخیص با شدت متوسط تا شدید و اثر همودینامیک متناظر."], ["ECG", "تغییرات دهلیزی یا بطنی متناسب با ضایعه."], ["Chest X-ray", "یافته‌های سازگار با تغییرات قلبی مزمن، بدون ادم حاد."], ["BNP", "BNP کمی افزایش یافته است."], ["CBC", "Hb و WBC بدون اختلال مهم."]],
 },
 {
- id: "cardio-038", title: "پرولاپس دریچه میترال", diagnosis: "mitral-valve-prolapse", age: 36, sex: "female", difficulty: "medium",
+ id: "cardio-038", title: "پرولاپس دریچه میترال", diagnosis: "mitral-valve-prolapse", age: 36, sex: "female", difficulty: "easy",
  profile: {"complaint": "تپش قلب و دردهای کوتاه و مبهم سینه", "onset": "چند سال", "course": "بدون تغییر جدی", "exertional": "گاهی", "rest": "بله", "quality": "تیز و کوتاه", "location": "سمت چپ سینه", "radiation": "ندارد", "duration": "چند ثانیه تا دقیقه", "better": "گاهی با آرام شدن", "pleuritic": "نه", "position": "فرقی ندارد", "nausea": "گاهی", "dyspnea": "گاهی", "exertional_dyspnea": "کمی", "tolerance": "کمی کمتر شده", "orthopnea": "نه", "pillows": "یک", "pnd": "نه", "edema": "نه", "weight": "ثابت", "palpitations": "تپش و جا افتادن ضربان", "abrupt": "گاهی", "rhythm": "معمولاً منظم", "palp_duration": "چند ثانیه تا دقیقه", "palp_trigger": "گاهی استرس یا قهوه", "palp_associated": "گاهی سرگیجه و تنگی نفس", "pre_syncope": "نه", "syncope_ex": "نه", "prodrome": "گاهی احساس گرمی", "recovery": "بعد از قطع تپش سریع خوب می‌شوم", "mi": "نه", "cad": "نه", "hf": "نه", "arrhythmia": "نه", "murmur": "نه", "htn": "نه", "diabetes": "نه", "lipids": "نه", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "داروی قلبی منظمی ندارم", "antiplatelet": "نه", "beta": "نه", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "نه", "cigarettes": "ندارم", "alcohol": "کم", "alcohol_amt": "گاهی", "stimulants": "نه", "exercise": "متوسط", "lifestyle_loss": "کمی", "osa": "نه", "dietweight": "ثابت", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "age": "None", "fever": "نه"},
  pe: ["بیمار هوشیار و پایدار است.", "BP 124/76، HR 84، RR 18، SpO₂ 97%.", "تنفس بدون دیسترس.", "نبض‌های محیطی قرینه و ادم ندارد.", "قله قلب در محل طبیعی و بدون thrill.", "S1/S2 طبیعی و بدون سوفل قابل‌توجه."],
  inv: [["Echocardiography", "ضایعه دریچه‌ای مربوط به تشخیص با شدت متوسط تا شدید و اثر همودینامیک متناظر."], ["ECG", "تغییرات دهلیزی یا بطنی متناسب با ضایعه."], ["Chest X-ray", "یافته‌های سازگار با تغییرات قلبی مزمن، بدون ادم حاد."], ["BNP", "BNP کمی افزایش یافته است."], ["CBC", "Hb و WBC بدون اختلال مهم."]],
 },
 {
- id: "cardio-039", title: "نارسایی دریچه تریکوسپید", diagnosis: "tricuspid-regurgitation", age: 61, sex: "female", difficulty: "medium",
+ id: "cardio-039", title: "نارسایی دریچه تریکوسپید", diagnosis: "tricuspid-regurgitation", age: 61, sex: "female", difficulty: "easy",
  profile: {"complaint": "ورم پاها و احساس سنگینی شکم", "onset": "حدود یک سال", "course": "بدتر شده", "exertional": "گاهی", "rest": "بله", "quality": "درد مشخصی ندارم", "location": "درد ندارم", "radiation": "ندارد", "duration": "چند دقیقه تا چند ساعت", "better": "گاهی خودبه‌خود قطع می‌شود", "pleuritic": "نه", "position": "فرقی ندارد", "nausea": "گاهی", "dyspnea": "کمی", "exertional_dyspnea": "کمی", "tolerance": "کمی کمتر شده", "orthopnea": "نه", "pillows": "یک", "pnd": "نه", "edema": "دوطرفه تا ساق", "weight": "۳ کیلو افزایش", "palpitations": "بله، واضح", "abrupt": "بله", "rhythm": "بسته به حمله", "palp_duration": "۱۰ دقیقه تا چند ساعت", "palp_trigger": "گاهی استرس یا قهوه", "palp_associated": "گاهی سرگیجه و تنگی نفس", "pre_syncope": "گاهی", "syncope_ex": "نه", "prodrome": "گاهی احساس گرمی", "recovery": "بعد از قطع تپش سریع خوب می‌شوم", "mi": "نه", "cad": "نه", "hf": "نه", "arrhythmia": "نه", "murmur": "سابقه بیماری دریچه‌ای دارم", "htn": "نه", "diabetes": "نه", "lipids": "نه", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "داروی قلبی منظمی ندارم", "antiplatelet": "نه", "beta": "نه", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "نه", "cigarettes": "ندارم", "alcohol": "کم", "alcohol_amt": "گاهی", "stimulants": "نه", "exercise": "متوسط", "lifestyle_loss": "کمی", "osa": "نه", "dietweight": "ثابت", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "age": "None", "fever": "نه"},
  pe: ["بیمار خسته و دارای ورم محیطی است.", "BP 116/72، HR 88، RR 18، SpO₂ 95%.", "تنفس نسبتاً راحت در استراحت.", "JVP بالا و ادم گوده‌گذار دوطرفه تا ساق.", "قله قلب بدون جابه‌جایی واضح.", "صدای قلب با یافته‌های سمت راست؛ در TR سوفل هولوسیستولیک کنار چپ جناغ شنیده می‌شود."],
  inv: [["Echocardiography", "ضایعه دریچه‌ای مربوط به تشخیص با شدت متوسط تا شدید و اثر همودینامیک متناظر."], ["ECG", "تغییرات دهلیزی یا بطنی متناسب با ضایعه."], ["Chest X-ray", "یافته‌های سازگار با تغییرات قلبی مزمن، بدون ادم حاد."], ["BNP", "BNP کمی افزایش یافته است."], ["CBC", "Hb و WBC بدون اختلال مهم."]],
 },
 {
- id: "cardio-040", title: "تنگی دریچه ریوی", diagnosis: "pulmonary-valve-stenosis", age: 19, sex: "female", difficulty: "medium",
+ id: "cardio-040", title: "تنگی دریچه ریوی", diagnosis: "pulmonary-valve-stenosis", age: 19, sex: "female", difficulty: "easy",
  profile: {"complaint": "تنگی نفس و خستگی هنگام ورزش", "onset": "از نوجوانی", "course": "تدریجی", "exertional": "گاهی", "rest": "بله", "quality": "درد مشخصی ندارم", "location": "درد ندارم", "radiation": "ندارد", "duration": "چند دقیقه تا چند ساعت", "better": "گاهی خودبه‌خود قطع می‌شود", "pleuritic": "نه", "position": "فرقی ندارد", "nausea": "گاهی", "dyspnea": "با فعالیت", "exertional_dyspnea": "بله", "tolerance": "کمتر از همسالان", "orthopnea": "نه", "pillows": "یک", "pnd": "نه", "edema": "نه", "weight": "ثابت", "palpitations": "بله، واضح", "abrupt": "بله", "rhythm": "بسته به حمله", "palp_duration": "۱۰ دقیقه تا چند ساعت", "palp_trigger": "گاهی استرس یا قهوه", "palp_associated": "گاهی سرگیجه و تنگی نفس", "pre_syncope": "گاهی", "syncope_ex": "نه", "prodrome": "گاهی احساس گرمی", "recovery": "بعد از قطع تپش سریع خوب می‌شوم", "mi": "نه", "cad": "نه", "hf": "نه", "arrhythmia": "نه", "murmur": "از کودکی گفته‌اند سوفل قلبی دارم", "htn": "نه", "diabetes": "نه", "lipids": "نه", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "داروی قلبی منظمی ندارم", "antiplatelet": "نه", "beta": "نه", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "نه", "cigarettes": "ندارم", "alcohol": "کم", "alcohol_amt": "گاهی", "stimulants": "نه", "exercise": "متوسط", "lifestyle_loss": "کمی", "osa": "نه", "dietweight": "ثابت", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "بله", "congenital": "بله، تنگی دریچه ریوی", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "age": "None", "fever": "نه"},
  pe: ["بیمار جوان و پایدار است.", "BP 136/78، HR 82، RR 16، SpO₂ 98%.", "تنفس طبیعی در استراحت.", "در کوآرکتاسیون نبض فمورال ضعیف‌تر و فشار پا پایین‌تر است.", "در ASD/VSD یا PS thrill سیستولیک ممکن است لمس شود؛ در این بیمار thrill خفیف وجود دارد.", "سوفل سیستولیک متناسب با ضایعه شنیده می‌شود؛ در ASD در کنار چپ جناغ و در PS در ناحیه پولمونر."],
  inv: [["Echocardiography", "ضایعه دریچه‌ای مربوط به تشخیص با شدت متوسط تا شدید و اثر همودینامیک متناظر."], ["ECG", "تغییرات دهلیزی یا بطنی متناسب با ضایعه."], ["Chest X-ray", "یافته‌های سازگار با تغییرات قلبی مزمن، بدون ادم حاد."], ["BNP", "BNP کمی افزایش یافته است."], ["CBC", "Hb و WBC بدون اختلال مهم."]],
 },
 {
- id: "cardio-041", title: "افیوژن پریکارد", diagnosis: "pericardial-effusion", age: 55, sex: "female", difficulty: "hard",
+ id: "cardio-041", title: "افیوژن پریکارد", diagnosis: "pericardial-effusion", age: 55, sex: "female", difficulty: "medium",
  profile: {"complaint": "تنگی نفس و احساس سنگینی سینه", "onset": "چند هفته", "course": "بدتر شده", "exertional": "گاهی", "rest": "بله", "quality": "سنگینی", "location": "وسط سینه", "radiation": "ندارد", "duration": "تقریباً مداوم", "better": "با نشستن کمی بهتر", "pleuritic": "نه", "position": "دراز کشیدن بدتر می‌کند", "nausea": "گاهی", "dyspnea": "بله", "exertional_dyspnea": "بله", "tolerance": "کمی کمتر شده", "orthopnea": "نه", "pillows": "یک", "pnd": "نه", "edema": "نه", "weight": "ثابت", "palpitations": "بله، واضح", "abrupt": "بله", "rhythm": "بسته به حمله", "palp_duration": "۱۰ دقیقه تا چند ساعت", "palp_trigger": "گاهی استرس یا قهوه", "palp_associated": "گاهی سرگیجه و تنگی نفس", "pre_syncope": "گاهی", "syncope_ex": "نه", "prodrome": "گاهی احساس گرمی", "recovery": "بعد از قطع تپش سریع خوب می‌شوم", "mi": "نه", "cad": "نه", "hf": "نه", "arrhythmia": "نه", "murmur": "نه", "htn": "نه", "diabetes": "نه", "lipids": "نه", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "داروی قلبی منظمی ندارم", "antiplatelet": "نه", "beta": "نه", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "نه", "cigarettes": "ندارم", "alcohol": "کم", "alcohol_amt": "گاهی", "stimulants": "نه", "exercise": "متوسط", "lifestyle_loss": "کمی", "osa": "نه", "dietweight": "ثابت", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "لوپوس دارم", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "age": "None", "fever": "نه"},
  pe: ["بیمار با تنگی نفس و ظاهر نسبتاً بیمار است.", "BP 94/62، HR 112، RR 24، SpO₂ 94%.", "تنفس سریع و سطحی.", "JVP بالا و نبض محیطی نسبتاً ضعیف.", "صدای قلب کم‌حجم و قله قلب به‌سختی قابل لمس است.", "صدای قلب‌ها خفه و سوفل واضحی ندارد."],
  inv: [["Echocardiography", "افیوژن محیط قلبی با اندازه متوسط؛ در تامپوناد، فروریزش دهلیز راست و بطن راست در دیاستول دیده می‌شود."], ["ECG", "Low voltage و در تامپوناد electrical alternans."], ["Chest X-ray", "بزرگی سایه قلب متناسب با افیوژن."], ["CBC", "Hb و WBC در محدوده نزدیک طبیعی."], ["CRP", "CRP کمی افزایش یافته است."]],
@@ -262,10 +265,10 @@ const caseData: Array<{id:string; title:string; diagnosis:string; age:number; se
  id: "cardio-043", title: "پریکاردیت کانستریکتیو", diagnosis: "constrictive-pericarditis", age: 64, sex: "male", difficulty: "hard",
  profile: {"complaint": "ورم پاها، شکم بزرگ‌شده و تنگی نفس هنگام فعالیت", "onset": "یک سال", "course": "تدریجی", "exertional": "بله", "rest": "گاهی", "quality": "فشار یا درد واضح ندارم", "location": "درد مشخصی ندارم", "radiation": "ندارد", "duration": "تنگی نفس با فعالیت چند دقیقه تا بیشتر طول می‌کشد", "better": "با نشستن و استراحت بهتر می‌شود", "pleuritic": "نه", "position": "با دراز کشیدن بدتر می‌شود", "nausea": "نه", "dyspnea": "بله", "exertional_dyspnea": "بله", "tolerance": "به‌طور واضح کمتر شده", "orthopnea": "کمی", "pillows": "۲", "pnd": "نه", "edema": "دوطرفه شدید", "weight": "افزایش وزن به‌دلیل ورم", "palpitations": "گاهی", "abrupt": "نه", "rhythm": "منظم", "palp_duration": "چند دقیقه", "palp_trigger": "با فعالیت", "palp_associated": "با تنگی نفس", "pre_syncope": "نه", "syncope_ex": "نه", "prodrome": "ندارم", "recovery": "با استراحت تدریجی بهتر می‌شوم", "mi": "نه", "cad": "نه", "hf": "نه", "arrhythmia": "نه", "murmur": "نه", "htn": "بله", "diabetes": "نه", "lipids": "بله", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "داروی فشار خون مصرف می‌کنم", "antiplatelet": "نه", "beta": "گاهی", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "هرگز سیگار نکشیده‌ام", "cigarettes": "ندارم", "alcohol": "نه", "alcohol_amt": "ندارم", "stimulants": "نه", "exercise": "کم", "lifestyle_loss": "بله", "osa": "نه", "dietweight": "نمک غذا را زیاد مصرف می‌کنم", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "سابقه التهاب پرده قلب داشته‌ام", "dental": "نه", "surgery": "چند سال قبل جراحی قلب داشتم", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "age": "None", "fever": "نه"},
  pe: ["بیمار خسته و دارای ورم محیطی است.", "BP 116/72، HR 88، RR 18، SpO₂ 95%.", "تنفس نسبتاً راحت در استراحت.", "JVP بالا و ادم گوده‌گذار دوطرفه تا ساق.", "قله قلب بدون جابه‌جایی واضح.", "صدای قلب با یافته‌های سمت راست؛ در TR سوفل هولوسیستولیک کنار چپ جناغ شنیده می‌شود."],
- inv: [["NT-proBNP", "NT-proBNP به‌طور قابل‌توجهی افزایش یافته است."], ["Echocardiography", "LVEF حفظ‌شده یا نزدیک طبیعی با یافته‌های اختلال پرشدن/فشارهای پرشدگی بالا."], ["Chest X-ray", "در HF چپ احتقان ریوی؛ در بیماری‌های غالباً راست ممکن است ادم ریه واضح نباشد."], ["ECG", "تغییرات متناسب با بیماری زمینه‌ای."], ["CMP", "عملکرد کلیه و الکترولیت‌ها برای ارزیابی احتقان و درمان بررسی شد."]],
+ inv: [["NT-proBNP", "NT-proBNP افزایش‌یافته است؛ مقدار دقیق در سناریو ثبت نشده است."], ["Echocardiography", "LVEF حفظ‌شده یا نزدیک طبیعی با یافته‌های اختلال پرشدن/فشارهای پرشدگی بالا."], ["Chest X-ray", "در HF چپ احتقان ریوی؛ در بیماری‌های غالباً راست ممکن است ادم ریه واضح نباشد."], ["ECG", "تغییرات متناسب با بیماری زمینه‌ای."], ["CMP", "عملکرد کلیه و الکترولیت‌ها برای ارزیابی احتقان و درمان بررسی شد."]],
 },
 {
- id: "cardio-044", title: "بیماری قلبی روماتیسمی", diagnosis: "rheumatic-heart-disease", age: 52, sex: "female", difficulty: "hard",
+ id: "cardio-044", title: "بیماری قلبی روماتیسمی", diagnosis: "rheumatic-heart-disease", age: 52, sex: "female", difficulty: "medium",
  profile: {"complaint": "تنگی نفس، تپش قلب و کاهش تحمل فعالیت", "onset": "چند سال", "course": "تدریجی", "exertional": "گاهی", "rest": "بله", "quality": "درد مشخصی ندارم", "location": "درد ندارم", "radiation": "ندارد", "duration": "چند دقیقه تا چند ساعت", "better": "گاهی خودبه‌خود قطع می‌شود", "pleuritic": "نه", "position": "فرقی ندارد", "nausea": "گاهی", "dyspnea": "بله", "exertional_dyspnea": "بله", "tolerance": "کمی کمتر شده", "orthopnea": "بله", "pillows": "۲", "pnd": "نه", "edema": "نه", "weight": "ثابت", "palpitations": "بله، واضح", "abrupt": "بله", "rhythm": "گاهی نامنظم", "palp_duration": "۱۰ دقیقه تا چند ساعت", "palp_trigger": "گاهی استرس یا قهوه", "palp_associated": "گاهی سرگیجه و تنگی نفس", "pre_syncope": "گاهی", "syncope_ex": "نه", "prodrome": "گاهی احساس گرمی", "recovery": "بعد از قطع تپش سریع خوب می‌شوم", "mi": "نه", "cad": "نه", "hf": "نه", "arrhythmia": "نه", "murmur": "بیماری دریچه‌ای دارم", "htn": "نه", "diabetes": "نه", "lipids": "نه", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "داروی قلبی منظمی ندارم", "antiplatelet": "نه", "beta": "نه", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "نه", "cigarettes": "ندارم", "alcohol": "کم", "alcohol_amt": "گاهی", "stimulants": "نه", "exercise": "متوسط", "lifestyle_loss": "کمی", "osa": "نه", "dietweight": "ثابت", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "در نوجوانی تب روماتیسمی داشتم", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "palp": "گاهی", "age": "None", "fever": "نه"},
  pe: ["بیمار با تنگی نفس فعالیتی است.", "BP 122/70، HR 92، RR 19، SpO₂ 96%.", "تنفس کمی سریع.", "ادم خفیف دوطرفه.", "قله قلب با tapping impulse لمس می‌شود.", "S1 برجسته و opening snap همراه سوفل دیاستولیک در apex شنیده می‌شود."],
  inv: [["Echocardiography", "ضایعه دریچه‌ای مربوط به تشخیص با شدت متوسط تا شدید و اثر همودینامیک متناظر."], ["ECG", "تغییرات دهلیزی یا بطنی متناسب با ضایعه."], ["Chest X-ray", "یافته‌های سازگار با تغییرات قلبی مزمن، بدون ادم حاد."], ["BNP", "BNP کمی افزایش یافته است."], ["CBC", "Hb و WBC بدون اختلال مهم."]],
@@ -274,7 +277,7 @@ const caseData: Array<{id:string; title:string; diagnosis:string; age:number; se
  id: "cardio-045", title: "کاردیومیوپاتی محدودکننده", diagnosis: "restrictive-cardiomyopathy", age: 60, sex: "female", difficulty: "hard",
  profile: {"complaint": "تنگی نفس و ورم پاها", "onset": "یک سال", "course": "بدتر شده", "exertional": "بله", "rest": "گاهی", "quality": "فشار یا درد واضح ندارم", "location": "درد مشخصی ندارم", "radiation": "ندارد", "duration": "تنگی نفس با فعالیت چند دقیقه تا بیشتر طول می‌کشد", "better": "با نشستن و استراحت بهتر می‌شود", "pleuritic": "نه", "position": "با دراز کشیدن بدتر می‌شود", "nausea": "نه", "dyspnea": "بله", "exertional_dyspnea": "بله", "tolerance": "به‌طور واضح کمتر شده", "orthopnea": "بله", "pillows": "۲", "pnd": "گاهی", "edema": "دوطرفه", "weight": "در دو هفته اخیر حدود ۳ کیلو اضافه کرده‌ام", "palpitations": "گاهی", "abrupt": "نه", "rhythm": "منظم", "palp_duration": "چند دقیقه", "palp_trigger": "با فعالیت", "palp_associated": "با تنگی نفس", "pre_syncope": "نه", "syncope_ex": "نه", "prodrome": "ندارم", "recovery": "با استراحت تدریجی بهتر می‌شوم", "mi": "نه", "cad": "نه", "hf": "به من نارسایی قلبی گفته‌اند", "arrhythmia": "نه", "murmur": "نه", "htn": "بله", "diabetes": "نه", "lipids": "بله", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "داروی فشار خون مصرف می‌کنم", "antiplatelet": "نه", "beta": "گاهی", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "هرگز سیگار نکشیده‌ام", "cigarettes": "ندارم", "alcohol": "نه", "alcohol_amt": "ندارم", "stimulants": "نه", "exercise": "کم", "lifestyle_loss": "بله", "osa": "نه", "dietweight": "نمک غذا را زیاد مصرف می‌کنم", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "برای یک بیماری نفوذی بررسی می‌شوم", "childhood_murmur": "نه", "congenital": "نه", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "نه", "chest_always_ex": "نه", "age": "None", "fever": "نه"},
  pe: ["بیمار هوشیار و پایدار است.", "BP 124/76، HR 84، RR 18، SpO₂ 97%.", "تنفس بدون دیسترس.", "نبض‌های محیطی قرینه و ادم ندارد.", "قله قلب در محل طبیعی و بدون thrill.", "S1/S2 طبیعی و بدون سوفل قابل‌توجه."],
- inv: [["NT-proBNP", "NT-proBNP به‌طور قابل‌توجهی افزایش یافته است."], ["Echocardiography", "LVEF حفظ‌شده یا نزدیک طبیعی با یافته‌های اختلال پرشدن/فشارهای پرشدگی بالا."], ["Chest X-ray", "در HF چپ احتقان ریوی؛ در بیماری‌های غالباً راست ممکن است ادم ریه واضح نباشد."], ["ECG", "تغییرات متناسب با بیماری زمینه‌ای."], ["CMP", "عملکرد کلیه و الکترولیت‌ها برای ارزیابی احتقان و درمان بررسی شد."]],
+ inv: [["NT-proBNP", "NT-proBNP افزایش‌یافته است؛ مقدار دقیق در سناریو ثبت نشده است."], ["Echocardiography", "LVEF حفظ‌شده یا نزدیک طبیعی با یافته‌های اختلال پرشدن/فشارهای پرشدگی بالا."], ["Chest X-ray", "در HF چپ احتقان ریوی؛ در بیماری‌های غالباً راست ممکن است ادم ریه واضح نباشد."], ["ECG", "تغییرات متناسب با بیماری زمینه‌ای."], ["CMP", "عملکرد کلیه و الکترولیت‌ها برای ارزیابی احتقان و درمان بررسی شد."]],
 },
 {
  id: "cardio-046", title: "کاردیومیوپاتی آریتموژنیک بطن راست (ARVC)", diagnosis: "arrhythmogenic-right-ventricular-cardiomyopathy", age: 28, sex: "male", difficulty: "hard",
@@ -289,13 +292,13 @@ const caseData: Array<{id:string; title:string; diagnosis:string; age:number; se
  inv: [["ECG", "تغییرات ایسکمیک متناسب با تابلوی بالینی."], ["High-sensitivity troponin", "برای افتراق آسیب حاد میوکارد اندازه‌گیری شد و نتیجه با تابلوی بالینی تفسیر می‌شود."], ["Echocardiography", "اختلال حرکتی منطقه‌ای متناسب با ضایعه."], ["Coronary angiography", "آناتومی کرونر/ضایعه مسئول مشخص شد."], ["CBC", "Hb و پلاکت در محدوده قابل‌قبول."]],
 },
 {
- id: "cardio-048", title: "نقص دیواره بین دهلیزی (ASD)", diagnosis: "atrial-septal-defect", age: 34, sex: "female", difficulty: "hard",
+ id: "cardio-048", title: "نقص دیواره بین دهلیزی (ASD)", diagnosis: "atrial-septal-defect", age: 34, sex: "female", difficulty: "medium",
  profile: {"complaint": "تنگی نفس هنگام فعالیت و خستگی", "onset": "چند سال", "course": "تدریجی", "exertional": "گاهی", "rest": "بله", "quality": "درد مشخصی ندارم", "location": "درد ندارم", "radiation": "ندارد", "duration": "چند دقیقه تا چند ساعت", "better": "گاهی خودبه‌خود قطع می‌شود", "pleuritic": "نه", "position": "فرقی ندارد", "nausea": "گاهی", "dyspnea": "بله", "exertional_dyspnea": "بله", "tolerance": "کمتر شده", "orthopnea": "نه", "pillows": "یک", "pnd": "نه", "edema": "نه", "weight": "ثابت", "palpitations": "گاهی", "abrupt": "بله", "rhythm": "بسته به حمله", "palp_duration": "۱۰ دقیقه تا چند ساعت", "palp_trigger": "گاهی استرس یا قهوه", "palp_associated": "گاهی سرگیجه و تنگی نفس", "pre_syncope": "گاهی", "syncope_ex": "نه", "prodrome": "گاهی احساس گرمی", "recovery": "بعد از قطع تپش سریع خوب می‌شوم", "mi": "نه", "cad": "نه", "hf": "نه", "arrhythmia": "نه", "murmur": "از کودکی گفته‌اند سوفل دارم", "htn": "نه", "diabetes": "نه", "lipids": "نه", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "داروی قلبی منظمی ندارم", "antiplatelet": "نه", "beta": "نه", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "نه", "cigarettes": "ندارم", "alcohol": "کم", "alcohol_amt": "گاهی", "stimulants": "نه", "exercise": "متوسط", "lifestyle_loss": "کمی", "osa": "نه", "dietweight": "ثابت", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "بله", "congenital": "بله، ASD", "cyanosis": "نه", "childhood_surgery": "نه", "childhood_exercise": "کودکی در ورزش زود خسته می‌شدم", "chest_always_ex": "نه", "age": "None", "fever": "نه"},
  pe: ["بیمار جوان و پایدار است.", "BP 136/78، HR 82، RR 16، SpO₂ 98%.", "تنفس طبیعی در استراحت.", "در کوآرکتاسیون نبض فمورال ضعیف‌تر و فشار پا پایین‌تر است.", "در ASD/VSD یا PS thrill سیستولیک ممکن است لمس شود؛ در این بیمار thrill خفیف وجود دارد.", "سوفل سیستولیک متناسب با ضایعه شنیده می‌شود؛ در ASD در کنار چپ جناغ و در PS در ناحیه پولمونر."],
  inv: [["Echocardiography", "نقص مادرزادی مربوط به تشخیص با اثر همودینامیک متناظر مشاهده شد."], ["ECG", "الگوی الکتریکی متناسب با ضایعه مادرزادی."], ["Chest X-ray", "تغییرات مزمن اندازه قلب یا عروق متناسب با ضایعه."], ["CT Angiography", "آناتومی ضایعه در صورت نیاز دقیق‌تر مشخص شد."], ["Oxygen saturation", "SpO₂ در استراحت طبیعی و بدون سیانوز مرکزی."]],
 },
 {
- id: "cardio-049", title: "نقص دیواره بین بطنی (VSD)", diagnosis: "ventricular-septal-defect", age: 23, sex: "male", difficulty: "hard",
+ id: "cardio-049", title: "نقص دیواره بین بطنی (VSD)", diagnosis: "ventricular-septal-defect", age: 23, sex: "male", difficulty: "medium",
  profile: {"complaint": "تنگی نفس و خستگی هنگام فعالیت", "onset": "از کودکی ولی اخیراً بیشتر شده", "course": "تدریجی", "exertional": "گاهی", "rest": "بله", "quality": "درد مشخصی ندارم", "location": "درد ندارم", "radiation": "ندارد", "duration": "چند دقیقه تا چند ساعت", "better": "گاهی خودبه‌خود قطع می‌شود", "pleuritic": "نه", "position": "فرقی ندارد", "nausea": "گاهی", "dyspnea": "بله", "exertional_dyspnea": "بله", "tolerance": "کمی کمتر شده", "orthopnea": "نه", "pillows": "یک", "pnd": "نه", "edema": "نه", "weight": "ثابت", "palpitations": "بله، واضح", "abrupt": "بله", "rhythm": "بسته به حمله", "palp_duration": "۱۰ دقیقه تا چند ساعت", "palp_trigger": "گاهی استرس یا قهوه", "palp_associated": "گاهی سرگیجه و تنگی نفس", "pre_syncope": "گاهی", "syncope_ex": "نه", "prodrome": "گاهی احساس گرمی", "recovery": "بعد از قطع تپش سریع خوب می‌شوم", "mi": "نه", "cad": "نه", "hf": "نه", "arrhythmia": "نه", "murmur": "از کودکی سوفل داشته‌ام", "htn": "نه", "diabetes": "نه", "lipids": "نه", "kidney": "نه", "thyroid": "نه", "procedures": "نداشته‌ام", "stent": "نه", "cabg": "نه", "ablation": "نه", "device": "نه", "meds": "داروی قلبی منظمی ندارم", "antiplatelet": "نه", "beta": "نه", "diuretic": "نه", "medchange": "نه", "missed": "نه", "smoking": "نه", "cigarettes": "ندارم", "alcohol": "کم", "alcohol_amt": "گاهی", "stimulants": "نه", "exercise": "متوسط", "lifestyle_loss": "کمی", "osa": "نه", "dietweight": "ثابت", "family_early_cad": "نه", "family_sudden": "نه", "family_cm": "نه", "family_arrhythmia": "نه", "family_congenital": "نه", "family_aorta": "نه", "family_lipid": "نه", "viral": "نه", "dental": "نه", "surgery": "نه", "endocarditis": "نه", "rheumatic": "نه", "autoimmune": "نه", "infiltrative": "نه", "childhood_murmur": "بله", "congenital": "بله، VSD", "cyanosis": "نه", "childhood_surgery": "جراحی نداشته‌ام", "childhood_exercise": "نه", "chest_always_ex": "نه", "age": "None", "fever": "نه"},
  pe: ["بیمار جوان و پایدار است.", "BP 136/78، HR 82، RR 16، SpO₂ 98%.", "تنفس طبیعی در استراحت.", "در کوآرکتاسیون نبض فمورال ضعیف‌تر و فشار پا پایین‌تر است.", "در ASD/VSD یا PS thrill سیستولیک ممکن است لمس شود؛ در این بیمار thrill خفیف وجود دارد.", "سوفل سیستولیک متناسب با ضایعه شنیده می‌شود؛ در ASD در کنار چپ جناغ و در PS در ناحیه پولمونر."],
  inv: [["Echocardiography", "نقص مادرزادی مربوط به تشخیص با اثر همودینامیک متناظر مشاهده شد."], ["ECG", "الگوی الکتریکی متناسب با ضایعه مادرزادی."], ["Chest X-ray", "تغییرات مزمن اندازه قلب یا عروق متناسب با ضایعه."], ["CT Angiography", "آناتومی ضایعه در صورت نیاز دقیق‌تر مشخص شد."], ["Oxygen saturation", "SpO₂ در استراحت طبیعی و بدون سیانوز مرکزی."]],
@@ -309,107 +312,382 @@ const caseData: Array<{id:string; title:string; diagnosis:string; age:number; se
 ];
 
 function buildCase(item: typeof caseData[number]): Case {
- const history: CaseHint[] = cardiologyQuestionBank.map((question) => { const originalIndex = Number(question.id.replace("cardio-hist-", "")); return q(question.id, historyAnswer(originalIndex, item.profile)); });
- const physicalExam = item.pe.map((content, index) => ({ id: `cardio-${item.id}-pe-${index+1}`, sourceId: `CPE${String(index+1).padStart(3,"0")}`, label: `یافته معاینه ${index+1}`, content }));
- const investigations = item.inv.map(([name, finding], index) => ({ id: `cardio-${item.id}-inv-${index+1}`, name, category: "cardiology", findings: [{ label: name, value: finding }], relevance: (index === 0 ? "high" : "low") as "high" | "low" }));
+ const profile = clinicalProfile(item);
+ const authoredHistory = cardiologyHistoryPhase3[item.id];
+ const history: CaseHint[] = cardiologyQuestionBank.map((question, index) => {
+   const authored = authoredHistory?.[question.id];
+   return q(question.id, authored?.patientAnswer ?? historyAnswer(index + 1, profile));
+ });
+ const peContents = physicalExamAnswers(item, profile);
+ const physicalExam = peContents.map((content, index) => ({ id: `cardio-${item.id}-pe-${index+1}`, sourceId: `CPE${String(index+1).padStart(3,"0")}`, label: cardiologyPhysicalExamBank[index].title, content }));
+ const investigationContents = investigationAnswers(item);
+ const investigations = investigationContents.map((entry, index) => ({ id: `cardio-${item.id}-inv-${index+1}`, sourceId: `CINV${String(index+1).padStart(3,"0")}`, name: cardiologyInvestigationBank[index].title, category: "cardiology", findings: [{ label: cardiologyInvestigationBank[index].title, value: entry }], relevance: (index < 4 ? "high" : entry.startsWith("در این سناریو انجام نشده") ? "non-contributory" : "low") as "high" | "low" | "non-contributory" }));
  const diagnosis = diseases.find(x => x.id === item.diagnosis);
  if (!diagnosis) throw new Error(`Missing cardiology diagnosis: ${item.diagnosis}`);
  const candidates = candidatePool(item.diagnosis);
  return { id:item.id, title:item.title, course:"cardiology", tags:[item.diagnosis], difficulty:item.difficulty, patient:{age:item.age,sex:item.sex}, presentation:item.profile.complaint, stages:[{id:`${item.id}-history`,type:"history",title:"شرح حال بیمار",hints:history},{id:`${item.id}-physical`,type:"physical-exam",title:"معاینه فیزیکی",hints:physicalExam},{id:`${item.id}-investigation`,type:"investigation",title:"بررسی‌ها",investigations}], diagnosis, candidateDiagnosisIds:candidates, reviewQuestions:[] };
 }
 
-function historyAnswer(i:number,p:Record<string,string>):string { switch(i) {
- case 1: return p.complaint;
- case 2: return p.quality;
- case 3: return p.dyspnea;
- case 4: return p.palpitations;
- case 5: return p.pre_syncope;
- case 6: return p.edema;
- case 7: return p.tolerance;
- case 8: return p.cyanosis;
- case 9: return p.fever;
- case 10: return p.onset;
- case 11: return p.onset.includes("ناگهانی") || p.course === "ناگهانی" ? "ناگهانی شروع شد." : "تدریجی شروع شد.";
- case 12: return p.course;
- case 13: return p.exertional;
- case 14: return p.rest;
- case 15: return p.quality;
- case 16: return p.location;
- case 17: return p.radiation;
- case 18: return p.duration;
- case 19: return p.better;
- case 20: return p.pleuritic;
- case 21: return p.position;
- case 22: return p.better === "چیزی بهترش نمی‌کند" || p.better.includes("کامل نشده") ? "نه، استراحت هم کاملاً برطرفش نمی‌کند." : "بله، با استراحت بهتر می‌شود.";
- case 23: return p.nausea;
- case 24: return p.dyspnea;
- case 25: return p.exertional_dyspnea;
- case 26: return p.tolerance;
- case 27: return p.position.includes("دراز") && p.position.includes("بدتر") ? "بله، دراز کشیدن تنگی نفسم را بدتر می‌کند." : "نه، دراز کشیدن باعث تنگی نفسم نمی‌شود.";
- case 28: return p.pillows;
- case 29: return p.pnd;
- case 30: return p.weight;
- case 31: return p.palpitations;
- case 32: return p.abrupt;
- case 33: return p.rhythm;
- case 34: return p.palp_duration;
- case 35: return p.palp_trigger;
- case 36: return p.palp_associated;
- case 37: return p.pre_syncope !== "نه" ? `بله، ${p.palpitations}` : "نه، قبل از نزدیک غش شدن تپش قلب نداشته‌ام.";
- case 38: return p.syncope_ex;
- case 39: return p.prodrome;
- case 40: return p.recovery;
- case 41: return p.mi;
- case 42: return p.cad;
- case 43: return p.hf;
- case 44: return p.arrhythmia;
- case 45: return p.murmur;
- case 46: return p.htn;
- case 47: return p.diabetes;
- case 48: return p.lipids;
- case 49: return p.kidney;
- case 50: return p.thyroid;
- case 51: return p.procedures;
- case 52: return p.stent;
- case 53: return p.cabg;
- case 54: return p.ablation;
- case 55: return p.device;
- case 56: return p.meds;
- case 57: return p.antiplatelet;
- case 58: return p.beta;
- case 59: return p.diuretic;
- case 60: return p.medchange;
- case 61: return p.missed;
- case 62: return p.smoking;
- case 63: return p.cigarettes;
- case 64: return p.alcohol;
- case 65: return p.alcohol_amt;
- case 66: return p.stimulants;
- case 67: return p.exercise;
- case 68: return p.lifestyle_loss;
- case 69: return p.osa;
- case 70: return p.dietweight;
- case 71: return p.family_early_cad;
- case 72: return p.family_sudden;
- case 73: return p.family_cm;
- case 74: return p.family_arrhythmia;
- case 75: return p.family_congenital;
- case 76: return p.family_aorta;
- case 77: return p.family_lipid;
- case 78: return p.viral;
- case 79: return p.dental;
- case 80: return p.surgery;
- case 81: return p.endocarditis;
- case 82: return p.rheumatic;
- case 83: return p.autoimmune;
- case 84: return p.infiltrative;
- case 85: return p.childhood_murmur;
- case 86: return p.congenital;
- case 87: return p.cyanosis;
- case 88: return p.childhood_surgery;
- case 89: return p.childhood_exercise;
- case 90: return p.chest_always_ex;
- default: return "اطلاعاتی در این مورد ندارم."; } }
+function clinicalProfile(item: typeof caseData[number]): Record<string,string> {
+ const p = { ...item.profile };
+ const id = item.diagnosis;
+ const complaint = p.complaint || "";
+ const arrhythmias = new Set(["atrial-fibrillation","supraventricular-tachycardia","ventricular-tachycardia","atrial-flutter","avnrt","avrt-wpw","multifocal-atrial-tachycardia","ventricular-fibrillation","sinus-node-dysfunction","first-degree-av-block","mobitz-i-av-block","mobitz-ii-av-block","complete-heart-block","arrhythmogenic-right-ventricular-cardiomyopathy"]);
+ const painCases = new Set(["acute-coronary-syndrome","stable-angina","unstable-angina","nstemi","stemi","coronary-vasospasm","spontaneous-coronary-artery-dissection","coronary-microvascular-dysfunction","acute-pericarditis","acute-myocarditis","aortic-dissection","takotsubo-cardiomyopathy"]);
+ const heartFailure = new Set(["heart-failure-with-reduced-ejection-fraction","dilated-cardiomyopathy","hfpef","acute-decompensated-heart-failure","right-sided-heart-failure","cardiogenic-shock","pulmonary-hypertension","constrictive-pericarditis","restrictive-cardiomyopathy","tricuspid-regurgitation"]);
+ const hasPalpComplaint = complaint.includes("تپش");
+ if (!arrhythmias.has(id) && !hasPalpComplaint && p.palpitations === "بله، واضح") {
+   p.palpitations = painCases.has(id) ? "گاهی همراه درد یا ناراحتی اصلی تپش خفیف دارم." : heartFailure.has(id) ? "گاهی تپش خفیف دارم، به‌خصوص با فعالیت." : "تپش قلب واضحی نداشته‌ام.";
+ }
+ const syncopeRelevant = new Set(["ventricular-tachycardia","ventricular-fibrillation","aortic-stenosis","hypertrophic-cardiomyopathy","sinus-node-dysfunction","mobitz-ii-av-block","complete-heart-block","arrhythmogenic-right-ventricular-cardiomyopathy"]);
+ if (!/(غش|سرگیجه|نزدیک غش)/.test(complaint) && !syncopeRelevant.has(id)) p.pre_syncope = "نه، غش یا نزدیک‌غش نداشته‌ام.";
+ const edemaRelevant = heartFailure.has(id) || /ورم|ادم|شکم بزرگ/.test(complaint) || id === "cardiac-tamponade";
+ if (!edemaRelevant) p.edema = "نه، ورم پاها نداشته‌ام.";
+ const dyspneaRelevant = /تنگی نفس|نفس‌تنگی/.test(complaint) || p.exertional_dyspnea === "بله" || heartFailure.has(id) || painCases.has(id) || ["aortic-stenosis","mitral-regurgitation","mitral-stenosis","aortic-regurgitation","pulmonary-valve-stenosis","atrial-septal-defect","ventricular-septal-defect","pericardial-effusion","cardiac-tamponade","rheumatic-heart-disease"].includes(id);
+ if (!dyspneaRelevant && p.dyspnea !== "نه") p.dyspnea = "نه، تنگی نفس مشخصی نداشته‌ام.";
+ if (["atrial-fibrillation","supraventricular-tachycardia","ventricular-tachycardia","atrial-flutter","avnrt","avrt-wpw","multifocal-atrial-tachycardia"].includes(id) && !/تنگی نفس|نفس‌تنگی/.test(complaint)) p.dyspnea = "گاهی هنگام حمله تپش قلب دچار تنگی نفس می‌شوم.";
+ if (id === "first-degree-av-block") { p.palpitations = "نه، علامت خاصی احساس نکرده‌ام."; p.pre_syncope = "نه، غش یا نزدیک‌غش نداشته‌ام."; p.dyspnea = "نه، تنگی نفس ندارم."; }
+ if (id === "mobitz-i-av-block") { p.palpitations = "گاهی احساس می‌کنم ضربانم جا می‌افتد."; p.pre_syncope = "گاهی کمی سرگیجه دارم، اما غش نکرده‌ام."; }
+ if (id === "mobitz-ii-av-block") { p.palpitations = "گاهی ضربانم جا می‌افتد."; p.pre_syncope = "بله، چند بار نزدیک بوده غش کنم."; }
+ if (id === "complete-heart-block") { p.palpitations = "گاهی ضربانم کند یا جاافتاده به نظر می‌رسد."; p.pre_syncope = "بله، ضعف شدید و غش داشته‌ام."; }
+ if (id === "ventricular-fibrillation") { p.palpitations = "پیش از بیهوش شدن تپش شدید داشتم."; p.pre_syncope = "غش ناگهانی داشته‌ام."; }
+ if (id === "cardiogenic-shock") { p.dyspnea = "بله، حتی در استراحت نفس‌تنگی شدید دارم."; p.pre_syncope = "بله، احساس غش و ضعف شدید دارم."; }
+ if (id === "cardiac-tamponade") { p.dyspnea = "بله، تنگی نفس رو به افزایش دارم."; p.pre_syncope = "گاهی احساس سبکی سر و نزدیک‌غش دارم."; }
+ return p;
+}
+
+function historyAnswer(n:number,p:Record<string,string>):string {
+ const v=(key:string,fallback="اطلاعاتی در این مورد در شرح‌حال ثبت نشده است.") => p[key]?.trim() || fallback;
+ const noPain = /درد ندارم|درد مشخصی ندارم|فشار یا درد واضح ندارم|ندارم/.test(v("quality")) || v("location")==="درد ندارم";
+ const palpAbsent = /^(نه|ندارم|تپش قلب واضحی نداشته‌ام|نداشته‌ام)/.test(v("palpitations"));
+ const noSyncope = /^(نه|نداشته‌ام)/.test(v("syncope_ex")) && /^(نه|نداشته‌ام)/.test(v("pre_syncope"));
+ switch(n) {
+  case 1: return v("complaint");
+  case 2: return noPain ? "نه، درد یا ناراحتی مشخصی در قفسه سینه نداشته‌ام." : `بله؛ ${v("quality")}، در ${v("location")} ${v("radiation","انتشار مشخصی ندارد")}.`;
+  case 3: return v("dyspnea");
+  case 4: return v("palpitations");
+  case 5: return `غش: ${v("syncope_ex")}; نزدیک‌غش: ${v("pre_syncope")}.`;
+  case 6: return v("edema");
+  case 7: return v("tolerance");
+  case 8: return v("onset");
+  case 9: return "نحوه شروع ناگهانی یا تدریجی در داده‌های این کیس به‌طور مستقل ثبت نشده است.";
+  case 10: return v("course");
+  case 11: return noPain ? "چون درد قفسه سینه ندارم، ارتباط درد با فعالیت مطرح نیست." : v("exertional");
+  case 12: return noPain ? "چون درد قفسه سینه ندارم، درد در استراحت مطرح نیست." : v("rest");
+  case 13: return noPain ? "درد قفسه سینه ندارم." : v("quality");
+  case 14: return noPain ? "درد قفسه سینه ندارم." : v("location");
+  case 15: return noPain ? "دردی ندارم که به جای دیگری انتشار پیدا کند." : v("radiation");
+  case 16: return noPain ? "چون درد قفسه سینه ندارم، مدت یا دفعات حمله درد مطرح نیست." : v("duration");
+  case 17: return noPain ? "چون درد قفسه سینه ندارم، عامل تسکین یا تشدید درد مطرح نیست." : v("better");
+  case 18: return noPain ? "چون درد قفسه سینه ندارم، این ویژگی مطرح نیست." : v("pleuritic");
+  case 19: return noPain ? "چون درد قفسه سینه ندارم، تغییر وضعیت بدن اثری بر درد ندارد." : v("position");
+  case 20: return v("nausea");
+  case 21: return v("fever");
+  case 22: return v("exertional_dyspnea");
+  case 23: return v("orthopnea");
+  case 24: return v("pillows");
+  case 25: return v("pnd");
+  case 26: return `تغییر وزن: ${v("weight")}. درباره کاهش ادرار اطلاعاتی در شرح‌حال ثبت نشده است.`;
+  case 27: return palpAbsent ? "تپش قلب ندارم؛ بنابراین کیفیت آن قابل توصیف نیست." : v("palpitations");
+  case 28: return palpAbsent ? "تپش قلب ندارم که شروع یا قطع حمله‌ای داشته باشد." : v("abrupt");
+  case 29: return palpAbsent ? "تپش قلب ندارم که نظم آن را توصیف کنم." : v("rhythm");
+  case 30: return palpAbsent ? "چون تپش قلب ندارم، مدت یا تعداد حملات مطرح نیست." : v("palp_duration");
+  case 31: return palpAbsent ? "تپش قلب ندارم که محرک مشخصی داشته باشد." : v("palp_trigger");
+  case 32: return palpAbsent ? "تپش قلب ندارم که با علامت دیگری همراه باشد." : v("palp_associated");
+  case 33: return noSyncope ? "غش یا نزدیک‌غش نداشته‌ام." : `غش: ${v("syncope_ex")}; نزدیک‌غش: ${v("pre_syncope")}. شرایط دقیق بروز در داده‌های این کیس به‌طور کامل ثبت نشده است.`;
+  case 34: return noSyncope ? "چون غش یا نزدیک‌غش نداشته‌ام، پیش‌درآمد یا دوره بهبودی پس از آن مطرح نیست." : "پیش‌درآمد و بهبودی پس از غش/نزدیک‌غش در داده‌های این کیس به‌طور مشخص ثبت نشده است.";
+  case 35: return `سابقه قلبی: سکته قلبی ${v("mi")}؛ بیماری کرونر ${v("cad")}؛ نارسایی قلبی ${v("hf")}؛ آریتمی ${v("arrhythmia")}؛ بیماری دریچه‌ای/سوفل ${v("murmur")}؛ بیماری مادرزادی ${v("congenital")}؛ تب روماتیسمی ${v("rheumatic")}. بیماری‌های همراه: فشارخون ${v("htn")}؛ دیابت ${v("diabetes")}؛ چربی خون ${v("lipids")}؛ کلیه ${v("kidney")}؛ تیروئید ${v("thyroid")}.`;
+  case 36: return `آنژیوگرافی/اقدامات دیگر: ${v("procedures")}؛ استنت ${v("stent")}؛ جراحی بای‌پس ${v("cabg")}؛ ابلیشن ${v("ablation")}؛ دستگاه قلبی ${v("device")}.`;
+  case 37: return `داروهای فعلی: ${v("meds")}؛ تغییر اخیر دارو: ${v("medchange")}؛ دوز فراموش‌شده: ${v("missed")}.`;
+  case 38: return "اطلاعاتی درباره حساسیت دارویی در شرح‌حال این کیس ثبت نشده است.";
+  case 39: return `سابقه خانوادگی بیماری کرونر زودرس: ${v("family_early_cad")}؛ مرگ ناگهانی: ${v("family_sudden")}؛ کاردیومیوپاتی: ${v("family_cm")}؛ آریتمی ارثی: ${v("family_arrhythmia")}؛ بیماری مادرزادی: ${v("family_congenital")}؛ بیماری آئورت: ${v("family_aorta")}.`;
+  case 40: return `سیگار: ${v("smoking")} (${v("cigarettes")})؛ ویپ: اطلاعاتی در شرح‌حال ثبت نشده است؛ الکل: ${v("alcohol")} (${v("alcohol_amt")})؛ مواد محرک: ${v("stimulants")}؛ فعالیت بدنی معمول: ${v("exercise")}.`;
+  default: return "اطلاعاتی در این مورد ثبت نشده است.";
+ }
+}
+
+const peSpecific: Record<string, Partial<Record<number,string>>> = {
+ "acute-coronary-syndrome": {6:"S1 و S2 قابل سمع‌اند؛ سوفل جدید واضحی شنیده نمی‌شود. در صورت بروز نارسایی حاد، S3 یا کراکل ممکن است اضافه شود.",7:"ریه‌ها در این سناریو بدون کراکل واضح‌اند؛ ادم محیطی دیده نمی‌شود."},
+ "stable-angina": {3:"نبض‌های محیطی قرینه و پرفیوژن مناسب است؛ ادم وجود ندارد.",4:"JVP طبیعی است و رفلاکس هپاتوژوگولار دیده نمی‌شود.",6:"S1 و S2 طبیعی؛ سوفل مهمی شنیده نمی‌شود.",7:"ریه‌ها شفاف‌اند و نشانه‌ای از احتقان سیستمیک وجود ندارد."},
+ "heart-failure-with-reduced-ejection-fraction": {4:"JVP افزایش یافته و رفلاکس هپاتوژوگولار مثبت است.",5:"ضربان اپکس جابه‌جا و منتشر است؛ ممکن است S3 قابل لمس/سمع باشد.",6:"گالوپ S3 شنیده می‌شود؛ در صورت نارسایی عملکردی میترال، سوفل هولوسیستولیک اپکس ممکن است وجود داشته باشد.",7:"کراکل‌های دوطرفه قاعده ریه و ادم گوده‌گذار اندام تحتانی با احتقان سازگارند."},
+ "atrial-fibrillation": {3:"نبض نامنظم‌ـ‌نامنظم است؛ ادم محیطی در صورت نبود نارسایی همزمان وجود ندارد.",4:"JVP معمولاً طبیعی است مگر بیماری همزمان سمت راست قلب وجود داشته باشد.",6:"ریتم نامنظم؛ سوفل اختصاصی برای AF وجود ندارد و باید بیماری دریچه‌ای همزمان ارزیابی شود.",7:"ریه‌ها شفاف‌اند مگر نارسایی قلبی همزمان وجود داشته باشد."},
+ "supraventricular-tachycardia": {3:"نبض سریع و منظم است؛ پرفیوژن باید از نظر افت فشار یا سردی اندام بررسی شود.",4:"JVP ممکن است به‌علت موج‌های دهلیزی برجسته باشد؛ در بیمار پایدار معمولاً افزایش پایدار JVP انتظار نمی‌رود.",6:"تاکی‌کاردی منظم؛ سوفل اختصاصی شنیده نمی‌شود.",7:"ریه‌ها معمولاً شفاف‌اند؛ کراکل به نفع نارسایی همزمان است."},
+ "ventricular-tachycardia": {1:"بیمار تاکی‌کارد و از نظر همودینامیک ناپایدار است؛ سطح هوشیاری و پرفیوژن فوراً ارزیابی می‌شود.",2:"تاکی‌کاردی پهن‌کمپلکس؛ فشارخون ممکن است پایین باشد و پایش مداوم ضروری است.",3:"اندام‌ها ممکن است سرد و مرطوب باشند و نبض ضعیف باشد.",6:"ریتم سریع؛ سمع در تاکی‌کاردی پایدار ممکن است دشوار باشد. سوفل علت تشخیصی VT نیست.",7:"در صورت نارسایی همزمان ممکن است کراکل شنیده شود؛ معاینه نباید درمان آریتمی ناپایدار را به تأخیر اندازد."},
+ "aortic-stenosis": {3:"نبض کاروتید کم‌دامنه و با بالا آمدن آهسته است؛ در بیماری شدید ممکن است نبض محیطی ضعیف باشد.",5:"ضربان اپکس ممکن است پایدار و در بیماری پیشرفته برجسته باشد.",6:"سوفل سیستولیک جهشی خشن در فضای بین‌دنده‌ای دوم راست با انتشار به کاروتیدها؛ شدت سوفل به‌تنهایی شدت تنگی را تعیین نمی‌کند.",7:"در صورت نارسایی قلبی کراکل ممکن است وجود داشته باشد؛ در غیر این صورت ریه‌ها می‌توانند شفاف باشند."},
+ "mitral-regurgitation": {4:"JVP در MR بدون نارسایی قلبی معمولاً طبیعی است؛ در بیماری پیشرفته ممکن است بالا برود.",5:"در MR مزمن، اپکس ممکن است جابه‌جا و هایپردینامیک باشد.",6:"سوفل هولوسیستولیک در اپکس با انتشار به زیربغل؛ S3 ممکن است در MR شدید وجود داشته باشد.",7:"در MR شدید یا دکمپنسیه، کراکل قاعده ریه و نشانه‌های احتقان ممکن است دیده شود."},
+ "infective-endocarditis": {1:"بیمار تب‌دار و بدحال به نظر می‌رسد؛ وضعیت همودینامیک و علائم آمبولی ارزیابی می‌شوند.",3:"ممکن است پته‌شی، خونریزی خطی زیر ناخن یا ضایعات محیطی دیده شود؛ نبود آن‌ها اندوکاردیت را رد نمی‌کند.",6:"سوفل جدید یا تغییرکرده ممکن است وجود داشته باشد؛ نبود سوفل اندوکاردیت را رد نمی‌کند.",7:"کراکل فقط در صورت نارسایی قلبی همزمان انتظار می‌رود؛ بررسی علائم آمبولی و نارسایی ضروری است."},
+ "acute-pericarditis": {4:"JVP معمولاً طبیعی است؛ افزایش آن یا افت فشار، افیوژن همودینامیک مهم را مطرح می‌کند.",6:"ممکن است صدای مالش پریکارد در لبه چپ جناغ شنیده شود؛ این صدا ممکن است متناوب باشد.",7:"ریه‌ها معمولاً شفاف‌اند؛ کراکل به نفع عارضه یا بیماری همزمان است."},
+ "hypertrophic-cardiomyopathy": {3:"نبض ممکن است دو قله‌ای باشد؛ سنکوپ یا افت فشار حین فعالیت باید جدی گرفته شود.",5:"ضربان اپکس ممکن است دوگانه یا پایدار باشد.",6:"سوفل سیستولیک در لبه چپ جناغ/اپکس که با ایستادن یا والسالوا افزایش و با اسکوات کاهش می‌یابد؛ شدت به انسداد وابسته است.",7:"ریه‌ها معمولاً شفاف‌اند مگر نارسایی قلبی همزمان وجود داشته باشد."},
+ "dilated-cardiomyopathy": {4:"JVP در صورت احتقان بالا است.",5:"اپکس معمولاً جابه‌جا و منتشر است.",6:"S3 ممکن است شنیده شود؛ سوفل عملکردی MR/TR در صورت اتساع حلقه‌ها ممکن است وجود داشته باشد.",7:"کراکل قاعده ریه و ادم محیطی در صورت احتقان دیده می‌شود."},
+ "acute-myocarditis": {1:"بیمار ممکن است پس از بیماری ویروسی با تاکی‌کاردی و ظاهر ناخوش مراجعه کند.",4:"JVP بر اساس وجود نارسایی بطنی طبیعی یا افزایش‌یافته است.",6:"ممکن است S3 یا سوفل عملکردی در صورت اختلال عملکرد بطنی شنیده شود؛ معاینه طبیعی بیماری را رد نمی‌کند.",7:"در اختلال عملکرد بطنی، کراکل و نشانه‌های احتقان ممکن است وجود داشته باشند."},
+ "aortic-dissection": {3:"اختلاف نبض یا فشار بین اندام‌ها ممکن است وجود داشته باشد؛ نبض طبیعی دیسکشن را رد نمی‌کند.",4:"JVP معمولاً طبیعی است مگر تامپوناد یا نارسایی قلب راست ایجاد شده باشد.",6:"سوفل دیاستولیک نارسایی آئورت ممکن است در دیسکشن آئورت صعودی شنیده شود.",7:"ریه‌ها معمولاً شفاف‌اند مگر نارسایی آئورت حاد یا عارضه همزمان ایجاد شده باشد."},
+ "pulmonary-hypertension": {3:"ممکن است ادم محیطی، سیانوز یا کاهش پرفیوژن در بیماری پیشرفته دیده شود.",4:"JVP ممکن است بالا باشد، به‌ویژه در نارسایی بطن راست.",5:"هیو پاراسترنال ناشی از بطن راست ممکن است لمس شود.",6:"صدای P2 بلند و گاهی سوفل نارسایی تریکوسپید شنیده می‌شود.",7:"ریه‌ها ممکن است شفاف باشند؛ ادم محیطی یا هپاتومگالی در نارسایی سمت راست ممکن است دیده شود."},
+ "unstable-angina": {6:"S1/S2 معمولاً طبیعی‌اند؛ سوفل جدید یا علائم نارسایی باید از نظر عارضه بررسی شوند.",7:"ریه‌ها ممکن است شفاف باشند؛ کراکل نشانه احتقان یا نارسایی همزمان است."},
+ "nstemi": {6:"سوفل جدید معمولاً وجود ندارد؛ سوفل جدید همراه درد می‌تواند عارضه مکانیکی را مطرح کند.",7:"ریه‌ها ممکن است شفاف باشند؛ در اختلال عملکرد بطن چپ کراکل دیده می‌شود."},
+ "stemi": {6:"S1/S2 و وجود S3 یا سوفل جدید بررسی می‌شوند؛ سوفل جدید می‌تواند نشانه عارضه مکانیکی باشد.",7:"کراکل در صورت ادم ریه ممکن است شنیده شود؛ ریه شفاف انفارکتوس را رد نمی‌کند."},
+ "coronary-vasospasm": {3:"در فاصله حملات نبض و پرفیوژن ممکن است طبیعی باشد.",4:"JVP معمولاً طبیعی است.",6:"سمع قلب معمولاً طبیعی است مگر ایسکمی یا آریتمی همزمان وجود داشته باشد.",7:"ریه‌ها معمولاً شفاف‌اند."},
+ "spontaneous-coronary-artery-dissection": {3:"نبض‌ها معمولاً قرینه‌اند؛ افت فشار یا علائم شوک نشانه عارضه است.",6:"سوفل اختصاصی ندارد؛ سوفل جدید باید ارزیابی شود.",7:"ریه‌ها بسته به وسعت آسیب میوکارد شفاف یا دارای کراکل‌اند."},
+ "coronary-microvascular-dysfunction": {3:"نبض‌ها و پرفیوژن معمولاً طبیعی‌اند.",4:"JVP طبیعی است.",6:"سمع قلب معمولاً طبیعی است.",7:"ریه‌ها شفاف و بدون شواهد احتقان‌اند."},
+ "hfpef": {4:"JVP در صورت افزایش فشارهای پرشدگی بالا است.",5:"اپکس ممکن است جابه‌جا نباشد؛ S4 در صورت ریتم سینوسی ممکن است شنیده شود.",6:"S4 ممکن است وجود داشته باشد؛ سوفل فقط در صورت بیماری دریچه‌ای همزمان انتظار می‌رود.",7:"کراکل قاعده ریه و ادم در زمان احتقان ممکن است وجود داشته باشند."},
+ "acute-decompensated-heart-failure": {1:"بیمار با دیسترس تنفسی و شواهد احتقان مراجعه می‌کند.",2:"تاکی‌پنه و هیپوکسمی ممکن است وجود داشته باشد؛ فشارخون می‌تواند بالا یا پایین باشد.",4:"JVP افزایش‌یافته و رفلاکس هپاتوژوگولار ممکن است مثبت باشد.",5:"S3 یا اپکس جابه‌جا بسته به فنوتیپ نارسایی ممکن است وجود داشته باشد.",6:"S3 ممکن است شنیده شود.",7:"کراکل دوطرفه، ادم محیطی یا افیوژن پلور با احتقان سازگار است."},
+ "right-sided-heart-failure": {3:"ادم گوده‌گذار دوطرفه و احتمال هپاتومگالی/آسیت وجود دارد.",4:"JVP افزایش‌یافته و رفلاکس هپاتوژوگولار مثبت است.",5:"هیو پاراسترنال ممکن است در اتساع بطن راست لمس شود.",6:"سوفل TR یا P2 بلند در علت زمینه‌ای ممکن است وجود داشته باشد.",7:"هپاتومگالی احتقانی، آسیت و ادم ممکن است دیده شوند؛ ریه‌ها گاهی شفاف‌اند."},
+ "cardiogenic-shock": {1:"بیمار بدحال، سرد و مرطوب است و ممکن است سطح هوشیاری مختل باشد.",2:"افت فشارخون، تاکی‌کاردی و تاکی‌پنه؛ SpO₂ ممکن است کاهش یابد.",3:"اندام‌ها سرد، نبض ضعیف و پرشدن مویرگی طولانی است.",4:"JVP بسته به علت و وضعیت بطن راست ممکن است بالا باشد.",6:"S3 یا سوفل ناشی از عارضه مکانیکی ممکن است شنیده شود.",7:"کراکل در ادم ریه شایع است؛ معاینه باید با ارزیابی سریع همودینامیک همراه باشد."},
+ "atrial-flutter": {2:"اغلب تاکی‌کاردی منظم با ضربان بطنی نزدیک 150/min در هدایت 2:1؛ فشارخون را پایش کنید.",3:"نبض معمولاً منظم است مگر هدایت AV متغیر باشد.",6:"سوفل اختصاصی ندارد؛ ریتم سریع منظم ممکن است در سمع احساس شود.",7:"ریه‌ها معمولاً شفاف‌اند مگر نارسایی قلبی همزمان باشد."},
+ "avnrt": {2:"در حمله، تاکی‌کاردی منظم با ضربان معمولاً 150–250/min و فشارخون متغیر است.",3:"نبض سریع و منظم است.",6:"سوفل اختصاصی وجود ندارد.",7:"ریه‌ها معمولاً شفاف‌اند."},
+ "avrt-wpw": {2:"در حمله AVRT تاکی‌کاردی سریع رخ می‌دهد؛ اگر ریتم نامنظم و پهن‌کمپلکس باشد، خطر AF پیش‌تحریکی مطرح است.",3:"نبض در AVRT معمولاً سریع و منظم است؛ در AF پیش‌تحریکی می‌تواند نامنظم باشد.",6:"سوفل اختصاصی ندارد.",7:"ریه‌ها معمولاً شفاف‌اند."},
+ "multifocal-atrial-tachycardia": {2:"تاکی‌کاردی نامنظم؛ هیپوکسمی و بیماری زمینه‌ای ریوی باید ارزیابی شوند.",3:"نبض نامنظم است.",6:"سوفل اختصاصی ندارد؛ یافته‌های بیماری ریوی زمینه‌ای ممکن است وجود داشته باشند.",7:"ویز یا کاهش ورود هوا در بیماری انسدادی ریه ممکن است وجود داشته باشد."},
+ "ventricular-fibrillation": {1:"بیمار بی‌هوش و بدون نبض مؤثر است؛ این وضعیت ایست قلبی محسوب می‌شود.",2:"فشارخون و SpO₂ قابل اتکا نیستند؛ نبض مرکزی وجود ندارد.",3:"نبض مرکزی لمس نمی‌شود؛ احیای قلبی‌ریوی فوری لازم است.",4:"JVP و معاینه معمول قابل تفسیر نیستند تا پس از بازگشت گردش خون.",5:"معاینه پره‌کوردیال نباید احیا یا دفیبریلاسیون را به تأخیر اندازد.",6:"صدای قلب و نبض مؤثر وجود ندارد.",7:"تهویه و علل برگشت‌پذیر ایست قلبی باید همزمان بررسی شوند."},
+ "sinus-node-dysfunction": {2:"ضربان ممکن است برادی‌کارد یا متناوباً سریع و کند باشد.",3:"نبض کند یا دارای وقفه است.",6:"سمع ممکن است طبیعی باشد؛ وقفه‌های ریتم با معاینه کوتاه رد نمی‌شوند.",7:"ریه‌ها معمولاً شفاف‌اند مگر نارسایی همزمان وجود داشته باشد."},
+ "first-degree-av-block": {2:"علائم حیاتی معمولاً پایدار و ضربان اغلب طبیعی است.",3:"نبض معمولاً منظم است.",6:"سمع قلب اغلب طبیعی است؛ تشخیص با ECG است نه سمع.",7:"ریه‌ها شفاف‌اند و نشانه‌ای از احتقان انتظار نمی‌رود."},
+ "mobitz-i-av-block": {2:"ضربان ممکن است کمی کند باشد؛ پایداری همودینامیک ارزیابی می‌شود.",3:"نبض ممکن است کند یا گاه‌گاه وقفه‌دار باشد.",6:"سمع ممکن است وقفه ضربان را نشان دهد؛ تشخیص نوع بلوک با ECG انجام می‌شود.",7:"ریه‌ها معمولاً شفاف‌اند."},
+ "mobitz-ii-av-block": {2:"برادی‌کاردی و افت فشار ممکن است رخ دهد؛ بیمار از نظر ناپایداری ارزیابی می‌شود.",3:"نبض کند و گاه‌گاه افت‌کننده است.",6:"سمع ممکن است وقفه ضربان را نشان دهد؛ ECG برای تشخیص ضروری است.",7:"ریه‌ها معمولاً شفاف‌اند مگر نارسایی همزمان وجود داشته باشد."},
+ "complete-heart-block": {2:"برادی‌کاردی قابل‌توجه و احتمال افت فشار؛ ضربان دهلیزی و بطنی از هم جدا هستند.",3:"نبض کند؛ ممکن است موج‌های وریدی گردنی cannon دیده شوند.",4:"موج‌های cannon در JVP ممکن است به علت انقباض دهلیز علیه دریچه بسته ایجاد شوند.",6:"شدت صدای اول ممکن است متغیر باشد؛ تشخیص قطعی با ECG است.",7:"کراکل فقط در صورت نارسایی همزمان وجود دارد."},
+ "aortic-regurgitation": {3:"نبض‌های جهنده و فشار نبض وسیع ممکن است وجود داشته باشد.",5:"اپکس در نارسایی مزمن شدید ممکن است جابه‌جا و هایپردینامیک باشد.",6:"سوفل دیاستولیک زودرس، کاهنده و دمنده در لبه چپ جناغ؛ در AR شدید صدای Austin Flint ممکن است شنیده شود.",7:"کراکل در صورت نارسایی قلبی پیشرفته ممکن است وجود داشته باشد."},
+ "mitral-stenosis": {4:"JVP در بیماری پیشرفته یا فشار خون ریوی ممکن است بالا باشد.",5:"ضربان اپکس معمولاً طبیعی یا ضربه‌ای است؛ ضربان دهلیزی ممکن است در ریتم سینوسی برجسته باشد.",6:"صدای اول بلند و opening snap همراه با rumble دیاستولیک در اپکس؛ AF ممکن است یافته همراه باشد.",7:"کراکل در احتقان ریوی یا فشار خون ریوی ممکن است دیده شود."},
+ "mitral-valve-prolapse": {5:"اپکس معمولاً طبیعی است.",6:"کلیک میدسیستولیک و گاهی سوفل سیستولیک دیررس در اپکس؛ یافته‌ها با وضعیت بدن تغییر می‌کنند.",7:"ریه‌ها شفاف‌اند مگر MR قابل‌توجه ایجاد شده باشد."},
+ "tricuspid-regurgitation": {3:"ادم محیطی و نبض وریدی برجسته ممکن است وجود داشته باشد.",4:"JVP بالا با موج v برجسته و رفلاکس هپاتوژوگولار ممکن است دیده شود.",5:"هیو بطن راست ممکن است لمس شود.",6:"سوفل هولوسیستولیک در لبه چپ تحتانی جناغ که با دم افزایش می‌یابد.",7:"هپاتومگالی احتقانی، آسیت و ادم اندام تحتانی ممکن است وجود داشته باشد."},
+ "pulmonary-valve-stenosis": {3:"نبض محیطی معمولاً طبیعی است؛ در بیماری شدید علائم نارسایی بطن راست ممکن است دیده شود.",5:"هیو پاراسترنال در هیپرتروفی بطن راست ممکن است لمس شود.",6:"سوفل سیستولیک جهشی در فضای بین‌دنده‌ای دوم چپ و گاهی کلیک جهشی.",7:"در بیماری خفیف ریه‌ها شفاف‌اند؛ در بیماری شدید احتقان سمت راست ممکن است وجود داشته باشد."},
+ "pericardial-effusion": {4:"JVP در افیوژن بزرگ یا افزایش فشار داخل پریکارد ممکن است بالا باشد.",5:"ضربان اپکس ممکن است دشوار لمس شود.",6:"صداهای قلب در افیوژن بزرگ ممکن است خفه باشند؛ صدای مالش در صورت پریکاردیت همزمان ممکن است شنیده شود.",7:"ریه‌ها معمولاً شفاف‌اند؛ افیوژن پلور ممکن است در بیماری سیستمیک همراه وجود داشته باشد."},
+ "cardiac-tamponade": {1:"بیمار بدحال با تنگی نفس و احتمال افت فشار است؛ ارزیابی فوری همودینامیک لازم است.",2:"تاکی‌کاردی، افت فشار و pulsus paradoxus ممکن است وجود داشته باشد.",3:"نبض سریع و ضعیف؛ اندام‌ها ممکن است سرد باشند.",4:"JVP افزایش‌یافته است؛ در تامپوناد حاد همراه افت فشار، این یافته بسیار مهم است.",5:"ضربان اپکس ممکن است دشوار لمس شود.",6:"صداهای قلب ممکن است خفه باشند؛ نبود سه‌گانه بک تامپوناد را رد نمی‌کند.",7:"ریه‌ها اغلب نسبتاً شفاف‌اند؛ درناژ اورژانسی نباید با بررسی غیرضروری به تأخیر بیفتد."},
+ "constrictive-pericarditis": {3:"ادم محیطی و آسیت ممکن است وجود داشته باشد.",4:"JVP بالا و علامت Kussmaul ممکن است دیده شود.",5:"ضربان اپکس ممکن است طبیعی یا کمتر برجسته باشد.",6:"صدای knock پریکاردی اوایل دیاستول ممکن است شنیده شود.",7:"هپاتومگالی، آسیت و ادم با احتقان وریدی سیستمیک سازگارند؛ ریه‌ها ممکن است نسبتاً شفاف باشند."},
+ "rheumatic-heart-disease": {4:"JVP بسته به شدت درگیری دریچه‌ای و فشار خون ریوی طبیعی یا بالا است.",5:"اپکس ممکن است در بیماری مزمن با اتساع بطن چپ جابه‌جا شود.",6:"نوع سوفل تابع ضایعه دریچه‌ای است؛ درگیری میترال شایع است و باید با اکو تعیین شود.",7:"کراکل یا ادم در صورت نارسایی قلبی/فشار خون ریوی ممکن است وجود داشته باشد."},
+ "restrictive-cardiomyopathy": {4:"JVP اغلب در بیماری علامت‌دار بالا است و ممکن است y descent برجسته داشته باشد.",5:"اپکس ممکن است نسبتاً طبیعی باشد، با وجود احتقان قابل‌توجه.",6:"S3 ممکن است شنیده شود؛ یافته دریچه‌ای اختصاصی وجود ندارد مگر بیماری همراه باشد.",7:"ادم، آسیت و هپاتومگالی شایع‌اند؛ کراکل ممکن است در احتقان چپ وجود داشته باشد."},
+ "arrhythmogenic-right-ventricular-cardiomyopathy": {3:"نبض محیطی معمولاً طبیعی است؛ در آریتمی پایدار ممکن است افت فشار یا پرفیوژن ضعیف رخ دهد.",5:"هیو بطن راست ممکن است در بیماری پیشرفته وجود داشته باشد.",6:"سمع قلب اغلب طبیعی است مگر بیماری ساختاری یا TR همراه وجود داشته باشد.",7:"ریه‌ها معمولاً شفاف‌اند مگر نارسایی بطن راست پیشرفته باشد."},
+ "takotsubo-cardiomyopathy": {1:"بیمار پس از استرس شدید با درد قفسه سینه و تنگی نفس مراجعه می‌کند؛ از نظر ACS ارزیابی می‌شود.",2:"تاکی‌کاردی یا تغییرات فشارخون ممکن است وجود داشته باشد.",6:"ممکن است S3 یا سوفل عملکردی گذرا در اختلال عملکرد بطنی وجود داشته باشد.",7:"کراکل در صورت ادم ریه ممکن است وجود داشته باشد."},
+ "atrial-septal-defect": {3:"نبض‌ها معمولاً قرینه‌اند؛ در شانت بزرگ ممکن است علائم نارسایی بطن راست دیده شود.",5:"هیو بطن راست ممکن است در شانت قابل‌توجه لمس شود.",6:"S2 ثابت و دوشاخه و سوفل سیستولیک جریان در لبه چپ فوقانی جناغ از یافته‌های کلاسیک است.",7:"ریه‌ها اغلب شفاف‌اند؛ در شانت بزرگ ممکن است افزایش جریان ریوی وجود داشته باشد."},
+ "ventricular-septal-defect": {3:"نبض‌ها معمولاً طبیعی‌اند؛ در نقص بزرگ ممکن است علائم نارسایی قلبی وجود داشته باشد.",5:"تریل سیستولیک ممکن است در لبه چپ تحتانی جناغ لمس شود.",6:"سوفل هولوسیستولیک خشن در لبه چپ تحتانی جناغ؛ شدت سوفل همیشه با اندازه نقص متناسب نیست.",7:"در شانت بزرگ، تاکی‌پنه و کراکل ناشی از افزایش جریان ریوی/نارسایی قلبی ممکن است دیده شود."},
+ "coarctation-of-aorta": {2:"فشارخون اندام فوقانی بالاتر از اندام تحتانی است.",3:"نبض فمورال ضعیف و با تأخیر نسبت به رادیال است.",5:"ممکن است هیو بطن چپ به علت فشارخون بالا لمس شود.",6:"سوفل سیستولیک ممکن است در پشت بین کتف‌ها شنیده شود.",7:"ریه‌ها معمولاً شفاف‌اند؛ علائم نارسایی قلبی در موارد شدید ممکن است وجود داشته باشد."},
+}
+
+function physicalExamAnswers(item: typeof caseData[number], p:Record<string,string>): string[] {
+ const id = item.diagnosis;
+ const old = item.pe;
+ const generalMap:Record<string,string> = {
+  "acute-coronary-syndrome":"بیمار هوشیار، مضطرب و عرق‌کرده است؛ درد قفسه سینه ادامه دارد.",
+  "unstable-angina":"بیمار هوشیار و مضطرب است؛ درد قفسه سینه دارد.",
+  "nstemi":"بیمار هوشیار و مضطرب است؛ درد فشاری قفسه سینه دارد.",
+  "stemi":"بیمار هوشیار، عرق‌کرده و دارای درد شدید و مداوم قفسه سینه است.",
+  "aortic-dissection":"بیمار هوشیار و بدحال است؛ درد ناگهانی شدید قفسه سینه و پشت دارد.",
+  "cardiogenic-shock":"بیمار بدحال، سرد و مرطوب است؛ سطح هوشیاری کاهش‌یافته و پرفیوژن ضعیف است.",
+  "ventricular-fibrillation":"بیمار بی‌هوش و بدون نبض است؛ ایست قلبی وجود دارد.",
+  "cardiac-tamponade":"بیمار بدحال و دچار تنگی نفس است؛ علائم ناپایداری همودینامیک دارد.",
+  "complete-heart-block":"بیمار دچار برادی‌کاردی شدید و ضعف است.",
+  "mobitz-ii-av-block":"بیمار دچار برادی‌کاردی علامت‌دار است.",
+  "infective-endocarditis":"بیمار تب‌دار و بی‌حال است.",
+  "acute-pericarditis":"بیمار هوشیار است و درد پلوریتیک قفسه سینه دارد.",
+  "acute-myocarditis":"بیمار خسته است و درد قفسه سینه و تنگی نفس دارد.",
+  "heart-failure-with-reduced-ejection-fraction":"بیمار خسته و دچار تنگی نفس است.",
+  "hfpef":"بیمار دچار تنگی نفس فعالیتی و علائم احتقان است.",
+  "acute-decompensated-heart-failure":"بیمار دچار تنگی نفس حاد و احتقان است.",
+  "right-sided-heart-failure":"بیمار دچار ادم اندام‌ها و احتقان وریدی سیستمیک است."
+ };
+ const general = generalMap[id] || old[0] || "بیمار هوشیار و از نظر عمومی پایدار است.";
+ const vitalMap:Record<string,string> = {
+  "atrial-fibrillation":"فشارخون 132/78 mmHg؛ ضربان قلب 118/min نامنظم؛ تعداد تنفس 18/min؛ SpO₂ برابر 97٪.",
+  "cardiogenic-shock":"فشارخون 72/44 mmHg؛ ضربان قلب 128/min؛ تعداد تنفس 30/min؛ SpO₂ برابر 88٪ در هوای اتاق.",
+  "ventricular-fibrillation":"نبض و فشارخون وجود ندارد؛ تنفس مؤثر وجود ندارد؛ SpO₂ قابل اندازه‌گیری نیست.",
+  "sinus-node-dysfunction":"فشارخون 118/68 mmHg؛ ضربان قلب 48/min؛ تعداد تنفس 16/min؛ SpO₂ برابر 98٪.",
+  "first-degree-av-block":"فشارخون 124/76 mmHg؛ ضربان قلب 72/min؛ تعداد تنفس 16/min؛ SpO₂ برابر 98٪.",
+  "mobitz-i-av-block":"فشارخون 118/70 mmHg؛ ضربان قلب 52/min؛ تعداد تنفس 16/min؛ SpO₂ برابر 98٪.",
+  "mobitz-ii-av-block":"فشارخون 104/66 mmHg؛ ضربان قلب 38/min؛ تعداد تنفس 18/min؛ SpO₂ برابر 97٪.",
+  "complete-heart-block":"فشارخون 86/54 mmHg؛ ضربان قلب 32/min؛ تعداد تنفس 20/min؛ SpO₂ برابر 95٪.",
+  "atrial-flutter":"فشارخون 118/72 mmHg؛ ضربان قلب 150/min؛ تعداد تنفس 19/min؛ SpO₂ برابر 97٪.",
+  "avnrt":"فشارخون 112/70 mmHg؛ ضربان قلب 184/min؛ تعداد تنفس 20/min؛ SpO₂ برابر 98٪.",
+  "avrt-wpw":"فشارخون 110/68 mmHg؛ ضربان قلب 190/min؛ تعداد تنفس 22/min؛ SpO₂ برابر 97٪.",
+  "multifocal-atrial-tachycardia":"فشارخون 118/72 mmHg؛ ضربان قلب 132/min نامنظم؛ تعداد تنفس 22/min؛ SpO₂ برابر 92٪ در هوای اتاق."
+ };
+ const vitals = vitalMap[id] || old[1] || "علائم حیاتی در داده‌های این کیس ثبت نشده است.";
+ const edemaPresent = new Set(["heart-failure-with-reduced-ejection-fraction","hfpef","acute-decompensated-heart-failure","right-sided-heart-failure","constrictive-pericarditis","restrictive-cardiomyopathy","tricuspid-regurgitation"]).has(id);
+ const peripheralMap:Record<string,string> = {
+  "aortic-stenosis":"نبض کاروتید کم‌دامنه و با بالا آمدن آهسته است؛ ادم محیطی وجود ندارد.",
+  "aortic-regurgitation":"نبض‌های محیطی جهنده‌اند و فشار نبض وسیع است؛ ادم محیطی وجود ندارد.",
+  "aortic-dissection":"نبض‌های محیطی در دو سمت نامتقارن‌اند.",
+  "coarctation-of-aorta":"نبض فمورال ضعیف و با تأخیر است؛ فشارخون پاها از دست‌ها پایین‌تر است.",
+  "ventricular-fibrillation":"نبض مرکزی وجود ندارد.",
+  "cardiogenic-shock":"نبض‌ها ضعیف‌اند؛ اندام‌ها سرد و پرشدن مویرگی طولانی است.",
+  "heart-failure-with-reduced-ejection-fraction":"ادم گوده‌گذار دوطرفه ساق وجود دارد.",
+  "hfpef":"ادم گوده‌گذار دوطرفه مچ و ساق وجود دارد.",
+  "acute-decompensated-heart-failure":"ادم گوده‌گذار دوطرفه ساق وجود دارد.",
+  "right-sided-heart-failure":"ادم گوده‌گذار دوطرفه تا ساق وجود دارد.",
+  "tricuspid-regurgitation":"ادم گوده‌گذار دوطرفه ساق وجود دارد.",
+  "constrictive-pericarditis":"ادم گوده‌گذار دوطرفه ساق وجود دارد.",
+  "restrictive-cardiomyopathy":"ادم گوده‌گذار دوطرفه ساق وجود دارد.",
+  "pulmonary-hypertension":"ادم محیطی خفیف دوطرفه وجود دارد.",
+  "cardiac-tamponade":"نبض سریع و ضعیف است؛ ادم محیطی وجود ندارد."
+ };
+ let peripheral = peripheralMap[id] || (edemaPresent ? "ادم گوده‌گذار دوطرفه ساق وجود دارد؛ نبض‌های محیطی قابل لمس‌اند." : "ادم محیطی وجود ندارد؛ نبض‌های محیطی دوطرفه و قابل لمس‌اند.");
+ const neckMap:Record<string,string> = {
+  "heart-failure-with-reduced-ejection-fraction":"JVP افزایش‌یافته است؛ رفلاکس هپاتوژوگولار مثبت است.",
+  "hfpef":"JVP افزایش‌یافته است؛ رفلاکس هپاتوژوگولار مثبت است.",
+  "acute-decompensated-heart-failure":"JVP افزایش‌یافته است؛ رفلاکس هپاتوژوگولار مثبت است.",
+  "right-sided-heart-failure":"JVP به‌وضوح افزایش‌یافته است؛ رفلاکس هپاتوژوگولار مثبت است.",
+  "tricuspid-regurgitation":"JVP افزایش‌یافته و موج v برجسته دارد.",
+  "constrictive-pericarditis":"JVP افزایش‌یافته است؛ علامت کوسمال مثبت است.",
+  "restrictive-cardiomyopathy":"JVP افزایش‌یافته است؛ رفلاکس هپاتوژوگولار مثبت است.",
+  "pulmonary-hypertension":"JVP افزایش‌یافته است.",
+  "cardiac-tamponade":"JVP افزایش‌یافته است.",
+  "cardiogenic-shock":"JVP افزایش‌یافته است.",
+  "infective-endocarditis":"JVP طبیعی است؛ برجستگی وریدهای گردن وجود ندارد."
+ };
+ const neck = neckMap[id] || "JVP طبیعی است؛ رفلاکس هپاتوژوگولار منفی است.";
+ const precordialMap:Record<string,string> = {
+  "aortic-stenosis":"ضربان اپکس پایدار است؛ هیو پاراسترنال قابل لمس نیست.",
+  "aortic-regurgitation":"ضربان اپکس جابه‌جا و پرتحرک است.",
+  "mitral-regurgitation":"ضربان اپکس جابه‌جا و پرتحرک است.",
+  "mitral-stenosis":"ضربان اپکس در محل طبیعی است؛ تریل قابل لمس نیست.",
+  "mitral-valve-prolapse":"ضربان اپکس در محل طبیعی است؛ تریل قابل لمس نیست.",
+  "hypertrophic-cardiomyopathy":"ضربان اپکس قوی است؛ هیو پاراسترنال قابل لمس نیست.",
+  "dilated-cardiomyopathy":"ضربان اپکس جابه‌جا و منتشر است.",
+  "heart-failure-with-reduced-ejection-fraction":"ضربان اپکس جابه‌جا و منتشر است.",
+  "ventricular-septal-defect":"تریل سیستولیک در کنار چپ جناغ لمس می‌شود.",
+  "atrial-septal-defect":"هیو پاراسترنال چپ لمس می‌شود.",
+  "pulmonary-valve-stenosis":"هیو پاراسترنال چپ لمس می‌شود.",
+  "coarctation-of-aorta":"ضربان اپکس در محل طبیعی است؛ تریل قابل لمس نیست.",
+  "cardiac-tamponade":"ضربان اپکس ضعیف است؛ تریل قابل لمس نیست."
+ };
+ let precordial = precordialMap[id] || (old[4] || "ضربان اپکس در محل طبیعی است؛ تریل قابل لمس نیست.");
+ precordial = precordial.replace(/در ASD\/VSD یا PS thrill سیستولیک ممکن است لمس شود؛ در این بیمار thrill خفیف وجود دارد\./g, "تریل سیستولیک خفیف لمس می‌شود.");
+ const auscultationMap:Record<string,string> = {
+  "aortic-stenosis":"سوفل سیستولیک خشن crescendo-decrescendo در فضای بین‌دنده‌ای دوم راست شنیده می‌شود و به کاروتید انتشار دارد.",
+  "aortic-regurgitation":"سوفل دیاستولیک زودرس کاهنده در کنار چپ جناغ شنیده می‌شود.",
+  "mitral-regurgitation":"سوفل هولوسیستولیک در اپکس با انتشار به آگزیلا شنیده می‌شود.",
+  "mitral-stenosis":"صدای opening snap و سوفل دیاستولیک rumbling در اپکس شنیده می‌شود.",
+  "mitral-valve-prolapse":"کلیک میدسیستولیک و سوفل دیررس سیستولیک در اپکس شنیده می‌شود.",
+  "tricuspid-regurgitation":"سوفل هولوسیستولیک در کنار چپ جناغ تحتانی شنیده می‌شود و با دم شدت می‌گیرد.",
+  "pulmonary-valve-stenosis":"سوفل سیستولیک جهشی در فضای بین‌دنده‌ای دوم چپ شنیده می‌شود.",
+  "hypertrophic-cardiomyopathy":"سوفل سیستولیک در لبه چپ جناغ شنیده می‌شود و با مانور والسالوا شدت می‌گیرد.",
+  "ventricular-septal-defect":"سوفل هولوسیستولیک خشن در کنار چپ جناغ تحتانی شنیده می‌شود.",
+  "atrial-septal-defect":"S2 به‌طور ثابت دوشاخه است؛ سوفل سیستولیک جریان در ناحیه پولمونر شنیده می‌شود.",
+  "infective-endocarditis":"سوفل جدید نارسایی دریچه‌ای شنیده می‌شود.",
+  "acute-pericarditis":"صدای مالش پریکارد در لبه چپ جناغ شنیده می‌شود.",
+  "aortic-dissection":"S1 و S2 شنیده می‌شوند؛ سوفل نارسایی آئورت وجود دارد.",
+  "cardiac-tamponade":"صداهای قلب خفه‌اند؛ سوفل واضح شنیده نمی‌شود.",
+  "pericardial-effusion":"صداهای قلب کاهش‌یافته‌اند؛ سوفل واضح شنیده نمی‌شود.",
+  "ventricular-fibrillation":"صداهای قلب قابل سمع نیستند؛ نبض وجود ندارد.",
+  "complete-heart-block":"صدای قلب با ضربان بطنی آهسته شنیده می‌شود؛ سوفل واضح وجود ندارد.",
+  "first-degree-av-block":"S1 و S2 طبیعی‌اند؛ سوفل شنیده نمی‌شود.",
+  "mobitz-i-av-block":"S1 و S2 شنیده می‌شوند؛ سوفل واضح وجود ندارد.",
+  "mobitz-ii-av-block":"S1 و S2 شنیده می‌شوند؛ سوفل واضح وجود ندارد.",
+  "heart-failure-with-reduced-ejection-fraction":"صدای سوم قلب (S3) شنیده می‌شود؛ سوفل واضح وجود ندارد.",
+  "dilated-cardiomyopathy":"صدای سوم قلب (S3) شنیده می‌شود؛ سوفل واضح وجود ندارد.",
+  "hfpef":"صدای چهارم قلب (S4) شنیده می‌شود؛ سوفل واضح وجود ندارد.",
+  "acute-decompensated-heart-failure":"صدای سوم قلب (S3) شنیده می‌شود؛ سوفل واضح وجود ندارد.",
+  "right-sided-heart-failure":"صدای سوم سمت راست شنیده می‌شود؛ سوفل واضح وجود ندارد.",
+  "cardiogenic-shock":"صدای سوم قلب (S3) شنیده می‌شود؛ سوفل واضح وجود ندارد.",
+  "restrictive-cardiomyopathy":"صدای سوم قلب (S3) شنیده می‌شود؛ سوفل واضح وجود ندارد.",
+  "pulmonary-hypertension":"صدای P2 بلند است؛ سوفل واضح دریچه‌ای شنیده نمی‌شود.",
+  "acute-myocarditis":"صدای سوم قلب (S3) شنیده می‌شود؛ سوفل واضح وجود ندارد.",
+  "rheumatic-heart-disease":"سوفل دیاستولیک در اپکس شنیده می‌شود؛ با تنگی میترال سازگار است.",
+  "constrictive-pericarditis":"صدای knock پریکاردی در اوایل دیاستول شنیده می‌شود."
+ };
+ let auscultation = auscultationMap[id] || "S1 و S2 طبیعی‌اند؛ سوفل واضح شنیده نمی‌شود.";
+ auscultation = auscultation.replace("S1/S2 طبیعی و ممکن است تاکی‌کاردی خفیف وجود داشته باشد.", "S1 و S2 طبیعی‌اند؛ سوفل واضح شنیده نمی‌شود.");
+ const congestionMap:Record<string,string> = {
+  "heart-failure-with-reduced-ejection-fraction":"کراکل دوطرفه قاعده ریه شنیده می‌شود.",
+  "hfpef":"کراکل دوطرفه قاعده ریه شنیده می‌شود.",
+  "acute-decompensated-heart-failure":"کراکل منتشر دوطرفه شنیده می‌شود؛ شواهد ادم ریوی وجود دارد.",
+  "right-sided-heart-failure":"ریه‌ها شفاف‌اند؛ هپاتومگالی وجود دارد.",
+  "cardiogenic-shock":"کراکل دوطرفه ریه شنیده می‌شود؛ پرفیوژن محیطی کاهش‌یافته است.",
+  "pulmonary-hypertension":"ریه‌ها شفاف‌اند؛ نشانه‌های فشار بالای سمت راست قلب وجود دارد.",
+  "tricuspid-regurgitation":"ریه‌ها شفاف‌اند؛ هپاتومگالی وجود دارد.",
+  "constrictive-pericarditis":"ریه‌ها شفاف‌اند؛ آسیت وجود دارد.",
+  "restrictive-cardiomyopathy":"کراکل قاعده ریه شنیده می‌شود.",
+  "cardiac-tamponade":"ریه‌ها شفاف‌اند؛ کراکل و ادم ریوی وجود ندارد.",
+  "pericardial-effusion":"ریه‌ها شفاف‌اند؛ کراکل ریوی وجود ندارد.",
+  "dilated-cardiomyopathy":"کراکل قاعده ریه شنیده می‌شود؛ نشانه‌های احتقان وجود دارد.",
+  "acute-myocarditis":"کراکل قاعده ریه شنیده می‌شود؛ تنگی نفس با یافته‌های احتقان همراه است.",
+  "aortic-stenosis":"ریه‌ها شفاف‌اند؛ کراکل ریوی وجود ندارد.",
+  "mitral-stenosis":"کراکل قاعده ریه شنیده می‌شود؛ با احتقان ریوی سازگار است.",
+  "mitral-regurgitation":"کراکل قاعده ریه شنیده می‌شود؛ با احتقان ریوی سازگار است.",
+  "rheumatic-heart-disease":"کراکل قاعده ریه شنیده می‌شود؛ نشانه‌های احتقان وجود دارد.",
+  "ventricular-fibrillation":"تنفس مؤثر وجود ندارد؛ صدای تنفسی طبیعی شنیده نمی‌شود."
+ };
+ const congestion = congestionMap[id] || "ریه‌ها شفاف‌اند؛ کراکل ریوی، هپاتومگالی و آسیت وجود ندارد.";
+ return [general, vitals, peripheral, neck, precordial, auscultation, congestion];
+}
+
+function investigationAnswers(item: typeof caseData[number]): string[] {
+ const id = item.diagnosis;
+ const old = item.inv;
+ const categoryOf = (name:string):number => {
+  const n = name.toLowerCase();
+  if (/ecg|electrocard/.test(n)) return 0;
+  if (/ct|mri|magnetic resonance|computed tomography|ct angiograph/.test(n)) return 4;
+  if (/coronary angiograph|cardiac catheter|catheterization|electrophysiology|pericardiocentesis|invasive|right heart catheter|biopsy/.test(n)) return 5;
+  if (/troponin|bnp|cbc|crp|esr|blood culture|lipid|bmp|cmp|creatinine|coagulation|thyroid|electrolyte|lactate|laborator|glucose|d-dimer|tsh|blood test/.test(n)) return 1;
+  if (/chest x.?ray|radiograph|cxr/.test(n)) return 2;
+  if (/echo|echocardiograph/.test(n)) return 3;
+  if (/stress|holter|telemetry|monitor|exercise|six.minute|functional|perfusion imaging|ambulatory|tilt.table/.test(n)) return 6;
+  return -1;
+ };
+ const found:string[][] = [[],[],[],[],[],[],[]];
+ for (const [name, raw] of old) {
+  const index = categoryOf(name);
+  if (index < 0) continue;
+  let value = raw.trim();
+  if (value.includes("NT-proBNP افزایش‌یافته است؛ مقدار دقیق در سناریو ثبت نشده است.")) value = "NT-proBNP افزایش‌یافته است.";
+  if (value.includes("در HF چپ احتقان ریوی؛ در بیماری‌های غالباً راست ممکن است ادم ریه واضح نباشد.")) {
+   const noPulmonaryEdema = new Set(["right-sided-heart-failure","constrictive-pericarditis"]);
+   value = noPulmonaryEdema.has(id) ? "رادیوگرافی قفسه سینه: ادم ریوی واضح وجود ندارد." : "رادیوگرافی قفسه سینه: احتقان عروقی ریوی وجود دارد.";
+  }
+  if (value.includes("عملکرد کلیه و الکترولیت‌ها برای ارزیابی احتقان و درمان بررسی شد.")) {
+   const results:Record<string,string> = {
+    "hfpef":"عملکرد کلیه و الکترولیت‌ها: کراتینین 1.1 mg/dL، سدیم 136 mmol/L و پتاسیم 4.2 mmol/L.",
+    "acute-decompensated-heart-failure":"عملکرد کلیه و الکترولیت‌ها: کراتینین 1.4 mg/dL، سدیم 130 mmol/L و پتاسیم 4.4 mmol/L.",
+    "right-sided-heart-failure":"عملکرد کلیه و الکترولیت‌ها: کراتینین 1.2 mg/dL، سدیم 135 mmol/L و پتاسیم 4.0 mmol/L.",
+    "constrictive-pericarditis":"عملکرد کلیه و الکترولیت‌ها: کراتینین 1.0 mg/dL، سدیم 136 mmol/L و پتاسیم 4.1 mmol/L.",
+    "restrictive-cardiomyopathy":"عملکرد کلیه و الکترولیت‌ها: کراتینین 1.3 mg/dL، سدیم 133 mmol/L و پتاسیم 4.2 mmol/L."
+   };
+   value = results[id] || "عملکرد کلیه و الکترولیت‌ها بررسی شد؛ نتیجه عددی در داده کیس ثبت نشده است.";
+  }
+  if (value.includes("آناتومی ضایعه در صورت نیاز دقیق‌تر مشخص شد.")) {
+   const results:Record<string,string> = {
+    "atrial-septal-defect":"نقص دیواره بین‌دهلیزی دیده می‌شود.",
+    "ventricular-septal-defect":"نقص دیواره بین‌بطنی دیده می‌شود.",
+    "coarctation-of-aorta":"تنگی موضعی آئورت در ناحیه ایستموس تأیید شد."
+   };
+   value = results[id] || "آناتومی ضایعه مشخص شد.";
+  }
+  const directByDiagnosis:Record<string,Partial<Record<number,string>>> = {
+   "unstable-angina":{0:"ECG حین درد: ST depression افقی در لیدهای جانبی؛ تروپونین سریالی طبیعی است.",3:"اکوکاردیوگرافی: LVEF برابر 60٪؛ اختلال حرکتی منطقه‌ای در حالت استراحت دیده نمی‌شود."},
+   "nstemi":{0:"ECG: ST depression در لیدهای جانبی و وارونگی موج T؛ ST elevation پایدار وجود ندارد.",3:"اکوکاردیوگرافی: هیپوکینزی دیواره تحتانی؛ LVEF برابر 50٪."},
+   "stemi":{0:"ECG: ST elevation در لیدهای قدامی V1–V4 با تغییرات متقابل تحتانی.",3:"اکوکاردیوگرافی: آکینزی دیواره قدامی و سپتوم؛ LVEF برابر 38٪."},
+   "coronary-vasospasm":{0:"ECG حین درد: ST elevation گذرا در لیدهای تحتانی؛ ECG پس از رفع درد به خط پایه برمی‌گردد.",3:"اکوکاردیوگرافی در فاصله حملات: LVEF برابر 60٪ و اختلال حرکتی پایدار وجود ندارد."},
+   "spontaneous-coronary-artery-dissection":{0:"ECG: ST elevation در لیدهای قدامی و تغییرات ایسکمیک حاد.",3:"اکوکاردیوگرافی: هیپوکینزی دیواره قدامی؛ LVEF برابر 45٪."},
+   "coronary-microvascular-dysfunction":{0:"ECG استراحت: ریتم سینوسی و بدون تغییر حاد ST-T؛ تست استرس با ST depression همراه است.",3:"اکوکاردیوگرافی: LVEF برابر 60٪؛ اختلال حرکتی منطقه‌ای وجود ندارد."},
+   "cardiogenic-shock":{0:"ECG: تاکی‌کاردی سینوسی با ST depression منتشر و شواهد ایسکمی میوکارد.",3:"اکوکاردیوگرافی: LVEF برابر 25٪ با هیپوکینزی منتشر بطن چپ."},
+   "hfpef":{0:"ECG: ریتم سینوسی با هیپرتروفی بطن چپ و تغییرات ثانویه ST-T.",3:"اکوکاردیوگرافی: LVEF برابر 60٪، اختلال دیاستولیک درجه II و افزایش فشار پرشدگی بطن چپ."},
+   "acute-decompensated-heart-failure":{0:"ECG: تاکی‌کاردی سینوسی با هیپرتروفی بطن چپ.",3:"اکوکاردیوگرافی: LVEF برابر 35٪ و افزایش فشارهای پرشدگی بطن چپ."},
+   "right-sided-heart-failure":{0:"ECG: انحراف محور به راست و شواهد هیپرتروفی بطن راست.",3:"اکوکاردیوگرافی: اتساع بطن راست و کاهش عملکرد سیستولیک آن؛ LVEF بطن چپ برابر 55٪."},
+   "aortic-regurgitation":{0:"ECG: هیپرتروفی بطن چپ با تغییرات ثانویه ST-T.",2:"CXR: بزرگی بطن چپ؛ ادم حاد ریوی وجود ندارد."},
+   "mitral-stenosis":{0:"ECG: بزرگی دهلیز چپ؛ ریتم سینوسی در این ثبت.",2:"CXR: بزرگی دهلیز چپ و احتقان عروقی ریوی."},
+   "mitral-valve-prolapse":{0:"ECG: ریتم سینوسی؛ تغییرات حاد ST-T وجود ندارد.",2:"CXR: اندازه قلب طبیعی است؛ احتقان ریوی وجود ندارد."},
+   "tricuspid-regurgitation":{0:"ECG: بزرگی دهلیز راست و شواهد فشار/بار حجمی بطن راست.",2:"CXR: بزرگی دهلیز راست؛ ادم ریوی وجود ندارد."},
+   "pulmonary-valve-stenosis":{0:"ECG: انحراف محور به راست و هیپرتروفی بطن راست.",2:"CXR: برجستگی قطعه شریان ریوی؛ اندازه قلب طبیعی است."},
+   "pericardial-effusion":{2:"CXR: سایه قلب بزرگ و گلوبولار است."},
+   "cardiac-tamponade":{2:"CXR: سایه قلب بزرگ و گلوبولار است؛ یافته با افیوژن قابل‌توجه پریکارد سازگار است."},
+   "constrictive-pericarditis":{0:"ECG: ولتاژ پایین QRS و ریتم سینوسی.",3:"اکوکاردیوگرافی: حرکت سپتوم وابسته به تنفس و اختلال پرشدن بطنی؛ LVEF برابر 60٪."},
+   "rheumatic-heart-disease":{0:"ECG: بزرگی دهلیز چپ؛ ریتم AF در این ثبت.",2:"CXR: بزرگی دهلیز چپ و احتقان عروقی ریوی."},
+   "restrictive-cardiomyopathy":{0:"ECG: ولتاژ پایین QRS با الگوی شبه‌انفارکتوس.",3:"اکوکاردیوگرافی: LVEF برابر 55٪، اختلال دیاستولیک شدید و بزرگی هر دو دهلیز."},
+   "atrial-septal-defect":{0:"ECG: انحراف محور به راست و بلوک ناقص شاخه راست.",2:"CXR: افزایش عروق ریوی و بزرگی دهلیز و بطن راست."},
+   "ventricular-septal-defect":{0:"ECG: هیپرتروفی بطن چپ ناشی از شانت چپ به راست.",2:"CXR: کاردیومگالی و افزایش عروق ریوی."},
+   "coarctation-of-aorta":{0:"ECG: هیپرتروفی بطن چپ.",2:"CXR: علامت عدد ۳ در حاشیه آئورت و فرسایش دنده‌ها دیده می‌شود."},
+   "takotsubo-cardiomyopathy":{0:"ECG: ST elevation در لیدهای قدامی و سپس وارونگی موج T.",3:"اکوکاردیوگرافی: آکینزی اپکس با هایپرکینزی قاعده؛ LVEF برابر 35٪."},
+   "acute-myocarditis":{0:"ECG: تغییرات منتشر ST-T بدون الگوی اختصاصی یک قلمرو کرونری."}
+  };
+  const specific = directByDiagnosis[id]?.[index];
+  if (specific && /متناسب با|سازگار با تغییرات قلبی مزمن|الگوی الکتریکی متناسب|LVEF حفظ‌شده یا نزدیک طبیعی|بزرگی سایه قلب متناسب|تغییرات غیراختصاصی ST-T|تغییرات ایسکمیک متناسب|اختلال حرکتی منطقه‌ای متناسب|تغییرات دهلیزی یا بطنی متناسب|تغییرات متناسب با بیماری زمینه‌ای|تغییرات مزمن اندازه قلب یا عروق/.test(raw)) value = specific;
+  if (value.startsWith("ECG:")) value = value.replace(/^ECG:\s*/i, "");
+  if (value.startsWith("رادیوگرافی قفسه سینه:")) value = value.replace(/^رادیوگرافی قفسه سینه:\s*/, "");
+  if (value.startsWith("CT قلب:")) value = value.replace(/^CT قلب:\s*/, "");
+  if (value.startsWith("اکوکاردیوگرافی:")) value = value.replace(/^اکوکاردیوگرافی:\s*/, "");
+  if (value.startsWith("NT-proBNP ")) value = value.replace(/^NT-proBNP\s+/i, "");
+  value = value.replace(/^NT-proBNP:\s*/i, "").replace(/^CMP:\s*/i, "");
+  value = value.replace(/\s+/g," ").trim();
+  found[index].push(`${name}: ${value}`);
+ }
+ return found.map((values, index) => values.length ? values.join("؛ ") : "انجام نشده است.");
+}
 
 function candidatePool(id:string): string[] {
  const common=["acute-coronary-syndrome","stable-angina","acute-pericarditis","heart-failure-with-reduced-ejection-fraction","atrial-fibrillation","supraventricular-tachycardia","ventricular-tachycardia","aortic-stenosis","mitral-regurgitation","pulmonary-hypertension"];

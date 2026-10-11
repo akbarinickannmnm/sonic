@@ -1,0 +1,48 @@
+{
+  "scope": {
+    "cases": 50,
+    "answers_per_case": 40,
+    "rendered_answers": 2000,
+    "structural_errors": 0
+  },
+  "validator_result": {
+    "total_flags": 199,
+    "by_severity": {
+      "review": 143,
+      "error": 51,
+      "warning": 5
+    },
+    "by_code": {
+      "ONSET_MODE_UNDOCUMENTED": 47,
+      "QUESTION_ANSWER_SCOPE_MISMATCH": 50,
+      "ALLERGY_HISTORY_MISSING": 50,
+      "VAPE_HISTORY_MISSING": 45,
+      "TARGET_DIAGNOSIS_LEAKAGE": 1,
+      "DYSPNEA_CONTRADICTION": 1,
+      "HIGH_ANSWER_REUSE": 5
+    }
+  },
+  "confirmed_high_confidence": [
+    {
+      "caseId": "BANK",
+      "questionId": "cardio-hist-035",
+      "code": "QUESTION_ANSWER_SCOPE_MISMATCH",
+      "count": 50
+    },
+    {
+      "caseId": "cardio-050",
+      "questionId": "cardio-hist-022",
+      "code": "DYSPNEA_CONTRADICTION",
+      "count": 1
+    }
+  ],
+  "manual_review_cases": [
+    "cardio-001",
+    "cardio-002",
+    "cardio-003",
+    "cardio-004",
+    "cardio-005"
+  ],
+  "content_modified": false,
+  "specialist_signoff": false
+}

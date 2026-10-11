@@ -1,0 +1,1713 @@
+// Phase 3/5: explicit authored History answers for cardio-001..cardio-005.
+// Updated in phase 5: question 035/040 alignment and first-five answer reconciliation.
+export type HistoryAnswerStatus = "present" | "absent" | "unknown" | "not_applicable" | "mixed";
+export type AuthoredHistoryAnswer = { question: string; status: HistoryAnswerStatus; patientAnswer: string; sourceFields: string[]; reviewerNote?: string };
+export const cardiologyHistoryPhase3: Record<string, Record<string, AuthoredHistoryAnswer>> = {
+  "cardio-001": {
+    "cardio-hist-001": {
+      "question": "چه چیزی باعث شد امروز مراجعه کنید؟",
+      "status": "present",
+      "patientAnswer": "درد و فشار شدید وسط سینه دارم که حدود ۴۵ دقیقه است ادامه دارد.",
+      "sourceFields": [
+        "complaint"
+      ]
+    },
+    "cardio-hist-002": {
+      "question": "آیا درد یا ناراحتی قفسه سینه داشته‌اید؟",
+      "status": "present",
+      "patientAnswer": "بله؛ فشار و سنگینی شدیدی وسط سینه‌ام حس می‌کنم.",
+      "sourceFields": [
+        "quality;location"
+      ]
+    },
+    "cardio-hist-003": {
+      "question": "آیا تنگی نفس داشته‌اید؟",
+      "status": "present",
+      "patientAnswer": "بله، همراه درد نفسم هم تنگ شده است.",
+      "sourceFields": [
+        "dyspnea"
+      ]
+    },
+    "cardio-hist-004": {
+      "question": "آیا احساس تپش قلب یا جا افتادن ضربان داشته‌اید؟",
+      "status": "present",
+      "patientAnswer": "کمی تپش قلب هم‌زمان با درد دارم.",
+      "sourceFields": [
+        "palpitations"
+      ]
+    },
+    "cardio-hist-005": {
+      "question": "آیا غش کرده‌اید یا احساس کرده‌اید در آستانه غش هستید؟",
+      "status": "absent",
+      "patientAnswer": "نه، غش نکرده‌ام و احساس نزدیک‌غش هم نداشته‌ام.",
+      "sourceFields": [
+        "pre_syncope;syncope_ex"
+      ]
+    },
+    "cardio-hist-006": {
+      "question": "آیا پاها یا مچ پاهایتان ورم کرده‌اند؟",
+      "status": "absent",
+      "patientAnswer": "نه، پاهایم ورم نکرده‌اند.",
+      "sourceFields": [
+        "edema"
+      ]
+    },
+    "cardio-hist-007": {
+      "question": "آیا تحمل فعالیتتان کم شده یا زودتر از قبل خسته می‌شوید؟",
+      "status": "present",
+      "patientAnswer": "بله؛ امروز تحمل فعالیت من خیلی کمتر شده است.",
+      "sourceFields": [
+        "tolerance"
+      ]
+    },
+    "cardio-hist-008": {
+      "question": "علائم از چه زمانی شروع شدند؟",
+      "status": "present",
+      "patientAnswer": "حدود ۴۵ دقیقه پیش، وقتی از پله بالا می‌رفتم شروع شد.",
+      "sourceFields": [
+        "onset"
+      ]
+    },
+    "cardio-hist-009": {
+      "question": "شروع علائم ناگهانی بود یا تدریجی؟",
+      "status": "unknown",
+      "patientAnswer": "از اطلاعاتی که دارم نمی‌توانم با اطمینان بگویم شروع درد ناگهانی بود یا تدریجی.",
+      "sourceFields": [
+        "onset;profile lacks explicit onset mode"
+      ],
+      "reviewerNote": "زمان شروع ثبت شده، اما نحوه شروع جداگانه ثبت نشده است."
+    },
+    "cardio-hist-010": {
+      "question": "از زمان شروع، علائم بهتر شده‌اند، بدتر شده‌اند یا ثابت مانده‌اند؟",
+      "status": "present",
+      "patientAnswer": "از شروع برطرف نشده و شدیدتر شده است.",
+      "sourceFields": [
+        "course"
+      ]
+    },
+    "cardio-hist-011": {
+      "question": "آیا درد قفسه سینه با فعالیت بدنی ایجاد یا تشدید می‌شود؟",
+      "status": "present",
+      "patientAnswer": "بله، هنگام بالا رفتن از پله شروع شد.",
+      "sourceFields": [
+        "exertional"
+      ]
+    },
+    "cardio-hist-012": {
+      "question": "آیا درد قفسه سینه در حالت استراحت هم رخ می‌دهد؟",
+      "status": "present",
+      "patientAnswer": "بله؛ این بار درد در استراحت هم ادامه دارد.",
+      "sourceFields": [
+        "rest"
+      ]
+    },
+    "cardio-hist-013": {
+      "question": "درد قفسه سینه چه حسی دارد و شدت آن چقدر است؟",
+      "status": "present",
+      "patientAnswer": "مثل فشار و سنگینی است، انگار چیزی روی سینه‌ام گذاشته‌اند؛ شدت آن زیاد است.",
+      "sourceFields": [
+        "quality;complaint"
+      ]
+    },
+    "cardio-hist-014": {
+      "question": "درد یا ناراحتی دقیقاً کجاست؟",
+      "status": "present",
+      "patientAnswer": "وسط سینه‌ام است.",
+      "sourceFields": [
+        "location"
+      ]
+    },
+    "cardio-hist-015": {
+      "question": "آیا درد به دست، شانه، فک، گردن یا پشت انتشار دارد؟",
+      "status": "present",
+      "patientAnswer": "به دست چپ و کمی به فکم می‌زند.",
+      "sourceFields": [
+        "radiation"
+      ]
+    },
+    "cardio-hist-016": {
+      "question": "هر حمله درد چقدر طول می‌کشد و چند وقت یک‌بار رخ می‌دهد؟",
+      "status": "present",
+      "patientAnswer": "این حمله حدود ۴۵ دقیقه است که قطع نشده؛ تعداد حملات جداگانه ثبت نشده است.",
+      "sourceFields": [
+        "duration;profile lacks episode frequency"
+      ]
+    },
+    "cardio-hist-017": {
+      "question": "چه چیزی درد را بهتر یا بدتر می‌کند؟ آیا با استراحت یا داروی تجویزشده بهتر می‌شود؟",
+      "status": "present",
+      "patientAnswer": "با استراحت برطرف نشده است؛ دارویی برای این حمله در اطلاعات ثبت نشده است.",
+      "sourceFields": [
+        "better;meds"
+      ]
+    },
+    "cardio-hist-018": {
+      "question": "آیا درد با نفس عمیق یا سرفه بدتر می‌شود؟",
+      "status": "absent",
+      "patientAnswer": "نه، با نفس عمیق یا سرفه بدتر نمی‌شود.",
+      "sourceFields": [
+        "pleuritic"
+      ]
+    },
+    "cardio-hist-019": {
+      "question": "آیا درد با تغییر وضعیت بدن تغییر می‌کند؟",
+      "status": "absent",
+      "patientAnswer": "نه، تغییر وضعیت بدن درد را تغییر نمی‌دهد.",
+      "sourceFields": [
+        "position"
+      ]
+    },
+    "cardio-hist-020": {
+      "question": "آیا همراه علائم، تهوع، استفراغ یا تعریق داشته‌اید؟",
+      "status": "present",
+      "patientAnswer": "تهوع و عرق سرد دارم؛ استفراغ در اطلاعات ثبت نشده است.",
+      "sourceFields": [
+        "nausea"
+      ]
+    },
+    "cardio-hist-021": {
+      "question": "آیا اخیراً تب، لرز یا عفونت داشته‌اید؟",
+      "status": "absent",
+      "patientAnswer": "نه، تب، لرز یا عفونت اخیر نداشته‌ام.",
+      "sourceFields": [
+        "fever;viral"
+      ]
+    },
+    "cardio-hist-022": {
+      "question": "آیا تنگی نفس هنگام فعالیت ایجاد می‌شود؟",
+      "status": "present",
+      "patientAnswer": "بله، هنگام فعالیت تنگی نفس دارم.",
+      "sourceFields": [
+        "exertional_dyspnea"
+      ]
+    },
+    "cardio-hist-023": {
+      "question": "آیا هنگام دراز کشیدن دچار تنگی نفس می‌شوید؟",
+      "status": "absent",
+      "patientAnswer": "نه، هنگام دراز کشیدن تنگی نفس نمی‌گیرم.",
+      "sourceFields": [
+        "orthopnea"
+      ]
+    },
+    "cardio-hist-024": {
+      "question": "برای خواب راحت چند بالش زیر سرتان می‌گذارید؟",
+      "status": "present",
+      "patientAnswer": "معمولاً یک بالش استفاده می‌کنم.",
+      "sourceFields": [
+        "pillows"
+      ]
+    },
+    "cardio-hist-025": {
+      "question": "آیا شب‌ها با احساس خفگی یا تنگی نفس از خواب بیدار می‌شوید؟",
+      "status": "absent",
+      "patientAnswer": "نه، شب‌ها با تنگی نفس از خواب بیدار نمی‌شوم.",
+      "sourceFields": [
+        "pnd"
+      ]
+    },
+    "cardio-hist-026": {
+      "question": "آیا اخیراً افزایش وزن سریع یا کاهش ادرار داشته‌اید؟",
+      "status": "absent",
+      "patientAnswer": "وزنم تغییر نکرده و کاهش ادرار در شرح‌حالم گزارش نشده است.",
+      "sourceFields": [
+        "weight;profile lacks urine output"
+      ],
+      "reviewerNote": "افزایش وزن رد شده؛ کاهش ادرار به‌طور مستقل ارزیابی نشده است."
+    },
+    "cardio-hist-027": {
+      "question": "تپش قلب را چگونه احساس می‌کنید؛ تند، نامنظم، کوبنده یا جاافتاده؟",
+      "status": "present",
+      "patientAnswer": "تپش خفیفی دارم که هم‌زمان با درد شروع شده؛ ضربان را منظم احساس می‌کنم.",
+      "sourceFields": [
+        "palpitations;rhythm"
+      ]
+    },
+    "cardio-hist-028": {
+      "question": "تپش قلب ناگهانی شروع و ناگهانی قطع می‌شود؟",
+      "status": "absent",
+      "patientAnswer": "نه، تپش به‌صورت حمله ناگهانیِ جداگانه شروع و قطع نمی‌شود.",
+      "sourceFields": [
+        "abrupt"
+      ]
+    },
+    "cardio-hist-029": {
+      "question": "ضربان هنگام حمله منظم است یا نامنظم؟",
+      "status": "present",
+      "patientAnswer": "ضربان را منظم احساس می‌کنم.",
+      "sourceFields": [
+        "rhythm"
+      ]
+    },
+    "cardio-hist-030": {
+      "question": "حمله تپش قلب معمولاً چقدر طول می‌کشد و چند وقت یک‌بار رخ می‌دهد؟",
+      "status": "present",
+      "patientAnswer": "تپش تا وقتی درد ادامه دارد حس می‌شود؛ حمله مستقل یا دفعات جداگانه‌ای گزارش نشده است.",
+      "sourceFields": [
+        "palp_duration;palpitations"
+      ]
+    },
+    "cardio-hist-031": {
+      "question": "چه چیزی حمله تپش قلب را شروع یا تشدید می‌کند؟",
+      "status": "present",
+      "patientAnswer": "هم‌زمان با درد و فعالیت شروع می‌شود.",
+      "sourceFields": [
+        "palp_trigger"
+      ]
+    },
+    "cardio-hist-032": {
+      "question": "آیا تپش قلب با سرگیجه، درد قفسه سینه یا تنگی نفس همراه است؟",
+      "status": "present",
+      "patientAnswer": "همراه تپش، سرگیجه خفیف و تنگی نفس دارم.",
+      "sourceFields": [
+        "palp_associated"
+      ]
+    },
+    "cardio-hist-033": {
+      "question": "اگر غش یا نزدیک‌غش داشته‌اید، در چه شرایطی رخ داده است؛ مثلاً هنگام فعالیت، ایستادن یا همراه تپش قلب؟",
+      "status": "absent",
+      "patientAnswer": "غش یا نزدیک‌غش نداشته‌ام.",
+      "sourceFields": [
+        "pre_syncope;syncope_ex"
+      ]
+    },
+    "cardio-hist-034": {
+      "question": "پیش از غش چه احساسی داشتید و پس از آن چقدر سریع به حالت عادی برگشتید؟",
+      "status": "not_applicable",
+      "patientAnswer": "چون غش یا نزدیک‌غش نداشته‌ام، پیش‌درآمد یا دوره بهبودی پس از آن ندارم.",
+      "sourceFields": [
+        "pre_syncope;syncope_ex"
+      ]
+    },
+    "cardio-hist-035": {
+      "question": "آیا قبلاً بیماری قلبی، سکته قلبی، نارسایی قلبی، آریتمی، بیماری دریچه‌ای، بیماری روماتیسمی قلب یا بیماری مادرزادی قلب داشته‌اید؟ آیا فشارخون، دیابت، چربی خون، بیماری کلیه یا تیروئید دارید؟",
+      "status": "mixed",
+      "patientAnswer": "قبلاً سکته قلبی، نارسایی قلبی، آریتمی یا بیماری دریچه‌ای نداشته‌ام. فشارخون، دیابت و چربی خون دارم؛ بیماری کلیوی یا تیروئیدی ندارم. بیماری کرونر قبلاً برایم به‌طور مشخص تشخیص داده نشده و سابقه روماتیسم قلبی یا بیماری مادرزادی قلب ندارم.",
+      "sourceFields": [
+        "mi",
+        "cad",
+        "hf",
+        "arrhythmia",
+        "murmur",
+        "congenital",
+        "rheumatic",
+        "htn",
+        "diabetes",
+        "lipids",
+        "kidney",
+        "thyroid"
+      ]
+    },
+    "cardio-hist-036": {
+      "question": "آیا برای قلبتان آنژیوگرافی، استنت‌گذاری، جراحی، ابلیشن یا کاشت دستگاه انجام شده است؟",
+      "status": "absent",
+      "patientAnswer": "آنژیوگرافی، استنت‌گذاری، جراحی قلب، ابلیشن یا کاشت دستگاه نداشته‌ام.",
+      "sourceFields": [
+        "procedures;stent;cabg;ablation;device"
+      ]
+    },
+    "cardio-hist-037": {
+      "question": "چه داروهایی مصرف می‌کنید؟ آیا اخیراً دارویی تغییر کرده یا دوزی را جا انداخته‌اید؟",
+      "status": "mixed",
+      "patientAnswer": "لوزارتان، آتورواستاتین و متفورمین مصرف می‌کنم؛ گاهی هم بتابلوکر می‌خورم. تغییر اخیر دارو یا جا انداختن دوز را گزارش نکرده‌ام.",
+      "sourceFields": [
+        "meds;beta;medchange;missed"
+      ]
+    },
+    "cardio-hist-038": {
+      "question": "آیا به دارو یا ماده‌ای حساسیت دارید؟ اگر بله، چه واکنشی داشته‌اید؟",
+      "status": "unknown",
+      "patientAnswer": "اطلاعاتی درباره حساسیت دارویی در شرح‌حالم ثبت نشده است.",
+      "sourceFields": [
+        "profile lacks allergy history"
+      ]
+    },
+    "cardio-hist-039": {
+      "question": "آیا در خانواده سابقه بیماری کرونر زودرس، مرگ ناگهانی، کاردیومیوپاتی، آریتمی ارثی یا بیماری آئورت وجود دارد؟",
+      "status": "mixed",
+      "patientAnswer": "پدرم در ۵۶ سالگی سکته قلبی داشته و مادرم کلسترول بالا دارد؛ سابقه مرگ ناگهانی یا بیماری ارثی قلبی دیگری در خانواده گزارش نشده است.",
+      "sourceFields": [
+        "family_early_cad;family_sudden;family_cm;family_arrhythmia;family_congenital;family_aorta;family_lipid"
+      ]
+    },
+    "cardio-hist-040": {
+      "question": "آیا سیگار یا ویپ مصرف می‌کنید یا قبلاً مصرف می‌کردید؟ آیا الکل یا مواد محرک مصرف می‌کنید و سطح فعالیت بدنی معمولتان چقدر است؟",
+      "status": "mixed",
+      "patientAnswer": "سیگار می‌کشم؛ روزی حدود یک پاکت و به مدت ۳۰ سال. درباره ویپ اطلاعاتی در شرح‌حالم ثبت نشده است. ماهی یکی دو بار الکل می‌نوشم، مواد محرک مصرف نمی‌کنم و فعالیت بدنی منظم ندارم.",
+      "sourceFields": [
+        "smoking",
+        "cigarettes",
+        "vaping not recorded",
+        "alcohol",
+        "alcohol_amt",
+        "stimulants",
+        "exercise"
+      ]
+    }
+  },
+  "cardio-002": {
+    "cardio-hist-001": {
+      "question": "چه چیزی باعث شد امروز مراجعه کنید؟",
+      "status": "present",
+      "patientAnswer": "وقتی تند راه می‌روم یا از پله بالا می‌روم، وسط سینه‌ام فشار حس می‌کنم.",
+      "sourceFields": [
+        "complaint"
+      ]
+    },
+    "cardio-hist-002": {
+      "question": "آیا درد یا ناراحتی قفسه سینه داشته‌اید؟",
+      "status": "present",
+      "patientAnswer": "بله، هنگام فعالیت وسط سینه‌ام فشار و سنگینی حس می‌کنم.",
+      "sourceFields": [
+        "quality;location"
+      ]
+    },
+    "cardio-hist-003": {
+      "question": "آیا تنگی نفس داشته‌اید؟",
+      "status": "present",
+      "patientAnswer": "گاهی هنگام درد کمی تنگی نفس دارم.",
+      "sourceFields": [
+        "dyspnea"
+      ]
+    },
+    "cardio-hist-004": {
+      "question": "آیا احساس تپش قلب یا جا افتادن ضربان داشته‌اید؟",
+      "status": "absent",
+      "patientAnswer": "نه، تپش قلب یا جا افتادن ضربان نداشته‌ام.",
+      "sourceFields": [
+        "palpitations"
+      ]
+    },
+    "cardio-hist-005": {
+      "question": "آیا غش کرده‌اید یا احساس کرده‌اید در آستانه غش هستید؟",
+      "status": "absent",
+      "patientAnswer": "نه، غش یا نزدیک‌غش نداشته‌ام.",
+      "sourceFields": [
+        "pre_syncope;syncope_ex"
+      ]
+    },
+    "cardio-hist-006": {
+      "question": "آیا پاها یا مچ پاهایتان ورم کرده‌اند؟",
+      "status": "absent",
+      "patientAnswer": "نه، پاها یا مچ پاهایم ورم نمی‌کنند.",
+      "sourceFields": [
+        "edema"
+      ]
+    },
+    "cardio-hist-007": {
+      "question": "آیا تحمل فعالیتتان کم شده یا زودتر از قبل خسته می‌شوید؟",
+      "status": "present",
+      "patientAnswer": "بله، در سربالایی زودتر از قبل مجبور می‌شوم بایستم.",
+      "sourceFields": [
+        "tolerance;lifestyle_loss"
+      ]
+    },
+    "cardio-hist-008": {
+      "question": "علائم از چه زمانی شروع شدند؟",
+      "status": "present",
+      "patientAnswer": "این الگو حدود شش ماه پیش شروع شد.",
+      "sourceFields": [
+        "onset"
+      ]
+    },
+    "cardio-hist-009": {
+      "question": "شروع علائم ناگهانی بود یا تدریجی؟",
+      "status": "unknown",
+      "patientAnswer": "شروع دقیقاً ناگهانی یا تدریجی بودن علائم در شرح‌حالم مشخص نشده است.",
+      "sourceFields": [
+        "onset;profile lacks explicit onset mode"
+      ],
+      "reviewerNote": "مدت شش‌ماهه، نحوه شروع را به‌تنهایی مشخص نمی‌کند."
+    },
+    "cardio-hist-010": {
+      "question": "از زمان شروع، علائم بهتر شده‌اند، بدتر شده‌اند یا ثابت مانده‌اند؟",
+      "status": "present",
+      "patientAnswer": "در این شش ماه تقریباً همان الگو را داشته است.",
+      "sourceFields": [
+        "course"
+      ]
+    },
+    "cardio-hist-011": {
+      "question": "آیا درد قفسه سینه با فعالیت بدنی ایجاد یا تشدید می‌شود؟",
+      "status": "present",
+      "patientAnswer": "بله، معمولاً با راه رفتن تند یا بالا رفتن از پله ایجاد می‌شود.",
+      "sourceFields": [
+        "exertional"
+      ]
+    },
+    "cardio-hist-012": {
+      "question": "آیا درد قفسه سینه در حالت استراحت هم رخ می‌دهد؟",
+      "status": "absent",
+      "patientAnswer": "نه، معمولاً در استراحت درد ندارم.",
+      "sourceFields": [
+        "rest"
+      ]
+    },
+    "cardio-hist-013": {
+      "question": "درد قفسه سینه چه حسی دارد و شدت آن چقدر است؟",
+      "status": "present",
+      "patientAnswer": "حس فشار و سنگینی است؛ شدت دقیق آن ثبت نشده است.",
+      "sourceFields": [
+        "quality"
+      ]
+    },
+    "cardio-hist-014": {
+      "question": "درد یا ناراحتی دقیقاً کجاست؟",
+      "status": "present",
+      "patientAnswer": "وسط سینه‌ام است.",
+      "sourceFields": [
+        "location"
+      ]
+    },
+    "cardio-hist-015": {
+      "question": "آیا درد به دست، شانه، فک، گردن یا پشت انتشار دارد؟",
+      "status": "present",
+      "patientAnswer": "گاهی به شانه چپم می‌زند.",
+      "sourceFields": [
+        "radiation"
+      ]
+    },
+    "cardio-hist-016": {
+      "question": "هر حمله درد چقدر طول می‌کشد و چند وقت یک‌بار رخ می‌دهد؟",
+      "status": "present",
+      "patientAnswer": "هر بار حدود ۵ تا ۱۰ دقیقه طول می‌کشد؛ دفعات دقیق در هفته ثبت نشده است.",
+      "sourceFields": [
+        "duration;profile lacks episode frequency"
+      ]
+    },
+    "cardio-hist-017": {
+      "question": "چه چیزی درد را بهتر یا بدتر می‌کند؟ آیا با استراحت یا داروی تجویزشده بهتر می‌شود؟",
+      "status": "present",
+      "patientAnswer": "با ایستادن و استراحت بهتر می‌شود؛ مصرف داروی تسکین‌دهنده برای حمله در شرح‌حالم ثبت نشده است.",
+      "sourceFields": [
+        "better"
+      ]
+    },
+    "cardio-hist-018": {
+      "question": "آیا درد با نفس عمیق یا سرفه بدتر می‌شود؟",
+      "status": "absent",
+      "patientAnswer": "نه، با نفس عمیق یا سرفه بدتر نمی‌شود.",
+      "sourceFields": [
+        "pleuritic"
+      ]
+    },
+    "cardio-hist-019": {
+      "question": "آیا درد با تغییر وضعیت بدن تغییر می‌کند؟",
+      "status": "absent",
+      "patientAnswer": "نه، تغییر وضعیت بدن اثری ندارد.",
+      "sourceFields": [
+        "position"
+      ]
+    },
+    "cardio-hist-020": {
+      "question": "آیا همراه علائم، تهوع، استفراغ یا تعریق داشته‌اید؟",
+      "status": "unknown",
+      "patientAnswer": "تهوع همراه درد ندارم؛ درباره استفراغ یا عرق سرد اطلاعات جداگانه‌ای در شرح‌حالم ثبت نشده است.",
+      "sourceFields": [
+        "nausea;profile lacks explicit vomiting/diaphoresis fields"
+      ]
+    },
+    "cardio-hist-021": {
+      "question": "آیا اخیراً تب، لرز یا عفونت داشته‌اید؟",
+      "status": "absent",
+      "patientAnswer": "نه، تب، لرز یا عفونت اخیر نداشته‌ام.",
+      "sourceFields": [
+        "fever;viral"
+      ]
+    },
+    "cardio-hist-022": {
+      "question": "آیا تنگی نفس هنگام فعالیت ایجاد می‌شود؟",
+      "status": "present",
+      "patientAnswer": "بله، با فعالیت کمی تنگی نفس پیدا می‌کنم.",
+      "sourceFields": [
+        "exertional_dyspnea"
+      ]
+    },
+    "cardio-hist-023": {
+      "question": "آیا هنگام دراز کشیدن دچار تنگی نفس می‌شوید؟",
+      "status": "absent",
+      "patientAnswer": "نه، هنگام دراز کشیدن تنگی نفس ندارم.",
+      "sourceFields": [
+        "orthopnea"
+      ]
+    },
+    "cardio-hist-024": {
+      "question": "برای خواب راحت چند بالش زیر سرتان می‌گذارید؟",
+      "status": "present",
+      "patientAnswer": "یک بالش زیر سرم می‌گذارم.",
+      "sourceFields": [
+        "pillows"
+      ]
+    },
+    "cardio-hist-025": {
+      "question": "آیا شب‌ها با احساس خفگی یا تنگی نفس از خواب بیدار می‌شوید؟",
+      "status": "absent",
+      "patientAnswer": "نه، شب‌ها با تنگی نفس از خواب بیدار نمی‌شوم.",
+      "sourceFields": [
+        "pnd"
+      ]
+    },
+    "cardio-hist-026": {
+      "question": "آیا اخیراً افزایش وزن سریع یا کاهش ادرار داشته‌اید؟",
+      "status": "mixed",
+      "patientAnswer": "وزنم ثابت مانده است؛ درباره کاهش ادرار اطلاعاتی ثبت نشده است.",
+      "sourceFields": [
+        "weight;profile lacks urine output"
+      ]
+    },
+    "cardio-hist-027": {
+      "question": "تپش قلب را چگونه احساس می‌کنید؛ تند، نامنظم، کوبنده یا جاافتاده؟",
+      "status": "not_applicable",
+      "patientAnswer": "تپش قلب ندارم؛ بنابراین کیفیت تپش برای توصیف وجود ندارد.",
+      "sourceFields": [
+        "palpitations"
+      ]
+    },
+    "cardio-hist-028": {
+      "question": "تپش قلب ناگهانی شروع و ناگهانی قطع می‌شود؟",
+      "status": "not_applicable",
+      "patientAnswer": "چون تپش قلب ندارم، شروع و قطع حمله‌ای وجود ندارد.",
+      "sourceFields": [
+        "palpitations"
+      ]
+    },
+    "cardio-hist-029": {
+      "question": "ضربان هنگام حمله منظم است یا نامنظم؟",
+      "status": "not_applicable",
+      "patientAnswer": "حمله تپش قلبی ندارم که نظم آن را توصیف کنم.",
+      "sourceFields": [
+        "palpitations"
+      ]
+    },
+    "cardio-hist-030": {
+      "question": "حمله تپش قلب معمولاً چقدر طول می‌کشد و چند وقت یک‌بار رخ می‌دهد؟",
+      "status": "not_applicable",
+      "patientAnswer": "چون تپش قلب ندارم، مدت یا تعداد حملات مطرح نیست.",
+      "sourceFields": [
+        "palpitations"
+      ]
+    },
+    "cardio-hist-031": {
+      "question": "چه چیزی حمله تپش قلب را شروع یا تشدید می‌کند؟",
+      "status": "not_applicable",
+      "patientAnswer": "محرکی برای تپش قلب ندارم، چون تپش گزارش نمی‌کنم.",
+      "sourceFields": [
+        "palpitations"
+      ]
+    },
+    "cardio-hist-032": {
+      "question": "آیا تپش قلب با سرگیجه، درد قفسه سینه یا تنگی نفس همراه است؟",
+      "status": "not_applicable",
+      "patientAnswer": "تپش قلب ندارم که با علامت دیگری همراه باشد؛ فقط گاهی هنگام درد کمی تنگی نفس دارم.",
+      "sourceFields": [
+        "palpitations;dyspnea"
+      ]
+    },
+    "cardio-hist-033": {
+      "question": "اگر غش یا نزدیک‌غش داشته‌اید، در چه شرایطی رخ داده است؛ مثلاً هنگام فعالیت، ایستادن یا همراه تپش قلب؟",
+      "status": "absent",
+      "patientAnswer": "غش یا نزدیک‌غش نداشته‌ام.",
+      "sourceFields": [
+        "pre_syncope;syncope_ex"
+      ]
+    },
+    "cardio-hist-034": {
+      "question": "پیش از غش چه احساسی داشتید و پس از آن چقدر سریع به حالت عادی برگشتید؟",
+      "status": "not_applicable",
+      "patientAnswer": "چون غش یا نزدیک‌غش نداشته‌ام، پیش‌درآمد یا دوره بهبودی پس از آن ندارم.",
+      "sourceFields": [
+        "pre_syncope;syncope_ex"
+      ]
+    },
+    "cardio-hist-035": {
+      "question": "آیا قبلاً بیماری قلبی، سکته قلبی، نارسایی قلبی، آریتمی، بیماری دریچه‌ای، بیماری روماتیسمی قلب یا بیماری مادرزادی قلب داشته‌اید؟ آیا فشارخون، دیابت، چربی خون، بیماری کلیه یا تیروئید دارید؟",
+      "status": "mixed",
+      "patientAnswer": "فشارخون و چربی خون بالا دارم. سکته قلبی یا نارسایی قلبی نداشته‌ام؛ بیماری کرونر قبلاً به‌طور مشخص برایم تشخیص داده نشده. دیابت، بیماری کلیوی و تیروئیدی ندارم و سابقه آریتمی، بیماری دریچه‌ای، روماتیسم قلبی یا بیماری مادرزادی قلب هم ندارم.",
+      "sourceFields": [
+        "mi",
+        "cad",
+        "hf",
+        "arrhythmia",
+        "murmur",
+        "congenital",
+        "rheumatic",
+        "htn",
+        "diabetes",
+        "lipids",
+        "kidney",
+        "thyroid"
+      ]
+    },
+    "cardio-hist-036": {
+      "question": "آیا برای قلبتان آنژیوگرافی، استنت‌گذاری، جراحی، ابلیشن یا کاشت دستگاه انجام شده است؟",
+      "status": "absent",
+      "patientAnswer": "آنژیوگرافی، استنت‌گذاری، جراحی قلب، ابلیشن یا کاشت دستگاه نداشته‌ام.",
+      "sourceFields": [
+        "procedures;stent;cabg;ablation;device"
+      ]
+    },
+    "cardio-hist-037": {
+      "question": "چه داروهایی مصرف می‌کنید؟ آیا اخیراً دارویی تغییر کرده یا دوزی را جا انداخته‌اید؟",
+      "status": "mixed",
+      "patientAnswer": "آملودیپین و آتورواستاتین مصرف می‌کنم؛ تغییر اخیر دارو یا جا انداختن دوز را گزارش نکرده‌ام.",
+      "sourceFields": [
+        "meds;medchange;missed"
+      ]
+    },
+    "cardio-hist-038": {
+      "question": "آیا به دارو یا ماده‌ای حساسیت دارید؟ اگر بله، چه واکنشی داشته‌اید؟",
+      "status": "unknown",
+      "patientAnswer": "اطلاعاتی درباره حساسیت دارویی در شرح‌حالم ثبت نشده است.",
+      "sourceFields": [
+        "profile lacks allergy history"
+      ]
+    },
+    "cardio-hist-039": {
+      "question": "آیا در خانواده سابقه بیماری کرونر زودرس، مرگ ناگهانی، کاردیومیوپاتی، آریتمی ارثی یا بیماری آئورت وجود دارد؟",
+      "status": "mixed",
+      "patientAnswer": "برادرم در ۵۹ سالگی بیماری کرونر داشته و پدرم کلسترول بالا داشته است؛ سابقه خانوادگی دیگری در شرح‌حالم گزارش نشده است.",
+      "sourceFields": [
+        "family_early_cad;family_sudden;family_cm;family_arrhythmia;family_congenital;family_aorta;family_lipid"
+      ]
+    },
+    "cardio-hist-040": {
+      "question": "آیا سیگار یا ویپ مصرف می‌کنید یا قبلاً مصرف می‌کردید؟ آیا الکل یا مواد محرک مصرف می‌کنید و سطح فعالیت بدنی معمولتان چقدر است؟",
+      "status": "mixed",
+      "patientAnswer": "قبلاً سیگار می‌کشیدم؛ روزی نصف پاکت به مدت ۲۰ سال و پنج سال است که ترک کرده‌ام. درباره ویپ اطلاعاتی ثبت نشده است. ماهی یک بار الکل مصرف می‌کنم، مواد محرک مصرف نمی‌کنم و هفته‌ای چند بار پیاده‌روی دارم.",
+      "sourceFields": [
+        "smoking",
+        "cigarettes",
+        "vaping not recorded",
+        "alcohol",
+        "alcohol_amt",
+        "stimulants",
+        "exercise"
+      ]
+    }
+  },
+  "cardio-003": {
+    "cardio-hist-001": {
+      "question": "چه چیزی باعث شد امروز مراجعه کنید؟",
+      "status": "present",
+      "patientAnswer": "به‌خاطر تنگی نفس و ورم پاها مراجعه کرده‌ام.",
+      "sourceFields": [
+        "complaint"
+      ]
+    },
+    "cardio-hist-002": {
+      "question": "آیا درد یا ناراحتی قفسه سینه داشته‌اید؟",
+      "status": "absent",
+      "patientAnswer": "درد یا فشار مشخصی در قفسه سینه ندارم.",
+      "sourceFields": [
+        "quality;location;complaint"
+      ]
+    },
+    "cardio-hist-003": {
+      "question": "آیا تنگی نفس داشته‌اید؟",
+      "status": "present",
+      "patientAnswer": "بله، با فعالیت و گاهی حتی در استراحت نفسم تنگ می‌شود.",
+      "sourceFields": [
+        "dyspnea"
+      ]
+    },
+    "cardio-hist-004": {
+      "question": "آیا احساس تپش قلب یا جا افتادن ضربان داشته‌اید؟",
+      "status": "present",
+      "patientAnswer": "گاهی تپش قلب دارم.",
+      "sourceFields": [
+        "palpitations"
+      ]
+    },
+    "cardio-hist-005": {
+      "question": "آیا غش کرده‌اید یا احساس کرده‌اید در آستانه غش هستید؟",
+      "status": "absent",
+      "patientAnswer": "غش یا نزدیک‌غش نداشته‌ام.",
+      "sourceFields": [
+        "pre_syncope;syncope_ex"
+      ]
+    },
+    "cardio-hist-006": {
+      "question": "آیا پاها یا مچ پاهایتان ورم کرده‌اند؟",
+      "status": "present",
+      "patientAnswer": "بله، هر دو ساق پایم ورم کرده‌اند.",
+      "sourceFields": [
+        "edema"
+      ]
+    },
+    "cardio-hist-007": {
+      "question": "آیا تحمل فعالیتتان کم شده یا زودتر از قبل خسته می‌شوید؟",
+      "status": "present",
+      "patientAnswer": "بله، تحمل فعالیت من به‌طور واضح کمتر شده است.",
+      "sourceFields": [
+        "tolerance"
+      ]
+    },
+    "cardio-hist-008": {
+      "question": "علائم از چه زمانی شروع شدند؟",
+      "status": "present",
+      "patientAnswer": "تنگی نفس از چند ماه پیش شروع شده است.",
+      "sourceFields": [
+        "onset"
+      ]
+    },
+    "cardio-hist-009": {
+      "question": "شروع علائم ناگهانی بود یا تدریجی؟",
+      "status": "unknown",
+      "patientAnswer": "از اطلاعات ثبت‌شده نمی‌توانم بگویم شروع تنگی نفس ناگهانی بود یا تدریجی؛ فقط می‌دانم طی چند ماه بدتر شده است.",
+      "sourceFields": [
+        "onset;course"
+      ],
+      "reviewerNote": "سیر تدریجی بدترشدن، نحوه شروع اولیه را به‌تنهایی مشخص نمی‌کند."
+    },
+    "cardio-hist-010": {
+      "question": "از زمان شروع، علائم بهتر شده‌اند، بدتر شده‌اند یا ثابت مانده‌اند؟",
+      "status": "present",
+      "patientAnswer": "به‌تدریج بدتر شده است.",
+      "sourceFields": [
+        "course"
+      ]
+    },
+    "cardio-hist-011": {
+      "question": "آیا درد قفسه سینه با فعالیت بدنی ایجاد یا تشدید می‌شود؟",
+      "status": "not_applicable",
+      "patientAnswer": "درد قفسه سینه ندارم؛ بنابراین ارتباط درد با فعالیت مطرح نیست.",
+      "sourceFields": [
+        "quality;location"
+      ]
+    },
+    "cardio-hist-012": {
+      "question": "آیا درد قفسه سینه در حالت استراحت هم رخ می‌دهد؟",
+      "status": "not_applicable",
+      "patientAnswer": "درد قفسه سینه ندارم؛ بنابراین درد در استراحت هم ندارم.",
+      "sourceFields": [
+        "quality;location"
+      ]
+    },
+    "cardio-hist-013": {
+      "question": "درد قفسه سینه چه حسی دارد و شدت آن چقدر است؟",
+      "status": "not_applicable",
+      "patientAnswer": "درد قفسه سینه ندارم.",
+      "sourceFields": [
+        "quality;location"
+      ]
+    },
+    "cardio-hist-014": {
+      "question": "درد یا ناراحتی دقیقاً کجاست؟",
+      "status": "not_applicable",
+      "patientAnswer": "محل درد مطرح نیست، چون درد قفسه سینه ندارم.",
+      "sourceFields": [
+        "location"
+      ]
+    },
+    "cardio-hist-015": {
+      "question": "آیا درد به دست، شانه، فک، گردن یا پشت انتشار دارد؟",
+      "status": "not_applicable",
+      "patientAnswer": "دردی ندارم که به جای دیگری انتشار پیدا کند.",
+      "sourceFields": [
+        "radiation;location"
+      ]
+    },
+    "cardio-hist-016": {
+      "question": "هر حمله درد چقدر طول می‌کشد و چند وقت یک‌بار رخ می‌دهد؟",
+      "status": "not_applicable",
+      "patientAnswer": "درد قفسه سینه ندارم؛ مدت حمله درد مطرح نیست.",
+      "sourceFields": [
+        "quality;location"
+      ]
+    },
+    "cardio-hist-017": {
+      "question": "چه چیزی درد را بهتر یا بدتر می‌کند؟ آیا با استراحت یا داروی تجویزشده بهتر می‌شود؟",
+      "status": "not_applicable",
+      "patientAnswer": "درد قفسه سینه ندارم؛ عامل تسکین‌دهنده یا تشدیدکننده‌ای برای درد ندارم.",
+      "sourceFields": [
+        "quality;location"
+      ]
+    },
+    "cardio-hist-018": {
+      "question": "آیا درد با نفس عمیق یا سرفه بدتر می‌شود؟",
+      "status": "not_applicable",
+      "patientAnswer": "درد قفسه سینه ندارم؛ این ویژگی درباره من مطرح نیست.",
+      "sourceFields": [
+        "quality;location"
+      ]
+    },
+    "cardio-hist-019": {
+      "question": "آیا درد با تغییر وضعیت بدن تغییر می‌کند؟",
+      "status": "not_applicable",
+      "patientAnswer": "درد قفسه سینه ندارم؛ تغییر وضعیت بدن درد را تغییر نمی‌دهد چون دردی وجود ندارد.",
+      "sourceFields": [
+        "quality;location"
+      ]
+    },
+    "cardio-hist-020": {
+      "question": "آیا همراه علائم، تهوع، استفراغ یا تعریق داشته‌اید؟",
+      "status": "unknown",
+      "patientAnswer": "تهوع ندارم؛ درباره استفراغ یا عرق سرد اطلاعات جداگانه‌ای در شرح‌حالم ثبت نشده است.",
+      "sourceFields": [
+        "nausea;profile lacks explicit vomiting/diaphoresis fields"
+      ]
+    },
+    "cardio-hist-021": {
+      "question": "آیا اخیراً تب، لرز یا عفونت داشته‌اید؟",
+      "status": "absent",
+      "patientAnswer": "تب، لرز یا عفونت اخیر نداشته‌ام.",
+      "sourceFields": [
+        "fever;viral"
+      ]
+    },
+    "cardio-hist-022": {
+      "question": "آیا تنگی نفس هنگام فعالیت ایجاد می‌شود؟",
+      "status": "present",
+      "patientAnswer": "بله، با فعالیت دچار تنگی نفس می‌شوم.",
+      "sourceFields": [
+        "exertional_dyspnea"
+      ]
+    },
+    "cardio-hist-023": {
+      "question": "آیا هنگام دراز کشیدن دچار تنگی نفس می‌شوید؟",
+      "status": "present",
+      "patientAnswer": "بله، وقتی دراز می‌کشم نفسم تنگ می‌شود.",
+      "sourceFields": [
+        "orthopnea"
+      ]
+    },
+    "cardio-hist-024": {
+      "question": "برای خواب راحت چند بالش زیر سرتان می‌گذارید؟",
+      "status": "present",
+      "patientAnswer": "برای خواب راحت به سه بالش نیاز دارم.",
+      "sourceFields": [
+        "pillows"
+      ]
+    },
+    "cardio-hist-025": {
+      "question": "آیا شب‌ها با احساس خفگی یا تنگی نفس از خواب بیدار می‌شوید؟",
+      "status": "present",
+      "patientAnswer": "بله، شب‌ها گاهی با تنگی نفس از خواب بیدار می‌شوم.",
+      "sourceFields": [
+        "pnd"
+      ]
+    },
+    "cardio-hist-026": {
+      "question": "آیا اخیراً افزایش وزن سریع یا کاهش ادرار داشته‌اید؟",
+      "status": "present",
+      "patientAnswer": "در دو هفته اخیر حدود سه کیلو وزن اضافه کرده‌ام؛ کاهش ادرار در شرح‌حالم ثبت نشده است.",
+      "sourceFields": [
+        "weight;profile lacks urine output"
+      ]
+    },
+    "cardio-hist-027": {
+      "question": "تپش قلب را چگونه احساس می‌کنید؛ تند، نامنظم، کوبنده یا جاافتاده؟",
+      "status": "present",
+      "patientAnswer": "گاهی تپش قلب دارم، اما کیفیت دقیق آن در شرح‌حالم مشخص نشده است.",
+      "sourceFields": [
+        "palpitations"
+      ]
+    },
+    "cardio-hist-028": {
+      "question": "تپش قلب ناگهانی شروع و ناگهانی قطع می‌شود؟",
+      "status": "absent",
+      "patientAnswer": "نه، شروع و پایان ناگهانی برای تپش‌ها گزارش نشده است.",
+      "sourceFields": [
+        "abrupt"
+      ]
+    },
+    "cardio-hist-029": {
+      "question": "ضربان هنگام حمله منظم است یا نامنظم؟",
+      "status": "present",
+      "patientAnswer": "ضربان را منظم احساس می‌کنم.",
+      "sourceFields": [
+        "rhythm"
+      ]
+    },
+    "cardio-hist-030": {
+      "question": "حمله تپش قلب معمولاً چقدر طول می‌کشد و چند وقت یک‌بار رخ می‌دهد؟",
+      "status": "present",
+      "patientAnswer": "تپش‌ها چند دقیقه طول می‌کشند؛ تعداد دفعات دقیق ثبت نشده است.",
+      "sourceFields": [
+        "palp_duration;profile lacks frequency"
+      ]
+    },
+    "cardio-hist-031": {
+      "question": "چه چیزی حمله تپش قلب را شروع یا تشدید می‌کند؟",
+      "status": "present",
+      "patientAnswer": "بیشتر هنگام فعالیت متوجه تپش می‌شوم.",
+      "sourceFields": [
+        "palp_trigger"
+      ]
+    },
+    "cardio-hist-032": {
+      "question": "آیا تپش قلب با سرگیجه، درد قفسه سینه یا تنگی نفس همراه است؟",
+      "status": "present",
+      "patientAnswer": "گاهی تپش با تنگی نفس همراه است.",
+      "sourceFields": [
+        "palp_associated"
+      ]
+    },
+    "cardio-hist-033": {
+      "question": "اگر غش یا نزدیک‌غش داشته‌اید، در چه شرایطی رخ داده است؛ مثلاً هنگام فعالیت، ایستادن یا همراه تپش قلب؟",
+      "status": "absent",
+      "patientAnswer": "غش یا نزدیک‌غش نداشته‌ام.",
+      "sourceFields": [
+        "pre_syncope;syncope_ex"
+      ]
+    },
+    "cardio-hist-034": {
+      "question": "پیش از غش چه احساسی داشتید و پس از آن چقدر سریع به حالت عادی برگشتید؟",
+      "status": "not_applicable",
+      "patientAnswer": "چون غش یا نزدیک‌غش نداشته‌ام، پیش‌درآمد یا دوره بهبودی پس از آن ندارم.",
+      "sourceFields": [
+        "pre_syncope;syncope_ex"
+      ]
+    },
+    "cardio-hist-035": {
+      "question": "آیا قبلاً بیماری قلبی، سکته قلبی، نارسایی قلبی، آریتمی، بیماری دریچه‌ای، بیماری روماتیسمی قلب یا بیماری مادرزادی قلب داشته‌اید؟ آیا فشارخون، دیابت، چربی خون، بیماری کلیه یا تیروئید دارید؟",
+      "status": "mixed",
+      "patientAnswer": "سه سال پیش سکته قلبی داشته‌ام و بیماری کرونر و نارسایی قلبی برایم تشخیص داده شده‌اند. فشارخون و چربی خون هم دارم؛ دیابت، بیماری کلیوی و تیروئیدی ندارم. سابقه آریتمی، بیماری دریچه‌ای، روماتیسم قلبی یا بیماری مادرزادی قلب ندارم.",
+      "sourceFields": [
+        "mi",
+        "cad",
+        "hf",
+        "arrhythmia",
+        "murmur",
+        "congenital",
+        "rheumatic",
+        "htn",
+        "diabetes",
+        "lipids",
+        "kidney",
+        "thyroid"
+      ],
+      "reviewerNote": "پروفایل منبع این بیمار را دارای نارسایی قلبی تشخیص‌داده‌شده معرفی می‌کند؛ این کیس از نظر شرح‌حال، پیگیری بیماری شناخته‌شده است و اگر هدف کیس تشخیص کور باشد، باید خود سناریو جداگانه بازطراحی شود."
+    },
+    "cardio-hist-036": {
+      "question": "آیا برای قلبتان آنژیوگرافی، استنت‌گذاری، جراحی، ابلیشن یا کاشت دستگاه انجام شده است؟",
+      "status": "absent",
+      "patientAnswer": "آنژیوگرافی، استنت‌گذاری، جراحی قلب، ابلیشن یا کاشت دستگاه نداشته‌ام.",
+      "sourceFields": [
+        "procedures;stent;cabg;ablation;device"
+      ]
+    },
+    "cardio-hist-037": {
+      "question": "چه داروهایی مصرف می‌کنید؟ آیا اخیراً دارویی تغییر کرده یا دوزی را جا انداخته‌اید؟",
+      "status": "mixed",
+      "patientAnswer": "فوروزماید، لوزارتان، کارودیلول و اسپیرونولاکتون مصرف می‌کنم؛ تغییر اخیر یا جا انداختن دوز را گزارش نکرده‌ام.",
+      "sourceFields": [
+        "meds;medchange;missed"
+      ],
+      "reviewerNote": "فیلد جداگانه بتابلوکر در پروفایل با فهرست داروها ناسازگار است؛ فهرست داروها مبنا قرار گرفته و این تناقض منبع باید اصلاح شود."
+    },
+    "cardio-hist-038": {
+      "question": "آیا به دارو یا ماده‌ای حساسیت دارید؟ اگر بله، چه واکنشی داشته‌اید؟",
+      "status": "unknown",
+      "patientAnswer": "اطلاعاتی درباره حساسیت دارویی در شرح‌حالم ثبت نشده است.",
+      "sourceFields": [
+        "profile lacks allergy history"
+      ]
+    },
+    "cardio-hist-039": {
+      "question": "آیا در خانواده سابقه بیماری کرونر زودرس، مرگ ناگهانی، کاردیومیوپاتی، آریتمی ارثی یا بیماری آئورت وجود دارد؟",
+      "status": "absent",
+      "patientAnswer": "سابقه خانوادگی بیماری کرونر زودرس، مرگ ناگهانی یا بیماری ارثی قلبی گزارش نشده است.",
+      "sourceFields": [
+        "family_early_cad;family_sudden;family_cm;family_arrhythmia;family_congenital;family_aorta;family_lipid"
+      ]
+    },
+    "cardio-hist-040": {
+      "question": "آیا سیگار یا ویپ مصرف می‌کنید یا قبلاً مصرف می‌کردید؟ آیا الکل یا مواد محرک مصرف می‌کنید و سطح فعالیت بدنی معمولتان چقدر است؟",
+      "status": "mixed",
+      "patientAnswer": "قبلاً سیگار می‌کشیدم؛ روزی نصف پاکت به مدت ۲۵ سال و سه سال است که ترک کرده‌ام. درباره ویپ اطلاعاتی ثبت نشده است. الکل یا مواد محرک مصرف نمی‌کنم و فعالیت بدنی‌ام کم است.",
+      "sourceFields": [
+        "smoking",
+        "cigarettes",
+        "vaping not recorded",
+        "alcohol",
+        "alcohol_amt",
+        "stimulants",
+        "exercise"
+      ]
+    }
+  },
+  "cardio-004": {
+    "cardio-hist-001": {
+      "question": "چه چیزی باعث شد امروز مراجعه کنید؟",
+      "status": "present",
+      "patientAnswer": "به‌خاطر تپش قلب مراجعه کرده‌ام؛ حمله‌ها بیشتر شده‌اند.",
+      "sourceFields": [
+        "complaint;course"
+      ]
+    },
+    "cardio-hist-002": {
+      "question": "آیا درد یا ناراحتی قفسه سینه داشته‌اید؟",
+      "status": "absent",
+      "patientAnswer": "درد یا ناراحتی قفسه سینه ندارم.",
+      "sourceFields": [
+        "quality;location"
+      ]
+    },
+    "cardio-hist-003": {
+      "question": "آیا تنگی نفس داشته‌اید؟",
+      "status": "present",
+      "patientAnswer": "گاهی تنگی نفس دارم.",
+      "sourceFields": [
+        "dyspnea"
+      ]
+    },
+    "cardio-hist-004": {
+      "question": "آیا احساس تپش قلب یا جا افتادن ضربان داشته‌اید؟",
+      "status": "present",
+      "patientAnswer": "بله، ضربانم نامنظم و کوبنده می‌شود.",
+      "sourceFields": [
+        "palpitations;palp"
+      ]
+    },
+    "cardio-hist-005": {
+      "question": "آیا غش کرده‌اید یا احساس کرده‌اید در آستانه غش هستید؟",
+      "status": "mixed",
+      "patientAnswer": "گاهی احساس نزدیک‌غش دارم، اما غش واقعی نکرده‌ام.",
+      "sourceFields": [
+        "pre_syncope;syncope_ex"
+      ]
+    },
+    "cardio-hist-006": {
+      "question": "آیا پاها یا مچ پاهایتان ورم کرده‌اند؟",
+      "status": "absent",
+      "patientAnswer": "نه، پاهایم ورم نکرده‌اند.",
+      "sourceFields": [
+        "edema"
+      ]
+    },
+    "cardio-hist-007": {
+      "question": "آیا تحمل فعالیتتان کم شده یا زودتر از قبل خسته می‌شوید؟",
+      "status": "present",
+      "patientAnswer": "تحمل فعالیت کمی کمتر شده است.",
+      "sourceFields": [
+        "tolerance;lifestyle_loss"
+      ]
+    },
+    "cardio-hist-008": {
+      "question": "علائم از چه زمانی شروع شدند؟",
+      "status": "present",
+      "patientAnswer": "حملات از چند هفته تا چند ماه پیش شروع شده‌اند.",
+      "sourceFields": [
+        "onset"
+      ]
+    },
+    "cardio-hist-009": {
+      "question": "شروع علائم ناگهانی بود یا تدریجی؟",
+      "status": "unknown",
+      "patientAnswer": "می‌دانم حملات گاهی ناگهانی شروع می‌شوند، اما نحوه شروع اولین علائم در شرح‌حالم مشخص نیست.",
+      "sourceFields": [
+        "onset;abrupt"
+      ],
+      "reviewerNote": "abrupt مربوط به حملات تپش است و نباید به‌عنوان نحوه شروع کلی بیماری استفاده شود."
+    },
+    "cardio-hist-010": {
+      "question": "از زمان شروع، علائم بهتر شده‌اند، بدتر شده‌اند یا ثابت مانده‌اند؟",
+      "status": "present",
+      "patientAnswer": "حملات بیشتر شده‌اند.",
+      "sourceFields": [
+        "course"
+      ]
+    },
+    "cardio-hist-011": {
+      "question": "آیا درد قفسه سینه با فعالیت بدنی ایجاد یا تشدید می‌شود؟",
+      "status": "not_applicable",
+      "patientAnswer": "درد قفسه سینه ندارم؛ ارتباط درد با فعالیت مطرح نیست.",
+      "sourceFields": [
+        "quality;location"
+      ]
+    },
+    "cardio-hist-012": {
+      "question": "آیا درد قفسه سینه در حالت استراحت هم رخ می‌دهد؟",
+      "status": "not_applicable",
+      "patientAnswer": "درد قفسه سینه ندارم.",
+      "sourceFields": [
+        "quality;location"
+      ]
+    },
+    "cardio-hist-013": {
+      "question": "درد قفسه سینه چه حسی دارد و شدت آن چقدر است؟",
+      "status": "not_applicable",
+      "patientAnswer": "درد قفسه سینه ندارم.",
+      "sourceFields": [
+        "quality;location"
+      ]
+    },
+    "cardio-hist-014": {
+      "question": "درد یا ناراحتی دقیقاً کجاست؟",
+      "status": "not_applicable",
+      "patientAnswer": "محل درد مطرح نیست، چون درد قفسه سینه ندارم.",
+      "sourceFields": [
+        "location"
+      ]
+    },
+    "cardio-hist-015": {
+      "question": "آیا درد به دست، شانه، فک، گردن یا پشت انتشار دارد؟",
+      "status": "not_applicable",
+      "patientAnswer": "دردی ندارم که به جای دیگری انتشار پیدا کند.",
+      "sourceFields": [
+        "radiation;location"
+      ]
+    },
+    "cardio-hist-016": {
+      "question": "هر حمله درد چقدر طول می‌کشد و چند وقت یک‌بار رخ می‌دهد؟",
+      "status": "not_applicable",
+      "patientAnswer": "درد قفسه سینه ندارم؛ مدت حمله درد مطرح نیست.",
+      "sourceFields": [
+        "quality;location"
+      ]
+    },
+    "cardio-hist-017": {
+      "question": "چه چیزی درد را بهتر یا بدتر می‌کند؟ آیا با استراحت یا داروی تجویزشده بهتر می‌شود؟",
+      "status": "not_applicable",
+      "patientAnswer": "درد قفسه سینه ندارم؛ عامل تسکین یا تشدید درد مطرح نیست.",
+      "sourceFields": [
+        "quality;location"
+      ]
+    },
+    "cardio-hist-018": {
+      "question": "آیا درد با نفس عمیق یا سرفه بدتر می‌شود؟",
+      "status": "not_applicable",
+      "patientAnswer": "درد قفسه سینه ندارم.",
+      "sourceFields": [
+        "quality;location"
+      ]
+    },
+    "cardio-hist-019": {
+      "question": "آیا درد با تغییر وضعیت بدن تغییر می‌کند؟",
+      "status": "not_applicable",
+      "patientAnswer": "درد قفسه سینه ندارم.",
+      "sourceFields": [
+        "quality;location"
+      ]
+    },
+    "cardio-hist-020": {
+      "question": "آیا همراه علائم، تهوع، استفراغ یا تعریق داشته‌اید؟",
+      "status": "mixed",
+      "patientAnswer": "گاهی تهوع دارم؛ استفراغ یا عرق سرد در شرح‌حالم گزارش نشده است.",
+      "sourceFields": [
+        "nausea"
+      ]
+    },
+    "cardio-hist-021": {
+      "question": "آیا اخیراً تب، لرز یا عفونت داشته‌اید؟",
+      "status": "absent",
+      "patientAnswer": "تب، لرز یا عفونت اخیر نداشته‌ام.",
+      "sourceFields": [
+        "fever;viral"
+      ]
+    },
+    "cardio-hist-022": {
+      "question": "آیا تنگی نفس هنگام فعالیت ایجاد می‌شود؟",
+      "status": "present",
+      "patientAnswer": "گاهی هنگام فعالیت کمی تنگی نفس دارم.",
+      "sourceFields": [
+        "exertional_dyspnea"
+      ]
+    },
+    "cardio-hist-023": {
+      "question": "آیا هنگام دراز کشیدن دچار تنگی نفس می‌شوید؟",
+      "status": "absent",
+      "patientAnswer": "نه، هنگام دراز کشیدن تنگی نفس ندارم.",
+      "sourceFields": [
+        "orthopnea"
+      ]
+    },
+    "cardio-hist-024": {
+      "question": "برای خواب راحت چند بالش زیر سرتان می‌گذارید؟",
+      "status": "present",
+      "patientAnswer": "یک بالش زیر سرم می‌گذارم.",
+      "sourceFields": [
+        "pillows"
+      ]
+    },
+    "cardio-hist-025": {
+      "question": "آیا شب‌ها با احساس خفگی یا تنگی نفس از خواب بیدار می‌شوید؟",
+      "status": "absent",
+      "patientAnswer": "نه، شب‌ها با تنگی نفس از خواب بیدار نمی‌شوم.",
+      "sourceFields": [
+        "pnd"
+      ]
+    },
+    "cardio-hist-026": {
+      "question": "آیا اخیراً افزایش وزن سریع یا کاهش ادرار داشته‌اید؟",
+      "status": "mixed",
+      "patientAnswer": "وزنم ثابت مانده است؛ درباره کاهش ادرار اطلاعاتی ثبت نشده است.",
+      "sourceFields": [
+        "weight;profile lacks urine output"
+      ]
+    },
+    "cardio-hist-027": {
+      "question": "تپش قلب را چگونه احساس می‌کنید؛ تند، نامنظم، کوبنده یا جاافتاده؟",
+      "status": "present",
+      "patientAnswer": "ضربانم نامنظم و کوبنده است.",
+      "sourceFields": [
+        "palpitations;rhythm;palp"
+      ]
+    },
+    "cardio-hist-028": {
+      "question": "تپش قلب ناگهانی شروع و ناگهانی قطع می‌شود؟",
+      "status": "present",
+      "patientAnswer": "بله، حمله‌های تپش قلبم گاهی ناگهانی شروع می‌شوند و ناگهانی هم قطع می‌شوند.",
+      "sourceFields": [
+        "abrupt"
+      ]
+    },
+    "cardio-hist-029": {
+      "question": "ضربان هنگام حمله منظم است یا نامنظم؟",
+      "status": "present",
+      "patientAnswer": "هنگام حمله ضربان نامنظم است.",
+      "sourceFields": [
+        "rhythm"
+      ]
+    },
+    "cardio-hist-030": {
+      "question": "حمله تپش قلب معمولاً چقدر طول می‌کشد و چند وقت یک‌بار رخ می‌دهد؟",
+      "status": "present",
+      "patientAnswer": "حمله‌ها چند ساعت طول می‌کشند؛ تعداد دقیق حملات ثبت نشده است.",
+      "sourceFields": [
+        "palp_duration;profile lacks frequency"
+      ]
+    },
+    "cardio-hist-031": {
+      "question": "چه چیزی حمله تپش قلب را شروع یا تشدید می‌کند؟",
+      "status": "present",
+      "patientAnswer": "گاهی استرس باعث شروع یا تشدید حمله می‌شود.",
+      "sourceFields": [
+        "palp_trigger"
+      ]
+    },
+    "cardio-hist-032": {
+      "question": "آیا تپش قلب با سرگیجه، درد قفسه سینه یا تنگی نفس همراه است؟",
+      "status": "present",
+      "patientAnswer": "گاهی با تپش، سرگیجه و تنگی نفس دارم.",
+      "sourceFields": [
+        "palp_associated"
+      ]
+    },
+    "cardio-hist-033": {
+      "question": "اگر غش یا نزدیک‌غش داشته‌اید، در چه شرایطی رخ داده است؛ مثلاً هنگام فعالیت، ایستادن یا همراه تپش قلب؟",
+      "status": "mixed",
+      "patientAnswer": "گاهی نزدیک‌غش دارم؛ غش واقعی نداشته‌ام. اینکه این حالت هنگام فعالیت یا ایستادن رخ می‌دهد، در شرح‌حالم مشخص نشده است.",
+      "sourceFields": [
+        "pre_syncope;syncope_ex;profile lacks presyncope context"
+      ]
+    },
+    "cardio-hist-034": {
+      "question": "پیش از غش چه احساسی داشتید و پس از آن چقدر سریع به حالت عادی برگشتید؟",
+      "status": "mixed",
+      "patientAnswer": "گاهی احساس گرمی دارم، اما مشخص نیست قبل از نزدیک‌غش رخ می‌دهد یا نه. غش واقعی نداشته‌ام؛ بهبود پس از غش مطرح نیست.",
+      "sourceFields": [
+        "prodrome;recovery;syncope_ex"
+      ],
+      "reviewerNote": "فیلد recovery مربوط به پایان تپش است، نه لزوماً بهبود پس از نزدیک‌غش."
+    },
+    "cardio-hist-035": {
+      "question": "آیا قبلاً بیماری قلبی، سکته قلبی، نارسایی قلبی، آریتمی، بیماری دریچه‌ای، بیماری روماتیسمی قلب یا بیماری مادرزادی قلب داشته‌اید؟ آیا فشارخون، دیابت، چربی خون، بیماری کلیه یا تیروئید دارید؟",
+      "status": "mixed",
+      "patientAnswer": "قبلاً برایم بیماری قلبی، سکته قلبی، نارسایی قلبی یا آریتمی تشخیص داده نشده بود. فشارخون، دیابت، چربی خون، بیماری کلیوی یا تیروئیدی ندارم و سابقه بیماری دریچه‌ای، روماتیسم قلبی یا بیماری مادرزادی قلب هم ندارم.",
+      "sourceFields": [
+        "mi",
+        "cad",
+        "hf",
+        "arrhythmia",
+        "murmur",
+        "congenital",
+        "rheumatic",
+        "htn",
+        "diabetes",
+        "lipids",
+        "kidney",
+        "thyroid"
+      ]
+    },
+    "cardio-hist-036": {
+      "question": "آیا برای قلبتان آنژیوگرافی، استنت‌گذاری، جراحی، ابلیشن یا کاشت دستگاه انجام شده است؟",
+      "status": "absent",
+      "patientAnswer": "آنژیوگرافی، استنت‌گذاری، جراحی قلب، ابلیشن یا کاشت دستگاه نداشته‌ام.",
+      "sourceFields": [
+        "procedures;stent;cabg;ablation;device"
+      ]
+    },
+    "cardio-hist-037": {
+      "question": "چه داروهایی مصرف می‌کنید؟ آیا اخیراً دارویی تغییر کرده یا دوزی را جا انداخته‌اید؟",
+      "status": "absent",
+      "patientAnswer": "داروی روزانه‌ای مصرف نمی‌کنم؛ اخیراً هم دارویی را تغییر نداده‌ام یا دوزی را جا نینداخته‌ام.",
+      "sourceFields": [
+        "meds",
+        "medchange",
+        "missed"
+      ]
+    },
+    "cardio-hist-038": {
+      "question": "آیا به دارو یا ماده‌ای حساسیت دارید؟ اگر بله، چه واکنشی داشته‌اید؟",
+      "status": "unknown",
+      "patientAnswer": "اطلاعاتی درباره حساسیت دارویی در شرح‌حالم ثبت نشده است.",
+      "sourceFields": [
+        "profile lacks allergy history"
+      ]
+    },
+    "cardio-hist-039": {
+      "question": "آیا در خانواده سابقه بیماری کرونر زودرس، مرگ ناگهانی، کاردیومیوپاتی، آریتمی ارثی یا بیماری آئورت وجود دارد؟",
+      "status": "absent",
+      "patientAnswer": "سابقه خانوادگی بیماری کرونر زودرس، مرگ ناگهانی یا بیماری ارثی قلبی گزارش نشده است.",
+      "sourceFields": [
+        "family_early_cad;family_sudden;family_cm;family_arrhythmia;family_congenital;family_aorta;family_lipid"
+      ]
+    },
+    "cardio-hist-040": {
+      "question": "آیا سیگار یا ویپ مصرف می‌کنید یا قبلاً مصرف می‌کردید؟ آیا الکل یا مواد محرک مصرف می‌کنید و سطح فعالیت بدنی معمولتان چقدر است؟",
+      "status": "mixed",
+      "patientAnswer": "سیگار نمی‌کشم و مواد محرک مصرف نمی‌کنم. درباره ویپ اطلاعاتی ثبت نشده است. الکل را کم و گاه‌به‌گاه مصرف می‌کنم و فعالیت بدنی‌ام متوسط است.",
+      "sourceFields": [
+        "smoking",
+        "cigarettes",
+        "vaping not recorded",
+        "alcohol",
+        "alcohol_amt",
+        "stimulants",
+        "exercise"
+      ]
+    }
+  },
+  "cardio-005": {
+    "cardio-hist-001": {
+      "question": "چه چیزی باعث شد امروز مراجعه کنید؟",
+      "status": "present",
+      "patientAnswer": "به‌خاطر حمله‌های تپش قلب مراجعه کرده‌ام که بیشتر شده‌اند.",
+      "sourceFields": [
+        "complaint;course"
+      ]
+    },
+    "cardio-hist-002": {
+      "question": "آیا درد یا ناراحتی قفسه سینه داشته‌اید؟",
+      "status": "absent",
+      "patientAnswer": "درد یا ناراحتی قفسه سینه ندارم.",
+      "sourceFields": [
+        "quality;location"
+      ]
+    },
+    "cardio-hist-003": {
+      "question": "آیا تنگی نفس داشته‌اید؟",
+      "status": "present",
+      "patientAnswer": "گاهی هنگام حمله تپش قلب تنگی نفس دارم.",
+      "sourceFields": [
+        "dyspnea;palp_associated"
+      ]
+    },
+    "cardio-hist-004": {
+      "question": "آیا احساس تپش قلب یا جا افتادن ضربان داشته‌اید؟",
+      "status": "present",
+      "patientAnswer": "بله، تپش خیلی سریع و منظم دارم.",
+      "sourceFields": [
+        "palpitations;palp"
+      ]
+    },
+    "cardio-hist-005": {
+      "question": "آیا غش کرده‌اید یا احساس کرده‌اید در آستانه غش هستید؟",
+      "status": "mixed",
+      "patientAnswer": "گاهی احساس نزدیک‌غش دارم، اما غش واقعی نکرده‌ام.",
+      "sourceFields": [
+        "pre_syncope;syncope_ex"
+      ]
+    },
+    "cardio-hist-006": {
+      "question": "آیا پاها یا مچ پاهایتان ورم کرده‌اند؟",
+      "status": "absent",
+      "patientAnswer": "نه، پاهایم ورم نکرده‌اند.",
+      "sourceFields": [
+        "edema"
+      ]
+    },
+    "cardio-hist-007": {
+      "question": "آیا تحمل فعالیتتان کم شده یا زودتر از قبل خسته می‌شوید؟",
+      "status": "present",
+      "patientAnswer": "تحمل فعالیت کمی کمتر شده است.",
+      "sourceFields": [
+        "tolerance;lifestyle_loss"
+      ]
+    },
+    "cardio-hist-008": {
+      "question": "علائم از چه زمانی شروع شدند؟",
+      "status": "present",
+      "patientAnswer": "حملات از چند هفته تا چند ماه پیش شروع شده‌اند.",
+      "sourceFields": [
+        "onset"
+      ]
+    },
+    "cardio-hist-009": {
+      "question": "شروع علائم ناگهانی بود یا تدریجی؟",
+      "status": "unknown",
+      "patientAnswer": "نحوه شروع اولین علائم مشخص نیست؛ خود حمله‌های تپش ناگهانی شروع و قطع می‌شوند.",
+      "sourceFields": [
+        "onset;abrupt"
+      ],
+      "reviewerNote": "شروع ناگهانی حمله با شروع کلی علائم یکسان نیست."
+    },
+    "cardio-hist-010": {
+      "question": "از زمان شروع، علائم بهتر شده‌اند، بدتر شده‌اند یا ثابت مانده‌اند؟",
+      "status": "present",
+      "patientAnswer": "حملات در این مدت بیشتر شده‌اند.",
+      "sourceFields": [
+        "course"
+      ]
+    },
+    "cardio-hist-011": {
+      "question": "آیا درد قفسه سینه با فعالیت بدنی ایجاد یا تشدید می‌شود؟",
+      "status": "not_applicable",
+      "patientAnswer": "درد قفسه سینه ندارم؛ ارتباط درد با فعالیت مطرح نیست.",
+      "sourceFields": [
+        "quality;location"
+      ]
+    },
+    "cardio-hist-012": {
+      "question": "آیا درد قفسه سینه در حالت استراحت هم رخ می‌دهد؟",
+      "status": "not_applicable",
+      "patientAnswer": "درد قفسه سینه ندارم.",
+      "sourceFields": [
+        "quality;location"
+      ]
+    },
+    "cardio-hist-013": {
+      "question": "درد قفسه سینه چه حسی دارد و شدت آن چقدر است؟",
+      "status": "not_applicable",
+      "patientAnswer": "درد قفسه سینه ندارم.",
+      "sourceFields": [
+        "quality;location"
+      ]
+    },
+    "cardio-hist-014": {
+      "question": "درد یا ناراحتی دقیقاً کجاست؟",
+      "status": "not_applicable",
+      "patientAnswer": "محل درد مطرح نیست، چون درد قفسه سینه ندارم.",
+      "sourceFields": [
+        "location"
+      ]
+    },
+    "cardio-hist-015": {
+      "question": "آیا درد به دست، شانه، فک، گردن یا پشت انتشار دارد؟",
+      "status": "not_applicable",
+      "patientAnswer": "دردی ندارم که به جای دیگری انتشار پیدا کند.",
+      "sourceFields": [
+        "radiation;location"
+      ]
+    },
+    "cardio-hist-016": {
+      "question": "هر حمله درد چقدر طول می‌کشد و چند وقت یک‌بار رخ می‌دهد؟",
+      "status": "not_applicable",
+      "patientAnswer": "درد قفسه سینه ندارم؛ مدت حمله درد مطرح نیست.",
+      "sourceFields": [
+        "quality;location"
+      ]
+    },
+    "cardio-hist-017": {
+      "question": "چه چیزی درد را بهتر یا بدتر می‌کند؟ آیا با استراحت یا داروی تجویزشده بهتر می‌شود؟",
+      "status": "not_applicable",
+      "patientAnswer": "درد قفسه سینه ندارم؛ عامل تسکین یا تشدید درد مطرح نیست.",
+      "sourceFields": [
+        "quality;location"
+      ]
+    },
+    "cardio-hist-018": {
+      "question": "آیا درد با نفس عمیق یا سرفه بدتر می‌شود؟",
+      "status": "not_applicable",
+      "patientAnswer": "درد قفسه سینه ندارم.",
+      "sourceFields": [
+        "quality;location"
+      ]
+    },
+    "cardio-hist-019": {
+      "question": "آیا درد با تغییر وضعیت بدن تغییر می‌کند؟",
+      "status": "not_applicable",
+      "patientAnswer": "درد قفسه سینه ندارم.",
+      "sourceFields": [
+        "quality;location"
+      ]
+    },
+    "cardio-hist-020": {
+      "question": "آیا همراه علائم، تهوع، استفراغ یا تعریق داشته‌اید؟",
+      "status": "mixed",
+      "patientAnswer": "گاهی تهوع دارم؛ استفراغ یا عرق سرد در شرح‌حالم ثبت نشده است.",
+      "sourceFields": [
+        "nausea"
+      ]
+    },
+    "cardio-hist-021": {
+      "question": "آیا اخیراً تب، لرز یا عفونت داشته‌اید؟",
+      "status": "absent",
+      "patientAnswer": "تب، لرز یا عفونت اخیر نداشته‌ام.",
+      "sourceFields": [
+        "fever;viral"
+      ]
+    },
+    "cardio-hist-022": {
+      "question": "آیا تنگی نفس هنگام فعالیت ایجاد می‌شود؟",
+      "status": "present",
+      "patientAnswer": "بله، تنگی نفس خفیفی هنگام فعالیت دارم.",
+      "sourceFields": [
+        "exertional_dyspnea"
+      ]
+    },
+    "cardio-hist-023": {
+      "question": "آیا هنگام دراز کشیدن دچار تنگی نفس می‌شوید؟",
+      "status": "absent",
+      "patientAnswer": "نه، هنگام دراز کشیدن تنگی نفس ندارم.",
+      "sourceFields": [
+        "orthopnea"
+      ]
+    },
+    "cardio-hist-024": {
+      "question": "برای خواب راحت چند بالش زیر سرتان می‌گذارید؟",
+      "status": "present",
+      "patientAnswer": "یک بالش زیر سرم می‌گذارم.",
+      "sourceFields": [
+        "pillows"
+      ]
+    },
+    "cardio-hist-025": {
+      "question": "آیا شب‌ها با احساس خفگی یا تنگی نفس از خواب بیدار می‌شوید؟",
+      "status": "absent",
+      "patientAnswer": "نه، شب‌ها با تنگی نفس از خواب بیدار نمی‌شوم.",
+      "sourceFields": [
+        "pnd"
+      ]
+    },
+    "cardio-hist-026": {
+      "question": "آیا اخیراً افزایش وزن سریع یا کاهش ادرار داشته‌اید؟",
+      "status": "mixed",
+      "patientAnswer": "وزنم ثابت مانده است؛ درباره کاهش ادرار اطلاعاتی ثبت نشده است.",
+      "sourceFields": [
+        "weight;profile lacks urine output"
+      ]
+    },
+    "cardio-hist-027": {
+      "question": "تپش قلب را چگونه احساس می‌کنید؛ تند، نامنظم، کوبنده یا جاافتاده؟",
+      "status": "present",
+      "patientAnswer": "تپش‌ها خیلی سریع و منظم‌اند.",
+      "sourceFields": [
+        "palpitations;rhythm;palp"
+      ]
+    },
+    "cardio-hist-028": {
+      "question": "تپش قلب ناگهانی شروع و ناگهانی قطع می‌شود؟",
+      "status": "present",
+      "patientAnswer": "بله، حمله‌ها ناگهانی شروع و ناگهانی قطع می‌شوند.",
+      "sourceFields": [
+        "abrupt"
+      ]
+    },
+    "cardio-hist-029": {
+      "question": "ضربان هنگام حمله منظم است یا نامنظم؟",
+      "status": "present",
+      "patientAnswer": "ضربان هنگام حمله کاملاً منظم است.",
+      "sourceFields": [
+        "rhythm"
+      ]
+    },
+    "cardio-hist-030": {
+      "question": "حمله تپش قلب معمولاً چقدر طول می‌کشد و چند وقت یک‌بار رخ می‌دهد؟",
+      "status": "present",
+      "patientAnswer": "هر حمله حدود ۱۰ تا ۲۰ دقیقه طول می‌کشد؛ تعداد دقیق حملات ثبت نشده است.",
+      "sourceFields": [
+        "palp_duration;profile lacks frequency"
+      ]
+    },
+    "cardio-hist-031": {
+      "question": "چه چیزی حمله تپش قلب را شروع یا تشدید می‌کند؟",
+      "status": "present",
+      "patientAnswer": "گاهی با قهوه یا استرس شروع می‌شود.",
+      "sourceFields": [
+        "palp_trigger"
+      ]
+    },
+    "cardio-hist-032": {
+      "question": "آیا تپش قلب با سرگیجه، درد قفسه سینه یا تنگی نفس همراه است؟",
+      "status": "present",
+      "patientAnswer": "گاهی همراه تپش سرگیجه و تنگی نفس دارم.",
+      "sourceFields": [
+        "palp_associated"
+      ]
+    },
+    "cardio-hist-033": {
+      "question": "اگر غش یا نزدیک‌غش داشته‌اید، در چه شرایطی رخ داده است؛ مثلاً هنگام فعالیت، ایستادن یا همراه تپش قلب؟",
+      "status": "mixed",
+      "patientAnswer": "گاهی نزدیک‌غش دارم، اما غش واقعی نکرده‌ام. شرایط دقیق بروز نزدیک‌غش در شرح‌حالم مشخص نیست.",
+      "sourceFields": [
+        "pre_syncope;syncope_ex;profile lacks presyncope context"
+      ]
+    },
+    "cardio-hist-034": {
+      "question": "پیش از غش چه احساسی داشتید و پس از آن چقدر سریع به حالت عادی برگشتید؟",
+      "status": "mixed",
+      "patientAnswer": "گاهی احساس گرمی دارم، اما ارتباط آن با نزدیک‌غش مشخص نیست. بعد از پایان تپش معمولاً سریع حالم بهتر می‌شود؛ غش واقعی نداشته‌ام.",
+      "sourceFields": [
+        "prodrome;recovery;syncope_ex"
+      ]
+    },
+    "cardio-hist-035": {
+      "question": "آیا قبلاً بیماری قلبی، سکته قلبی، نارسایی قلبی، آریتمی، بیماری دریچه‌ای، بیماری روماتیسمی قلب یا بیماری مادرزادی قلب داشته‌اید؟ آیا فشارخون، دیابت، چربی خون، بیماری کلیه یا تیروئید دارید؟",
+      "status": "mixed",
+      "patientAnswer": "پیش از این حمله‌ها، سکته قلبی، بیماری کرونر، نارسایی قلبی یا آریتمی برایم تشخیص داده نشده بود. فشارخون، دیابت، چربی خون، بیماری کلیوی یا تیروئیدی ندارم و سابقه بیماری دریچه‌ای، روماتیسم قلبی یا بیماری مادرزادی قلب هم ندارم.",
+      "sourceFields": [
+        "mi",
+        "cad",
+        "hf",
+        "arrhythmia",
+        "murmur",
+        "congenital",
+        "rheumatic",
+        "htn",
+        "diabetes",
+        "lipids",
+        "kidney",
+        "thyroid"
+      ]
+    },
+    "cardio-hist-036": {
+      "question": "آیا برای قلبتان آنژیوگرافی، استنت‌گذاری، جراحی، ابلیشن یا کاشت دستگاه انجام شده است؟",
+      "status": "absent",
+      "patientAnswer": "آنژیوگرافی، استنت‌گذاری، جراحی قلب، ابلیشن یا کاشت دستگاه نداشته‌ام.",
+      "sourceFields": [
+        "procedures;stent;cabg;ablation;device"
+      ]
+    },
+    "cardio-hist-037": {
+      "question": "چه داروهایی مصرف می‌کنید؟ آیا اخیراً دارویی تغییر کرده یا دوزی را جا انداخته‌اید؟",
+      "status": "mixed",
+      "patientAnswer": "داروی روزانه مصرف نمی‌کنم؛ تغییر دارو یا دوز جاافتاده‌ای هم ندارم.",
+      "sourceFields": [
+        "meds;medchange;missed"
+      ]
+    },
+    "cardio-hist-038": {
+      "question": "آیا به دارو یا ماده‌ای حساسیت دارید؟ اگر بله، چه واکنشی داشته‌اید؟",
+      "status": "unknown",
+      "patientAnswer": "اطلاعاتی درباره حساسیت دارویی در شرح‌حالم ثبت نشده است.",
+      "sourceFields": [
+        "profile lacks allergy history"
+      ]
+    },
+    "cardio-hist-039": {
+      "question": "آیا در خانواده سابقه بیماری کرونر زودرس، مرگ ناگهانی، کاردیومیوپاتی، آریتمی ارثی یا بیماری آئورت وجود دارد؟",
+      "status": "absent",
+      "patientAnswer": "سابقه خانوادگی بیماری کرونر زودرس، مرگ ناگهانی یا بیماری ارثی قلبی گزارش نشده است.",
+      "sourceFields": [
+        "family_early_cad;family_sudden;family_cm;family_arrhythmia;family_congenital;family_aorta;family_lipid"
+      ]
+    },
+    "cardio-hist-040": {
+      "question": "آیا سیگار یا ویپ مصرف می‌کنید یا قبلاً مصرف می‌کردید؟ آیا الکل یا مواد محرک مصرف می‌کنید و سطح فعالیت بدنی معمولتان چقدر است؟",
+      "status": "mixed",
+      "patientAnswer": "سیگار نمی‌کشم و مواد محرک مصرف نمی‌کنم. درباره ویپ اطلاعاتی ثبت نشده است. الکل را کم و گاه‌به‌گاه مصرف می‌کنم و فعالیت بدنی‌ام متوسط است. قهوه گاهی حمله تپش قلبم را تحریک می‌کند.",
+      "sourceFields": [
+        "smoking",
+        "cigarettes",
+        "vaping not recorded",
+        "alcohol",
+        "alcohol_amt",
+        "stimulants",
+        "exercise",
+        "palp_trigger"
+      ]
+    }
+  }
+};

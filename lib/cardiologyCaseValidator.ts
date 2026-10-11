@@ -24,9 +24,11 @@ export function validateCardiologyCases(cases:Case[]):CardiologyValidationError[
    hs.hints.forEach(h=>{if(!h.content?.trim())e.push({code:"EMPTY_HISTORY",message:"Empty history answer",caseId:c.id}); if(banned.some(x=>h.content.toLowerCase().includes(x.toLowerCase())))e.push({code:"PLACEHOLDER",message:"Placeholder/generic text in history",caseId:c.id});});
   }
   if(!pe||pe.type!=="physical-exam")e.push({code:"PE_STAGE",message:"Missing physical exam stage",caseId:c.id});
-  else { if(pe.hints.length<5||pe.hints.length>7)e.push({code:"PE_COUNT",message:`Physical exam must contain 5–7 items; found ${pe.hints.length}`,caseId:c.id}); pe.hints.forEach(h=>{if(!h.content?.trim())e.push({code:"EMPTY_PE",message:"Empty physical exam finding",caseId:c.id});}); }
+  else { if(pe.hints.length!==7)e.push({code:"PE_COUNT",message:`Physical exam must contain exactly 7 fixed items; found ${pe.hints.length}`,caseId:c.id});
+   if(JSON.stringify(pe.hints.map(h=>h.sourceId))!==JSON.stringify(cardiologyPhysicalExamBank.map(x=>x.id)))e.push({code:"PE_IDS",message:"Physical exam IDs/order do not match the fixed bank",caseId:c.id}); pe.hints.forEach(h=>{if(!h.content?.trim())e.push({code:"EMPTY_PE",message:"Empty physical exam finding",caseId:c.id});}); }
   if(!inv||inv.type!=="investigation")e.push({code:"INV_STAGE",message:"Missing investigation stage",caseId:c.id});
-  else { if(inv.investigations.length<5||inv.investigations.length>6)e.push({code:"INV_COUNT",message:`Investigation must contain 5–6 items; found ${inv.investigations.length}`,caseId:c.id}); inv.investigations.forEach(x=>{if(!x.name?.trim()||!x.findings?.length||x.findings.some(f=>!f.value?.trim()))e.push({code:"EMPTY_INV",message:"Incomplete investigation",caseId:c.id});}); }
+  else { if(inv.investigations.length!==7)e.push({code:"INV_COUNT",message:`Investigation must contain exactly 7 fixed items; found ${inv.investigations.length}`,caseId:c.id});
+   if(JSON.stringify(inv.investigations.map(x=>x.sourceId))!==JSON.stringify(cardiologyInvestigationBank.map(x=>x.id)))e.push({code:"INV_IDS",message:"Investigation IDs/order do not match the fixed bank",caseId:c.id}); inv.investigations.forEach(x=>{if(!x.name?.trim()||!x.findings?.length||x.findings.some(f=>!f.value?.trim()))e.push({code:"EMPTY_INV",message:"Incomplete investigation",caseId:c.id});}); }
  });
  const diff={easy:cases.filter(c=>c.difficulty==="easy").length,medium:cases.filter(c=>c.difficulty==="medium").length,hard:cases.filter(c=>c.difficulty==="hard").length};
  if(diff.easy!==15||diff.medium!==25||diff.hard!==10)e.push({code:"DIFFICULTY",message:`Difficulty must be 15/25/10; found ${diff.easy}/${diff.medium}/${diff.hard}`});

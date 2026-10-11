@@ -21,7 +21,7 @@ function containsAnswer(caseId: string, stageType: "history" | "physical-exam" |
   const stage = caseItem.stages.find((item) => item.type === stageType);
   if (!stage) return false;
 
-  if (stageType === "history" || stageType === "physical-exam") {
+  if (stage.type === "history" || stage.type === "physical-exam") {
     return stage.hints.some((item) => item.id === itemKey);
   }
 
