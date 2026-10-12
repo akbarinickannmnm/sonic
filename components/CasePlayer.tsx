@@ -14,7 +14,7 @@ import CaseCompletionModal from "./CaseCompletionModal";
 
 type Stage = "history" | "physical-exam" | "investigation" | "diagnosis";
 
-const MAX_HISTORY_QUESTIONS = 7;
+const MAX_HISTORY_QUESTIONS = 3;
 const MAX_PHYSICAL_EXAMS = 2;
 const MAX_INVESTIGATIONS = 2;
 const MAX_GUESSES = 4;
@@ -214,8 +214,6 @@ export default function CasePlayer({
   const [activeStage, setActiveStage] = useState<Stage>("history");
   const [historySequence, setHistorySequence] = useState<string[]>([]);
   const [physicalSequence, setPhysicalSequence] = useState<string[]>([]);
-  const [historySkipped, setHistorySkipped] = useState(false);
-  const [physicalSkipped, setPhysicalSkipped] = useState(false);
   const [investigationSequence, setInvestigationSequence] = useState<string[]>([]);
   const [activeHistoryId, setActiveHistoryId] = useState<string | null>(null);
   const [activePhysicalId, setActivePhysicalId] = useState<string | null>(null);
@@ -357,8 +355,6 @@ export default function CasePlayer({
         const saved = JSON.parse(raw) as {
           answered?: AnsweredItem[];
           activeStage?: Stage;
-          historySkipped?: boolean;
-          physicalSkipped?: boolean;
           historySequence?: string[];
           physicalSequence?: string[];
           investigationSequence?: string[];
@@ -372,23 +368,13 @@ export default function CasePlayer({
           won?: boolean | null;
         };
 
-        const legacyHistory = saved.historySequence ?? saved.answered?.filter((item) => item.type === "history").map((item) => item.sourceId).slice(0, MAX_HISTORY_QUESTIONS) ?? [];
-        const legacyPhysical = saved.physicalSequence ?? saved.answered?.filter((item) => item.type === "physical-exam").map((item) => item.sourceId).slice(0, MAX_PHYSICAL_EXAMS) ?? [];
+        const legacyHistory = saved.historySequence ?? saved.answered?.filter((item) => item.type === "history").map((item) => item.sourceId).slice(0, 3) ?? [];
+        const legacyPhysical = saved.physicalSequence ?? saved.answered?.filter((item) => item.type === "physical-exam").map((item) => item.sourceId).slice(0, 2) ?? [];
         const legacyInvestigation = saved.investigationSequence ?? saved.answered?.filter((item) => item.type === "investigation").map((item) => item.sourceId) ?? [];
-
-        const legacyActiveStage = saved.activeStage;
-        const isDownstreamStage = legacyActiveStage === "physical-exam" || legacyActiveStage === "investigation" || legacyActiveStage === "diagnosis";
-        // Older sessions used a three-question history limit. Preserve their current stage
-        // by treating the unasked history questions as skipped when restoring such a session.
-        const restoredHistorySkipped = saved.historySkipped ?? (isDownstreamStage && legacyHistory.length < MAX_HISTORY_QUESTIONS);
-        const isAfterPhysicalStage = legacyActiveStage === "investigation" || legacyActiveStage === "diagnosis";
-        const restoredPhysicalSkipped = saved.physicalSkipped ?? (isAfterPhysicalStage && legacyPhysical.length < MAX_PHYSICAL_EXAMS);
 
         setHistorySequence(legacyHistory.slice(0, MAX_HISTORY_QUESTIONS));
         setPhysicalSequence(legacyPhysical.slice(0, MAX_PHYSICAL_EXAMS));
         setInvestigationSequence(legacyInvestigation.slice(0, MAX_INVESTIGATIONS));
-        setHistorySkipped(Boolean(restoredHistorySkipped));
-        setPhysicalSkipped(Boolean(restoredPhysicalSkipped));
         setActiveHistoryId(saved.activeHistoryId ?? legacyHistory[legacyHistory.length - 1] ?? null);
         setActivePhysicalId(saved.activePhysicalId ?? legacyPhysical[legacyPhysical.length - 1] ?? null);
         setActiveInvestigationId(saved.activeInvestigationId ?? legacyInvestigation[legacyInvestigation.length - 1] ?? null);
@@ -398,21 +384,13 @@ export default function CasePlayer({
         setCompleted(Boolean(saved.completed));
         setWon(saved.won ?? null);
 
-        const historyGateOpen = legacyHistory.length >= MAX_HISTORY_QUESTIONS || Boolean(restoredHistorySkipped);
-        const physicalGateOpen = legacyPhysical.length >= MAX_PHYSICAL_EXAMS || Boolean(restoredPhysicalSkipped);
-        const investigationGateOpen = legacyInvestigation.length >= MAX_INVESTIGATIONS;
-        const savedStageAllowed = legacyActiveStage === "history"
-          || (legacyActiveStage === "physical-exam" && historyGateOpen)
-          || (legacyActiveStage === "investigation" && historyGateOpen && physicalGateOpen)
-          || (legacyActiveStage === "diagnosis" && investigationGateOpen);
-
-        const inferred: Stage = savedStageAllowed && legacyActiveStage
-          ? legacyActiveStage
-          : investigationGateOpen
+        const inferred: Stage = saved.activeStage === "diagnosis" && legacyInvestigation.length >= MAX_INVESTIGATIONS
+          ? "diagnosis"
+          : legacyInvestigation.length >= MAX_INVESTIGATIONS
             ? "diagnosis"
-            : physicalGateOpen && historyGateOpen
+            : legacyPhysical.length >= MAX_PHYSICAL_EXAMS
               ? "investigation"
-              : historyGateOpen
+              : legacyHistory.length >= MAX_HISTORY_QUESTIONS
                 ? "physical-exam"
                 : "history";
         setActiveStage(inferred);
@@ -429,8 +407,6 @@ export default function CasePlayer({
 
     window.localStorage.setItem(storageKey, JSON.stringify({
       activeStage,
-      historySkipped,
-      physicalSkipped,
       historySequence,
       physicalSequence,
       investigationSequence,
@@ -445,13 +421,11 @@ export default function CasePlayer({
     }));
 
     window.dispatchEvent(new Event("sonic:practice-progress-updated"));
-  }, [activeHistoryId, activeInvestigationId, activePhysicalId, activeStage, completed, diagnosisInput, guessCount, historySequence, historySkipped, hydrated, investigationSequence, physicalSequence, physicalSkipped, selectedCategory, storageKey, won]);
+  }, [activeHistoryId, activeInvestigationId, activePhysicalId, activeStage, completed, diagnosisInput, guessCount, historySequence, hydrated, investigationSequence, physicalSequence, selectedCategory, storageKey, won]);
 
   const historyComplete = historySequence.length >= MAX_HISTORY_QUESTIONS;
   const physicalComplete = physicalSequence.length >= MAX_PHYSICAL_EXAMS;
   const investigationComplete = investigationSequence.length >= MAX_INVESTIGATIONS;
-  const historyGateOpen = historyComplete || historySkipped;
-  const physicalGateOpen = physicalComplete || physicalSkipped;
 
   function selectHistory(id: string) {
     if (completed || activeStage !== "history") return;
@@ -467,22 +441,6 @@ export default function CasePlayer({
         setActivePhysicalId(null);
       }, 220);
     }
-  }
-
-  function skipToPhysicalExam() {
-    if (completed) return;
-    setHistorySkipped(true);
-    setPhysicalSkipped(false);
-    setActivePhysicalId(null);
-    setActiveStage("physical-exam");
-  }
-
-  function skipToInvestigation() {
-    if (completed) return;
-    setHistorySkipped(true);
-    setPhysicalSkipped(true);
-    setActiveInvestigationId(null);
-    setActiveStage("investigation");
   }
 
   function selectPhysical(id: string) {
@@ -517,8 +475,8 @@ export default function CasePlayer({
   function openStage(stage: Stage) {
     if (completed) return;
     if (stage === "history") setActiveStage(stage);
-    else if (stage === "physical-exam" && historyGateOpen) setActiveStage(stage);
-    else if (stage === "investigation" && historyGateOpen && physicalGateOpen) setActiveStage(stage);
+    else if (stage === "physical-exam" && historyComplete) setActiveStage(stage);
+    else if (stage === "investigation" && physicalComplete) setActiveStage(stage);
     else if (stage === "diagnosis" && investigationComplete) setActiveStage(stage);
   }
 
@@ -591,8 +549,8 @@ export default function CasePlayer({
 
   const stageTabs: Array<{ id: Stage; label: string; count?: string; enabled: boolean }> = [
     { id: "history", label: "شرح حال", count: `${historySequence.length}/${MAX_HISTORY_QUESTIONS}`, enabled: true },
-    { id: "physical-exam", label: "معاینه", count: `${physicalSequence.length}/${MAX_PHYSICAL_EXAMS}`, enabled: historyGateOpen },
-    { id: "investigation", label: "بررسی‌ها", count: `${investigationSequence.length}/${MAX_INVESTIGATIONS}`, enabled: historyGateOpen && physicalGateOpen },
+    { id: "physical-exam", label: "معاینه", count: `${physicalSequence.length}/${MAX_PHYSICAL_EXAMS}`, enabled: historyComplete },
+    { id: "investigation", label: "بررسی‌ها", count: `${investigationSequence.length}/${MAX_INVESTIGATIONS}`, enabled: physicalComplete },
     { id: "diagnosis", label: "تشخیص", enabled: investigationComplete },
   ];
 
@@ -637,19 +595,15 @@ export default function CasePlayer({
             <StageShell
               eyebrow="History"
               title="شرح حال"
-              description="حداکثر هفت سؤال از شرح حال انتخاب کن. سؤال‌ها و پاسخ‌های انتخاب‌شده بعد از هر انتخاب سمت راست باقی می‌مانند. اگر لازم نیست همه سؤال‌ها را بپرسی، می‌توانی زودتر به مرحله بعد بروی."
-              count={`${historySequence.length}/${MAX_HISTORY_QUESTIONS}`}
+              description="سه سؤال را از میان بانک سؤال انتخاب کن. سؤال‌ها و پاسخ‌های انتخاب‌شده بعد از هر انتخاب سمت راست باقی می‌مانند."
+              count={`${historySequence.length}/3`}
               questions={filteredHistory}
               selectedIds={historySelected}
               activeId={activeHistoryId}
               onSelect={selectHistory}
               conversation={conversation}
               emptyText="یک سؤال را از فهرست انتخاب کن تا پاسخ بیمار به روند کیس اضافه شود."
-              completeText="بعد از سؤال هفتم، معاینه به‌صورت خودکار باز می‌شود؛ یا می‌توانی هر زمان مرحله را رد کنی."
-              stageActions={[
-                { label: "رفتن به معاینه", onClick: skipToPhysicalExam, variant: "primary" },
-                { label: "رد شرح حال و معاینه؛ رفتن به بررسی‌ها", onClick: skipToInvestigation, variant: "secondary" },
-              ]}
+              completeText="بعد از سؤال سوم، معاینه به‌صورت خودکار باز می‌شود."
               categoryFilter={courseBank.historyCategories.map((category) => ({ id: category.id, label: category.label }))}
               selectedCategory={selectedCategory}
               onSelectCategory={setSelectedCategory}
@@ -745,7 +699,6 @@ function StageShell({
   conversation,
   emptyText,
   completeText,
-  stageActions,
   categoryFilter,
   selectedCategory,
   onSelectCategory,
@@ -761,7 +714,6 @@ function StageShell({
   conversation: ConversationItem[];
   emptyText: string;
   completeText: string;
-  stageActions?: Array<{ label: string; onClick: () => void; variant?: "primary" | "secondary" }>;
   categoryFilter?: Array<{ id: string; label: string }>;
   selectedCategory?: string;
   onSelectCategory?: (value: string) => void;
@@ -833,24 +785,6 @@ function StageShell({
       </div>
 
       <div className="mt-4 rounded-xl bg-slate-50 px-4 py-3 text-xs font-semibold leading-6 text-slate-500">{completeText}</div>
-      {stageActions?.length ? (
-        <div className="mt-4 flex flex-col gap-2 sm:flex-row">
-          {stageActions.map((action) => (
-            <button
-              key={action.label}
-              type="button"
-              onClick={action.onClick}
-              className={`rounded-xl px-4 py-3 text-sm font-bold transition ${
-                action.variant === "primary"
-                  ? "bg-slate-950 text-white hover:bg-slate-800"
-                  : "border border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
-              }`}
-            >
-              {action.label}
-            </button>
-          ))}
-        </div>
-      ) : null}
     </section>
   );
 }

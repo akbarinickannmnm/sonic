@@ -43,7 +43,7 @@ export const gastroenterologyQuestionBank: GastroenterologyQuestion[] = [
   { id: "gastro-h024", category: "stool", level: "primary", text: "دچار اسهال، یبوست یا جابه‌جایی بین این دو شده‌اید؟" },
   { id: "gastro-h025", category: "stool", level: "primary", text: "اگر اسهال دارید، از چه زمانی شروع شده و تقریباً چند بار در روز دفع دارید؟" },
   { id: "gastro-h026", category: "stool", level: "primary", text: "آیا در مدفوع خود خون، موکوس یا چرک مشاهده کرده‌اید؟" },
-  { id: "gastro-h027", category: "stool", level: "primary", text: "آیا مدفوع شما سیاه، قیری و بدبو شده است؟" },
+  { id: "gastro-h027", category: "stool", level: "primary", text: "آیا ادرارتان تیره شده یا مدفوع شما سیاه و قیری، بسیار کم‌رنگ/گِلی، یا چرب و شناور شده است؟" },
   { id: "gastro-h028", category: "stool", level: "primary", text: "آیا برای دفع مدفوع فوریت شدید دارید یا احساس می‌کنید هنوز بعد از دفع، مدفوع در روده باقی مانده است؟" },
   { id: "gastro-h029", category: "stool", level: "primary", text: "آیا اسهال شما در شب هم اتفاق می‌افتد و باعث بیدار شدنتان می‌شود؟" },
   { id: "gastro-h030", category: "stool", level: "primary", text: "آیا تا به حال مدفوع حجیم، چرب، بدبو یا چسبنده داشته‌اید که به‌سختی از روی توالت شسته شود؟" },
@@ -64,9 +64,9 @@ export const gastroenterologyQuestionBank: GastroenterologyQuestion[] = [
   { id: "gastro-h045", category: "infection", level: "primary", text: "آیا اخیراً آنتی‌بیوتیک مصرف کرده‌اید یا در بیمارستان بستری بوده‌اید؟" },
   { id: "gastro-h046", category: "hepatobiliary", level: "primary", text: "آیا درد شما بیشتر در قسمت راست بالای شکم است و آیا بعد از غذاهای چرب بدتر می‌شود؟" },
   { id: "gastro-h047", category: "hepatobiliary", level: "primary", text: "آیا همراه درد سمت راست بالای شکم تب، لرز یا زردی داشته‌اید؟" },
-  { id: "gastro-h048", category: "hepatobiliary", level: "primary", text: "آیا سابقه هپاتیت، بیماری مزمن کبد، مصرف زیاد الکل، یا تماس با فرد مبتلا به هپاتیت داشته‌اید؟" },
+  { id: "gastro-h048", category: "hepatobiliary", level: "primary", text: "آیا سابقه یا عامل خطر مرتبط با بیماری کبدی/هپاتیت دارید؛ مانند تزریق خون، تزریق مواد، خالکوبی، تماس جنسی محافظت‌نشده، مصرف الکل یا سابقه HBV؟" },
   { id: "gastro-h049", category: "hepatobiliary", level: "primary", text: "آیا درد شدید قسمت بالای شکم دارید که به پشت انتشار پیدا کند؟" },
-  { id: "gastro-h050", category: "meds", level: "primary", text: "چه داروها، مسکن‌ها، مکمل‌ها یا داروهای گیاهی را به‌طور منظم یا اخیراً مصرف کرده‌اید، به‌ویژه NSAIDها، aspirin، corticosteroids و PPIها؟" }
+  { id: "gastro-h050", category: "meds", level: "primary", text: "چه داروها، مسکن‌ها، مکمل‌ها یا داروهای گیاهی را مصرف می‌کنید؟ نام، دوز، مدت مصرف و زمان شروع/قطع آن‌ها چیست؟" }
 ];
 
 export function answerGastroHistory(caseData: Case, questionId: string): string {
