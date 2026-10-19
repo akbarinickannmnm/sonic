@@ -148,6 +148,9 @@ export type ReviewQuestion = {
 export type Case = {
   id: string;
 
+  /** Optional human-readable case code; route/storage IDs remain unchanged. */
+  caseCode?: string;
+
   title: string;
 
   course: Course;

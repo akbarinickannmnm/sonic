@@ -25,6 +25,14 @@ const DIFFICULTY_LABELS: Record<Case["difficulty"], string> = {
   hard: "سخت",
 };
 
+// The case library is grouped by difficulty first, not by caseCode.
+// Stable sorting preserves the existing order among cases of the same difficulty.
+const DIFFICULTY_ORDER: Record<Case["difficulty"], number> = {
+  easy: 0,
+  medium: 1,
+  hard: 2,
+};
+
 const COURSE_LABELS: Record<string, string> = {
   pulmonology: "ریه",
   cardiology: "قلب",
@@ -269,6 +277,7 @@ export default function CaseLibraryPage() {
     const investigations = getInvestigationItems(item);
     const haystack = [
       item.id,
+      item.caseCode ?? "",
       item.title,
       item.presentation,
       item.diagnosis.name,
@@ -279,7 +288,7 @@ export default function CaseLibraryPage() {
     ].join(" ").toLowerCase();
 
     return haystack.includes(q);
-  }), [courseFilter, difficultyFilter, search]);
+  }).sort((a, b) => DIFFICULTY_ORDER[a.difficulty] - DIFFICULTY_ORDER[b.difficulty]), [courseFilter, difficultyFilter, search]);
 
   const selectedCase = allCases.find((item) => item.id === selectedId) ?? allCases[0] ?? null;
 
@@ -447,7 +456,10 @@ export default function CaseLibraryPage() {
                   className={`w-full rounded-2xl border p-4 text-right transition ${selectedCase?.id === item.id ? "border-blue-300 bg-blue-50" : "border-slate-200 hover:bg-slate-50"}`}
                 >
                   <div className="flex items-center justify-between gap-2">
-                    <span className="text-xs font-mono text-slate-400">{item.id}</span>
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      {item.caseCode ? <span className="rounded-md bg-slate-100 px-2 py-1 text-xs font-mono font-semibold text-slate-700">{item.caseCode}</span> : null}
+                      <span className="text-[10px] font-mono text-slate-400">{item.id}</span>
+                    </div>
                     <span className={`rounded-full border px-2 py-1 text-[11px] font-semibold ${difficultyClass(item.difficulty)}`}>{DIFFICULTY_LABELS[item.difficulty]}</span>
                   </div>
                   <h2 className="mt-2 font-bold leading-6">{item.title}</h2>
@@ -463,7 +475,8 @@ export default function CaseLibraryPage() {
                 <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                   <div>
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-mono text-slate-600">{selectedCase.id}</span>
+                      {selectedCase.caseCode ? <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-mono font-semibold text-slate-700">{selectedCase.caseCode}</span> : null}
+                      <span className="rounded-full bg-slate-50 px-3 py-1 text-[11px] font-mono text-slate-500">{selectedCase.id}</span>
                       <span className={`rounded-full border px-3 py-1 text-xs font-semibold ${difficultyClass(selectedCase.difficulty)}`}>{DIFFICULTY_LABELS[selectedCase.difficulty]}</span>
                       <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">{COURSE_LABELS[selectedCase.course] ?? selectedCase.course}</span>
                     </div>

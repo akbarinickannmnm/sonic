@@ -562,8 +562,9 @@ export default function CasePlayer({
             <div className="min-w-0">
               <div className="text-[11px] font-semibold tracking-[0.14em] text-slate-400">شکایت اصلی</div>
               <h1 className="mt-1 max-w-[860px] text-[24px] font-extrabold leading-9 text-slate-950 lg:text-[28px]">{caseData.presentation}</h1>
-              <div className="mt-3 text-[14px] font-semibold text-slate-500">
-                {caseData.patient.age} ساله · {caseData.patient.sex === "male" ? "مرد" : "زن"}
+              <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-[14px] font-semibold text-slate-500">
+                <span>{caseData.patient.age} ساله · {caseData.patient.sex === "male" ? "مرد" : "زن"}</span>
+                {caseData.caseCode ? <span className="rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1 font-mono text-xs font-bold text-slate-600">کد کیس: {caseData.caseCode}</span> : null}
               </div>
             </div>
             <div className="shrink-0 rounded-xl bg-slate-50 px-4 py-3 text-right">
